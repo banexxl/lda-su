@@ -107,13 +107,13 @@ export default function NavList({ data }: NavListProps) {
                   </Box>
                 </Grid>
 
-                {/* {commonList && (
+                {commonList && (
                   <Grid xs={3}>
                     <Box sx={{ bgcolor: 'background.default', p: 5 }}>
                       <NavSubList subheader={commonList.subheader} items={commonList.items} />
                     </Box>
                   </Grid>
-                )} */}
+                )}
               </Grid>
             </Paper>
           </Fade>
@@ -126,6 +126,7 @@ export default function NavList({ data }: NavListProps) {
 // ----------------------------------------------------------------------
 
 function NavSubList({ subheader, isNew, cover, items }: NavSubListProps) {
+
   const pathname = usePathname();
 
   const coverPath = items.length ? items[0].path : '';
@@ -134,7 +135,7 @@ function NavSubList({ subheader, isNew, cover, items }: NavSubListProps) {
 
   return (
     <Stack spacing={2}>
-      {/* <ListSubheader
+      <ListSubheader
         sx={{
           p: 0,
           typography: 'h6',
@@ -148,9 +149,9 @@ function NavSubList({ subheader, isNew, cover, items }: NavSubListProps) {
             NEW
           </Label>
         )}
-      </ListSubheader> */}
+      </ListSubheader>
 
-      {/* {!commonList && (
+      {!commonList && (
         <Link component={RouterLink} href={coverPath}>
           <Image
             disabledEffect
@@ -169,7 +170,7 @@ function NavSubList({ subheader, isNew, cover, items }: NavSubListProps) {
             }}
           />
         </Link>
-      )} */}
+      )}
 
       <Stack spacing={1.5} alignItems="flex-start">
         {items.map((item) => {

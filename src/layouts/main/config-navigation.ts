@@ -6,7 +6,7 @@ export const aboutUsLinks = [
   {
     order: '1',
     subheader: 'Team',
-    cover: '/assets/images/menu/menu_marketing.jpg',
+    cover: 'https://lda-su.s3.eu-central-1.amazonaws.com/Untitled.png',
     items: [
       { title: 'Stanka', path: paths.teamMembers.stanka },
       { title: 'Silvija', path: paths.teamMembers.silvija },
