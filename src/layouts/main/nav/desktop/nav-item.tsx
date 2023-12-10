@@ -43,7 +43,7 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
     }
 
     return (
-      <Link component={RouterLink} href={path} color="inherit" underline="none">
+      <Link component={RouterLink} href={path} color="inherit" underline="none" sx={{ ':hover': { transform: 'scale(1.5)' } }}>
         {renderContent}
       </Link>
     );
@@ -86,7 +86,7 @@ const StyledNavItem = styled(ListItemButton, {
         backgroundColor: 'transparent',
         '&:before': {
           ...dotStyles,
-          opacity: 0.64,
+          opacity: 0.5,
         },
       },
       ...(active && {

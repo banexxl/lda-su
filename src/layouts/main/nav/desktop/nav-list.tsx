@@ -72,7 +72,8 @@ export default function NavList({ data }: NavListProps) {
               onMouseLeave={menuOpen.onFalse}
               sx={{
                 top: 62,
-                width: 1,
+                width: '20%',
+                left: '25%',
                 borderRadius: 0,
                 position: 'fixed',
                 bgcolor: 'background.default',
@@ -84,13 +85,14 @@ export default function NavList({ data }: NavListProps) {
                 <Grid xs={12}>
                   <Box
                     gap={5}
+                    borderRadius={'20px'}
                     display="grid"
                     gridTemplateColumns="repeat(5, 1fr)"
                     sx={{
                       p: 5,
                       height: 1,
                       position: 'relative',
-                      bgcolor: 'background.neutral',
+                      bgcolor: 'background.default',
                     }}
                   >
                     {mainList.map((list) => (
@@ -105,13 +107,13 @@ export default function NavList({ data }: NavListProps) {
                   </Box>
                 </Grid>
 
-                {commonList && (
+                {/* {commonList && (
                   <Grid xs={3}>
                     <Box sx={{ bgcolor: 'background.default', p: 5 }}>
                       <NavSubList subheader={commonList.subheader} items={commonList.items} />
                     </Box>
                   </Grid>
-                )}
+                )} */}
               </Grid>
             </Paper>
           </Fade>
@@ -132,7 +134,7 @@ function NavSubList({ subheader, isNew, cover, items }: NavSubListProps) {
 
   return (
     <Stack spacing={2}>
-      <ListSubheader
+      {/* <ListSubheader
         sx={{
           p: 0,
           typography: 'h6',
@@ -146,9 +148,9 @@ function NavSubList({ subheader, isNew, cover, items }: NavSubListProps) {
             NEW
           </Label>
         )}
-      </ListSubheader>
+      </ListSubheader> */}
 
-      {!commonList && (
+      {/* {!commonList && (
         <Link component={RouterLink} href={coverPath}>
           <Image
             disabledEffect
@@ -167,7 +169,7 @@ function NavSubList({ subheader, isNew, cover, items }: NavSubListProps) {
             }}
           />
         </Link>
-      )}
+      )} */}
 
       <Stack spacing={1.5} alignItems="flex-start">
         {items.map((item) => {

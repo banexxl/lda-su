@@ -57,7 +57,7 @@ export default function Header({ headerOnDark }: Props) {
               position: 'absolute',
             }}
           >
-      v2.3.0
+            v2.3.0
           </Label>
         </Link>
       </Box>

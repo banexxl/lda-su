@@ -2,6 +2,19 @@ import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
+export const aboutUsLinks = [
+  {
+    order: '1',
+    subheader: 'Team',
+    cover: '/assets/images/menu/menu_marketing.jpg',
+    items: [
+      { title: 'Stanka', path: paths.teamMembers.stanka },
+      { title: 'Silvija', path: paths.teamMembers.silvija },
+      { title: 'Boris', path: paths.teamMembers.boris },
+    ],
+  },
+]
+
 export const pageLinks = [
   {
     order: '1',
@@ -107,8 +120,14 @@ export const pageLinks = [
   },
 ];
 
+
 export const navConfig = [
   { title: 'Home', path: '/' },
+  {
+    title: 'About Us',
+    path: paths.aboutUs,
+    children: [aboutUsLinks[0]]
+  },
   { title: 'Components', path: paths.components.root },
   {
     title: 'Pages',
