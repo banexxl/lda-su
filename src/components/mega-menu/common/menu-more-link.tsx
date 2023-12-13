@@ -3,7 +3,7 @@ import Link from '@mui/material/Link';
 import { RouterLink } from 'src/routes/components';
 
 import { NavLink } from '../types';
-import Iconify from '../../iconify';
+import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 

@@ -38,12 +38,6 @@ export default function TravelPostsView() {
               popularTags={_tags}
               categories={_categories}
               recentPosts={{ list: _travelPosts.slice(-4) }}
-              advertisement={{
-                title: 'Advertisement',
-                description: 'Duis leo. Donec orci lectus, aliquam ut, faucibus non',
-                imageUrl: _mock.image.travel(9),
-                path: '',
-              }}
             />
           </Grid>
         </Grid>

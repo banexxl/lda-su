@@ -9,8 +9,8 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import Iconify from '../../iconify';
-import Scrollbar from '../../scrollbar';
+import Iconify from 'src/components/iconify';
+import Scrollbar from 'src/components/scrollbar';
 import BaseOptions from './base-options';
 import PresetsOptions from './presets-options';
 import { useSettingsContext } from '../context';

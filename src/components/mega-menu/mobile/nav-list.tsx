@@ -14,8 +14,8 @@ import { RouterLink } from 'src/routes/components';
 import { usePathname, useActiveLink } from 'src/routes/hooks';
 
 import NavItem from './nav-item';
-import Iconify from '../../iconify';
-import Scrollbar from '../../scrollbar';
+import Iconify from 'src/components/iconify';
+import Scrollbar from 'src/components/scrollbar';
 import { NavListProps, NavSubListProps } from '../types';
 
 // ----------------------------------------------------------------------

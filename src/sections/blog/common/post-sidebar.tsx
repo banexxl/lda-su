@@ -18,15 +18,12 @@ import { IAuthorProps } from 'src/types/author';
 import { IBlogPostProps, IBlogCategoryProps } from 'src/types/blog';
 
 import PostItemMobile from './post-item-mobile';
-import Advertisement, { AdvertisementProps } from '../../advertisement';
-
 // ----------------------------------------------------------------------
 
 interface Props extends StackProps {
   author?: IAuthorProps;
   popularTags?: string[];
   categories?: IBlogCategoryProps[];
-  advertisement?: AdvertisementProps;
   recentPosts?: {
     list: IBlogPostProps[];
   };
@@ -37,7 +34,6 @@ export default function PostSidebar({
   categories,
   popularTags,
   recentPosts,
-  advertisement,
   sx,
   ...other
 }: Props) {
@@ -107,7 +103,7 @@ export default function PostSidebar({
 
       <Stack direction="row" flexWrap="wrap" spacing={1}>
         {popularTags.map((tag) => (
-          <Chip key={tag} label={tag} variant="soft" size="small" onClick={() => {}} />
+          <Chip key={tag} label={tag} variant="soft" size="small" onClick={() => { }} />
         ))}
       </Stack>
     </Stack>
@@ -147,7 +143,6 @@ export default function PostSidebar({
 
         {renderPopularTags}
 
-        {advertisement && <Advertisement advertisement={advertisement} />}
       </Stack>
     </>
   );

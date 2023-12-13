@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import ListItemButton, { ListItemButtonProps } from '@mui/material/ListItemButton';
 
-import Iconify from '../../iconify';
+import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
