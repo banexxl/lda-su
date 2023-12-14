@@ -23,7 +23,6 @@ export default function TravelLandingView() {
   return (
     <>
       <Box sx={{ position: 'relative' }}>
-        <TravelLandingHero tours={_tours.slice(0, 5)} />
 
         <Container
           sx={{
@@ -51,14 +50,6 @@ export default function TravelLandingView() {
       <TravelLandingIntroduce />
 
       <TravelLandingSummary />
-
-      <TravelLandingFavoriteDestinations tours={_tours.slice(0, 4)} />
-
-      <TravelLandingTourFeatured tours={_tours.slice(0, 4)} />
-
-      <TravelLandingToursByCity tours={_tours.slice(0, 8)} />
-
-      <BlogTravelLandingLatestPosts posts={_travelPosts.slice(2, 6)} />
 
       <TravelTestimonial testimonials={_testimonials} />
 

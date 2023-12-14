@@ -26,7 +26,7 @@ export default function IconsView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Icons"
             links={[
               {
@@ -39,7 +39,7 @@ export default function IconsView() {
               'https://mui.com/components/material-icons',
               'https://iconify.design/icon-sets',
             ]}
-          />
+          /> */}
         </Container>
       </Box>
 

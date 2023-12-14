@@ -93,7 +93,7 @@ export default function MarkdownView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Markdown"
             links={[
               {
@@ -102,7 +102,7 @@ export default function MarkdownView() {
               },
               { name: 'Markdown' },
             ]}
-          />
+          /> */}
         </Container>
       </Box>
 

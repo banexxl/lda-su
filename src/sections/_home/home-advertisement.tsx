@@ -43,16 +43,6 @@ export default function HomeAdvertisement() {
           <br /> Website Today
         </Typography>
 
-        <Button
-          size="large"
-          variant="contained"
-          target="_blank"
-          rel="noopener"
-          color="primary"
-          href={paths.zoneStore}
-        >
-          Purchase Now
-        </Button>
       </Stack>
     </Box>
   );

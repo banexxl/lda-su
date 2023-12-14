@@ -81,7 +81,7 @@ export default function LightboxView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Lightbox"
             links={[
               {
@@ -91,7 +91,7 @@ export default function LightboxView() {
               { name: 'Lightbox' },
             ]}
             moreLink={['https://www.npmjs.com/package/yet-another-react-lightbox']}
-          />
+          /> */}
         </Container>
       </Box>
 

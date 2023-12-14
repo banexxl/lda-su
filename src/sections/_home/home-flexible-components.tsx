@@ -122,18 +122,6 @@ export default function HomeFlexibleComponents() {
               </Typography>
             </m.div>
 
-            <m.div variants={varFade().inUp}>
-              <Button
-                component={RouterLink}
-                href={paths.components.root}
-                color="inherit"
-                size="large"
-                variant="outlined"
-                endIcon={<Iconify icon="carbon:chevron-right" width={16} />}
-              >
-                Browse Components
-              </Button>
-            </m.div>
           </MotionViewport>
         </Grid>
 
@@ -219,7 +207,7 @@ export default function HomeFlexibleComponents() {
                 variant="soft"
                 color="primary"
                 label="Pamela"
-                onDelete={() => {}}
+                onDelete={() => { }}
                 avatar={<Avatar alt="Pamela">P</Avatar>}
               />
             </Stack>
@@ -236,7 +224,7 @@ export default function HomeFlexibleComponents() {
 
               <AvatarGroup max={4}>
                 {[...Array(8)].map((_, index) => (
-                  <Avatar key={index} alt={_mock.fullName(index)} src={_mock.image.avatar(index)} />
+                  <Avatar key={index} alt='asasasa' src={_mock.image.avatar(index)} />
                 ))}
               </AvatarGroup>
 
@@ -271,7 +259,7 @@ export default function HomeFlexibleComponents() {
               <Alert
                 severity="success"
                 action={
-                  <IconButton color="inherit" size="small" aria-label="close" onClick={() => {}}>
+                  <IconButton color="inherit" size="small" aria-label="close" onClick={() => { }}>
                     <Iconify icon="carbon:close" />
                   </IconButton>
                 }
@@ -305,7 +293,7 @@ export default function HomeFlexibleComponents() {
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                       >
                         <Avatar
-                          alt={_mock.fullName(0)}
+                          alt={'asasa'}
                           src={_mock.image.avatar(0)}
                           sx={{
                             width: 48,

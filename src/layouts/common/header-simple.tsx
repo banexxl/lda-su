@@ -3,7 +3,6 @@ import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
-
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
@@ -57,14 +56,6 @@ export default function HeaderSimple() {
         >
           <SettingsButton />
 
-          <Link
-            href={paths.support}
-            component={RouterLink}
-            color="inherit"
-            sx={{ typography: 'subtitle2' }}
-          >
-            Need help?
-          </Link>
         </Stack>
       </Toolbar>
 

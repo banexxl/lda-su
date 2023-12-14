@@ -33,7 +33,7 @@ export default function ImageView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Image"
             links={[
               {
@@ -42,7 +42,7 @@ export default function ImageView() {
               },
               { name: 'Image' },
             ]}
-          />
+          /> */}
         </Container>
       </Box>
 

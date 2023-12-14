@@ -43,17 +43,6 @@ export default function HomeForDesigner() {
       </m.div>
 
       <m.div variants={varFade({ distance: 40 }).inUp}>
-        <Button
-          color="primary"
-          size="large"
-          variant="contained"
-          endIcon={<Iconify icon="carbon:launch" />}
-          target="_blank"
-          rel="noopener"
-          href={paths.figmaPreview}
-        >
-          figma workspace
-        </Button>
       </m.div>
     </Box>
   );

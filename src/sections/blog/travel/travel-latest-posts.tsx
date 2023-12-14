@@ -22,7 +22,7 @@ type Props = {
   posts: IBlogPostProps[];
 };
 
-export default function TravelLatestPosts({ posts }: Props) {
+export default function TravelLatestPosts() {
   const mdUp = useResponsive('up', 'md');
 
   const viewAllBtn = (
@@ -68,15 +68,7 @@ export default function TravelLatestPosts({ posts }: Props) {
             },
           }}
         >
-          {posts
-            .slice(0, 4)
-            .map((post) =>
-              mdUp ? (
-                <PostItem key={post.id} post={post} />
-              ) : (
-                <PostItemMobile key={post.id} post={post} />
-              )
-            )}
+          asaasasa
         </Box>
 
         {!mdUp && (

@@ -35,7 +35,7 @@ export default function TravelToursView() {
           }}
         />
 
-        <TravelTourList tours={_tours} loading={loading.value} />
+        {/* <TravelTourList tours={_tours} loading={loading.value} /> */}
       </Container>
 
       <TravelNewsletter />

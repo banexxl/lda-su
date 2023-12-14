@@ -23,7 +23,7 @@ export default function ScrollView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Scrollbar"
             links={[
               {
@@ -32,7 +32,7 @@ export default function ScrollView() {
               },
               { name: 'Scrollbar' },
             ]}
-          />
+          /> */}
         </Container>
       </Box>
 

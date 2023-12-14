@@ -29,7 +29,7 @@ export default function LabelView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Label"
             links={[
               {
@@ -38,7 +38,7 @@ export default function LabelView() {
               },
               { name: 'Label' },
             ]}
-          />
+          /> */}
         </Container>
       </Box>
 

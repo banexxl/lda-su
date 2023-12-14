@@ -19,13 +19,13 @@ export default function TravelAboutView() {
 
       <TravelAboutOurMission />
 
-      <TravelTeam members={_members} />
+      <TravelTeam />
 
       <TravelTestimonial testimonials={_testimonials} />
 
       <TravelOurClients brands={_brands} />
 
-      <TravelLatestPosts posts={_travelPosts.slice(0, 4)} />
+      <TravelLatestPosts />
 
       <TravelNewsletter />
     </>

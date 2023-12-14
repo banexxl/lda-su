@@ -2,7 +2,6 @@
 
 import { useScroll } from 'framer-motion';
 
-import { _pricingHome } from 'src/_mock';
 import MainLayout from 'src/layouts/main';
 
 import ScrollProgress from 'src/components/scroll-progress';

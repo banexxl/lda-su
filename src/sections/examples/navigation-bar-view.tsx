@@ -215,7 +215,7 @@ export default function NavigationBarView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Navigation Bar"
             links={[
               {
@@ -224,7 +224,7 @@ export default function NavigationBarView() {
               },
               { name: 'Navigation Bar' },
             ]}
-          />
+          /> */}
         </Container>
       </Box>
 

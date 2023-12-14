@@ -24,7 +24,7 @@ export default function TextMaxLineView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="TextMaxLine"
             links={[
               {
@@ -33,7 +33,7 @@ export default function TextMaxLineView() {
               },
               { name: 'TextMaxLine' },
             ]}
-          />
+          /> */}
         </Container>
       </Box>
 

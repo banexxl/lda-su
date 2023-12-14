@@ -63,15 +63,15 @@ export default function TravelTourView() {
 
         <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse">
           <Grid xs={12} md={5} lg={4}>
-            <TravelTourDetailsReserveForm tour={_mockTour} />
+            {/* <TravelTourDetailsReserveForm tour={_mockTour} /> */}
           </Grid>
 
           <Grid xs={12} md={7} lg={8}>
-            <TravelTourDetailsHeader tour={_mockTour} />
+            {/* <TravelTourDetailsHeader tour={_mockTour} /> */}
 
             <Divider sx={{ borderStyle: 'dashed', my: 5 }} />
 
-            <TravelTourDetailsSummary tour={_mockTour} />
+            {/* <TravelTourDetailsSummary tour={_mockTour} /> */}
 
             <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
               <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5 }}>
@@ -109,7 +109,7 @@ export default function TravelTourView() {
 
       <ReviewTravel />
 
-      <TravelTourListSimilar tours={_tours.slice(-4)} />
+      {/* <TravelTourListSimilar tours={_tours.slice(-4)} /> */}
 
       <TravelNewsletter />
     </>

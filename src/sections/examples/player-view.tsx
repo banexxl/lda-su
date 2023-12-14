@@ -29,7 +29,7 @@ export default function PlayerView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Player"
             links={[
               {
@@ -39,7 +39,7 @@ export default function PlayerView() {
               { name: 'Player' },
             ]}
             moreLink={['https://www.npmjs.com/package/react-player']}
-          />
+          /> */}
         </Container>
       </Box>
 

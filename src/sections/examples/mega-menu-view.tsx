@@ -117,7 +117,7 @@ export default function MegaMenuView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Mega Menu"
             links={[
               {
@@ -126,7 +126,7 @@ export default function MegaMenuView() {
               },
               { name: 'Mega Menu' },
             ]}
-          />
+          /> */}
         </Container>
       </Box>
 
@@ -149,7 +149,7 @@ const NAV_ITEMS = [
     path: '#',
     icon: <Iconify icon="carbon:accessibility-alt" sx={{ width: 1, height: 1 }} />,
     products: [...Array(10)].map((_, index) => ({
-      name: _mock.productName(index),
+      name: 'name',
       coverUrl: _mock.image.product(index),
       path: '#',
     })),

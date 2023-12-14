@@ -13,7 +13,7 @@ type Props = {
   members: ITeamMemberProps[];
 };
 
-export default function TravelTeam({ members }: Props) {
+export default function TravelTeam() {
   return (
     <Container
       sx={{
@@ -49,9 +49,7 @@ export default function TravelTeam({ members }: Props) {
           },
         }}
       >
-        {members.map((member) => (
-          <TravelTeamItem key={member.id} member={member} />
-        ))}
+        aaaaaaaaa
       </Box>
     </Container>
   );

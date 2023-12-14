@@ -68,18 +68,6 @@ export default function HomeHero() {
                 customizable, and easy-to-use components.
               </Typography>
 
-              <Button
-                color="inherit"
-                size="large"
-                variant="contained"
-                endIcon={<Iconify icon="carbon:launch" />}
-                target="_blank"
-                rel="noopener"
-                href={paths.figmaPreview}
-              >
-                figma workspace
-              </Button>
-
               <Stack spacing={3}>
                 <Typography variant="overline" sx={{ opacity: 0.48 }}>
                   AVAILABLE FOR

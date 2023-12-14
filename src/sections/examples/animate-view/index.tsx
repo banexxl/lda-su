@@ -45,7 +45,8 @@ export default function AnimateView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          tu je nesto bilo
+          {/* <CustomBreadcrumbs
             heading="Animate"
             links={[
               {
@@ -55,7 +56,7 @@ export default function AnimateView() {
               { name: 'Animate' },
             ]}
             moreLink={['https://www.framer.com/api/motion']}
-          />
+          /> */}
         </Container>
       </Box>
 

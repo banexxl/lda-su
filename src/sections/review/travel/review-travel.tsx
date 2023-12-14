@@ -31,7 +31,7 @@ export default function ReviewTravel() {
       <Container sx={{ overflow: 'hidden' }}>
         <Grid container spacing={8}>
           <Grid xs={12} md={5} lg={4}>
-            <ReviewTourGuideInfo tourGuide={_mockTour.tourGuide} />
+            {/* <ReviewTourGuideInfo tourGuide={_mockTour.tourGuide} /> */}
           </Grid>
 
           <Grid xs={12} md={7} lg={8}>
@@ -42,7 +42,7 @@ export default function ReviewTravel() {
               onOpenReview={formOpen.onToggle}
             />
 
-            <ReviewList reviews={_reviews} />
+            {/* <ReviewList reviews={_reviews} /> */}
           </Grid>
         </Grid>
       </Container>

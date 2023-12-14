@@ -23,12 +23,12 @@ import CarouselCenterMode from './carousel-center-mode';
 
 // ----------------------------------------------------------------------
 
-const _carouselsExample = [...Array(20)].map((_, index) => ({
-  id: _mock.id(index),
-  title: _mock.postTitle(index),
-  coverUrl: _mock.image.cover(index),
-  description: _mock.description(index),
-}));
+// const _carouselsExample = [...Array(20)].map((_, index) => ({
+//   id: _mock.id(index),
+//   title: _mock.postTitle(index),
+//   coverUrl: _mock.image.cover(index),
+//   description: _mock.description(index),
+// }));
 
 // ----------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ export default function CarouselView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Carousel"
             links={[
               {
@@ -52,7 +52,7 @@ export default function CarouselView() {
               { name: 'Carousel' },
             ]}
             moreLink={['https://react-slick.neostack.com']}
-          />
+          /> */}
         </Container>
       </Box>
 
@@ -72,28 +72,32 @@ export default function CarouselView() {
           <Card>
             <CardHeader title="Carousel Basic 1" />
             <CardContent>
-              <CarouselBasic1 data={_carouselsExample.slice(0, 4)} />
+              sdsdsd
+              {/* <CarouselBasic1 data={_carouselsExample.slice(0, 4)} /> */}
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader title="Carousel Basic 2" />
             <CardContent>
-              <CarouselBasic2 data={_carouselsExample.slice(4, 8)} />
+              dsds
+              {/* <CarouselBasic2 data={_carouselsExample.slice(4, 8)} /> */}
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader title="Carousel Basic 3" />
             <CardContent>
-              <CarouselBasic3 data={_carouselsExample.slice(8, 12)} />
+              sddssd
+              {/* <CarouselBasic3 data={_carouselsExample.slice(8, 12)} /> */}
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader title="Carousel Basic 4" />
             <CardContent>
-              <CarouselBasic4 data={_carouselsExample.slice(12, 16)} />
+              sdsd
+              {/* <CarouselBasic4 data={_carouselsExample.slice(12, 16)} /> */}
             </CardContent>
           </Card>
         </Box>
@@ -102,21 +106,24 @@ export default function CarouselView() {
           <Card>
             <CardHeader title="Carousel Thumbnail" />
             <CardContent>
-              <CarouselThumbnail data={_carouselsExample.slice(0, 8)} />
+              dfdfddf
+              {/* <CarouselThumbnail data={_carouselsExample.slice(0, 8)} /> */}
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader title="Carousel Center Mode" subheader="Customs shape & icon button" />
             <CardContent>
-              <CarouselCenterMode data={_carouselsExample.slice(8, 16)} />
+              ffedw
+              {/* <CarouselCenterMode data={_carouselsExample.slice(8, 16)} /> */}
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader title="Carousel Animation" />
             <CardContent>
-              <CarouselAnimation data={_carouselsExample.slice(12, 16)} />
+              kfmdfd
+              {/* <CarouselAnimation data={_carouselsExample.slice(12, 16)} /> */}
             </CardContent>
           </Card>
         </Stack>

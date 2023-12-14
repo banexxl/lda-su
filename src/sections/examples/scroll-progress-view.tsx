@@ -34,7 +34,7 @@ export default function ScrollProgressView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          {/* <CustomBreadcrumbs
             heading="Scroll Progress"
             links={[
               {
@@ -43,7 +43,7 @@ export default function ScrollProgressView() {
               },
               { name: 'Scroll Progress' },
             ]}
-          />
+          /> */}
         </Container>
       </Box>
 

@@ -12,24 +12,6 @@ import { RouterLink } from 'src/routes/components';
 
 // ----------------------------------------------------------------------
 
-const ITEMS = [
-  { title: 'Animate', path: paths.components.animate },
-  { title: 'Carousel', path: paths.components.carousel },
-  { title: 'CountUp', path: paths.components.countUp },
-  { title: 'Form Validation', path: paths.components.form },
-  { title: 'Icons', path: paths.components.icons },
-  { title: 'Image', path: paths.components.image },
-  { title: 'Label', path: paths.components.label },
-  { title: 'Lightbox', path: paths.components.lightbox },
-  { title: 'Markdown', path: paths.components.markdown },
-  { title: 'Mega Menu', path: paths.components.megaMenu },
-  { title: 'Navigation Bar', path: paths.components.navigation },
-  { title: 'Scroll', path: paths.components.scroll },
-  { title: 'Scroll Progress', path: paths.components.scrollProgress },
-  { title: 'Player', path: paths.components.player },
-  { title: 'Text Max Line', path: paths.components.textMaxLine },
-];
-
 // ----------------------------------------------------------------------
 
 export default function ComponentsView() {
@@ -62,7 +44,8 @@ export default function ComponentsView() {
           md: 'repeat(4, 1fr)',
         }}
       >
-        {ITEMS.map((item) => (
+        neki linkovi ovde
+        {/* {ITEMS.map((item) => (
           <Link
             component={RouterLink}
             href={item.path}
@@ -86,7 +69,7 @@ export default function ComponentsView() {
               {item.title}
             </Paper>
           </Link>
-        ))}
+        ))} */}
       </Box>
     </Container>
   );

@@ -30,7 +30,8 @@ export default function FormValidationView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          dfdfd
+          {/* <CustomBreadcrumbs
             heading="Form Validation"
             links={[
               {
@@ -40,7 +41,7 @@ export default function FormValidationView() {
               { name: 'Form Validation' },
             ]}
             moreLink={['https://react-hook-form.com/', 'https://github.com/jquense/yup']}
-          />
+          /> */}
         </Container>
       </Box>
 

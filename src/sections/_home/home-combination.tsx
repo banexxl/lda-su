@@ -18,23 +18,6 @@ import { varFade, MotionViewport } from 'src/components/animate';
 export default function HomeCombination() {
   const mdUp = useResponsive('up', 'md');
 
-  const visitBtn = (
-    <m.div variants={varFade().inLeft}>
-      <Button
-        size="large"
-        color="inherit"
-        variant="outlined"
-        target="_blank"
-        rel="noopener"
-        href={paths.minimalStore}
-        endIcon={<Iconify icon="carbon:chevron-right" width={16} />}
-        sx={{ ...(mdUp && { mt: 5 }) }}
-      >
-        Visit Minimal Dashboard
-      </Button>
-    </m.div>
-  );
-
   return (
     <Container
       component={MotionViewport}
@@ -80,7 +63,7 @@ export default function HomeCombination() {
           </Typography>
         </m.div>
 
-        {mdUp && visitBtn}
+        {mdUp}
       </Box>
 
       <Box
@@ -102,7 +85,7 @@ export default function HomeCombination() {
         </m.div>
       </Box>
 
-      {!mdUp && visitBtn}
+      {!mdUp}
     </Container>
   );
 }

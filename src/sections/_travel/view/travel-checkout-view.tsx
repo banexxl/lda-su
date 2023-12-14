@@ -150,17 +150,6 @@ export default function TravelCheckoutView() {
             </Stack>
           </Grid>
 
-          <Grid xs={12} md={5}>
-            <TravelCheckOutSummary
-              guests={guests}
-              tour={_tours[0]}
-              departureDay={departureDay}
-              isSubmitting={isSubmitting}
-              onDecreaseGuests={handleDecreaseGuests}
-              onIncrementGuests={handleIncrementGuests}
-              onChangeDepartureDay={handleChangeDepartureDay}
-            />
-          </Grid>
         </Grid>
       </FormProvider>
     </Container>

@@ -33,7 +33,8 @@ export default function CountUpPageView() {
         }}
       >
         <Container>
-          <CustomBreadcrumbs
+          sdsss
+          {/* <CustomBreadcrumbs
             heading="CountUp"
             links={[
               {
@@ -43,7 +44,7 @@ export default function CountUpPageView() {
               { name: 'CountUp' },
             ]}
             moreLink={['https://www.npmjs.com/package/react-countup']}
-          />
+          /> */}
         </Container>
       </Box>
 

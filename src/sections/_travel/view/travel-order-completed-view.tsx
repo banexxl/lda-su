@@ -40,8 +40,6 @@ export default function TravelOrderCompletedView() {
       <Stack spacing={5}>
         <Typography variant="h2">Completed 🎉</Typography>
 
-        <TravelOrderCompletedInfo tour={_mockTour} />
-
         <TravelOrderCompletedSummary />
 
         <Stack spacing={2.5} direction={{ xs: 'column', md: 'row' }} justifyContent="center">
