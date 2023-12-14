@@ -21,7 +21,6 @@ import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
 import TravelNewsletter from '../travel-newsletter';
-import ReviewTravel from '../../review/travel/review-travel';
 import TravelTourListSimilar from '../list/travel-tour-list-similar';
 import TravelTourDetailsHeader from '../details/travel-tour-details-header';
 import TravelTourDetailsSummary from '../details/travel-tour-details-summary';
@@ -106,8 +105,6 @@ export default function TravelTourView() {
       </Container>
 
       <Divider sx={{ my: 10 }} />
-
-      <ReviewTravel />
 
       {/* <TravelTourListSimilar tours={_tours.slice(-4)} /> */}
 
