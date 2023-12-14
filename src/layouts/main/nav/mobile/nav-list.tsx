@@ -4,8 +4,6 @@ import { useActiveLink } from 'src/routes/hooks/use-active-link';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { NavSectionVertical } from 'src/components/nav-section';
-
 import NavItem from './nav-item';
 import { NavListProps } from '../types';
 
@@ -29,23 +27,6 @@ export default function NavList({ data }: NavListProps) {
         hasChild={!!data.children}
         externalLink={data.path.includes('http')}
       />
-
-      {!!data.children && (
-        <Collapse in={menuOpen.value} unmountOnExit>
-          <NavSectionVertical
-            data={data.children}
-            slotProps={{
-              rootItem: {
-                pl: 1,
-                minHeight: 30,
-              },
-              subheader: {
-                pl: 1,
-              },
-            }}
-          />
-        </Collapse>
-      )}
     </>
   );
 }

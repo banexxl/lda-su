@@ -2,13 +2,9 @@
 
 export const paths = {
   //AboutUs
-  aboutUs: 'about-us',
-  //TeamMemebers
-  teamMembers: {
-    stanka: '/about-us/stanka',
-    silvija: '/about-us/silvija',
-    boris: '/about-us/boris',
-  },
+  home: '/',
+  team: '/about-us/team',
+  docs: '/about-us/docs',
   // Travel
   travel: {
     root: '/travel',

@@ -6,7 +6,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
-
+import { NavBasicMobile, NavBasicDesktop } from 'src/components/nav-basic';
 import { paths } from 'src/routes/paths';
 
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
@@ -24,9 +24,9 @@ import Searchbar from '../common/searchbar';
 import { navConfig } from './config-navigation';
 import HeaderShadow from '../common/header-shadow';
 import SettingsButton from '../common/settings-button';
+import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
-
 type Props = {
   headerOnDark: boolean;
 };
@@ -64,7 +64,7 @@ export default function Header({ headerOnDark }: Props) {
 
       {mdUp ? (
         <Stack flexGrow={1} alignItems="center" sx={{ height: 1 }}>
-          <NavDesktop data={navConfig} />
+          <NavBasicDesktop data={navConfig} />
         </Stack>
       ) : (
         <Box sx={{ flexGrow: 1 }} />
@@ -79,7 +79,7 @@ export default function Header({ headerOnDark }: Props) {
 
       </Stack>
 
-      {!mdUp && <NavMobile data={navConfig} />}
+      {!mdUp && <NavBasicMobile data={navConfig} />}
     </>
   );
 

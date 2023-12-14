@@ -1,11 +1,11 @@
-import HomeView from 'src/sections/_home/view/home-view';
+import TravelLandingView from 'src/sections/_travel/view/travel-landing-view';
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'The starting point for your next project',
+  title: 'Travel: Home',
 };
 
-export default function HomePage() {
-  return <HomeView />;
+export default function TravelLandingPage() {
+  return <TravelLandingView />;
 }

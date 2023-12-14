@@ -6,6 +6,9 @@ type ReturnType = boolean;
 
 export function useActiveLink(path: string, deep = true): ReturnType {
 
+  console.log(path);
+
+
   const pathname = usePathname();
 
   const checkPath = path.startsWith('#');
