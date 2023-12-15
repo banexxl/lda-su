@@ -28,7 +28,7 @@ function Logo({ single = false, sx }: LogoProps) {
     >
       <Box
         sx={{
-          width: single ? 64 : 75,
+          width: single ? 64 : 100,
           lineHeight: 0,
           cursor: 'pointer',
           display: 'inline-flex',
@@ -36,7 +36,7 @@ function Logo({ single = false, sx }: LogoProps) {
           ...sx,
         }}
       >
-        <Image src={'/assets/logo_main.jpg'} height={100} width={100} alt={'nologo'} />
+        <Image src={'/assets/logo/EU-flag - Copy.jpg'} height={80} width={300} alt={'nologo'} />
       </Box>
     </Link>
   );

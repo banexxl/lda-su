@@ -40,25 +40,9 @@ export default function Header({ headerOnDark }: Props) {
 
   const renderContent = (
     <>
-      <Box sx={{ lineHeight: 0, position: 'relative' }}>
+      <Box sx={{ lineHeight: 0, position: 'relative', mb: '60px', borderRadius: '40px' }}>
         <Logo />
-        <Link href="/">
-          <Label
-            color="info"
-            sx={{
-              ml: 0.5,
-              px: 0.5,
-              top: -14,
-              left: 60,
-              height: 20,
-              fontSize: 11,
-              cursor: 'pointer',
-              position: 'absolute',
-            }}
-          >
-            v2.3.0
-          </Label>
-        </Link>
+        <Link href="/" />
       </Box>
 
       {mdUp ? (
@@ -69,7 +53,7 @@ export default function Header({ headerOnDark }: Props) {
         <Box sx={{ flexGrow: 1 }} />
       )}
 
-      <Stack spacing={2} direction="row" alignItems="center" justifyContent="flex-end">
+      <Stack spacing={2} direction="row" alignItems="center" justifyContent="flex-end" sx={{ pb: '60px' }}>
         <Stack spacing={1} direction="row" alignItems="center">
           <Searchbar />
 
@@ -109,6 +93,7 @@ export default function Header({ headerOnDark }: Props) {
       >
         <Container
           sx={{
+            mt: '50px',
             height: 1,
             display: 'flex',
             alignItems: 'center',

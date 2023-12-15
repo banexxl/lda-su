@@ -23,7 +23,7 @@ export const pageLinks = [
 
 
 export const navConfig = [
-  { title: 'Home', path: paths.home },
+  { title: 'Naslovna', path: paths.home },
   {
     title: 'O nama',
     path: '#',
