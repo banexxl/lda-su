@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-
+import bgImage from "public/granular.jpg"
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useBoundingClientRect } from 'src/hooks/use-bounding-client-rect';
 
@@ -44,11 +44,14 @@ export default function TravelLandingIntroduce() {
 
   const offsetLeft = container && container.left + 20;
 
+  const imageURL = "../../../public/granular.jpg"
+
   return (
     <Box
       sx={{
         pt: { xs: 10, md: 15 },
         pb: { xs: 5, md: 10 },
+        backgroundImage: `url(${bgImage.src})`
       }}
     >
       <Container ref={containerRef}>
@@ -58,6 +61,7 @@ export default function TravelLandingIntroduce() {
             maxWidth: 480,
             mx: { xs: 'auto', md: 'unset' },
             textAlign: { xs: 'center', md: 'unset' },
+            backgroundImage: `url(${imageURL})`
           }}
         >
           <Typography variant="h2">Explore A Different Way To Travel</Typography>

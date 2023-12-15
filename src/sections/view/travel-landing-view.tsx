@@ -23,7 +23,6 @@ export default function TravelLandingView() {
   return (
     <>
       <Box sx={{ position: 'relative' }}>
-
         <Container
           sx={{
             mb: { md: 10 },
