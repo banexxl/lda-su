@@ -68,7 +68,8 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
         wrapperClassName={wrapperClassName || 'component-image-wrapper'}
         placeholderSrc={disabledEffect ? '/assets/transparent.png' : '/assets/placeholder.svg'}
         sx={{
-          width: 1,
+          width: '80%',
+          borderRadius: '10px',
           height: 1,
           objectFit: 'cover',
           verticalAlign: 'bottom',

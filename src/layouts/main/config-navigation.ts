@@ -41,7 +41,7 @@ export const navConfig = [
     ],
   },
   {
-    title: 'Projects',
+    title: 'Projekti',
     path: '#',
     children: [
       { title: 'Regionalna platforma za učešće i dijalog mladih', path: '/projects/regionalna-platforma-za-ucesce-i-dijalog-mladih' },
