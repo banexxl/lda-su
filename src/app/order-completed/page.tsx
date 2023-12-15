@@ -1,4 +1,4 @@
-import TravelOrderCompletedView from 'src/sections/_travel/view/travel-order-completed-view';
+import TravelOrderCompletedView from 'src/sections/view/travel-order-completed-view';
 
 // ----------------------------------------------------------------------
 

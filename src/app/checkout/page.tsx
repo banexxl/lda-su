@@ -1,4 +1,4 @@
-import TravelCheckoutView from 'src/sections/_travel/view/travel-checkout-view';
+import TravelCheckoutView from 'src/sections/view/travel-checkout-view';
 
 // ----------------------------------------------------------------------
 

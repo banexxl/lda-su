@@ -1,4 +1,4 @@
-import TravelTourView from 'src/sections/_travel/view/travel-tour-view';
+import TravelTourView from 'src/sections/view/travel-tour-view';
 
 // ----------------------------------------------------------------------
 

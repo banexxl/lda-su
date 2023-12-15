@@ -14,7 +14,7 @@ import TravelLandingSummary from '../landing/travel-landing-summary';
 import TravelLandingIntroduce from '../landing/travel-landing-introduce';
 import TravelLandingToursByCity from '../landing/travel-landing-tours-by-city';
 import TravelLandingTourFeatured from '../landing/travel-landing-tour-featured';
-import BlogTravelLandingLatestPosts from '../../blog/travel/travel-landing-posts';
+import BlogTravelLandingLatestPosts from '../blog/travel/travel-landing-posts';
 import TravelLandingFavoriteDestinations from '../landing/travel-landing-favorite-destinations';
 
 // ----------------------------------------------------------------------

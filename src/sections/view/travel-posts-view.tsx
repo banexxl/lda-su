@@ -6,11 +6,11 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { _mock, _categories, _travelPosts } from 'src/_mock';
 
 import TravelNewsletter from '../travel-newsletter';
-import PostSidebar from '../../blog/common/post-sidebar';
-import TravelPosts from '../../blog/travel/travel-posts';
-import PostSearchMobile from '../../blog/common/post-search-mobile';
-import TravelFeaturedPosts from '../../blog/travel/travel-featured-posts';
-import TravelTrendingTopics from '../../blog/travel/travel-trending-topics';
+import PostSidebar from '../blog/common/post-sidebar';
+import TravelPosts from '../blog/travel/travel-posts';
+import PostSearchMobile from '../blog/common/post-search-mobile';
+import TravelFeaturedPosts from '../blog/travel/travel-featured-posts';
+import TravelTrendingTopics from '../blog/travel/travel-trending-topics';
 
 // ----------------------------------------------------------------------
 

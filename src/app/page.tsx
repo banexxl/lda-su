@@ -1,4 +1,4 @@
-import TravelLandingView from 'src/sections/_travel/view/travel-landing-view';
+import TravelLandingView from 'src/sections/view/travel-landing-view';
 
 // ----------------------------------------------------------------------
 

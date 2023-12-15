@@ -1,4 +1,4 @@
-import TravelPostView from 'src/sections/_travel/view/travel-post-view';
+import TravelPostView from 'src/sections/view/travel-post-view';
 
 // ----------------------------------------------------------------------
 

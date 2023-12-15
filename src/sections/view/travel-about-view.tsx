@@ -8,7 +8,7 @@ import TravelNewsletter from '../travel-newsletter';
 import TravelOurClients from '../travel-our-clients';
 import TravelTestimonial from '../testimonial/travel-testimonial';
 import TravelAboutOurMission from '../about/travel-about-our-mission';
-import TravelLatestPosts from '../../blog/travel/travel-latest-posts';
+import TravelLatestPosts from '../blog/travel/travel-latest-posts';
 
 // ----------------------------------------------------------------------
 

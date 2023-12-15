@@ -1,4 +1,4 @@
-import TravelAboutView from 'src/sections/_travel/view/travel-about-view';
+import TravelAboutView from 'src/sections/view/travel-about-view';
 
 // ----------------------------------------------------------------------
 
