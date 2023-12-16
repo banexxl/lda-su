@@ -135,7 +135,7 @@ type OverviewItemProp = {
   icon: IconifyProps;
 };
 
-const OverviewItem({ icon, label, text = '-' }: OverviewItemProp) {
+function OverviewItem({ icon, label, text = '-' }: OverviewItemProp) {
   return (
     <Stack spacing={1.5} direction="row" alignItems="flex-start">
       <Iconify icon={icon} width={24} />
@@ -156,7 +156,7 @@ type HighlightItemProps = {
   text: string;
 };
 
-const HighlightItem({ label, text }: HighlightItemProps) => {
+function HighlightItem({ label, text }: HighlightItemProps) {
   return (
     <Stack spacing={1}>
       <Typography

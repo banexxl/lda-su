@@ -48,7 +48,7 @@ type PostItemProps = {
   isNext?: boolean;
 };
 
-const PostItem({ coverUrl, title, icon, isNext }: PostItemProps) => {
+function PostItem({ coverUrl, title, icon, isNext }: PostItemProps) {
   return (
     <CardActionArea sx={{ borderRadius: 2 }}>
       <Link color="inherit" underline="none">

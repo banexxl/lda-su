@@ -12,6 +12,7 @@ type Props = {
 };
 
 export const FeaturedNews = ({ posts }: Props) => {
+
   const featuredPost = posts[0];
 
   return (

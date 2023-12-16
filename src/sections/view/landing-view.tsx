@@ -52,11 +52,11 @@ export const LandingView = () => {
 
       <Testimonial testimonials={_testimonials} />
 
-      <LandingProjectsByCity tours={[]} />
+      {/* <LandingProjectsByCity tours={[]} /> */}
 
-      <LandingTourFeatured tours={[]} />
+      {/* <LandingTourFeatured tours={[]} /> */}
 
-      <FeaturedNews posts={[]} />
+      {/* <FeaturedNews posts={[]} /> */}
 
       <Newsletter />
     </>

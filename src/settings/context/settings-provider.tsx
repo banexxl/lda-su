@@ -17,7 +17,7 @@ type Props = {
   defaultSettings: SettingsValueProps;
 };
 
-export const SettingsProvider({ children, defaultSettings }: Props) => {
+export default function SettingsProvider({ children, defaultSettings }: Props) {
   const { state, update, reset } = useLocalStorage(STORAGE_KEY, defaultSettings);
 
   const [openDrawer, setOpenDrawer] = useState(false);
