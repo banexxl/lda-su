@@ -93,7 +93,7 @@ export const LandingNews = ({ posts }: Props) => {
             <Button
               color="primary"
               component={RouterLink}
-              href={paths.travel.posts}
+              href={paths.alda.alda}
               endIcon={<Iconify icon="carbon:chevron-right" />}
             >
               View All

@@ -27,7 +27,7 @@ export const ProjectListSimilar = ({ tours }: Props) => {
   const viewAllBtn = (
     <Button
       component={RouterLink}
-      href={paths.travel.tours}
+      href={paths.alda.alda}
       color="inherit"
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >

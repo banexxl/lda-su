@@ -6,16 +6,21 @@ export const paths = {
   team: '/about-us/team',
   docs: '/about-us/docs',
   // LDA Subotica
-  travel: {
-    root: '/travel',
-    tours: '/travel/tours',
-    tour: `/travel/tour`,
-    checkout: '/travel/checkout',
-    orderCompleted: '/travel/order-completed',
-    posts: '/travel/posts',
-    post: `/travel/post`,
-    about: '/travel/about',
-    contact: '/travel/contact',
+  alda: {
+    alda: 'https://www.alda-europe.eu/',
+    ldaKnjazevac: 'http://www.lda-knjazevac.org/',
+    ldaMostar: `http://www.ldamostar.org/`,
+    ldaZavidovici: 'http://www.lda-zavidovici.org/',
+    ldaPrijedor: 'http://www.ldaprijedor.org/',
+    ldaSisak: 'http://www.lda-sisak.hr/',
+    ldaCSS: `http://www.lda-osijek.hr/`,
+    ldaBrtobiglaverteneglio: 'https://www.lda-verteneglio.hr/',
+    ldaKosovo: 'https://www.alda-europe.eu/alda_member/lda-kosovo/',
+    ldaNiksic: 'https://aldnk.me/',
+    ldaGeorgia: 'https://ldageorgia.ge/en',
+    ldaArmenia: 'https://www.alda-europe.eu/ru/the-work-of-lda-armenia-within-aldas-network/',
+    ldaDnjepropetrovsk: 'https://www.alda-europe.eu/alda_member/lda-of-the-dnipropetrovsk-region/',
+    ldaAlbania: 'https://lda.al/'
   },
   // // Auth
   // loginCover: '/auth/login-cover',

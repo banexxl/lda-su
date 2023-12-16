@@ -143,21 +143,21 @@ export const Footer = () => {
             </Stack>
           </Grid>
 
-          {/* <Grid xs={12} md={6}>
+          <Grid xs={12} md={6}>
             {mdUp ? (
               <Masonry columns={4} spacing={2} defaultColumns={4} defaultSpacing={2}>
-                {renderLists.map((list) => (
+                {renderLists.map((list: any) => (
                   <ListDesktop key={list.subheader} list={list} />
                 ))}
               </Masonry>
             ) : (
               <Stack spacing={1.5}>
-                {renderLists.map((list) => (
+                {renderLists.map((list: any) => (
                   <ListMobile key={list.subheader} list={list} />
                 ))}
               </Stack>
             )}
-          </Grid> */}
+          </Grid>
         </Grid>
       </Container>
 
@@ -188,7 +188,7 @@ export const Footer = () => {
     </>
   );
 
-  return <footer>{isHome ? simpleFooter : mainFooter}</footer>;
+  return <footer>{isHome ? mainFooter : simpleFooter}</footer>;
 }
 
 // ----------------------------------------------------------------------

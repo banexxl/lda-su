@@ -28,7 +28,7 @@ export const LatestNews = () => {
   const viewAllBtn = (
     <Button
       component={RouterLink}
-      href={paths.travel.posts}
+      href={paths.alda.alda}
       color="inherit"
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >

@@ -92,7 +92,7 @@ export const ProjectItem = ({ tour }: Props) => {
           {location}
         </Typography>
 
-        <Link component={RouterLink} href={paths.travel.tour} color="inherit">
+        <Link component={RouterLink} href={paths.alda.alda} color="inherit">
           <TextMaxLine variant="h6" persistent>
             {slug}
           </TextMaxLine>

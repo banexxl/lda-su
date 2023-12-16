@@ -29,7 +29,7 @@ export const LandingProjectsByCity = ({ tours }: Props) => {
   const viewAllBtn = (
     <Button
       component={RouterLink}
-      href={paths.travel.tours}
+      href={paths.alda.alda}
       color="inherit"
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >
@@ -100,7 +100,7 @@ const ProjectItem = ({ tour }: TourItemProps) => {
   const { coverUrl, location } = tour;
 
   return (
-    <Link component={RouterLink} href={paths.travel.tour} color="inherit" underline="none">
+    <Link component={RouterLink} href={paths.alda.alda} color="inherit" underline="none">
       <Paper
         variant="outlined"
         sx={{

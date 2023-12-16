@@ -28,7 +28,7 @@ export const PostItem = ({ post }: Props) => {
       <Stack spacing={1}>
         <NewsTimeBlock createdAt={fDate(post.createdAt)} duration={post.duration} />
 
-        <Link component={RouterLink} href={paths.travel.post} color="inherit">
+        <Link component={RouterLink} href={paths.alda.alda} color="inherit">
           <TextMaxLine variant="h5" persistent>
             {post.title}
           </TextMaxLine>

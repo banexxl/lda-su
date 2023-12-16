@@ -52,7 +52,7 @@ export const LandingTourFeatured = ({ tours }: Props) => {
       <Box sx={{ textAlign: 'center' }}>
         <Button
           component={RouterLink}
-          href={paths.travel.tours}
+          href={paths.alda.alda}
           size="large"
           variant="outlined"
           color="inherit"

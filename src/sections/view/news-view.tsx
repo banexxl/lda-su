@@ -35,7 +35,7 @@ export const NewsView = () => {
           sx={{ my: 3 }}
           links={[
             { name: 'Home', href: '/' },
-            { name: 'Blog', href: paths.travel.posts },
+            { name: 'Blog', href: paths.alda.alda },
             { name: "title" },
           ]}
         />

@@ -63,7 +63,7 @@ export const ProjectDetailsReserveForm = ({ tour }: Props) => {
   );
 
   const handleClickReserve = useCallback(() => {
-    router.push(paths.travel.checkout);
+    router.push(paths.alda.alda);
   }, [router]);
 
   return (

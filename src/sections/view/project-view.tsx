@@ -52,7 +52,7 @@ export const ProjectView = () => {
         <CustomBreadcrumbs
           links={[
             { name: 'Home', href: '/' },
-            { name: 'Tours', href: paths.travel.tours },
+            { name: 'Tours', href: paths.alda.alda },
             { name: _mockTour.slug },
           ]}
           sx={{ mt: 3, mb: 5 }}
