@@ -20,7 +20,7 @@ type Props = {
   onClose: VoidFunction;
 };
 
-export default function MapPopup({ office, onClose, lat, lng }: Props) {
+export const MapPopup = ({ office, onClose, lat, lng }: Props) => {
   const handleClose = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();

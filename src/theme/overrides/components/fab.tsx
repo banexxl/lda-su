@@ -17,7 +17,7 @@ declare module '@mui/material/Fab' {
 
 // ----------------------------------------------------------------------
 
-export function fab(theme: Theme) {
+export const fab = (theme: Theme) => {
   const lightMode = theme.palette.mode === 'light';
 
   const rootStyles = (ownerState: FabProps) => {

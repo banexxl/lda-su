@@ -5,12 +5,12 @@ import Collapse from '@mui/material/Collapse';
 import { usePathname } from 'src/routes/hooks';
 import { useActiveLink } from 'src/routes/hooks/use-active-link';
 
-import NavItem from './nav-item';
+import { NavItem } from './nav-item';
 import { NavListProps, NavSubListProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-export default function NavList({ data, depth, slotProps }: NavListProps) {
+export const NavList = ({ data, depth, slotProps }: NavListProps) => {
   const pathname = usePathname();
 
   const active = useActiveLink(data.path, !!data.children);
@@ -26,7 +26,7 @@ export default function NavList({ data, depth, slotProps }: NavListProps) {
 
   const handleToggleMenu = useCallback(() => {
     if (data.children) {
-      setOpenMenu((prev) => !prev);
+      setOpenMenu((prev: any) => !prev);
     }
   }, [data.children]);
 
@@ -64,7 +64,7 @@ export default function NavList({ data, depth, slotProps }: NavListProps) {
 
 // ----------------------------------------------------------------------
 
-function NavSubList({ data, depth, slotProps }: NavSubListProps) {
+const NavSubList = ({ data, depth, slotProps }: NavSubListProps) => {
   return (
     <>
       {data.map((list) => (

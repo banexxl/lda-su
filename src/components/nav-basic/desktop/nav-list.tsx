@@ -11,7 +11,7 @@ import { NavListProps, NavSubListProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-export default function NavList({ data, depth, slotProps }: NavListProps) {
+export const NavList = ({ data, depth, slotProps }: NavListProps) => {
   const navRef = useRef<HTMLDivElement | null>(null);
 
   const pathname = usePathname();
@@ -99,7 +99,7 @@ export default function NavList({ data, depth, slotProps }: NavListProps) {
 
 // ----------------------------------------------------------------------
 
-function NavSubList({ data, depth, slotProps }: NavSubListProps) {
+const NavSubList = ({ data, depth, slotProps }: NavSubListProps) => {
   return (
     <Stack spacing={0.5}>
       {data.map((list) => (

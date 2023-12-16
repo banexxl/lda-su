@@ -1,1 +1,1 @@
-export { default as SplashScreen } from './splash-screen';
+export { SplashScreen } from './splash-screen';

@@ -6,7 +6,7 @@ import { Theme, styled, SxProps } from '@mui/material/styles';
 import { bgBlur } from 'src/theme/css';
 
 import Logo from '../logo';
-import ProgressBar from '../progress-bar';
+import { ProgressBar } from '../progress-bar';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ type Props = {
   sx?: SxProps<Theme>;
 };
 
-export default function SplashScreen({ sx }: Props) {
+export const SplashScreen = ({ sx }: Props) => {
   return (
     <>
       <ProgressBar />

@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function treeView(theme: Theme) {
+export const treeView = (theme: Theme) => {
   return {
     MuiTreeItem: {
       styleOverrides: {

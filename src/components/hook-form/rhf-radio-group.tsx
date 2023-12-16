@@ -17,7 +17,7 @@ type Props = RadioGroupProps & {
   helperText?: React.ReactNode;
 };
 
-export default function RHFRadioGroup({
+export const RHFRadioGroup = ({
   row,
   name,
   label,
@@ -25,7 +25,7 @@ export default function RHFRadioGroup({
   spacing,
   helperText,
   ...other
-}: Props) {
+}: Props) => {
   const { control } = useFormContext();
 
   const labelledby = label ? `${name}-${label}` : '';

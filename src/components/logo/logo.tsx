@@ -13,7 +13,7 @@ interface LogoProps extends BoxProps {
   single?: boolean;
 }
 
-function Logo({ single = false, sx }: LogoProps) {
+const Logo = ({ single = false, sx }: LogoProps) => {
   const theme = useTheme();
 
   const PRIMARY_MAIN = theme.palette.primary.main;

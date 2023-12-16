@@ -5,11 +5,11 @@ import { useWidth } from 'src/hooks/use-responsive';
 
 // ----------------------------------------------------------------------
 
-function remToPx(value: string) {
+const remToPx = (value: string) => {
   return Math.round(parseFloat(value) * 16);
 }
 
-export default function useTypography(variant: Variant) {
+export const useTypography = (variant: Variant) => {
   const theme = useTheme();
 
   const breakpoints = useWidth();

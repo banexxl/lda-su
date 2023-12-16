@@ -10,7 +10,7 @@ interface Props extends StackProps {
   icon: React.ReactElement;
 }
 
-function Label({ icon, text, sx, ...other }: Props) {
+const Label = ({ icon, text, sx, ...other }: Props) => {
   return (
     <Stack
       direction="row"

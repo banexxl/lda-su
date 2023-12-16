@@ -6,6 +6,6 @@ import { StyledReactPlayer } from './styles';
 
 // https://github.com/CookPete/react-player
 
-export default function Player({ ...other }: ReactPlayerProps) {
+export const Player = ({ ...other }: ReactPlayerProps) => {
   return <StyledReactPlayer {...other} />;
 }

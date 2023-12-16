@@ -18,7 +18,7 @@ interface Props extends ReactPlayerProps {
   onClose: VoidFunction;
 }
 
-export default function PlayerDialog({ videoPath, open, onClose, ...other }: Props) {
+export const PlayerDialog = ({ videoPath, open, onClose, ...other }: Props) => {
   const loading = useBoolean(true);
 
   return (

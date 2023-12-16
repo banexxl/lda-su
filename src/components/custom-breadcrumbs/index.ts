@@ -1,3 +1,3 @@
 export * from './types';
 
-export { default } from './custom-breadcrumbs';
+export { CustomBreadcrumbs } from './custom-breadcrumbs';

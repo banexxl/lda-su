@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function list(theme: Theme) {
+export const list = (theme: Theme) => {
   return {
     MuiListItemIcon: {
       styleOverrides: {

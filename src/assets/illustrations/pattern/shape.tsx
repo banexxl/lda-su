@@ -5,7 +5,7 @@ import Box, { BoxProps } from '@mui/material/Box';
 
 // ----------------------------------------------------------------------
 
-function Shape({ ...other }: BoxProps) {
+const Shape = ({ ...other }: BoxProps) => {
   const theme = useTheme();
 
   const PRIMARY_LIGHT = theme.palette.primary.light;

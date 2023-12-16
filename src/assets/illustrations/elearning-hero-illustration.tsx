@@ -37,7 +37,7 @@ const varRight = {
 
 // ----------------------------------------------------------------------
 
-function ElearningHeroIllustration({ sx, ...other }: BoxProps) {
+const ElearningHeroIllustration = ({ sx, ...other }: BoxProps) => {
   const theme = useTheme();
 
   const GREEN = theme.palette.success.main;

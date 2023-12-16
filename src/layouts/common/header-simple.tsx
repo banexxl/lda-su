@@ -13,12 +13,12 @@ import { bgBlur } from 'src/theme/css';
 import Logo from 'src/components/logo';
 
 import { HEADER } from '../config-layout';
-import HeaderShadow from './header-shadow';
-import SettingsButton from './settings-button';
+import { HeaderShadow } from './header-shadow';
+import { SettingsButton } from './settings-button';
 
 // ----------------------------------------------------------------------
 
-export default function HeaderSimple() {
+export const HeaderSimple = () => {
   const theme = useTheme();
 
   const offset = useOffSetTop(HEADER.H_DESKTOP);

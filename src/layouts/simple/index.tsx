@@ -1,4 +1,4 @@
-import Header from '../common/header-simple';
+import { HeaderSimple } from '../common/header-simple';
 
 // ----------------------------------------------------------------------
 
@@ -6,10 +6,10 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function SimpleLayout({ children }: Props) {
+export const SimpleLayout = ({ children }: Props) => {
   return (
     <>
-      <Header />
+      <HeaderSimple />
 
       {children}
     </>

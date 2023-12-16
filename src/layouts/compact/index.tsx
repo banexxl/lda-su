@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 
-import Header from '../common/header-simple';
+import { HeaderSimple } from '../common/header-simple';
 
 // ----------------------------------------------------------------------
 
@@ -9,10 +9,10 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function CompactLayout({ children }: Props) {
+export const CompactLayout = ({ children }: Props) => {
   return (
     <>
-      <Header />
+      <HeaderSimple />
 
       <Container component="main">
         <Stack

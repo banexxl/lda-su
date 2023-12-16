@@ -7,14 +7,14 @@ import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/routes/components';
 
-import CompactLayout from 'src/layouts/compact';
+import { CompactLayout } from 'src/layouts/compact';
 
 import Image from 'src/components/image';
 import { varBounce, MotionContainer } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 
-export default function NotFoundView() {
+export const NotFoundView = () => {
   return (
     <CompactLayout>
       <MotionContainer>

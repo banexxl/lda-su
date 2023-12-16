@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function tooltip(theme: Theme) {
+export const tooltip = (theme: Theme) => {
   const lightMode = theme.palette.mode === 'light';
 
   return {

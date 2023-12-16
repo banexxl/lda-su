@@ -9,7 +9,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
 
-import Nav from './nav';
+import { Nav } from './nav';
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function AccountLayout({ children }: Props) {
+export const AccountLayout = ({ children }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const menuOpen = useBoolean();

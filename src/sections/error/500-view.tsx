@@ -7,14 +7,14 @@ import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/routes/components';
 
-import CompactLayout from 'src/layouts/compact';
+import { CompactLayout } from 'src/layouts/compact';
 
 import Image from 'src/components/image';
 import { varBounce, MotionContainer } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 
-export default function Error500View() {
+export const Error500View = () => {
   return (
     <CompactLayout>
       <MotionContainer>

@@ -17,7 +17,7 @@ interface RHFCheckboxProps extends Omit<FormControlLabelProps, 'control'> {
   helperText?: React.ReactNode;
 }
 
-export function RHFCheckbox({ name, helperText, ...other }: RHFCheckboxProps) {
+export const RHFCheckbox = ({ name, helperText, ...other }: RHFCheckboxProps) => {
   const { control } = useFormContext();
 
   return (
@@ -48,7 +48,7 @@ interface RHFMultiCheckboxProps extends Omit<FormControlLabelProps, 'control' | 
   helperText?: React.ReactNode;
 }
 
-export function RHFMultiCheckbox({
+export const RHFMultiCheckbox = ({
   row,
   name,
   label,
@@ -57,7 +57,7 @@ export function RHFMultiCheckbox({
   helperText,
   sx,
   ...other
-}: RHFMultiCheckboxProps) {
+}: RHFMultiCheckboxProps) => {
   const { control } = useFormContext();
 
   const getSelected = (selectedItems: string[], item: string) =>

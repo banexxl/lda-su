@@ -4,7 +4,7 @@ import { tableCellClasses } from '@mui/material/TableCell';
 
 // ----------------------------------------------------------------------
 
-export function table(theme: Theme) {
+export const table = (theme: Theme) => {
   return {
     MuiTableContainer: {
       styleOverrides: {

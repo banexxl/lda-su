@@ -13,7 +13,7 @@ type ContainerProps = {
   y: number;
 };
 
-export function useBoundingClientRect(containerRef: React.RefObject<HTMLDivElement>) {
+export const useBoundingClientRect = (containerRef: React.RefObject<HTMLDivElement>) => {
   const [container, setContainer] = useState<ContainerProps | null>(null);
 
   const handleResize = useCallback(() => {

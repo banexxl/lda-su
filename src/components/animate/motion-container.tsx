@@ -13,7 +13,7 @@ export interface Props extends IProps {
   action?: boolean;
 }
 
-export default function MotionContainer({ animate, action = false, children, ...other }: Props) {
+export const MotionContainer = ({ animate, action = false, children, ...other }: Props) => {
   if (action) {
     return (
       <Box

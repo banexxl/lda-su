@@ -5,7 +5,7 @@ import { paper } from '../../css';
 
 // ----------------------------------------------------------------------
 
-export function popover(theme: Theme) {
+export const popover = (theme: Theme) => {
   return {
     MuiPopover: {
       styleOverrides: {

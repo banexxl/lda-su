@@ -9,7 +9,7 @@ type ReturnType = {
   seconds: string;
 };
 
-export function useCountdown(date: Date): ReturnType {
+export const useCountdown = (date: Date): ReturnType => {
   const [countdown, setCountdown] = useState({
     days: '00',
     hours: '00',

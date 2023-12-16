@@ -5,9 +5,9 @@ import Box, { BoxProps } from '@mui/material/Box';
 
 import { GOOGLE_MAP_API } from 'src/config-global';
 
-import MapPopup from './map-popup';
+import { MapPopup } from './map-popup';
 import { mapStyle } from './styles';
-import MapMarker from './map-marker';
+import { MapMarker } from './map-marker';
 import { MapOfficeProps } from './types';
 
 // ----------------------------------------------------------------------
@@ -16,7 +16,7 @@ interface Props extends BoxProps {
   offices: MapOfficeProps[];
 }
 
-export default function Map({ offices, sx, ...other }: Props) {
+export const Map = ({ offices, sx, ...other }: Props) => {
   const [tooltip, setTooltip] = useState<MapOfficeProps | any>(null);
 
   const [centerMap, setCenterMap] = useState({

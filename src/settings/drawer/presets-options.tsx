@@ -52,7 +52,7 @@ type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function PresetsOptions({ value, onChange }: Props) {
+export const PresetsOptions = ({ value, onChange }: Props) => {
   return (
     <Box sx={{ px: 3 }}>
       <Typography variant="subtitle2" sx={{ py: 3 }}>
@@ -88,7 +88,7 @@ type OptionItemProps = {
   secondaryColor: string;
 };
 
-function OptionItem({ colorName, selected, primaryColor, secondaryColor }: OptionItemProps) {
+const OptionItem = ({ colorName, selected, primaryColor, secondaryColor }: OptionItemProps) => {
   return (
     <Paper
       variant={selected ? 'elevation' : 'outlined'}

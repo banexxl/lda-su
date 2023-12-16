@@ -1,11 +1,11 @@
-import TravelContactView from 'src/sections/view/travel-contact-view';
+import { ContactView } from 'src/sections/view/contact-view';
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Travel: Contact us',
+  title: 'LDA Subotica: Contact us',
 };
 
-export default function TravelContactPage() {
-  return <TravelContactView />;
+export const ContactPage = () => {
+  return <ContactView />;
 }

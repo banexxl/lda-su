@@ -11,7 +11,7 @@ import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function SupportHero() {
+export const SupportHero = () => {
   const theme = useTheme();
 
   return (

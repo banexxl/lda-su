@@ -3,7 +3,7 @@ import { SwitchProps, switchClasses } from '@mui/material/Switch';
 
 // ----------------------------------------------------------------------
 
-export function switches(theme: Theme) {
+export const switches = (theme: Theme) => {
   const lightMode = theme.palette.mode === 'light';
 
   const rootStyles = (ownerState: SwitchProps) => ({

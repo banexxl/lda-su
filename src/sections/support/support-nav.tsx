@@ -43,7 +43,7 @@ type Props = {
   onChangeTopic: (event: React.SyntheticEvent, newValue: string) => void;
 };
 
-export default function SupportNav({ topic, data, onChangeTopic, open, onClose }: Props) {
+export const SupportNav = ({ topic, data, onChangeTopic, open, onClose }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const renderContent = (

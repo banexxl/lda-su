@@ -10,13 +10,13 @@ export interface ScrollProgressProps extends BoxProps {
   scrollYProgress: MotionValue<number>;
 }
 
-export default function ScrollProgress({
+export const ScrollProgress = ({
   color = 'primary',
   size = 3,
   scrollYProgress,
   sx,
   ...other
-}: ScrollProgressProps) {
+}: ScrollProgressProps) => {
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,

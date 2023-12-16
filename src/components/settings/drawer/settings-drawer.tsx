@@ -11,13 +11,13 @@ import Typography from '@mui/material/Typography';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
-import BaseOptions from './base-options';
-import PresetsOptions from './presets-options';
+import { BaseOptions } from './base-options';
+import { PresetsOptions } from './presets-options';
 import { useSettingsContext } from '../context';
 
 // ----------------------------------------------------------------------
 
-export default function SettingsDrawer() {
+export const SettingsDrawer = () => {
   const settings = useSettingsContext();
 
   const renderHead = (

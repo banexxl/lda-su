@@ -5,7 +5,7 @@ import { accordionSummaryClasses } from '@mui/material/AccordionSummary';
 
 // ----------------------------------------------------------------------
 
-export function accordion(theme: Theme) {
+export const accordion = (theme: Theme) => {
   return {
     MuiAccordion: {
       styleOverrides: {

@@ -12,7 +12,7 @@ type Props = {
   onOpen: VoidFunction;
 };
 
-export default function MapMarker({ onOpen, lat, lng }: Props) {
+export const MapMarker = ({ onOpen, lat, lng }: Props) => {
   const handleOpen = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();

@@ -21,13 +21,13 @@ interface Props extends InputBaseProps {
   onDecreaseGuests: (guest?: string) => void;
 }
 
-export default function FilterGuests({
+export const FilterGuests = ({
   guests,
   onIncrementGuests,
   onDecreaseGuests,
   sx,
   ...other
-}: Props) {
+}: Props) => {
   const totalGuests = guests.children + guests.adults;
 
   const [open, setOpen] = useState<HTMLElement | null>(null);
@@ -100,7 +100,7 @@ type RowProps = {
   onIncrement: VoidFunction;
 };
 
-function Input({ title, caption, total, onDecrease, onIncrement }: RowProps) {
+const Input = ({ title, caption, total, onDecrease, onIncrement }: RowProps) => {
   return (
     <Stack direction="row">
       <Stack spacing={0.5} sx={{ flexGrow: 1 }}>

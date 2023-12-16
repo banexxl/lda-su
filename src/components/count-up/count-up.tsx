@@ -11,7 +11,7 @@ export interface CountUpNumberProps extends ReactCountUpProps {
   sx?: SxProps<Theme>;
 }
 
-export default function CountUp({ sx, ...other }: CountUpNumberProps) {
+export const CountUp = ({ sx, ...other }: CountUpNumberProps) => {
   const ref = useRef(null);
 
   const isInView = useInView(ref, { once: true });

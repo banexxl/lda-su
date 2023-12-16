@@ -117,7 +117,7 @@ const base = {
 
 // ----------------------------------------------------------------------
 
-export function palette(mode: 'light' | 'dark') {
+export const palette = (mode: 'light' | 'dark') => {
   const light = {
     ...base,
     mode: 'light',

@@ -14,7 +14,7 @@ declare module '@mui/material/Badge' {
   }
 }
 
-export function badge(theme: Theme) {
+export const badge = (theme: Theme) => {
   return {
     MuiBadge: {
       styleOverrides: {

@@ -10,7 +10,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function RTL({ children, themeDirection }: Props) {
+export const RTL({ children, themeDirection }: Props) => {
   useEffect(() => {
     document.dir = themeDirection;
   }, [themeDirection]);

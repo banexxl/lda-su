@@ -14,7 +14,7 @@ declare module '@mui/material/Button' {
 
 // ----------------------------------------------------------------------
 
-export function button(theme: Theme) {
+export const button = (theme: Theme) => {
   const lightMode = theme.palette.mode === 'light';
 
   const rootStyles = (ownerState: ButtonProps) => {

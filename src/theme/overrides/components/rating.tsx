@@ -4,7 +4,7 @@ import { svgIconClasses } from '@mui/material/SvgIcon';
 
 // ----------------------------------------------------------------------
 
-export function rating(theme: Theme) {
+export const rating = (theme: Theme) => {
   return {
     MuiRating: {
       styleOverrides: {

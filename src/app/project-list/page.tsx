@@ -1,11 +1,11 @@
-import TravelToursView from 'src/sections/view/travel-tours-view';
+import { ProjectsView } from 'src/sections/view/project-list-view';
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Travel: Tours',
+  title: 'LDA Subotica: Projects',
 };
 
-export default function TravelToursPage() {
-  return <TravelToursView />;
+export const ProjectsPage = () => {
+  return <ProjectsView />;
 }

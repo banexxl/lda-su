@@ -1,11 +1,11 @@
-import TravelLandingView from 'src/sections/view/travel-landing-view';
+import { LandingView } from 'src/sections/view/landing-view';
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Travel: Home',
+  title: 'LDA Subotica: Home',
 };
 
-export default function TravelLandingPage() {
-  return <TravelLandingView />;
+export const LandingPage = () => {
+  return <LandingView />;
 }

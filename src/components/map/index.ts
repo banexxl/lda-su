@@ -1,3 +1,3 @@
 export * from './types';
 
-export { default } from './map';
+export { Map } from './map';

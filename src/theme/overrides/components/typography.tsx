@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function typography(theme: Theme) {
+export const typography = (theme: Theme) => {
   return {
     MuiTypography: {
       styleOverrides: {

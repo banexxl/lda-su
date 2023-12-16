@@ -17,13 +17,13 @@ import { bgBlur } from 'src/theme/css';
 import Logo from 'src/components/logo';
 import Label from 'src/components/label';
 
-import NavMobile from './nav/mobile';
-import NavDesktop from './nav/desktop';
+import { NavMobile } from './nav/mobile';
+import { NavDesktop } from './nav/desktop';
 import { HEADER } from '../config-layout';
-import Searchbar from '../common/searchbar';
+import { Searchbar } from '../common/searchbar';
 import { navConfig } from './config-navigation';
-import HeaderShadow from '../common/header-shadow';
-import SettingsButton from '../common/settings-button';
+import { HeaderShadow } from '../common/header-shadow';
+import { SettingsButton } from '../common/settings-button';
 import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
@@ -31,7 +31,7 @@ type Props = {
   headerOnDark: boolean;
 };
 
-export default function Header({ headerOnDark }: Props) {
+export const Header = ({ headerOnDark }: Props) => {
   const theme = useTheme();
 
   const offset = useOffSetTop();
@@ -56,8 +56,6 @@ export default function Header({ headerOnDark }: Props) {
       <Stack spacing={2} direction="row" alignItems="center" justifyContent="flex-end" sx={{ pb: '60px' }}>
         <Stack spacing={1} direction="row" alignItems="center">
           <Searchbar />
-
-          <SettingsButton />
         </Stack>
 
       </Stack>

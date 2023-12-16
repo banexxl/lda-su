@@ -1,11 +1,11 @@
-import TravelAboutView from 'src/sections/view/travel-about-view';
+import { AboutView } from 'src/sections/view/about-view';
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Travel: About us',
+  title: 'LDA Subotica: About Us',
 };
 
-export default function TravelAboutPage() {
-  return <TravelAboutView />;
+export const AboutPage = () => {
+  return <AboutView />;
 }

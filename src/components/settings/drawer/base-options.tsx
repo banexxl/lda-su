@@ -11,7 +11,7 @@ type Props = ListItemButtonProps & {
   selected: boolean;
 };
 
-export default function BaseOptions({ title, icons, selected, ...other }: Props) {
+export const BaseOptions = ({ title, icons, selected, ...other }: Props) => {
   return (
     <ListItemButton
       sx={{

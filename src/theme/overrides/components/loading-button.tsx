@@ -3,7 +3,7 @@ import { LoadingButtonProps, loadingButtonClasses } from '@mui/lab/LoadingButton
 
 // ----------------------------------------------------------------------
 
-export function loadingButton(theme: Theme) {
+export const loadingButton = (theme: Theme) => {
   return {
     MuiLoadingButton: {
       styleOverrides: {

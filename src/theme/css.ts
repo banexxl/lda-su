@@ -78,7 +78,7 @@ type BgBlurProps = {
   imgUrl?: string;
 };
 
-export function bgBlur(props?: BgBlurProps) {
+export const bgBlur = (props?: BgBlurProps) => {
   const color = props?.color || '#000000';
   const blur = props?.blur || 6;
   const opacity = props?.opacity || 0.8;
@@ -120,7 +120,7 @@ type BgGradientProps = {
   imgUrl?: string;
 };
 
-export function bgGradient(props?: BgGradientProps) {
+export const bgGradient = (props?: BgGradientProps) => {
   const direction = props?.direction || 'to bottom';
   const startColor = props?.startColor;
   const endColor = props?.endColor;
@@ -129,9 +129,8 @@ export function bgGradient(props?: BgGradientProps) {
 
   if (imgUrl) {
     return {
-      background: `linear-gradient(${direction}, ${startColor || color}, ${
-        endColor || color
-      }), url(${imgUrl})`,
+      background: `linear-gradient(${direction}, ${startColor || color}, ${endColor || color
+        }), url(${imgUrl})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center center',
@@ -145,7 +144,7 @@ export function bgGradient(props?: BgGradientProps) {
 
 // ----------------------------------------------------------------------
 
-export function textGradient(value: string) {
+export const textGradient = (value: string) => {
   return {
     background: `-webkit-linear-gradient(${value})`,
     WebkitBackgroundClip: 'text',

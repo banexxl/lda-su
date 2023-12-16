@@ -22,7 +22,7 @@ declare module '@mui/material/Pagination' {
 
 // ----------------------------------------------------------------------
 
-export function pagination(theme: Theme) {
+export const pagination = (theme: Theme) => {
   const lightMode = theme.palette.mode === 'light';
 
   const rootStyles = (ownerState: PaginationProps) => {

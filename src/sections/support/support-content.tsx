@@ -18,7 +18,7 @@ type Props = {
   }[];
 };
 
-export default function SupportContent({ contents }: Props) {
+export const SupportContent = ({ contents }: Props) => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
   const handleChangeExpanded = useCallback(

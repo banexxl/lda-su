@@ -3,7 +3,7 @@ import { tabClasses } from '@mui/material/Tab';
 
 // ----------------------------------------------------------------------
 
-export function tabs(theme: Theme) {
+export const tabs = (theme: Theme) => {
   return {
     MuiTabs: {
       styleOverrides: {

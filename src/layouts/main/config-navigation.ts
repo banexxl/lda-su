@@ -5,7 +5,7 @@ import { paths } from 'src/routes/paths';
 export const pageLinks = [
   {
     order: '6',
-    subheader: 'Travel',
+    subheader: 'LDA Subotica',
     cover: '/assets/images/menu/menu_travel.jpg',
     items: [
       { title: 'Landing', path: paths.travel.root },

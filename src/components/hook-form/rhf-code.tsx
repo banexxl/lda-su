@@ -9,7 +9,7 @@ type RHFCodesProps = MuiOtpInputProps & {
   name: string;
 };
 
-export default function RHFCode({ name, ...other }: RHFCodesProps) {
+export const RHFCode = ({ name, ...other }: RHFCodesProps) => {
   const { control } = useFormContext();
 
   return (

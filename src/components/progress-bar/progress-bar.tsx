@@ -3,13 +3,13 @@
 import NProgress from 'nprogress';
 import { useEffect } from 'react';
 
-import StyledProgressBar from './styles';
+import { StyledProgressBar } from './styles';
 
 // ----------------------------------------------------------------------
 
 type PushStateInput = [data: any, unused: string, url?: string | URL | null | undefined];
 
-export default function ProgressBar() {
+export const ProgressBar = () => {
   useEffect(() => {
     NProgress.configure({ showSpinner: false });
 

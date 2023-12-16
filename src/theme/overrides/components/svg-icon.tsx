@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function svgIcon(theme: Theme) {
+export const svgIcon = (theme: Theme) => {
   return {
     MuiSvgIcon: {
       styleOverrides: {

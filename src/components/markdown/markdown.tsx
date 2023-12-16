@@ -10,7 +10,7 @@ type Props = {
   sx?: SxProps<Theme>;
 };
 
-export default function Markdown({ content, firstLetter = false, sx }: Props) {
+export const Markdown = ({ content, firstLetter = false, sx }: Props) => {
   return (
     <StyledMarkdown
       firstLetter={firstLetter}

@@ -23,7 +23,7 @@ import { NavListProps, NavSubListProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-export default function NavList({ data }: NavListProps) {
+export const NavList = ({ data }: NavListProps) => {
   const pathname = usePathname();
 
   const menuOpen = useBoolean();
@@ -125,7 +125,7 @@ export default function NavList({ data }: NavListProps) {
 
 // ----------------------------------------------------------------------
 
-function NavSubList({ subheader, isNew, cover, items }: NavSubListProps) {
+const NavSubList = ({ subheader, isNew, cover, items }: NavSubListProps) => {
 
   const pathname = usePathname();
 

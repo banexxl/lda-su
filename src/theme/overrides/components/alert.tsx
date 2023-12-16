@@ -7,7 +7,7 @@ const COLORS = ['info', 'success', 'warning', 'error'] as const;
 
 // ----------------------------------------------------------------------
 
-export function alert(theme: Theme) {
+export const alert = (theme: Theme) => {
   const lightMode = theme.palette.mode === 'light';
 
   const rootStyles = (ownerState: AlertProps) => {

@@ -15,7 +15,7 @@ type AuthCarouselProps = {
   children: React.ReactNode;
 };
 
-export default function AuthCoverLayout({ title, images, children }: AuthCarouselProps) {
+export const AuthCoverLayout = ({ title, images, children }: AuthCarouselProps) => {
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
@@ -47,9 +47,8 @@ export default function AuthCoverLayout({ title, images, children }: AuthCarouse
           key={img}
           alt={img}
           src={img}
-          overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${
-            theme.palette.common.black
-          } 75%)`}
+          overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
+            } 75%)`}
           sx={{
             '& img': { minHeight: '100vh', width: 1 },
           }}

@@ -3,7 +3,7 @@ import { DialogProps } from '@mui/material/Dialog';
 
 // ----------------------------------------------------------------------
 
-export function dialog(theme: Theme) {
+export const dialog = (theme: Theme) => {
   return {
     MuiDialog: {
       styleOverrides: {

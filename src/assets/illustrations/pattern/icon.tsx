@@ -57,7 +57,7 @@ interface Props extends BoxProps {
   content: any;
 }
 
-function Icon({ content, color, sx, ...other }: Props) {
+const Icon = ({ content, color, sx, ...other }: Props) => {
   return (
     <Box
       sx={{

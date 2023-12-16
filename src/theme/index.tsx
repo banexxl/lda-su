@@ -10,11 +10,11 @@ import { useSettingsContext } from 'src/components/settings';
 import { palette } from './palette';
 import { shadows } from './shadows';
 import { typography } from './typography';
-import RTL from './options/right-to-left';
+import { RTL } from './options/right-to-left';
 import { customShadows } from './custom-shadows';
 import { componentsOverrides } from './overrides';
 import { createPresets } from './options/presets';
-import NextAppDirEmotionCacheProvider from './next-emotion-cache';
+import { NextAppDirEmotionCacheProvider } from './next-emotion-cache';
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function ThemeProvider({ children }: Props) {
+export const ThemeProvider = ({ children }: Props) => {
   const settings = useSettingsContext();
 
   const presets = createPresets(settings.themeColorPresets);
@@ -52,10 +52,10 @@ export default function ThemeProvider({ children }: Props) {
   return (
     <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
       <MuiThemeProvider theme={theme}>
-        <RTL themeDirection={settings.themeDirection}>
-          <CssBaseline />
-          {children}
-        </RTL>
+        {/* <RTL themeDirection={settings.themeDirection}> */}
+        <CssBaseline />
+        {children}
+        {/* </RTL> */}
       </MuiThemeProvider>
     </NextAppDirEmotionCacheProvider>
   );

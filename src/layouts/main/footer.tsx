@@ -41,7 +41,7 @@ const StyledAppStoreButton = styled(Button)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function Footer() {
+export const Footer = () => {
   const mdUp = useResponsive('up', 'md');
 
   const pathname = usePathname();
@@ -193,7 +193,7 @@ export default function Footer() {
 
 // ----------------------------------------------------------------------
 
-export function ListDesktop({ list }: { list: NavSubListProps }) {
+export const ListDesktop = ({ list }: { list: NavSubListProps }) => {
   const pathname = usePathname();
 
   return (
@@ -230,7 +230,7 @@ export function ListDesktop({ list }: { list: NavSubListProps }) {
 
 // ----------------------------------------------------------------------
 
-export function ListMobile({ list }: { list: NavSubListProps }) {
+export const ListMobile = ({ list }: { list: NavSubListProps }) => {
   const pathname = usePathname();
 
   const listExpand = useBoolean();
@@ -284,7 +284,7 @@ export function ListMobile({ list }: { list: NavSubListProps }) {
 
 // ----------------------------------------------------------------------
 
-function AppStoreButton({ ...other }: StackProps) {
+const AppStoreButton = ({ ...other }: StackProps) => {
   return (
     <Stack direction="row" flexWrap="wrap" spacing={2} {...other}>
       <StyledAppStoreButton startIcon={<Iconify icon="ri:apple-fill" width={28} />}>

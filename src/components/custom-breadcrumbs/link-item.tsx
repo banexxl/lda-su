@@ -13,7 +13,7 @@ type Props = {
   disabled: boolean;
 };
 
-export default function BreadcrumbsLink({ link, activeLast, disabled }: Props) {
+export const LinkItem = ({ link, activeLast, disabled }: Props) => {
   const styles = {
     typography: 'body2',
     alignItems: 'center',
@@ -21,10 +21,10 @@ export default function BreadcrumbsLink({ link, activeLast, disabled }: Props) {
     display: 'inline-flex',
     ...(disabled &&
       !activeLast && {
-        cursor: 'default',
-        pointerEvents: 'none',
-        color: 'text.disabled',
-      }),
+      cursor: 'default',
+      pointerEvents: 'none',
+      color: 'text.disabled',
+    }),
   };
 
   const renderContent = (

@@ -10,7 +10,7 @@ type ReturnType = {
   onMouseLeaveHandler: VoidFunction;
 };
 
-export function useHoverParallax(stiffness = 250, damping = 20): ReturnType {
+export const useHoverParallax = (stiffness = 250, damping = 20): ReturnType => {
   const x = useSpring(0, {
     stiffness,
     damping,

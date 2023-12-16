@@ -11,7 +11,7 @@ type ReturnType = {
   setSelected: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function useLightbox(slides: Slide[]): ReturnType {
+export const useLightbox = (slides: Slide[]): ReturnType => {
   const [selected, setSelected] = useState(-1);
 
   const handleOpen = useCallback(

@@ -24,7 +24,7 @@ type Props = {
   onClose: VoidFunction;
 };
 
-export default function Nav({ open, onClose }: Props) {
+export const Nav = ({ open, onClose }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const renderContent = (
@@ -123,7 +123,7 @@ type NavItemProps = {
   };
 };
 
-function NavItem({ item }: NavItemProps) {
+const NavItem = ({ item }: NavItemProps) => {
   const active = useActiveLink(item.path);
 
   return (

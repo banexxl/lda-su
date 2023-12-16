@@ -3,7 +3,7 @@ import { alpha, useTheme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export default function StyledLightbox() {
+export const StyledLightbox = () => {
   const theme = useTheme();
 
   const inputGlobalStyles = (

@@ -2,7 +2,7 @@ import { Theme, alpha } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function paper(theme: Theme) {
+export const paper = (theme: Theme) => {
   return {
     MuiPaper: {
       styleOverrides: {

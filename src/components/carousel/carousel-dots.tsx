@@ -56,7 +56,7 @@ export interface Props extends BoxProps {
   sx?: SxProps<Theme>;
 }
 
-export default function CarouselDots(props?: Props) {
+export const CarouselDots = (props?: Props) => {
   const rounded = props?.rounded || false;
 
   const sx = props?.sx;

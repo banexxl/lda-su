@@ -9,7 +9,7 @@ import { NavListProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-export default function NavList({ data }: NavListProps) {
+export const NavList = ({ data }: NavListProps) => {
   const active = useActiveLink(data.path, !!data.children);
 
   const menuOpen = useBoolean();

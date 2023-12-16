@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 
 type ReturnType = boolean;
 
-export function useActiveLink(path: string, deep = true): ReturnType {
+export const useActiveLink = (path: string, deep = true): ReturnType => {
 
   console.log(path);
 

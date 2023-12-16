@@ -14,13 +14,13 @@ import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 
-import NavList from './nav-list';
+import { NavList } from './nav-list';
 import { NavProps } from '../types';
 import { NAV } from '../../../config-layout';
 
 // ----------------------------------------------------------------------
 
-export default function NavMobile({ data }: NavProps) {
+export const NavMobile = ({ data }: NavProps) => {
   const pathname = usePathname();
 
   const mobileOpen = useBoolean();

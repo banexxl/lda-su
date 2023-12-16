@@ -6,7 +6,7 @@ import { paper, menuItem } from '../../css';
 
 // ----------------------------------------------------------------------
 
-export function autocomplete(theme: Theme) {
+export const autocomplete = (theme: Theme) => {
   return {
     MuiAutocomplete: {
       styleOverrides: {

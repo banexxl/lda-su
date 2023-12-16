@@ -40,7 +40,7 @@ type SearchbarProps = {
   sx?: SxProps<Theme>;
 };
 
-export default function Searchbar({ sx }: SearchbarProps) {
+export const Searchbar = ({ sx }: SearchbarProps) => {
   const searchOpen = useBoolean();
 
   return (

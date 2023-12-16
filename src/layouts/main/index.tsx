@@ -2,8 +2,8 @@ import Box from '@mui/material/Box';
 
 import { usePathname } from 'src/routes/hooks';
 
-import Header from './header';
-import Footer from './footer';
+import { Header } from './header';
+import { Footer } from './footer';
 import { HEADER } from '../config-layout';
 import { Container, Stack } from '@mui/system';
 import { Drawer, IconButton, Typography } from '@mui/material';
@@ -62,7 +62,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function MainLayout({ children }: Props) {
+export const MainLayout = ({ children }: Props) => {
   const pathname = usePathname();
   const mobileOpen = useBoolean();
   const actionPage = (arr: string[]) =>
@@ -110,7 +110,7 @@ export default function MainLayout({ children }: Props) {
 
 // ----------------------------------------------------------------------
 
-function Spacing() {
+const Spacing = () => {
   return (
     <Box
       sx={{

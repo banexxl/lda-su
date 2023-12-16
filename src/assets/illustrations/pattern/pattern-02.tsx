@@ -18,7 +18,7 @@ const animateUp = (duration = 60) => ({
   transition: { duration, repeat: Infinity, ease: 'linear' },
 });
 
-function Pattern02({ sx, ...other }: BoxProps) {
+const Pattern02 = ({ sx, ...other }: BoxProps) => {
   return (
     <Box
       sx={{

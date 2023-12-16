@@ -21,7 +21,7 @@ type Props = {
 
 // ----------------------------------------------------------------------
 
-export default function FilterTime({ departureDay, onChangeDepartureDay, sx }: Props) {
+export const FilterTime = ({ departureDay, onChangeDepartureDay, sx }: Props) => {
   return (
     <MobileDatePicker
       value={departureDay}

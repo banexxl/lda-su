@@ -18,7 +18,7 @@ import Scrollbar from 'src/components/scrollbar';
 
 // ----------------------------------------------------------------------
 
-export default function SettingsDrawer() {
+export const SettingsDrawer = () => {
   const settings = useSettingsContext();
 
   const renderHead = (

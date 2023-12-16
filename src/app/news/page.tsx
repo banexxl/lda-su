@@ -1,11 +1,11 @@
-import TravelPostView from 'src/sections/view/travel-post-view';
+import { NewsView } from 'src/sections/view/news-view';
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Travel: Blog Post',
+  title: 'LDA Subotica: Blog Post',
 };
 
-export default function TravelPostPage() {
-  return <TravelPostView />;
+export const NewsPage = () => {
+  return <NewsView />;
 }

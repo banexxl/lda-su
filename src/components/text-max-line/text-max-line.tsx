@@ -4,7 +4,7 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import { TextMaxLineProps } from './types';
-import useTypography from './use-typography';
+import { useTypography } from './use-typography';
 
 // ----------------------------------------------------------------------
 

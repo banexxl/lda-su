@@ -6,7 +6,7 @@ import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 
 // ----------------------------------------------------------------------
 
-export function textField(theme: Theme) {
+export const textField = (theme: Theme) => {
   const color = {
     focused: theme.palette.text.primary,
     active: theme.palette.text.secondary,

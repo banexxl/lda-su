@@ -17,7 +17,7 @@ import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function ComingSoonView() {
+export const ComingSoonView = () => {
   const { days, hours, minutes, seconds } = useCountdown(new Date('07/07/2024 21:30'));
 
   return (
@@ -89,7 +89,7 @@ type TimeBlockProps = {
   value: string;
 };
 
-function TimeBlock({ label, value }: TimeBlockProps) {
+const TimeBlock = ({ label, value }: TimeBlockProps) => {
   return (
     <div>
       <Box> {value} </Box>

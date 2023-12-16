@@ -20,7 +20,7 @@ type ReturnType = {
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function useCarousel(props?: Settings): ReturnType {
+export const useCarousel = (props?: Settings): ReturnType => {
   const theme = useTheme();
 
   const carouselRef = useRef<Carousel | null>(null);

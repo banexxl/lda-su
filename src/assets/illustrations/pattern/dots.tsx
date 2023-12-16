@@ -11,7 +11,7 @@ interface Props extends BoxProps {
   color?: ColorSchema;
 }
 
-function Dot({ size = 24, color = 'primary', sx }: Props) {
+const Dot = ({ size = 24, color = 'primary', sx }: Props) => {
   return (
     <Box
       sx={{

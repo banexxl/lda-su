@@ -45,7 +45,7 @@ type Props = {
   sx?: SxProps<Theme>;
 };
 
-export default function CarouselArrowIndex({
+export const CarouselArrowIndex = ({
   index,
   total,
   onNext,
@@ -53,7 +53,7 @@ export default function CarouselArrowIndex({
   icon,
   sx,
   ...other
-}: Props) {
+}: Props) => {
   const theme = useTheme();
 
   const isRTL = theme.direction === 'rtl';

@@ -6,7 +6,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Image from 'src/components/image';
 
-import Header from '../common/header-simple';
+import { HeaderSimple } from '../common/header-simple';
 
 // ----------------------------------------------------------------------
 
@@ -14,12 +14,12 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function AuthIllustrationLayout({ children }: Props) {
+export const AuthIllustrationLayout = ({ children }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   return (
     <>
-      <Header />
+      <HeaderSimple />
 
       <Container
         sx={{

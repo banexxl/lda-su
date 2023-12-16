@@ -9,12 +9,12 @@ import ReactLightbox, { useLightboxState } from 'yet-another-react-lightbox';
 import Box from '@mui/material/Box';
 
 import Iconify from '../iconify';
-import StyledLightbox from './styles';
+import { StyledLightbox } from './styles';
 import { LightBoxProps } from './types';
 
 // ----------------------------------------------------------------------
 
-export default function Lightbox({
+export const Lightbox = ({
   slides,
   disabledZoom,
   disabledVideo,
@@ -25,7 +25,7 @@ export default function Lightbox({
   disabledFullscreen,
   onGetCurrentIndex,
   ...other
-}: LightBoxProps) {
+}: LightBoxProps) => {
   const totalItems = slides ? slides.length : 0;
 
   return (
@@ -77,14 +77,14 @@ export default function Lightbox({
 
 // ----------------------------------------------------------------------
 
-export function getPlugins({
+export const getPlugins = ({
   disabledZoom,
   disabledVideo,
   disabledCaptions,
   disabledSlideshow,
   disabledThumbnails,
   disabledFullscreen,
-}: LightBoxProps) {
+}: LightBoxProps) => {
   let plugins = [Captions, Fullscreen, Slideshow, Thumbnails, Video, Zoom];
 
   if (disabledThumbnails) {
@@ -116,7 +116,7 @@ type DisplayTotalProps = {
   disabledTotal?: boolean;
 };
 
-export function DisplayTotal({ totalItems, disabledTotal }: DisplayTotalProps) {
+export const DisplayTotal = ({ totalItems, disabledTotal }: DisplayTotalProps) => {
   const { currentIndex } = useLightboxState();
 
   if (disabledTotal) {

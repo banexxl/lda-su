@@ -12,7 +12,7 @@ import { varBounce, MotionContainer } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 
-export default function MaintenanceView() {
+export const MaintenanceView = () => {
   return (
     <MotionContainer>
       <m.div variants={varBounce().in}>

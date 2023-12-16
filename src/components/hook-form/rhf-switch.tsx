@@ -11,7 +11,7 @@ interface Props extends Omit<FormControlLabelProps, 'control'> {
   helperText?: React.ReactNode;
 }
 
-export default function RHFSwitch({ name, helperText, ...other }: Props) {
+export const RHFSwitch = ({ name, helperText, ...other }: Props) => {
   const { control } = useFormContext();
 
   return (

@@ -9,7 +9,7 @@ interface Props extends BoxProps {
   children?: React.ReactNode;
 }
 
-function Circle({ children, hide = false, sx, ...other }: Props) {
+const Circle = ({ children, hide = false, sx, ...other }: Props) => {
   return (
     <Box sx={{ width: 460, height: 460, position: 'absolute', ...sx }} {...other}>
       {!hide && (

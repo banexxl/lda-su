@@ -4,12 +4,12 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import LinkItem from './link-item';
+import { LinkItem } from './link-item';
 import { CustomBreadcrumbsProps } from './types';
 
 // ----------------------------------------------------------------------
 
-export default function CustomBreadcrumbs({
+export const CustomBreadcrumbs = ({
   links,
   action,
   heading,
@@ -17,7 +17,7 @@ export default function CustomBreadcrumbs({
   activeLast,
   sx,
   ...other
-}: CustomBreadcrumbsProps) {
+}: CustomBreadcrumbsProps) => {
   const lastLink = links[links.length - 1].name;
 
   return (
@@ -72,7 +72,7 @@ export default function CustomBreadcrumbs({
 
 // ----------------------------------------------------------------------
 
-function Separator() {
+const Separator = () => {
   return (
     <Box
       component="span"

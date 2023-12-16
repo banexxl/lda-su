@@ -17,18 +17,10 @@ interface Props<
   helperText?: React.ReactNode;
 }
 
-export default function RHFAutocomplete<
-  T,
-  Multiple extends boolean | undefined,
-  DisableClearable extends boolean | undefined,
-  FreeSolo extends boolean | undefined,
->({
-  name,
-  label,
-  placeholder,
-  helperText,
-  ...other
-}: Omit<Props<T, Multiple, DisableClearable, FreeSolo>, 'renderInput'>) {
+export const RHFAutocomplete = <
+  T, Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined, FreeSolo extends boolean | undefined>
+  ({ name, label, placeholder, helperText, ...other }: Omit<Props<T, Multiple, DisableClearable, FreeSolo>, 'renderInput'>) => {
   const { control, setValue } = useFormContext();
 
   return (

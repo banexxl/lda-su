@@ -14,7 +14,7 @@ declare module '@mui/material/Chip' {
 
 // ----------------------------------------------------------------------
 
-export function chip(theme: Theme) {
+export const chip = (theme: Theme) => {
   const lightMode = theme.palette.mode === 'light';
 
   const rootStyles = (ownerState: ChipProps) => {

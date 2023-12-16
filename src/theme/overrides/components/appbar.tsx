@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function appBar(theme: Theme) {
+export const appBar = (theme: Theme) => {
   return {
     MuiAppBar: {
       styleOverrides: {

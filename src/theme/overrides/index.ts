@@ -48,7 +48,7 @@ import { loadingButton } from './components/loading-button';
 
 // ----------------------------------------------------------------------
 
-export function componentsOverrides(theme: Theme) {
+export const componentsOverrides = (theme: Theme) => {
   const components = merge(
     defaultProps(theme),
     //

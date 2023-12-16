@@ -25,7 +25,7 @@ const stylesIcon = {
 
 // ----------------------------------------------------------------------
 
-function CareerHeroIllustration({ sx, ...other }: BoxProps) {
+const CareerHeroIllustration = ({ sx, ...other }: BoxProps) => {
   const theme = useTheme();
 
   const { offsetX, offsetY, onMouseMoveHandler, onMouseLeaveHandler } = useHoverParallax();

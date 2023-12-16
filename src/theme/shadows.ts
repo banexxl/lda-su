@@ -4,7 +4,7 @@ import { grey, common } from './palette';
 
 // ----------------------------------------------------------------------
 
-export function shadows(mode: 'light' | 'dark'): Shadows {
+export const shadows = (mode: 'light' | 'dark'): Shadows => {
   const color = mode === 'light' ? grey[500] : common.black;
 
   const transparent1 = alpha(color, 0.2);

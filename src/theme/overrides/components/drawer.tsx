@@ -5,7 +5,7 @@ import { paper } from '../../css';
 
 // ----------------------------------------------------------------------
 
-export function drawer(theme: Theme) {
+export const drawer = (theme: Theme) => {
   const lightMode = theme.palette.mode === 'light';
 
   return {

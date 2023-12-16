@@ -8,7 +8,7 @@ import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function FilterLocation() {
+export const FilterLocation = () => {
   return (
     <Autocomplete
       sx={{ width: 1 }}

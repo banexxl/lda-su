@@ -6,7 +6,7 @@ import { grey, primary, secondary } from 'src/theme/palette';
 
 type PresetType = 'default' | 'preset01' | 'preset02' | 'preset03' | 'preset04' | 'preset05';
 
-export function createPresets(preset: PresetType) {
+export const createPresets = (preset: PresetType) => {
   const { primary: primaryColor, secondary: secondaryColor } = getPrimary(preset);
 
   const theme = {
@@ -131,7 +131,7 @@ export const presetOptions = [
   { name: 'preset05', value: [preset05.primary.main, preset05.secondary.main] },
 ];
 
-export function getPrimary(preset: PresetType) {
+export const getPrimary = (preset: PresetType) => {
   return {
     default: { primary, secondary },
     preset01,

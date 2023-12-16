@@ -21,7 +21,7 @@ type RHFSelectProps = TextFieldProps & {
   PaperPropsSx?: SxProps<Theme>;
 };
 
-export function RHFSelect({
+export const RHFSelect = ({
   name,
   native,
   maxHeight = 220,
@@ -29,7 +29,7 @@ export function RHFSelect({
   children,
   PaperPropsSx,
   ...other
-}: RHFSelectProps) {
+}: RHFSelectProps) => {
   const { control } = useFormContext();
 
   return (
@@ -81,7 +81,7 @@ type RHFMultiSelectProps = FormControlProps & {
   }[];
 };
 
-export function RHFMultiSelect({
+export const RHFMultiSelect = ({
   name,
   chip,
   label,
@@ -90,7 +90,7 @@ export function RHFMultiSelect({
   placeholder,
   helperText,
   ...other
-}: RHFMultiSelectProps) {
+}: RHFMultiSelectProps) => {
   const { control } = useFormContext();
 
   const renderValues = (selectedIds: string[]) => {

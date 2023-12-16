@@ -4,7 +4,7 @@ import { menuItem } from '../../css';
 
 // ----------------------------------------------------------------------
 
-export function menu(theme: Theme) {
+export const menu = (theme: Theme) => {
   return {
     MuiMenuItem: {
       styleOverrides: {

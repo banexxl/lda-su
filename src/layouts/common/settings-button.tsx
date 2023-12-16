@@ -15,7 +15,7 @@ type Props = {
   sx?: SxProps<Theme>;
 };
 
-export default function SettingsButton({ sx }: Props) {
+export const SettingsButton = ({ sx }: Props) => {
   const settings = useSettingsContext();
 
   return (

@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function radio(theme: Theme) {
+export const radio = (theme: Theme) => {
   return {
     // CHECKBOX, RADIO, SWITCH
     MuiFormControlLabel: {

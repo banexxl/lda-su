@@ -57,7 +57,7 @@ const timeTypes = timeList.reduce((result: Record<string, any>, currentValue) =>
   return result;
 }, {});
 
-export function datePicker(theme: Theme) {
+export const datePicker = (theme: Theme) => {
   return {
     MuiPickersLayout: {
       styleOverrides: {

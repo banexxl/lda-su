@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function select(theme: Theme) {
+export const select = (theme: Theme) => {
   return {
     MuiSelect: {
       styleOverrides: {

@@ -3,7 +3,7 @@ import { alpha, useTheme } from '@mui/material/styles';
 
 import { bgGradient } from 'src/theme/css';
 
-import Header from '../common/header-simple';
+import { HeaderSimple } from '../common/header-simple';
 
 // ----------------------------------------------------------------------
 
@@ -11,12 +11,12 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function AuthBackgroundLayout({ children }: Props) {
+export const AuthBackgroundLayout = ({ children }: Props) => {
   const theme = useTheme();
 
   return (
     <>
-      <Header />
+      <HeaderSimple />
 
       <Stack
         alignItems="center"

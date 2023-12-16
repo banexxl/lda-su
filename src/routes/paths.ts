@@ -5,7 +5,7 @@ export const paths = {
   home: '/',
   team: '/about-us/team',
   docs: '/about-us/docs',
-  // Travel
+  // LDA Subotica
   travel: {
     root: '/travel',
     tours: '/travel/tours',

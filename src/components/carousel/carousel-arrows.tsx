@@ -58,7 +58,7 @@ interface Props extends StackProps {
   rightButtonProps?: IconButtonProps;
 }
 
-export default function CarouselArrows({
+export const CarouselArrows = ({
   shape = 'circular',
   filled = false,
   icon,
@@ -69,7 +69,7 @@ export default function CarouselArrows({
   rightButtonProps,
   sx,
   ...other
-}: Props) {
+}: Props) => {
   const theme = useTheme();
 
   const isRTL = theme.direction === 'rtl';

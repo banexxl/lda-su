@@ -15,11 +15,11 @@ interface Props extends IProps {
   disableAnimatedMobile?: boolean;
 }
 
-export default function MotionViewport({
+export const MotionViewport = ({
   children,
   disableAnimatedMobile = true,
   ...other
-}: Props) {
+}: Props) => {
   const smDown = useResponsive('down', 'sm');
 
   if (smDown && disableAnimatedMobile) {

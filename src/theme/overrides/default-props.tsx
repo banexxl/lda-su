@@ -67,7 +67,7 @@ const TreeViewEndIcon = (props: SvgIconProps) => (
 
 // ----------------------------------------------------------------------
 
-export function defaultProps(theme: Theme) {
+export const defaultProps = (theme: Theme) => {
   return {
     MuiAlert: {
       defaultProps: {

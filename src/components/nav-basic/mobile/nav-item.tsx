@@ -12,7 +12,7 @@ import { NavItemProps, NavItemStateProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
+export const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
   ({ title, path, icon, depth, open, active, hasChild, externalLink, ...other }, ref) => {
     const renderContent = (
       <StyledNavItem ref={ref} open={open} depth={depth} active={active} {...other}>

@@ -14,7 +14,7 @@ declare module '@mui/material/ButtonGroup' {
 
 // ----------------------------------------------------------------------
 
-export function buttonGroup(theme: Theme) {
+export const buttonGroup = (theme: Theme) => {
   const rootStyles = (ownerState: ButtonGroupProps) => {
     const inheritColor = ownerState.color === 'inherit';
 

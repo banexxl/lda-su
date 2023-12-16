@@ -28,7 +28,7 @@ const varRight = {
 
 // ----------------------------------------------------------------------
 
-function Pattern01({ sx, ...other }: BoxProps) {
+const Pattern01 = ({ sx, ...other }: BoxProps) => {
   const theme = useTheme();
 
   const PURPLE = '#DC8CFF';

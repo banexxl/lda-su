@@ -9,7 +9,7 @@ import { paper } from '../../css';
 
 // ----------------------------------------------------------------------
 
-export function dataGrid(theme: Theme) {
+export const dataGrid = (theme: Theme) => {
   const paperStyles = paper({ theme, dropdown: true });
 
   return {

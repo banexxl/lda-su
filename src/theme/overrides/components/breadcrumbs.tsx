@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function breadcrumbs(theme: Theme) {
+export const breadcrumbs = (theme: Theme) => {
   return {
     MuiBreadcrumbs: {
       styleOverrides: {

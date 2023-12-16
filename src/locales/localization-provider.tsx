@@ -9,6 +9,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function LocalizationProvider({ children }: Props) {
+export const LocalizationProvider = ({ children }: Props) => {
   return <MuiLocalizationProvider dateAdapter={AdapterDateFns}>{children}</MuiLocalizationProvider>;
 }

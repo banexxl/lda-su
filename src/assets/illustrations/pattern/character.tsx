@@ -9,7 +9,7 @@ interface Props extends BoxProps {
   front?: boolean;
 }
 
-function Character({ front = false, ...other }: Props) {
+const Character = ({ front = false, ...other }: Props) => {
   const theme = useTheme();
 
   const PRIMARY_MAIN = theme.palette.primary.main;

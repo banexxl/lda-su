@@ -4,6 +4,6 @@ import { SplashScreen } from 'src/components/loading-screen';
 
 // ----------------------------------------------------------------------
 
-export default function Loading() {
+export const Loading = () => {
   return <SplashScreen />;
 }

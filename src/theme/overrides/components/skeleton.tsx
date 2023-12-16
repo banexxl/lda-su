@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export function skeleton(theme: Theme) {
+export const skeleton = (theme: Theme) => {
   return {
     MuiSkeleton: {
       styleOverrides: {
