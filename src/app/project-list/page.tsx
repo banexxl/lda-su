@@ -6,6 +6,6 @@ export const metadata = {
   title: 'LDA Subotica: Projects',
 };
 
-export const ProjectsPage = () => {
+export default function ProjectsPage() {
   return <ProjectsView />;
 }

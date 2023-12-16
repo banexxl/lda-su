@@ -6,6 +6,6 @@ export const metadata = {
   title: 'LDA Subotica: Contact us',
 };
 
-export const ContactPage = () => {
+export default function ContactPage() {
   return <ContactView />;
 }

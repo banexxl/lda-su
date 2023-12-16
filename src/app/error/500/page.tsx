@@ -6,6 +6,6 @@ export const metadata = {
   title: '500 Internal Server Error',
 };
 
-export const Page500 = () => {
+export default function Page500() {
   return <Error500View />;
 }

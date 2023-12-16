@@ -117,7 +117,7 @@ type CarouselItemProps = {
   tour: ITourProps;
 };
 
-const CarouselItem({ tour }: CarouselItemProps) => {
+const CarouselItem = ({ tour }: CarouselItemProps) => {
   const theme = useTheme();
 
   const renderOverlay = (
@@ -224,7 +224,7 @@ type ThumbnailItemProps = {
   selected?: boolean;
 };
 
-const ThumbnailItem({ tour, selected }: ThumbnailItemProps) => {
+const ThumbnailItem = ({ tour, selected }: ThumbnailItemProps) => {
   const theme = useTheme();
 
   return (

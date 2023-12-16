@@ -6,6 +6,6 @@ export const metadata = {
   title: 'Support',
 };
 
-export const SupportPage = () => {
+export default function SupportPage() {
   return <SupportView />;
 }

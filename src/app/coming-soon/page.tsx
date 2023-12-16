@@ -6,6 +6,6 @@ export const metadata = {
   title: 'Coming Soon',
 };
 
-export const ComingSoonPage = () => {
+export default function ComingSoonPage() {
   return <ComingSoonView />;
 }

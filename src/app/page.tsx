@@ -6,6 +6,6 @@ export const metadata = {
   title: 'LDA Subotica: Home',
 };
 
-export const LandingPage = () => {
+export default function LandingPage() {
   return <LandingView />;
 }

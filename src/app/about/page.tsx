@@ -6,6 +6,6 @@ export const metadata = {
   title: 'LDA Subotica: About Us',
 };
 
-export const AboutPage = () => {
+export default function AboutPage() {
   return <AboutView />;
 }

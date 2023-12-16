@@ -6,6 +6,6 @@ export const metadata = {
   title: 'Maintenance',
 };
 
-export const MaintenancePage = () => {
+export default function MaintenancePage() {
   return <MaintenanceView />;
 }

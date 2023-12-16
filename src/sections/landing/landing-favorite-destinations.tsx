@@ -99,7 +99,7 @@ type DestinationItemProps = {
   order: number;
 };
 
-const DestinationItem({ tour, order }: DestinationItemProps) => {
+const DestinationItem = ({ tour, order }: DestinationItemProps) => {
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');

@@ -6,6 +6,6 @@ export const metadata = {
   title: 'LDA Subotica: Tour',
 };
 
-export const ProjectPage = () => {
+export default function ProjectPage() {
   return <ProjectView />;
 }

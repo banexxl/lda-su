@@ -8,6 +8,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const Layout = ({ children }: Props) => {
+export default function Layout({ children }: Props) {
   return <CompactLayout>{children}</CompactLayout>;
 }

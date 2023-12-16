@@ -35,7 +35,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const RootLayout = ({ children }: Props) => {
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className={primaryFont.className}>
       <body>
