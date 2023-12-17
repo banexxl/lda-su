@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
-import { ITourProps } from 'src/types/tour';
+import { ITourProps } from 'src/types/project';
 
 import { ProjectItem } from './project-item';
 import { ProjectItemSkeleton } from './project-item-skeleton';

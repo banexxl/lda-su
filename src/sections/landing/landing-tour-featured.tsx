@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { ITourProps } from 'src/types/tour';
+import { ITourProps } from 'src/types/project';
 
 import { ProjectItem } from '../project-list/project-item';
 

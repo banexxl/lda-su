@@ -9,7 +9,7 @@ import { TOUR_SERVICE_OPTIONS } from 'src/_mock';
 
 import Iconify, { IconifyProps } from 'src/components/iconify';
 
-import { ITourProps } from 'src/types/tour';
+import { ITourProps } from 'src/types/project';
 
 // ----------------------------------------------------------------------
 

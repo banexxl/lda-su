@@ -11,7 +11,7 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-import { ITourProps } from 'src/types/tour';
+import { ITourProps } from 'src/types/project';
 
 // ----------------------------------------------------------------------
 

@@ -26,6 +26,34 @@ export const pageLinks = [
   }
 ];
 
+export const europaLinks = [
+  {
+    order: '6',
+    subheader: 'Europe',
+    cover: '/assets/images/menu/menu_alda.jpg',
+    items: [
+      { title: 'Council of Europe', path: paths.europe.councilOfEurope },
+      { title: 'Europa', path: paths.europe.europa },
+      { title: 'European Commission', path: paths.europe.europeanComission },
+      { title: 'EU Delegation to Serbia', path: paths.europe.europeanComission },
+      { title: 'Wolverhampton', path: paths.europe.wolverhampton },
+    ],
+  }
+];
+
+
+export const suboticaLinks = [
+  {
+    order: '6',
+    subheader: 'Subotica',
+    cover: '/assets/images/menu/menu_alda.jpg',
+    items: [
+      { title: 'Subotica.rs', path: paths.subotica.suRS },
+      { title: 'Subotica.info', path: paths.subotica.suInfo },
+      { title: 'Subotica.com', path: paths.subotica.suCOM },
+    ],
+  }
+];
 
 export const navConfig = [
   { title: 'Naslovna', path: paths.home },
@@ -43,6 +71,7 @@ export const navConfig = [
         ],
       },
       { title: 'Docs', path: '/about-us/docs' },
+      { title: 'Contact', path: '/about-us/contact' },
     ],
   },
   {

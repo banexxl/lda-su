@@ -21,30 +21,7 @@ import { LandingFavoriteDestinations } from '../landing/landing-favorite-destina
 
 export const LandingView = () => {
   return (
-    <>
-      <Box sx={{ position: 'relative' }}>
-        <Container
-          sx={{
-            mb: { md: 10 },
-            left: { md: 0 },
-            right: { md: 0 },
-            bottom: { md: 0 },
-            mx: { md: 'auto' },
-            pt: { xs: 3, md: 0 },
-            position: { md: 'absolute' },
-          }}
-        >
-          <Filters
-            sx={{
-              color: { md: 'common.white' },
-              bgcolor: (theme) => ({
-                xs: 'background.neutral',
-                md: alpha(theme.palette.common.white, 0.08),
-              }),
-            }}
-          />
-        </Container>
-      </Box>
+    <Box>
 
       <LandingIntroduce />
 
@@ -59,6 +36,6 @@ export const LandingView = () => {
       {/* <FeaturedNews posts={[]} /> */}
 
       <Newsletter />
-    </>
+    </Box>
   );
 }

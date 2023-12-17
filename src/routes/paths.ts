@@ -22,6 +22,18 @@ export const paths = {
     ldaDnjepropetrovsk: 'https://www.alda-europe.eu/alda_member/lda-of-the-dnipropetrovsk-region/',
     ldaAlbania: 'https://lda.al/'
   },
+  europe: {
+    councilOfEurope: 'https://www.coe.int/en/web/portal/home',
+    europa: 'https://european-union.europa.eu/index_en',
+    europeanComission: 'https://commission.europa.eu/index_en',
+    euSerbia: 'https://europa.rs/',
+    wolverhampton: 'https://www.wolverhampton.gov.uk/',
+  },
+  subotica: {
+    suRS: 'https://www.subotica.rs/',
+    suInfo: 'http://www.subotica.info/',
+    suCOM: 'https://www.subotica.com/',
+  },
   // // Auth
   // loginCover: '/auth/login-cover',
   // loginBackground: '/auth/login-background',

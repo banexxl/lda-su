@@ -11,7 +11,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
 
-import { ITourProps } from 'src/types/tour';
+import { ITourProps } from 'src/types/project';
 
 import { ProjectItem } from './project-item';
 

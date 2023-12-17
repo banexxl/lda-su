@@ -59,21 +59,34 @@ export const LandingIntroduce = () => {
         <Stack
           spacing={3}
           sx={{
-            maxWidth: 700,
+            width: '100%',
             mx: { xs: 'auto', md: 'unset' },
             textAlign: { xs: 'center', md: 'unset' },
-            backgroundImage: `url(${imageURL})`
+            backgroundImage: `url(${imageURL})`,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
           }}
         >
-          <Typography variant="h2">ALDA</Typography>
+          <Box>
 
-          <Typography sx={{ color: 'text.secondary', textAlign: 'start' }}>
-            Agencije lokalne demokratije nastale su kao izraz želje lokalnih i regionalnih vlasti Evrope da pruže podršku i pomoć lokalnim vlastima tokom ratnih sukoba u bivšoj Jugoslaviji. Prva Agencija osnovana je u Subotici, 1993. godine.<br />
-            <br />
-            U početnoj fazi aktivnosti Agencija bile su usmerene na pružanje humanitarne pomoći a ubrzo potom one bivaju uključene u složeni proces revitalizacije lokalnih zajednica u najširem smislu, obnove poverenja i dijaloga između različitih etničkih grupa i zaštite ljudskih prava.<br />
-            <br />
-            Agencije lokalne demokratije danas predstavljaju značajne aktere u procesu stabilizacije i dugoročnog jačanja demokratskih institucija u zemljama Jugoistočne Evrope.<br />
-          </Typography>
+            <Typography variant="h2">ALDA</Typography>
+
+            <Typography sx={{ color: 'text.secondary', textAlign: 'start', width: '70%' }}>
+              Agencije lokalne demokratije nastale su kao izraz želje lokalnih i regionalnih vlasti Evrope da pruže podršku i pomoć lokalnim vlastima tokom ratnih sukoba u bivšoj Jugoslaviji. Prva Agencija osnovana je u Subotici, 1993. godine.<br />
+              <br />
+              U početnoj fazi aktivnosti Agencija bile su usmerene na pružanje humanitarne pomoći a ubrzo potom one bivaju uključene u složeni proces revitalizacije lokalnih zajednica u najširem smislu, obnove poverenja i dijaloga između različitih etničkih grupa i zaštite ljudskih prava.<br />
+              <br />
+              Agencije lokalne demokratije danas predstavljaju značajne aktere u procesu stabilizacije i dugoročnog jačanja demokratskih institucija u zemljama Jugoistočne Evrope.<br />
+            </Typography>
+          </Box>
+          <Box sx={{ marginTop: '50px' }}>
+            <Image
+              alt="cover"
+              src="/assets/logo_main.jpg"
+              sx={{ width: '400px', height: mdUp ? '250px' : '200px' }}
+            />
+          </Box>
         </Stack>
       </Container>
 
@@ -125,13 +138,7 @@ export const LandingIntroduce = () => {
           </Stack>
         </Card>
 
-        <Image
-          alt="cover"
-          src="/assets/images/travel/travel_post_hero.jpg"
-          width={1600}
-          height={mdUp ? 900 : 1600}
-          ratio={mdUp ? '16/9' : '1/1'}
-        />
+
       </Box>
 
       <Container sx={{ textAlign: 'center' }}>

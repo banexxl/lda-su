@@ -13,7 +13,7 @@ import { useRouter } from 'src/routes/hooks';
 
 import { fCurrency } from 'src/utils/format-number';
 
-import { ITourProps } from 'src/types/tour';
+import { ITourProps } from 'src/types/project';
 
 import { FilterTime } from '../filters/filter-time';
 import { FilterGuests } from '../filters/filter-guests';

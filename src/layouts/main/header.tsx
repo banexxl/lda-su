@@ -60,7 +60,7 @@ export const Header = ({ headerOnDark }: Props) => {
 
       </Stack>
 
-      {!mdUp && <NavBasicMobile data={navConfig} />}
+      {!mdUp && <NavMobile data={[]} />}
     </>
   );
 

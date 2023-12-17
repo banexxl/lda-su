@@ -1,20 +1,18 @@
-import Link from '@mui/material/Link';
 import Masonry from '@mui/lab/Masonry';
 import Divider from '@mui/material/Divider';
 import Collapse from '@mui/material/Collapse';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { alpha, styled } from '@mui/material/styles';
+import { alpha, styled, useTheme } from '@mui/material/styles';
 import Stack, { StackProps } from '@mui/material/Stack';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button, { buttonClasses } from '@mui/material/Button';
-
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { usePathname } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
-
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useResponsive } from 'src/hooks/use-responsive';
 
@@ -24,24 +22,30 @@ import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 
 import { NavSubListProps } from './nav/types';
-import { pageLinks, navConfig } from './config-navigation';
+import { pageLinks, navConfig, europaLinks, suboticaLinks } from './config-navigation';
+import { Box } from '@mui/system';
+import Icon from 'src/assets/illustrations/pattern/icon';
+import { Link } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-const StyledAppStoreButton = styled(Button)(({ theme }) => ({
-  flexShrink: 0,
-  padding: '5px 12px',
-  color: theme.palette.common.white,
-  border: `solid 1px ${alpha(theme.palette.common.black, 0.24)}`,
-  background: `linear-gradient(180deg, ${theme.palette.grey[900]} 0%, ${theme.palette.common.black} 100%)`,
-  [`& .${buttonClasses.startIcon}`]: {
-    marginLeft: 0,
-  },
-}));
+// const StyledAppStoreButton = styled(Button)(({ theme }) => ({
+//   flexShrink: 0,
+//   padding: '5px 12px',
+//   color: theme.palette.common.white,
+//   border: `solid 1px ${alpha(theme.palette.common.black, 0.24)}`,
+//   background: `linear-gradient(180deg, ${theme.palette.grey[900]} 0%, ${theme.palette.common.black} 100%)`,
+//   [`& .${buttonClasses.startIcon}`]: {
+//     marginLeft: 0,
+//   },
+// }));
 
 // ----------------------------------------------------------------------
 
 export const Footer = () => {
+
+  const theme = useTheme();
+
   const mdUp = useResponsive('up', 'md');
 
   const pathname = usePathname();
@@ -54,112 +58,97 @@ export const Footer = () => {
 
   const isHome = pathname === '/';
 
-  const simpleFooter = (
-    <Container sx={{ py: 8, textAlign: 'center' }}>
-      <Logo single />
-
-      <Typography variant="caption" component="div" sx={{ color: 'text.secondary' }}>
-        © 2023. All rights reserved
-      </Typography>
-    </Container>
-  );
 
   const mainFooter = (
-    <>
+    <Box sx={{
+      backgroundImage: `url('assets/footer/eu-lda-h-1000x450.jpg')`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat'
+    }}>
       <Divider />
-
-      <Container
+      <Box
         sx={{
+          display: 'flex',
           overflow: 'hidden',
+          justifyContent: 'space-between',
           py: { xs: 8, md: 10 },
+          margin: '30px'
         }}
       >
-        <Grid container spacing={3} justifyContent={{ md: 'space-between' }}>
-          <Grid xs={12} md={4}>
-            <Stack spacing={{ xs: 3, md: 5 }}>
-              <Stack alignItems="flex-start" spacing={3}>
-                <Logo />
+        <Box sx={{ display: 'flex', flexDirection: 'column', width: '30%', gap: '30px' }}>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            Aktivnosti LDA Subotica fokusirane su na kreiranje aktivnog građanstva s jedne,
+            te transparentnih i odgovornih vlasti s druge strane,
+            s krajnjim ciljem uspostavljanja modernog i demokratskog društva.
+          </Typography>
 
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  The starting point for your next project based on easy-to-customize Material-UI ©
-                  helps you build apps faster and better.
-                </Typography>
-              </Stack>
+          <Typography variant="h6">Let’s stay in touch</Typography>
 
-              <Stack spacing={1} alignItems="flex-start">
-                <Typography variant="h6">Community</Typography>
-                <Link variant="body2" sx={{ color: 'text.primary' }}>
-                  Documentation
-                </Link>
+          <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+            Subscribe to our newsletter to receive latest articles to your inbox weekly.
+          </Typography>
 
-                <Link variant="body2" sx={{ color: 'text.primary' }}>
-                  Changelog
-                </Link>
+          <TextField
+            hiddenLabel
+            placeholder="Email address"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Button variant="contained" color="inherit" size="large" sx={{ mr: -1.25 }}>
+                    Subscribe
+                  </Button>
+                </InputAdornment>
+              ),
+            }}
+          />
 
-                <Link variant="body2" sx={{ color: 'text.primary' }}>
-                  Contributing
-                </Link>
-              </Stack>
+          <Box>
+            <Typography variant="h6">Social</Typography>
 
-              <Stack spacing={2}>
-                <Stack spacing={1}>
-                  <Typography variant="h6">Let’s stay in touch</Typography>
-                  <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                    Ubscribe to our newsletter to receive latest articles to your inbox weekly.
-                  </Typography>
-                </Stack>
+            <Link href='https://www.facebook.com/LocalDemocracyAgencySubotica' target='_blank' >
+              <FacebookIcon sx={{ color: 'primary.main' }} />
+            </Link>
 
-                <TextField
-                  fullWidth
-                  hiddenLabel
-                  placeholder="Email address"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Button variant="contained" color="inherit" size="large" sx={{ mr: -1.25 }}>
-                          Subscribe
-                        </Button>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Stack>
+            <Link href='https://www.facebook.com/LocalDemocracyAgencySubotica' target='_blank'>
+              <LinkedInIcon sx={{ color: 'primary.main' }} />
+            </Link>
+          </Box>
 
-              <Stack spacing={2}>
-                <Typography variant="h6">Social</Typography>
-                <Stack direction="row" alignItems="center">
-                  {_socials.map((social) => (
-                    <IconButton key={social.value} color="primary">
-                      <Iconify icon={social.icon} />
-                    </IconButton>
-                  ))}
-                </Stack>
-              </Stack>
+        </Box>
 
-              <Stack spacing={2}>
-                <Typography variant="h6">Apps</Typography>
-                <AppStoreButton />
-              </Stack>
-            </Stack>
-          </Grid>
+        <Box>
+          <Typography variant="h5" sx={{ marginBottom: '20px' }}>ALDA mreža</Typography>
+          {mdUp ? (
+            <Box >
+              {renderLists.map((list: any) => (
+                <ListDesktop key={list.subheader} list={list} />
+              ))}
+            </Box>
+          ) : (
+            <Box >
+              {renderLists.map((list: any) => (
+                <ListDesktop key={list.subheader} list={list} />
+              ))}
+            </Box>
+          )}
+        </Box>
 
-          <Grid xs={12} md={6}>
-            {mdUp ? (
-              <Masonry columns={4} spacing={2} defaultColumns={4} defaultSpacing={2}>
-                {renderLists.map((list: any) => (
-                  <ListDesktop key={list.subheader} list={list} />
-                ))}
-              </Masonry>
-            ) : (
-              <Stack spacing={1.5}>
-                {renderLists.map((list: any) => (
-                  <ListMobile key={list.subheader} list={list} />
-                ))}
-              </Stack>
-            )}
-          </Grid>
-        </Grid>
-      </Container>
+        <Box sx={{ gap: '30px' }}>
+          <Typography variant="h5" sx={{ marginBottom: '20px' }}>Subotica</Typography>
+          <Box >
+            {suboticaLinks.map((list: any) => (
+              <ListDesktop key={list.subheader} list={list} />
+            ))}
+          </Box>
+          <Typography variant="h5" sx={{ margin: '20px 0px' }}>Europe</Typography>
+          <Box >
+            {europaLinks.map((list: any) => (
+              <ListDesktop key={list.subheader} list={list} />
+            ))}
+          </Box>
+        </Box>
+      </Box >
 
       <Divider />
 
@@ -171,68 +160,51 @@ export const Footer = () => {
           sx={{ py: 3, textAlign: 'center' }}
         >
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-            © 2023. All rights reserved
+            © 2023. All rights reserved, LDA Subotica
           </Typography>
 
           <Stack direction="row" spacing={3} justifyContent="center">
-            <Link variant="caption" sx={{ color: 'text.secondary' }}>
+            {/* <Link variant="caption" sx={{ color: 'text.secondary' }}>
               Help Center
             </Link>
 
             <Link variant="caption" sx={{ color: 'text.secondary' }}>
               Terms of Service
-            </Link>
+            </Link> */}
           </Stack>
         </Stack>
+
       </Container>
-    </>
+    </Box >
   );
 
-  return <footer>{isHome ? mainFooter : simpleFooter}</footer>;
+  return mainFooter
 }
 
 // ----------------------------------------------------------------------
 
-export const ListDesktop = ({ list }: { list: NavSubListProps }) => {
+function ListDesktop({ list }: any) {
   const pathname = usePathname();
 
   return (
-    <Stack spacing={1.5} alignItems="flex-start">
-      <Typography variant="subtitle2">{list.subheader}</Typography>
+    <Stack spacing={1} alignItems="flex-start" >
 
-      {list.items?.map((link) => {
-        const active = pathname === link.path || pathname === `${link.path}/`;
+      {list.items?.map((link: any) => (
+        <Link
+          key={link.title}
+          href={link.path}
 
-        return (
-          <Link
-            component={RouterLink}
-            key={link.title}
-            href={link.path}
-            variant="caption"
-            sx={{
-              color: 'text.secondary',
-              '&:hover': {
-                color: 'text.primary',
-              },
-              ...(active && {
-                color: 'text.primary',
-                fontWeight: 'fontWeightSemiBold',
-              }),
-            }}
-          >
-            {link.title}
-          </Link>
-        );
-      })}
+          target="_blank"
+        >
+          {link.title}
+        </Link>
+      ))}
     </Stack>
   );
 }
 
-// ----------------------------------------------------------------------
-
-export const ListMobile = ({ list }: { list: NavSubListProps }) => {
+function ListMobile({ list }: any) {
   const pathname = usePathname();
-
   const listExpand = useBoolean();
 
   return (
@@ -248,68 +220,29 @@ export const ListMobile = ({ list }: { list: NavSubListProps }) => {
       >
         {list.subheader}
         <Iconify
-          width={16}
-          icon={listExpand.value ? 'carbon:chevron-down' : 'carbon:chevron-right'}
+          icon={
+            listExpand.value
+              ? 'carbon:chevron-down'
+              : 'carbon:chevron-right'
+          }
           sx={{ ml: 0.5 }}
         />
       </Typography>
 
       <Collapse in={listExpand.value} unmountOnExit sx={{ width: 1 }}>
         <Stack spacing={1.5} alignItems="flex-start">
-          {list.items?.map((link) => (
-            <Link
-              component={RouterLink}
-              key={link.title}
-              href={link.path}
-              variant="caption"
-              sx={{
-                color: 'text.secondary',
-                '&:hover': {
-                  color: 'text.primary',
-                },
-                ...(pathname === `${link.path}/` && {
-                  color: 'text.primary',
-                  fontWeight: 'fontWeightSemiBold',
-                }),
-              }}
-            >
-              {link.title}
-            </Link>
+          {list.items?.map((link: any) => (
+            <Typography>
+              <Link
+                key={link.title}
+                href={link.path}
+              >
+                {link.title}
+              </Link>
+            </Typography>
           ))}
         </Stack>
       </Collapse>
-    </Stack>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-const AppStoreButton = ({ ...other }: StackProps) => {
-  return (
-    <Stack direction="row" flexWrap="wrap" spacing={2} {...other}>
-      <StyledAppStoreButton startIcon={<Iconify icon="ri:apple-fill" width={28} />}>
-        <Stack alignItems="flex-start">
-          <Typography variant="caption" sx={{ opacity: 0.72 }}>
-            Download on the
-          </Typography>
-
-          <Typography variant="h6" sx={{ mt: -0.5 }}>
-            Apple Store
-          </Typography>
-        </Stack>
-      </StyledAppStoreButton>
-
-      <StyledAppStoreButton startIcon={<Iconify icon="logos:google-play-icon" width={28} />}>
-        <Stack alignItems="flex-start">
-          <Typography variant="caption" sx={{ opacity: 0.72 }}>
-            Download from
-          </Typography>
-
-          <Typography variant="h6" sx={{ mt: -0.5 }}>
-            Google Play
-          </Typography>
-        </Stack>
-      </StyledAppStoreButton>
     </Stack>
   );
 }

@@ -21,6 +21,7 @@ import { NAV } from '../../../config-layout';
 // ----------------------------------------------------------------------
 
 export const NavMobile = ({ data }: NavProps) => {
+
   const pathname = usePathname();
 
   const mobileOpen = useBoolean();
