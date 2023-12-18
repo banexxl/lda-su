@@ -7,17 +7,17 @@ import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { ITourProps } from 'src/types/project';
+import { Project } from 'src/types/project';;
 
 import { ProjectItem } from '../project-list/project-item';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  tours: ITourProps[];
+  projects: Project[];
 };
 
-export const LandingTourFeatured = ({ tours }: Props) => {
+export const LandingTourFeatured = ({ projects }: Props) => {
   return (
     <Container
       sx={{
@@ -44,8 +44,8 @@ export const LandingTourFeatured = ({ tours }: Props) => {
           },
         }}
       >
-        {tours.map((tour) => (
-          <ProjectItem key={tour.id} tour={tour} />
+        {projects.map((project: any) => (
+          <ProjectItem key={project.id} project={project} />
         ))}
       </Box>
 

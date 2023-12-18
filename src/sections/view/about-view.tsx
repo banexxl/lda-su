@@ -1,14 +1,11 @@
 'use client';
 
-import { _brands, _members, _travelPosts, _testimonials } from 'src/_mock';
+import { _brands, _travelPosts, _testimonials } from 'src/_mock';
 
-import { Team } from '../team/team';
 import { About } from '../about/about';
 import { Newsletter } from '../newsletter';
-import { OurClients } from '../our-clients';
-import { Testimonial } from '../testimonial/testimonial';
 import { AboutOurVision } from '../about/about-our-mission';
-import { LandingNews } from '../news/news-list/landing-news';
+import { LandingBlog } from '../blog/blog-list/landing-blog';
 
 // ----------------------------------------------------------------------
 
@@ -19,13 +16,7 @@ export const AboutView = () => {
 
       <AboutOurVision />
 
-      <Team />
-
-      <Testimonial testimonials={_testimonials} />
-
-      <OurClients brands={_brands} />
-
-      <LandingNews posts={[]} />
+      <LandingBlog posts={[]} />
 
       <Newsletter />
     </>

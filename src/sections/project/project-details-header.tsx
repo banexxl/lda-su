@@ -16,16 +16,16 @@ import { _socials } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
-import { ITourProps } from 'src/types/project';
+import { Project } from 'src/types/project';;
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  tour: ITourProps;
+  project: Project;
 };
 
-export const ProjectDetailsHeader = ({ tour }: Props) => {
-  const { slug, ratingNumber, totalReviews, location, favorited, tourGuide } = tour;
+export const ProjectDetailsHeader = ({ project }: Props) => {
+  const { location, favorited } = project;
 
   const [favorite, setFavorite] = useState(favorited);
 
@@ -52,9 +52,9 @@ export const ProjectDetailsHeader = ({ tour }: Props) => {
           mb: 3,
         }}
       >
-        <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 } }}>
+        {/* <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 } }}>
           {slug}
-        </Typography>
+        </Typography> */}
 
         <Stack direction="row" alignItems="center" flexShrink={0}>
           <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
@@ -75,13 +75,13 @@ export const ProjectDetailsHeader = ({ tour }: Props) => {
         <Stack spacing={0.5} direction="row" alignItems="center">
           <Iconify icon="carbon:star-filled" sx={{ color: 'warning.main' }} />
 
-          <Box sx={{ typography: 'h6' }}>
+          {/* <Box sx={{ typography: 'h6' }}>
             {Number.isInteger(ratingNumber) ? `${ratingNumber}.0` : ratingNumber}
           </Box>
 
           <Link variant="body2" sx={{ color: 'text.secondary' }}>
             ({fShortenNumber(totalReviews)} reviews)
-          </Link>
+          </Link> */}
         </Stack>
 
         <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
@@ -89,14 +89,14 @@ export const ProjectDetailsHeader = ({ tour }: Props) => {
         </Stack>
 
         <Stack direction="row" alignItems="center">
-          <Avatar src={tourGuide?.avatarUrl} sx={{ width: 24, height: 24 }} />
+          {/* <Avatar src={tourGuide?.avatarUrl} sx={{ width: 24, height: 24 }} /> */}
 
           <Typography variant="body2" sx={{ color: 'text.secondary', mx: 0.5 }}>
             Tour guide by
           </Typography>
 
           <Link variant="subtitle2" color="inherit">
-            {tourGuide?.name}
+            {/* {tourGuide?.name} */}
           </Link>
         </Stack>
       </Stack>

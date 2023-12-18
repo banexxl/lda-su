@@ -1,7 +1,4 @@
-import { IAuthorProps } from './author';
-import { ISocialLinks } from './socials';
-
-// ----------------------------------------------------------------------
+import { TeamMember } from './team-member';
 
 export type Project = {
   id: string;
@@ -14,6 +11,7 @@ export type Project = {
   gallery: string[];
   location: string;
   duration: string;
+  published: Date;
   timeBetween: {
     start: Date;
     end: Date;
@@ -21,6 +19,5 @@ export type Project = {
   favorited: boolean;
   favoritedNumber: number;
   languages: string[];
-  organizers: IAuthorProps[];
-  shareLinks: ISocialLinks;
+  organizers: TeamMember[];
 };

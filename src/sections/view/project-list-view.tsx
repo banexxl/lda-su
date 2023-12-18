@@ -35,7 +35,7 @@ export const ProjectsView = () => {
           }}
         />
 
-        {/* <TourList tours={_tours} loading={loading.value} /> */}
+        {/* <TourList projects={_tours} loading={loading.value} /> */}
       </Container>
 
       <Newsletter />

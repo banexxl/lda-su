@@ -1,47 +1,40 @@
 import Box from '@mui/material/Box';
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
-import { Project } from 'src/types/project';;
+import { Blog } from 'src/types/blog';
 
-import { ProjectItem } from './project-item';
-import { ProjectItemSkeleton } from './project-item-skeleton';
+import { PostItem } from './blog-item';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  projects: Project[];
-  loading?: boolean;
+  posts: Blog[];
 };
 
-export const ProjectList = ({ projects, loading }: Props) => {
+export const BlogList = ({ posts }: Props) => {
   return (
     <>
       <Box
         sx={{
-          columnGap: 3,
+          columnGap: 4,
           display: 'grid',
           rowGap: { xs: 4, md: 5 },
           gridTemplateColumns: {
             xs: 'repeat(1, 1fr)',
             sm: 'repeat(2, 1fr)',
-            md: 'repeat(4, 1fr)',
           },
         }}
       >
-        {(loading ? [...Array(12)] : projects).map((project, index) =>
-          project ? (
-            <ProjectItem key={project.id} project={project} />
-          ) : (
-            <ProjectItemSkeleton key={index} />
-          )
-        )}
+        {posts.slice(0, 8).map((post) => (
+          <PostItem key={post.id} post={post} />
+        ))}
       </Box>
 
       <Pagination
         count={10}
         color="primary"
         sx={{
-          my: 10,
+          py: { xs: 8, md: 10 },
           [`& .${paginationClasses.ul}`]: {
             justifyContent: 'center',
           },

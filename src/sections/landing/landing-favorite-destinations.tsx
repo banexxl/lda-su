@@ -11,7 +11,7 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-import { ITourProps } from 'src/types/project';
+import { Project } from 'src/types/project';
 
 // ----------------------------------------------------------------------
 
@@ -27,10 +27,10 @@ const ROWS = [
 // ----------------------------------------------------------------------
 
 type Props = {
-  tours: ITourProps[];
+  projects: Project[];
 };
 
-export const LandingFavoriteDestinations = ({ tours }: Props) => {
+export const LandingFavoriteDestinations = ({ projects }: Props) => {
   return (
     <Container
       sx={{
@@ -71,9 +71,9 @@ export const LandingFavoriteDestinations = ({ tours }: Props) => {
         </Grid>
 
         <Grid container xs={12} md={6} spacing={{ xs: 4, md: 3 }}>
-          {tours.map((tour, index) => (
+          {projects.map((project, index) => (
             <Grid
-              key={tour.id}
+              key={project.id}
               xs={12}
               sm={6}
               sx={{
@@ -83,7 +83,7 @@ export const LandingFavoriteDestinations = ({ tours }: Props) => {
                 }),
               }}
             >
-              <DestinationItem tour={tour} order={index % 3} />
+              <DestinationItem project={project} order={index % 3} />
             </Grid>
           ))}
         </Grid>
@@ -95,16 +95,16 @@ export const LandingFavoriteDestinations = ({ tours }: Props) => {
 // ----------------------------------------------------------------------
 
 type DestinationItemProps = {
-  tour: ITourProps;
+  project: Project;
   order: number;
 };
 
-const DestinationItem = ({ tour, order }: DestinationItemProps) => {
+const DestinationItem = ({ project, order }: DestinationItemProps) => {
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
 
-  const { location, continent, coverUrl } = tour;
+  const { location, coverUrl } = project;
 
   return (
     <Box
@@ -138,12 +138,12 @@ const DestinationItem = ({ tour, order }: DestinationItemProps) => {
           {location}
         </TextMaxLine>
 
-        <Stack direction="row" alignItems="center">
+        {/* <Stack direction="row" alignItems="center">
           <Iconify icon="carbon:location" sx={{ mr: 1, color: 'primary.main' }} />
           <TextMaxLine variant="body2" line={1} sx={{ opacity: 0.72 }}>
             {continent}
           </TextMaxLine>
-        </Stack>
+        </Stack> */}
       </Stack>
     </Box>
   );

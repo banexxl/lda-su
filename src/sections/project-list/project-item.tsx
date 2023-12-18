@@ -17,16 +17,16 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-import { ITourProps } from 'src/types/project';
+import { Project } from 'src/types/project';;
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  tour: ITourProps;
+  project: Project;
 };
 
-export const ProjectItem = ({ tour }: Props) => {
-  const { slug, location, price, priceSale, favorited, duration, ratingNumber, coverUrl } = tour;
+export const ProjectItem = ({ project }: Props) => {
+  const { location, favorited, duration, coverUrl } = project;
 
   const [favorite, setFavorite] = useState(favorited);
 
@@ -61,7 +61,7 @@ export const ProjectItem = ({ tour }: Props) => {
             color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
           }}
         >
-          {priceSale > 0 && (
+          {/* {priceSale > 0 && (
             <Box
               sx={{
                 color: 'grey.500',
@@ -72,7 +72,7 @@ export const ProjectItem = ({ tour }: Props) => {
               {fCurrency(priceSale)}
             </Box>
           )}
-          {fCurrency(price)}
+          {fCurrency(price)} */}
         </Stack>
 
         <Checkbox
@@ -85,18 +85,18 @@ export const ProjectItem = ({ tour }: Props) => {
         />
       </Stack>
 
-      <Image alt={slug} src={coverUrl} ratio="1/1" />
+      <Image alt={'cover image'} src={coverUrl} ratio="1/1" />
 
       <Stack spacing={0.5} sx={{ p: 2.5 }}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {location}
         </Typography>
 
-        <Link component={RouterLink} href={paths.alda.alda} color="inherit">
+        {/* <Link component={RouterLink} href={paths.alda.alda} color="inherit">
           <TextMaxLine variant="h6" persistent>
             {slug}
           </TextMaxLine>
-        </Link>
+        </Link> */}
       </Stack>
 
       <Divider sx={{ borderStyle: 'dashed' }} />
@@ -114,7 +114,7 @@ export const ProjectItem = ({ tour }: Props) => {
         <Stack spacing={0.5} direction="row" alignItems="center">
           <Iconify icon="carbon:star-filled" sx={{ color: 'warning.main' }} />
           <Box sx={{ typography: 'h6' }}>
-            {Number.isInteger(ratingNumber) ? `${ratingNumber}.0` : ratingNumber}
+            {/* {Number.isInteger(ratingNumber) ? `${ratingNumber}.0` : ratingNumber} */}
           </Box>
         </Stack>
       </Stack>

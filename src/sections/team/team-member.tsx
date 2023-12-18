@@ -13,7 +13,7 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import { varHover, varTranHover } from 'src/components/animate';
 
-import { ITeamMemberProps } from 'src/types/team';
+import { TeamMember } from 'src/types/team-member';
 
 // ----------------------------------------------------------------------
 
@@ -39,11 +39,11 @@ const StyledOverlay = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 type Props = {
-  member: ITeamMemberProps;
+  member: TeamMember;
 };
 
 export const TeamItem = ({ member }: Props) => {
-  const { name, role, photo } = member;
+  const { name, role, avatarUrl } = member;
 
   return (
     <Box
@@ -82,7 +82,7 @@ export const TeamItem = ({ member }: Props) => {
       </StyledOverlay>
 
       <m.div variants={varHover()} transition={varTranHover()}>
-        <Image src={photo} alt={name} ratio="3/4" />
+        <Image src={'/public/assets/team/stanka-parac-damjanovic.jpg'} alt={name} ratio="3/4" />
       </m.div>
     </Box>
   );

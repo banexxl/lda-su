@@ -1,4 +1,4 @@
-import { PostsView } from 'src/sections/view/news-list-view';
+import { PostsView } from 'src/sections/view/blog-list-view';
 
 // ----------------------------------------------------------------------
 

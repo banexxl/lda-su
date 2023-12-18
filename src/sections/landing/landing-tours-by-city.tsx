@@ -15,15 +15,15 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-import { ITourProps } from 'src/types/project';
+import { Project } from 'src/types/project';;
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  tours: ITourProps[];
+  projects: Project[];
 };
 
-export const LandingProjectsByCity = ({ tours }: Props) => {
+export const LandingProjectsByCity = ({ projects }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const viewAllBtn = (
@@ -76,8 +76,8 @@ export const LandingProjectsByCity = ({ tours }: Props) => {
           },
         }}
       >
-        {tours.map((tour) => (
-          <ProjectItem key={tour.id} tour={tour} />
+        {projects.map((project: any) => (
+          <ProjectItem key={project.id} project={project} />
         ))}
       </Box>
 
@@ -93,11 +93,11 @@ export const LandingProjectsByCity = ({ tours }: Props) => {
 // ----------------------------------------------------------------------
 
 type TourItemProps = {
-  tour: ITourProps;
+  project: Project;
 };
 
-const ProjectItem = ({ tour }: TourItemProps) => {
-  const { coverUrl, location } = tour;
+const ProjectItem = ({ project }: TourItemProps) => {
+  const { coverUrl, location } = project;
 
   return (
     <Link component={RouterLink} href={paths.alda.alda} color="inherit" underline="none">

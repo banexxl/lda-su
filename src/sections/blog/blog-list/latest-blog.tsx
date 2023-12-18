@@ -11,17 +11,18 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
 
-import { Project } from 'src/types/project';;
+import { Blog } from 'src/types/blog';
 
-import { ProjectItem } from './project-item';
+import { LatestBlogItem } from './latest-blog-item';
+import { BlogItemMobile } from '../common/blog-item-mobile';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  projects: Project[];
+  posts: Blog[];
 };
 
-export const ProjectListSimilar = ({ projects }: Props) => {
+export const LatestBlog = () => {
   const mdUp = useResponsive('up', 'md');
 
   const viewAllBtn = (
@@ -36,12 +37,13 @@ export const ProjectListSimilar = ({ projects }: Props) => {
   );
 
   return (
-    <Box sx={{ bgcolor: 'background.neutral' }}>
-      <Container
-        sx={{
-          py: { xs: 10, md: 15 },
-        }}
-      >
+    <Box
+      sx={{
+        bgcolor: 'background.neutral',
+        py: { xs: 10, md: 15 },
+      }}
+    >
+      <Container>
         <Stack
           direction="row"
           alignItems="center"
@@ -50,15 +52,15 @@ export const ProjectListSimilar = ({ projects }: Props) => {
             mb: { xs: 8, md: 10 },
           }}
         >
-          <Typography variant="h3">You Might Like</Typography>
+          <Typography variant="h3">Latest Posts</Typography>
 
           {mdUp && viewAllBtn}
         </Stack>
 
         <Box
           sx={{
+            gap: 3,
             display: 'grid',
-            gap: { xs: 4, md: 3 },
             gridTemplateColumns: {
               xs: 'repeat(1, 1fr)',
               sm: 'repeat(2, 1fr)',
@@ -66,14 +68,12 @@ export const ProjectListSimilar = ({ projects }: Props) => {
             },
           }}
         >
-          {projects.map((project) => (
-            <ProjectItem key={project.id} project={project} />
-          ))}
+          asaasasa
         </Box>
 
         {!mdUp && (
           <Stack alignItems="center" sx={{ mt: 8 }}>
-            viewAllBtn
+            {viewAllBtn}
           </Stack>
         )}
       </Container>

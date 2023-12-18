@@ -9,26 +9,21 @@ import { TOUR_SERVICE_OPTIONS } from 'src/_mock';
 
 import Iconify, { IconifyProps } from 'src/components/iconify';
 
-import { ITourProps } from 'src/types/project';
+import { Project } from 'src/types/project';;
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  tour: ITourProps;
+  project: Project;
 };
 
-export const ProjectDetailsSummary = ({ tour }: Props) => {
+export const ProjectDetailsSummary = ({ project }: Props) => {
   const {
-    program,
-    services,
     location,
     duration,
-    tourGuide,
     languages,
-    highlights,
     description,
-    available,
-  } = tour;
+  } = project;
 
   return (
     <Stack spacing={5}>
@@ -45,18 +40,18 @@ export const ProjectDetailsSummary = ({ tour }: Props) => {
             },
           }}
         >
-          <OverviewItem
+          {/* <OverviewItem
             icon="carbon:calendar"
             label="Available"
             text={`${fDate(available.start, 'dd/MM/yyyy')} - ${fDate(available.end, 'dd/MM/yyyy')}`}
-          />
-          <OverviewItem icon="carbon:user" label="Contact name" text={tourGuide?.name} />
+          /> */}
+          {/* <OverviewItem icon="carbon:user" label="Contact name" text={tourGuide?.name} /> */}
           <OverviewItem icon="carbon:location" label="Location" text={location} />
-          <OverviewItem
+          {/* <OverviewItem
             icon="carbon:mobile"
             label="Contact phone"
-            text={tourGuide?.phoneNumber || ''}
-          />
+          // text={tourGuide?.phoneNumber || ''}
+          /> */}
           <OverviewItem icon="carbon:time" label="Durations" text={duration} />
           <OverviewItem icon="carbon:translate" label="Languages" text={languages.join(', ')} />
         </Box>
@@ -72,11 +67,11 @@ export const ProjectDetailsSummary = ({ tour }: Props) => {
       <Stack spacing={2}>
         <Typography variant="h5">Tour Highlights</Typography>
 
-        <ul>
+        {/* <ul>
           {highlights.map((highlight) => (
             <li key={highlight}>{highlight}</li>
           ))}
-        </ul>
+        </ul> */}
       </Stack>
 
       <Stack spacing={2}>
@@ -96,20 +91,20 @@ export const ProjectDetailsSummary = ({ tour }: Props) => {
               spacing={1}
               direction="row"
               alignItems="center"
-              sx={{
-                ...(services.includes(service.label) && {
-                  color: 'text.disabled',
-                }),
-              }}
+            // sx={{
+            //   ...(services.includes(service.label) && {
+            //     color: 'text.disabled',
+            //   }),
+            // }}
             >
               <Iconify
                 icon="carbon:checkmark"
-                sx={{
-                  color: 'primary.main',
-                  ...(services.includes(service.label) && {
-                    color: 'text.disabled',
-                  }),
-                }}
+              // sx={{
+              //   color: 'primary.main',
+              //   ...(services.includes(service.label) && {
+              //     color: 'text.disabled',
+              //   }),
+              // }}
               />
               {service.label}
             </Stack>
@@ -119,9 +114,9 @@ export const ProjectDetailsSummary = ({ tour }: Props) => {
 
       <Stack spacing={2}>
         <Typography variant="h5">Tour Program</Typography>
-        {program.map((content) => (
+        {/* {program.map((content) => (
           <HighlightItem key={content.label} label={content.label} text={content.text} />
-        ))}
+        ))} */}
       </Stack>
     </Stack>
   );

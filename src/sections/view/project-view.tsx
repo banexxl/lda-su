@@ -62,15 +62,15 @@ export const ProjectView = () => {
 
         <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse">
           <Grid xs={12} md={5} lg={4}>
-            {/* <TourDetailsReserveForm tour={_mockTour} /> */}
+            {/* <TourDetailsReserveForm project={_mockTour} /> */}
           </Grid>
 
           <Grid xs={12} md={7} lg={8}>
-            {/* <TourDetailsHeader tour={_mockTour} /> */}
+            {/* <TourDetailsHeader project={_mockTour} /> */}
 
             <Divider sx={{ borderStyle: 'dashed', my: 5 }} />
 
-            {/* <TourDetailsSummary tour={_mockTour} /> */}
+            {/* <TourDetailsSummary project={_mockTour} /> */}
 
             <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
               <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5 }}>
@@ -106,7 +106,7 @@ export const ProjectView = () => {
 
       <Divider sx={{ my: 10 }} />
 
-      {/* <TourListSimilar tours={_tours.slice(-4)} /> */}
+      {/* <TourListSimilar projects={_tours.slice(-4)} /> */}
 
       <Newsletter />
     </>

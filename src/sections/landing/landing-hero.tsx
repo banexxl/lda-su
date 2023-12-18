@@ -18,15 +18,15 @@ import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 import Carousel, { useCarousel, CarouselDots } from 'src/components/carousel';
 
-import { ITourProps } from 'src/types/project';
+import { Project } from 'src/types/project';;
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  tours: ITourProps[];
+  projects: Project[];
 };
 
-export const ProjectLandingHero = ({ tours }: Props) => {
+export const ProjectLandingHero = ({ projects }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const carouselLarge = useCarousel({
@@ -66,14 +66,14 @@ export const ProjectLandingHero = ({ tours }: Props) => {
 
   return (
     <Box sx={{ minHeight: { md: '100vh' }, position: 'relative' }}>
-      {!!tours.length && (
+      {!!projects.length && (
         <Carousel
           {...carouselLarge.carouselSettings}
           asNavFor={carouselThumb.nav}
           ref={carouselLarge.carouselRef}
         >
-          {tours.map((tour) => (
-            <CarouselItem key={tour.id} tour={tour} />
+          {projects.map((project) => (
+            <CarouselItem key={project.id} project={project} />
           ))}
         </Carousel>
       )}
@@ -90,16 +90,16 @@ export const ProjectLandingHero = ({ tours }: Props) => {
             right: { xs: 20, lg: '6%', xl: '10%' },
           }}
         >
-          {!!tours.length && (
+          {!!projects.length && (
             <Carousel
               {...carouselThumb.carouselSettings}
               asNavFor={carouselLarge.nav}
               ref={carouselThumb.carouselRef}
             >
-              {tours.map((tour, index) => (
+              {projects.map((project, index) => (
                 <ThumbnailItem
-                  key={tour.id}
-                  tour={tour}
+                  key={project.id}
+                  project={project}
                   selected={carouselLarge.currentIndex === index}
                 />
               ))}
@@ -114,10 +114,10 @@ export const ProjectLandingHero = ({ tours }: Props) => {
 // ----------------------------------------------------------------------
 
 type CarouselItemProps = {
-  tour: ITourProps;
+  project: Project;
 };
 
-const CarouselItem = ({ tour }: CarouselItemProps) => {
+const CarouselItem = ({ project }: CarouselItemProps) => {
   const theme = useTheme();
 
   const renderOverlay = (
@@ -158,11 +158,11 @@ const CarouselItem = ({ tour }: CarouselItemProps) => {
         }}
       >
         <Typography variant="overline" sx={{ color: 'info.main', mb: 5 }}>
-          {tour.location}
+          {project.location}
         </Typography>
 
         <Typography variant="h1" sx={{ maxWidth: 480 }}>
-          {tour.slug}
+          {project.createdAt}
         </Typography>
 
         <Stack
@@ -173,18 +173,14 @@ const CarouselItem = ({ tour }: CarouselItemProps) => {
         >
           <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
             <Iconify icon="carbon:time" width={24} sx={{ mr: 1, color: 'primary.main' }} />
-            {tour.duration}
+            {project.duration}
           </Stack>
 
           <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
             <Iconify icon="carbon:star" width={24} sx={{ mr: 1, color: 'primary.main' }} />
-            {`${tour.ratingNumber} reviews`}
+            {`${project.favoritedNumber} reviews`}
           </Stack>
 
-          <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
-            <Iconify icon="carbon:currency" width={24} sx={{ mr: 1, color: 'primary.main' }} />
-            {`Starting at ${fCurrency(tour.price)}`}
-          </Stack>
         </Stack>
 
         <Button variant="contained" size="large" color="primary">
@@ -206,7 +202,7 @@ const CarouselItem = ({ tour }: CarouselItemProps) => {
 
         <Image
           alt="hero"
-          src={tour.heroUrl}
+          src={project.coverUrl}
           sx={{
             width: 1,
             height: { xs: 1, md: '100vh' },
@@ -220,11 +216,11 @@ const CarouselItem = ({ tour }: CarouselItemProps) => {
 // ----------------------------------------------------------------------
 
 type ThumbnailItemProps = {
-  tour: ITourProps;
+  project: Project;
   selected?: boolean;
 };
 
-const ThumbnailItem = ({ tour, selected }: ThumbnailItemProps) => {
+const ThumbnailItem = ({ project, selected }: ThumbnailItemProps) => {
   const theme = useTheme();
 
   return (
@@ -246,19 +242,13 @@ const ThumbnailItem = ({ tour, selected }: ThumbnailItemProps) => {
         }),
       }}
     >
-      <Avatar src={tour.heroUrl} sx={{ width: 48, height: 48 }} />
+      <Avatar src={project.coverUrl} sx={{ width: 48, height: 48 }} />
 
       <Stack spacing={0.5}>
         <TextMaxLine variant="h6" line={1}>
-          {tour.location}
+          {project.location}
         </TextMaxLine>
 
-        <Stack direction="row" alignItems="center">
-          <Iconify icon="carbon:location" sx={{ mr: 1, color: 'primary.main' }} />
-          <TextMaxLine variant="caption" line={1} sx={{ opacity: 0.48 }}>
-            {tour.continent}
-          </TextMaxLine>
-        </Stack>
       </Stack>
     </Stack>
   );

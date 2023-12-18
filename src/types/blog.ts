@@ -1,14 +1,11 @@
-import { IAuthorProps } from './author';
-import { ISocialLinks } from './socials';
+import { TeamMember } from './team-member';
 
-// ----------------------------------------------------------------------
-
-export type IBlogCategoryProps = {
+export type BlogCategoryProps = {
   label: string;
   path: string;
 };
 
-export type IBlogPostProps = {
+export type Blog = {
   id: string;
   title: string;
   heroUrl: string;
@@ -16,9 +13,7 @@ export type IBlogPostProps = {
   createdAt: Date;
   category: string;
   coverUrl: string;
-  duration: string;
   favorited: boolean;
   description: string;
-  author: IAuthorProps;
-  shareLinks?: ISocialLinks;
+  author: TeamMember;
 };
