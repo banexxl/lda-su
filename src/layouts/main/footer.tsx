@@ -41,8 +41,8 @@ import { Link } from '@mui/material';
 // }));
 
 // ----------------------------------------------------------------------
-
 export const Footer = () => {
+
 
   const theme = useTheme();
 
@@ -77,7 +77,7 @@ export const Footer = () => {
         }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', width: '30%', gap: '30px' }}>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          <Typography variant="body2" sx={{ color: 'text.primary' }}>
             Aktivnosti LDA Subotica fokusirane su na kreiranje aktivnog građanstva s jedne,
             te transparentnih i odgovornih vlasti s druge strane,
             s krajnjim ciljem uspostavljanja modernog i demokratskog društva.
@@ -85,7 +85,7 @@ export const Footer = () => {
 
           <Typography variant="h6">Let’s stay in touch</Typography>
 
-          <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+          <Typography variant="caption" sx={{ color: 'text.primary' }}>
             Subscribe to our newsletter to receive latest articles to your inbox weekly.
           </Typography>
 
@@ -159,16 +159,16 @@ export const Footer = () => {
           justifyContent="space-between"
           sx={{ py: 3, textAlign: 'center' }}
         >
-          <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+          <Typography variant="caption" sx={{ color: 'text.primary' }}>
             © 2023. All rights reserved, LDA Subotica
           </Typography>
 
           <Stack direction="row" spacing={3} justifyContent="center">
-            {/* <Link variant="caption" sx={{ color: 'text.secondary' }}>
+            {/* <Link variant="caption" sx={{ color: 'text.primary' }}>
               Help Center
             </Link>
 
-            <Link variant="caption" sx={{ color: 'text.secondary' }}>
+            <Link variant="caption" sx={{ color: 'text.primary' }}>
               Terms of Service
             </Link> */}
           </Stack>
@@ -185,7 +185,7 @@ export const Footer = () => {
 
 function ListDesktop({ list }: any) {
   const pathname = usePathname();
-
+  const theme = useTheme();
   return (
     <Stack spacing={1} alignItems="flex-start" >
 
@@ -193,7 +193,7 @@ function ListDesktop({ list }: any) {
         <Link
           key={link.title}
           href={link.path}
-
+          sx={{ color: theme.palette.primary.contrastText }}
           target="_blank"
         >
           {link.title}
