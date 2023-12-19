@@ -59,19 +59,19 @@ export const navConfig = [
   { title: 'Naslovna', path: paths.home },
   {
     title: 'O nama',
-    path: '#',
+    path: '/about',
     children: [
       {
         title: 'Tim',
         path: '#',
         children: [
-          { title: 'Stanka', path: '/about-us/team/stanka' },
-          { title: 'Silvija', path: '/about-us/team/silvija' },
-          { title: 'Boris', path: '/about-us/team/boris' },
+          { title: 'Stanka', path: '/profile/stanka' },
+          { title: 'Silvija', path: '/profile/silvija' },
+          { title: 'Boris', path: '/profile/boris' },
         ],
       },
-      { title: 'Docs', path: '/about-us/docs' },
-      { title: 'Contact', path: '/about-us/contact' },
+      { title: 'Docs', path: '/docs' },
+      { title: 'Contact', path: '/contact' },
     ],
   },
   {
@@ -161,9 +161,9 @@ export const navConfig = [
           { title: 'Šta je Volonterizam?', path: '/aktivnosti/mladi/sta-je-volonterizam' }
         ],
       },
-      { title: 'Programi lokalnih partnera', path: '/about-us/docs' },
-      { title: 'Lokalne koalicije za razvoj zajednice', path: '/about-us/docs' },
-      { title: 'Mreža za razvoj Subotice', path: '/about-us/docs' },
+      { title: 'Programi lokalnih partnera', path: '/docs' },
+      { title: 'Lokalne koalicije za razvoj zajednice', path: '/docs' },
+      { title: 'Mreža za razvoj Subotice', path: '/docs' },
     ],
   },
   {

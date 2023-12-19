@@ -12,6 +12,11 @@ import { useBoundingClientRect } from 'src/hooks/use-bounding-client-rect';
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
+import { BlogsPrevAndNext } from '../blog/common/blog-prev-and-next';
+import { LandingBlogItemCarousel } from '../blog/blog-list/landing-blog-item-carousel';
+import { BlogList } from '../blog/blog-list/blog-list';
+import { TrendingTopicBlogItem } from '../blog/blog-list/trending-topic-blog';
+import { TrendingTopics } from '../blog/blog-list/trending-topics-blog-list';
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +41,7 @@ const SUMMARY = [
 // ----------------------------------------------------------------------
 
 export const LandingIntroduce = () => {
+
   const mdUp = useResponsive('up', 'md');
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -90,90 +96,37 @@ export const LandingIntroduce = () => {
         </Stack>
       </Container>
 
-      <Box
-        sx={{
-          position: 'relative',
-          my: { xs: 8, md: 10 },
-          ml: { md: `${offsetLeft}px` },
-        }}
-      >
-        <Card
-          sx={{
-            p: 5,
-            top: 0,
-            left: 0,
-            zIndex: 9,
-            m: { xs: 2, md: 5 },
-            position: 'absolute',
-            maxWidth: { sm: 360 },
-            right: { xs: 0, sm: 'unset' },
-            bottom: { xs: 0, sm: 'unset' },
-            textAlign: { xs: 'center', sm: 'unset' },
-            display: 'flex',
-            alignItems: { xs: 'center', sm: 'unset' },
-            justifyContent: 'center',
-            flexDirection: 'column',
-          }}
-        >
-          <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-            Device
-          </Typography>
+      <TrendingTopicBlogItem topic={{
+        cover: '',
+        totalPost: 0,
+        category: ''
+      }} />
 
-          <Typography variant="h4" sx={{ my: 3 }}>
-            The More Important the Work
-          </Typography>
+      <TrendingTopics />
 
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent={{ xs: 'center', sm: 'unset' }}
-            sx={{
-              cursor: 'pointer',
-              color: 'primary.main',
-              typography: 'subtitle1',
-              '&:hover': { opacity: 0.72 },
-            }}
-          >
-            <Iconify icon="carbon:play" width={24} sx={{ mr: 1 }} /> Watch Video
-          </Stack>
-        </Card>
+      <BlogList posts={[]} />
 
+      <BlogsPrevAndNext />
 
-      </Box>
-
-      <Container sx={{ textAlign: 'center' }}>
-        <Box
-          sx={{
-            display: 'grid',
-            gap: { xs: 8, md: 3 },
-            gridTemplateColumns: {
-              xs: 'repeat(1, 1fr)',
-              md: 'repeat(3, 1fr)',
-            },
-          }}
-        >
-          {SUMMARY.map((value) => (
-            <Stack key={value.title} spacing={2}>
-              <SvgColor
-                src={value.icon}
-                sx={{
-                  mb: 3,
-                  width: 64,
-                  height: 64,
-                  mx: 'auto',
-                  color: 'primary.main',
-                }}
-              />
-
-              <Typography variant="h5">{value.title}</Typography>
-
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {value.description}
-              </Typography>
-            </Stack>
-          ))}
-        </Box>
-      </Container>
+      <LandingBlogItemCarousel post={{
+        id: '',
+        title: '',
+        heroUrl: '',
+        tags: undefined,
+        createdAt: new Date(),
+        category: '',
+        coverUrl: '',
+        favorited: false,
+        description: '',
+        author: {
+          name: '',
+          role: '',
+          about: undefined,
+          avatarUrl: '',
+          phoneNumber: undefined,
+          email: ''
+        }
+      }} />
     </Box>
   );
 }

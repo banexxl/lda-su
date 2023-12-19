@@ -3,8 +3,11 @@
 export const paths = {
   //AboutUs
   home: '/',
-  team: '/about-us/team',
-  docs: '/about-us/docs',
+  aboutUs: '/about',
+  docs: '/docs',
+  stanka: '/profile/stanka',
+  silvija: '/profile/silvija',
+  boris: '/profile/boris',
   // LDA Subotica
   alda: {
     alda: 'https://www.alda-europe.eu/',

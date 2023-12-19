@@ -50,7 +50,7 @@ export const Newsletter = () => {
                 textAlign: { xs: 'center', md: 'left' },
               }}
             >
-              <Typography variant="h2">Blogletter</Typography>
+              <Typography variant="h2">Newsletter</Typography>
 
               <Typography>
                 Sign up now to receive hot special offers
