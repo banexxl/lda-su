@@ -18,28 +18,6 @@ import { BlogList } from '../blog/blog-list/blog-list';
 import { TrendingTopicBlogItem } from '../blog/blog-list/trending-topic-blog';
 import { TrendingTopics } from '../blog/blog-list/trending-topics-blog-list';
 
-// ----------------------------------------------------------------------
-
-const SUMMARY = [
-  {
-    title: 'Professional Tour Guides',
-    description: 'Nunc nonummy metus. Donec elit libero',
-    icon: '/assets/icons/ic_popularity.svg',
-  },
-  {
-    title: 'Customer Satisfaction',
-    description: 'Nunc nonummy metus. Donec elit libero',
-    icon: '/assets/icons/ic_reputation.svg',
-  },
-  {
-    title: 'Secure Payment',
-    description: 'Nunc nonummy metus. Donec elit libero',
-    icon: '/assets/icons/ic_secure_payment.svg',
-  },
-];
-
-// ----------------------------------------------------------------------
-
 export const LandingIntroduce = () => {
 
   const mdUp = useResponsive('up', 'md');

@@ -15,8 +15,5 @@ type ProfilePageParams = {
 }
 
 export default function ProfilePage({ params }: ProfilePageParams) {
-
-     const profileToRender = profilesData.find(user => user.id === params.name);
-
-     return <ProfileView props={profileToRender} />;
+     return <ProfileView params={params} />;
 }

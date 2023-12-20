@@ -7,7 +7,7 @@ export const profilesData = [
           'location': 'Novi Sad',
           'phoneNumber': '+381658991733',
           'dateOfBirth': '27.05.1957.',
-          'imageURL': 'https://utfs.io/f/2cfe6666-f072-4fd5-a4f7-fd7fdb8301c0-wcmwyj.jpg'
+          'imageURL': '/assets/team/stanka-parac-damjanovic.jpg'
      },
      {
           'id': 'silvija',
@@ -17,6 +17,16 @@ export const profilesData = [
           'location': 'Subotica',
           'phoneNumber': '+381659131948',
           'dateOfBirth': '27.05.1986.',
-          'imageURL': 'https://utfs.io/f/8eb72226-27e2-4e33-8a75-06d43194e510-9715qu.jpg'
+          'imageURL': '/assets/team/silvija-patarcic.jpg'
+     },
+     {
+          'id': 'boris',
+          'name': 'Boris Cupać',
+          'bio': 'PR manager. U Kancelariji LDA od njenog osnivanja, od kraja 1998. godine, angažovan na raznim promotivnim poslovima.Učestvovao na mnogim seminarima i kampovima širom Balkana na kojima se govorilo o EU. Tokom 1998. godine je na CITY radiju vodio i uređivao emisiju o mladima “Scena”, u koautorstvu sa Miom Medaković i Sašom Vučinić.Iste godine, pokreću časopis za mlade “Talas”, koji izlazi do marta 1999. Jedan je od osnivača Demokratske stranke u Subotici, gde je radio kao šef kancelarije od 1999. do 2002. Do 2003. godine radi kao šef kancelarije Vlade Republike Srbije u Subotici, kada u Suboticu, u sklopu raznih aktivnosti Vlade, u više navrata, dovodi i ugošćava predsednika Zorana Đinđića i ministre prve demokratske Vlade. Tokom 2003. radio na “SUper televiziji” kao urednik filmskog programa i u “Hrvatskoj riječi” kao tehnički urednik. Od 2005. je vlasnik agencije “Refresh” i iza sebe ima oko 30 web sajtova, desetak knjiga, postera i kataloga. Od 1999. do danas je tehnički urednik kataloga i novina na Filmskom festivalu evropskog filma na Paliću. U isto vreme je pokrenuo časopis “Interno” (sada “5 +”) koji uređuje sa učenicima Doma učenika u Subotici, kao prve Gradske novine za srednjoškolce. U dva mandata, od 2000. do 2008. je bio zamenik predsednika UO Radio Subotice. Od 2008. je predsednik UO Art bioskop “Aleksandar Lifka”.',
+          'email': 'boris@refresh.rs',
+          'location': 'Subotica',
+          'phoneNumber': '+38124572343',
+          'dateOfBirth': '27.05.1986.',
+          'imageURL': '/assets/team/boris-cupac.jpg'
      }
 ]

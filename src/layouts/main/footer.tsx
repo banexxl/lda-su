@@ -17,7 +17,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import { _socials } from 'src/_mock';
-
+import footerImage from 'public/eu-lda-h-1000x450.jpg'
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 
@@ -61,12 +61,13 @@ export const Footer = () => {
 
   const mainFooter = (
     <Box sx={{
-      backgroundImage: `url('assets/footer/eu-lda-h-1000x450.jpg')`,
+      backgroundImage: `url(${footerImage.src})`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat'
+      backgroundRepeat: 'no-repeat',
+      boxShadow: `inset 0px -5px 10px -5px ${theme.palette.secondary}`
     }}>
-      <Divider />
+      <Divider sx={{ boxShadow: '1' }} />
       <Box
         sx={{
           display: 'flex',

@@ -11,10 +11,9 @@ import { Filters } from '../filters/filters';
 import { ProjectLandingHero } from '../landing/landing-hero';
 import { LandingSummary } from '../landing/landing-summary';
 import { LandingIntroduce } from '../landing/landing-introduce';
-// import { LandingProjectsByCity } from '../landing/landing-projects-by-city';
-// import { LandingTourFeatured } from '../landing/landing-project-featured';
 import { FeaturedBlog } from '../blog/blog-list/featured-blog';
 import { LandingFavoriteDestinations } from '../landing/landing-favorite-destinations';
+
 
 // ----------------------------------------------------------------------
 

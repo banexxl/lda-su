@@ -1,11 +1,11 @@
 import { memo } from 'react';
 
+import euLogo from 'public/eu-flag-logo.jpg'
 import Link from '@mui/material/Link';
 import { useTheme } from '@mui/material/styles';
 import Box, { BoxProps } from '@mui/material/Box';
 
 import { RouterLink } from 'src/routes/components';
-import Image from 'next/image';
 
 // ----------------------------------------------------------------------
 
@@ -33,11 +33,10 @@ const Logo = ({ single = false, sx }: LogoProps) => {
           cursor: 'pointer',
           display: 'inline-flex',
           borderRadius: '10px',
+          backgroundImage: `url(${euLogo.src})`,
           ...sx,
         }}
-      >
-        <Image src={'/assets/logo/EU-flag - Copy.jpg'} height={80} width={300} alt={'nologo'} />
-      </Box>
+      />
     </Link>
   );
 }
