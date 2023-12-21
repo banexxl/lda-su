@@ -12,6 +12,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Image from 'src/components/image';
 import { FormProvider, RHFTextField } from 'src/components/hook-form';
+import { ContactMap } from './contact-map';
 
 // ----------------------------------------------------------------------
 
@@ -61,10 +62,7 @@ export const ContactForm = () => {
       <Grid container spacing={3} justifyContent="space-between">
         {mdUp && (
           <Grid xs={12} md={6} lg={5}>
-            <Image
-              alt="travel-contact"
-              src="/assets/illustrations/illustration_travel_contact.svg"
-            />
+            <ContactMap mapApiKey={process.env.NEXT_PUBLIC_MAP_API!} />
           </Grid>
         )}
 
