@@ -1,23 +1,24 @@
 import { TeamMember } from './team-member';
 
 export type Project = {
-  id: string;
+  _id: string;
   title: string;
   subTitle: string[],
-  description: string[];
+  parargaph1: string;
+  parargaph2: string;
+  parargaph3: string;
+  parargaph4: string;
+  parargaph5: string;
+  parargaph6: string;
+  parargaph7: string;
+  parargaph8: string;
   projectType: string;
-  createdAt: string;
   coverUrl: string;
   gallery: string[];
-  location: string;
-  duration: string;
+  locations: string[];
   published: Date;
-  timeBetween: {
-    start: Date;
-    end: Date;
-  };
+  timeBetween: string,
   favorited: boolean;
   favoritedNumber: number;
-  languages: string[];
   organizers: TeamMember[];
 };

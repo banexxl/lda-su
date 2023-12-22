@@ -14,7 +14,7 @@ import { ProjectList } from '../project-list/project-list';
 
 // ----------------------------------------------------------------------
 
-export const ProjectsView = () => {
+export const ProjectsView = ({ allProjects }: any) => {
   const loading = useBoolean(true);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const ProjectsView = () => {
           }}
         />
 
-        {/* <TourList projects={_tours} loading={loading.value} /> */}
+        <ProjectList projects={allProjects} loading={loading.value} />
       </Container>
 
       <Newsletter />

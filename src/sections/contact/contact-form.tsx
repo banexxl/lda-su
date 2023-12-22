@@ -78,6 +78,7 @@ export const ContactForm = () => {
 
             <Typography sx={{ color: 'text.secondary' }}>
               We normally respond within 2 business days
+              <a href='https://lda-su.s3.eu-central-1.amazonaws.com/Publications/Publikacija-Local-Civic-Monitor.pdf' target='_blank'>Publikacija</a>
             </Typography>
           </Stack>
 
