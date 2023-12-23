@@ -17,12 +17,12 @@ type Props = {
   project: Project;
 };
 
-export const ProjectDetailsSummary = ({ project }: Props) => {
+export const ProjectDetailsSummary = (project: Project) => {
   const {
-    location,
-    duration,
-    languages,
-    description,
+    locations,
+    startDateTime,
+    endDateTime,
+    title
   } = project;
 
   return (
@@ -46,14 +46,14 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
             text={`${fDate(available.start, 'dd/MM/yyyy')} - ${fDate(available.end, 'dd/MM/yyyy')}`}
           /> */}
           {/* <OverviewItem icon="carbon:user" label="Contact name" text={tourGuide?.name} /> */}
-          <OverviewItem icon="carbon:location" label="Location" text={location} />
+          {/* <OverviewItem icon="carbon:location" label="Location" text={locations} /> */}
           {/* <OverviewItem
             icon="carbon:mobile"
             label="Contact phone"
           // text={tourGuide?.phoneNumber || ''}
           /> */}
-          <OverviewItem icon="carbon:time" label="Durations" text={duration} />
-          <OverviewItem icon="carbon:translate" label="Languages" text={languages.join(', ')} />
+          <OverviewItem icon="carbon:time" label="Durations" text={startDateTime.toString()} />
+          {/* <OverviewItem icon="carbon:translate" label="Languages" text={languages.join(', ')} /> */}
         </Box>
       </Stack>
 
@@ -61,7 +61,7 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
 
       <Stack spacing={2}>
         <Typography variant="h5">Tour Description</Typography>
-        <Typography>{description}</Typography>
+        <Typography>{title}</Typography>
       </Stack>
 
       <Stack spacing={2}>

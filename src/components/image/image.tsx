@@ -9,6 +9,7 @@ import { ImageProps } from './types';
 
 // ----------------------------------------------------------------------
 
+// eslint-disable-next-line react/display-name
 const Image = forwardRef<HTMLSpanElement, ImageProps>(
   (
     {
@@ -68,7 +69,7 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
         wrapperClassName={wrapperClassName || 'component-image-wrapper'}
         placeholderSrc={disabledEffect ? '/assets/transparent.png' : '/assets/placeholder.svg'}
         sx={{
-          width: '80%',
+          width: '100%',
           borderRadius: '10px',
           height: 1,
           objectFit: 'cover',

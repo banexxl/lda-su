@@ -8,6 +8,7 @@ import { StyledLabel } from './styles';
 
 // ----------------------------------------------------------------------
 
+// eslint-disable-next-line react/display-name
 const Label = forwardRef<HTMLSpanElement, LabelProps>(
   ({ children, color = 'default', variant = 'soft', startIcon, endIcon, sx, ...other }, ref) => {
     const theme = useTheme();

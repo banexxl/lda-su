@@ -25,7 +25,7 @@ type Props = {
 };
 
 export const ProjectDetailsHeader = ({ project }: Props) => {
-  const { location, favorited } = project;
+  const { locations, favorited } = project;
 
   const [favorite, setFavorite] = useState(favorited);
 
@@ -85,7 +85,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
         </Stack>
 
         <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-          <Iconify icon="carbon:location" sx={{ mr: 0.5 }} /> {location}
+          <Iconify icon="carbon:location" sx={{ mr: 0.5 }} /> {locations}
         </Stack>
 
         <Stack direction="row" alignItems="center">

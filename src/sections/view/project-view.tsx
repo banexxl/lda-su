@@ -20,18 +20,24 @@ import Iconify from 'src/components/iconify';
 import { SplashScreen } from 'src/components/loading-screen';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 
-import { Newsletter } from '../newsletter';
+// import { Newsletter } from '../newsletter';
 import { ProjectListSimilar } from '../project-list/project-list-similar';
 import { ProjectDetailsHeader } from '../project/project-details-header';
 import { ProjectDetailsSummary } from '../project/project-details-summary';
 import { ProjectDetailsGallery } from '../project/project-details-gallery';
 import { ProjectDetailsReserveForm } from '../project/project-details-reserve-form';
+import { Project } from 'src/types/project';
 
 // ----------------------------------------------------------------------
 
-const _mockTour = _tours[0];
+type ProjectProps = {
+  project: Project
+}
 
-export const ProjectView = () => {
+export const ProjectView = ({ project }: ProjectProps) => {
+  console.log(project);
+
+
   const loading = useBoolean(true);
 
   useEffect(() => {
@@ -51,18 +57,18 @@ export const ProjectView = () => {
       <Container sx={{ overflow: 'hidden' }}>
         <CustomBreadcrumbs
           links={[
-            { name: 'Home', href: '/' },
-            { name: 'Tours', href: paths.alda.alda },
-            { name: _mockTour.slug },
+            { name: 'home', href: '/' },
+            { name: 'project', href: paths.alda.alda },
+            { name: project.title },
           ]}
           sx={{ mt: 3, mb: 5 }}
         />
 
-        <ProjectDetailsGallery images={_mockTour.gallery} />
+        {/* <ProjectDetailsGallery images={project.gallery} /> */}
 
         <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse">
           <Grid xs={12} md={5} lg={4}>
-            {/* <TourDetailsReserveForm project={_mockTour} /> */}
+            {/* <ProjectDetailsReserveForm project={project} /> */}
           </Grid>
 
           <Grid xs={12} md={7} lg={8}>
@@ -108,7 +114,7 @@ export const ProjectView = () => {
 
       {/* <TourListSimilar projects={_tours.slice(-4)} /> */}
 
-      <Newsletter />
+      {/* <Newsletter /> */}
     </>
   );
 }

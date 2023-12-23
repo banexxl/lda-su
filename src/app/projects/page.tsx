@@ -7,13 +7,13 @@ export const metadata = {
   title: 'LDA Subotica: Projects',
 };
 
-export default async function ProjectsPage() {
-  const data = await getAllProjects()
-  return <ProjectsView allProjects={data} />;
-}
-
 export async function getAllProjects() {
   // Fetch data from an API or other source
   const allProjects = await projectsServices().getAllProjects()
   return allProjects
+}
+
+export default async function ProjectsPage() {
+  const data = await getAllProjects()
+  return <ProjectsView allProjects={data} />;
 }

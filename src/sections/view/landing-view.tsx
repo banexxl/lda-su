@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 
 import { _tours, _travelPosts, _testimonials } from 'src/_mock';
 
-import { Newsletter } from '../newsletter';
+// import { Newsletter } from '../newsletter';
 import { Filters } from '../filters/filters';
 import { ProjectLandingHero } from '../landing/landing-hero';
 import { LandingSummary } from '../landing/landing-summary';
@@ -31,7 +31,7 @@ export const LandingView = () => {
 
       {/* <FeaturedBlog posts={[]} /> */}
 
-      <Newsletter />
+      {/* <Newsletter /> */}
     </Box>
   );
 }

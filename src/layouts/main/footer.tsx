@@ -233,9 +233,8 @@ function ListMobile({ list }: any) {
       <Collapse in={listExpand.value} unmountOnExit sx={{ width: 1 }}>
         <Stack spacing={1.5} alignItems="flex-start">
           {list.items?.map((link: any) => (
-            <Typography>
+            <Typography key={link.title}>
               <Link
-                key={link.title}
                 href={link.path}
               >
                 {link.title}

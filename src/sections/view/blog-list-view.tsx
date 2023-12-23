@@ -5,7 +5,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { _mock, _categories, _travelPosts } from 'src/_mock';
 
-import { Newsletter } from '../newsletter';
+// import { Newsletter } from '../newsletter';
 import { BlogSidebar } from '../blog/common/blog-sidebar';
 import { BlogList } from '../blog/blog-list/blog-list';
 import { BlogSearchMobile } from '../blog/common/blog-search-mobile';
@@ -42,7 +42,7 @@ export const PostsView = () => {
         </Grid>
       </Container>
 
-      <Newsletter />
+      {/* <Newsletter /> */}
     </>
   );
 }

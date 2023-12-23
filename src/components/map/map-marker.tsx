@@ -1,4 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
 import { useCallback } from 'react';
 
 import Box from '@mui/material/Box';

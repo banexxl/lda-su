@@ -1,6 +1,6 @@
 'use client';
 
-import { Newsletter } from '../newsletter';
+// import { Newsletter } from '../newsletter';
 import { ContactInfo } from '../contact/contact-info';
 import { ContactForm } from '../contact/contact-form';
 
@@ -13,7 +13,7 @@ export const ContactView = () => {
 
       <ContactForm />
 
-      <Newsletter />
+      {/* <Newsletter /> */}
     </>
   );
 }

@@ -23,6 +23,38 @@ const projectsServices = () => {
           }
      }
 
+     const getAllProjectLinks = async () => {
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+
+          try {
+               const db = client.db('LDA_Projects')
+               let data: Project[] = await db.collection('Projects').distinct('link')
+               const returnData = JSON.parse(JSON.stringify(data))
+               return returnData
+          } catch (error: any) {
+               console.log({ message: error.message })
+          }
+          finally {
+               await client.close();
+          }
+     }
+
+     const getProjectByLink = async (link: string) => {
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+
+          try {
+               const db = client.db('LDA_Projects')
+               let data: Project[] = await db.collection('Projects').find({ link: link })
+               const returnData = JSON.parse(JSON.stringify(data))
+               return returnData
+          } catch (error: any) {
+               console.log({ message: error.message })
+          }
+          finally {
+               await client.close();
+          }
+     }
+
      const getRandomProjects = async () => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
@@ -274,6 +306,8 @@ const projectsServices = () => {
 
      return {
           getAllProjects,
+          getProjectByLink,
+          getAllProjectLinks,
           getAllMainCategories,
           getProductById,
           getProjectsByNameAndOrManufacturer,

@@ -13,7 +13,7 @@ import { Markdown } from 'src/components/markdown';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 
 import { BlogTags } from '../blog/common/blog-tags';
-import { Newsletter } from '../newsletter';
+// import { Newsletter } from '../newsletter';
 import { BlogAuthor } from '../blog/common/blog-author';
 import { BlogSidebar } from '../blog/common/blog-sidebar';
 import { PostHero } from '../blog/blog-list/blog-hero';
@@ -47,7 +47,7 @@ export const BlogView = () => {
         <Grid container spacing={{ md: 8 }}>
           <Grid xs={12} md={8}>
             <Typography variant="h5" sx={{ mb: 5 }}>
-              'description'
+              {`asasasaas`}
             </Typography>
 
             <Markdown content={content} firstLetter />
@@ -62,7 +62,7 @@ export const BlogView = () => {
         </Grid>
       </Container>
 
-      <Newsletter />
+      {/* <Newsletter /> */}
     </>
   );
 }

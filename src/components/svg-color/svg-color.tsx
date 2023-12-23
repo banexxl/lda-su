@@ -8,6 +8,7 @@ export type SvgColorProps = BoxProps & {
   src: string;
 };
 
+// eslint-disable-next-line react/display-name
 const SvgColor = forwardRef<HTMLSpanElement, SvgColorProps>(({ src, sx, ...other }, ref) => (
   <Box
     component="span"

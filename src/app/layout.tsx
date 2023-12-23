@@ -1,4 +1,3 @@
-/* eslint-disable perfectionist/sort-imports */
 "use client"
 import 'src/global.css';
 

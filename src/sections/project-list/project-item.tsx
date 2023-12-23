@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
-
+import moment from 'moment';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
@@ -17,7 +17,8 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-import { Project } from 'src/types/project';;
+import { Project } from 'src/types/project'; import { Backdrop, Modal } from '@mui/material';
+;
 
 // ----------------------------------------------------------------------
 
@@ -26,8 +27,8 @@ type Props = {
 };
 
 export const ProjectItem = ({ project }: Props) => {
-  const { location, favorited, duration, coverUrl } = project;
-
+  const { favorited, title, coverUrl, locations, startDateTime, endDateTime } = project;
+  const [open, setOpen] = useState(false);
   const [favorite, setFavorite] = useState(favorited);
 
   const handleChangeFavorite = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,11 +86,17 @@ export const ProjectItem = ({ project }: Props) => {
         />
       </Stack>
 
-      <Image alt={'cover image'} src={coverUrl} ratio="1/1" />
+      <Image alt={'cover image'} src={coverUrl} ratio="1/1" onClick={() => setOpen(true)} />
 
       <Stack spacing={0.5} sx={{ p: 2.5 }}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {location}
+          <Link
+            href={`/projects/${project.link}`}
+            sx={{
+              cursor: 'pointer'
+            }}>
+            {title}
+          </Link>
         </Typography>
 
         {/* <Link component={RouterLink} href={paths.alda.alda} color="inherit">
@@ -108,7 +115,8 @@ export const ProjectItem = ({ project }: Props) => {
           alignItems="center"
           sx={{ typography: 'body2', color: 'text.disabled' }}
         >
-          <Iconify icon="carbon:time" width={16} sx={{ mr: 1 }} /> {duration}
+          <Iconify icon="carbon:time" width={16} sx={{ mr: 1 }} /> Start date: {moment(startDateTime).format('YYYY/MM/DD')}
+          <Iconify icon="carbon:time" width={16} sx={{ mr: 1 }} /> End date: {moment(endDateTime).format('YYYY/MM/DD')}
         </Stack>
 
         <Stack spacing={0.5} direction="row" alignItems="center">
@@ -118,6 +126,35 @@ export const ProjectItem = ({ project }: Props) => {
           </Box>
         </Stack>
       </Stack>
-    </Card>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={() => setOpen(false)}
+      >
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          closeAfterTransition
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={{
+            position: 'absolute' as 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 600,
+            height: 700,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+          }}>
+            <Image alt={'cover image'} src={coverUrl} ratio="1/1" onClick={() => setOpen(false)} height={650} />
+          </Box>
+        </Modal>
+      </Backdrop>
+
+    </Card >
   );
 }

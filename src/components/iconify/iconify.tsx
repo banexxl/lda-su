@@ -11,6 +11,7 @@ interface Props extends BoxProps {
   icon: IconifyProps;
 }
 
+// eslint-disable-next-line react/display-name
 const Iconify = forwardRef<SVGElement, Props>(({ icon, width = 20, sx, ...other }, ref) => (
   <Box
     ref={ref}

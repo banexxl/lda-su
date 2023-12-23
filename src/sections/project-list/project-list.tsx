@@ -30,7 +30,7 @@ export const ProjectList = ({ projects, loading }: Props) => {
       >
         {(loading ? [...Array(12)] : projects).map((project, index) =>
           project ? (
-            <ProjectItem key={project.id} project={project} />
+            <ProjectItem key={project._id} project={project} />
           ) : (
             <ProjectItemSkeleton key={index} />
           )

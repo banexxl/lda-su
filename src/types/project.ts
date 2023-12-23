@@ -1,7 +1,10 @@
 import { TeamMember } from './team-member';
 
+type ProjectType = 'economy' | 'democracy' | 'eu-integrations' | 'cultural-heritage' | 'interethnic-dialogue' | 'migrations' | 'youth' | 'other'
+
 export type Project = {
   _id: string;
+  link: string;
   title: string;
   subTitle: string[],
   parargaph1: string;
@@ -17,7 +20,8 @@ export type Project = {
   gallery: string[];
   locations: string[];
   published: Date;
-  timeBetween: string,
+  startDateTime: Date,
+  endDateTime: Date,
   favorited: boolean;
   favoritedNumber: number;
   organizers: TeamMember[];

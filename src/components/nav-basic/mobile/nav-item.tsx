@@ -12,6 +12,7 @@ import { NavItemProps, NavItemStateProps } from '../types';
 
 // ----------------------------------------------------------------------
 
+// eslint-disable-next-line react/display-name
 export const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
   ({ title, path, icon, depth, open, active, hasChild, externalLink, ...other }, ref) => {
     const renderContent = (

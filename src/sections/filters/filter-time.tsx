@@ -1,4 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
 import InputBase from '@mui/material/InputBase';
 import { Theme, SxProps } from '@mui/material/styles';
 import { TextFieldProps } from '@mui/material/TextField';
