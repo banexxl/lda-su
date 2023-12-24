@@ -51,13 +51,13 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
 
     if (externalLink)
       return (
-        <Link href={path} target="_blank" rel="noopener" color="inherit" underline="none">
+        <Link href={path} target="_blank" rel="noopener" underline="none">
           {renderContent}
         </Link>
       );
 
     return (
-      <Link component={RouterLink} href={path} color="inherit" underline="none">
+      <Link component={RouterLink} href={path} underline="none">
         {renderContent}
       </Link>
     );
