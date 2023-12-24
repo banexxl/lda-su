@@ -52,9 +52,9 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           mb: 3,
         }}
       >
-        {/* <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 } }}>
-          {slug}
-        </Typography> */}
+        <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 } }}>
+          sdsd
+        </Typography>
 
         <Stack direction="row" alignItems="center" flexShrink={0}>
           <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>

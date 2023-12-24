@@ -78,57 +78,38 @@ export const navConfig = [
     title: 'Projekti',
     path: '#',
     children: [
-      { title: 'Regionalna platforma za učešće i dijalog mladih', path: '/projects/regionalna-platforma-za-ucesce-i-dijalog-mladih' },
-      { title: 'Lokalni građanski monitor Local Civic Monitor', path: '/projects/lokalni-gradjanski-monitor' },
-      { title: 'CLINK Kulturno nasleđe', path: '/projects/clink-kulturno-nasledje' },
-      { title: 'Balkan Kaleidoskop', path: '/projects/balkan-kaledioskop' },
-      { title: 'New Intercultural Concept', path: '/projects/novi-interkulturalni-koncept' },
-      { title: 'Svako je dugme važno', path: '/projects/svako-je-dugme-vazno' },
-      { title: 'Mreža za razvoj Subotice', path: '/projects/mreza-za-razvoj-subotice' },
-      { title: 'Balkan Compact', path: '/projects/balkan-koncept' },
       {
-        title: 'Završeni projekti',
-        path: '/projects/zavrseni-projekti',
-        children: [
-          { title: 'SNET.EU', path: '/projects/zavrseni-projekti/snet-eu' },
-          { title: 'LOKALNE KOALICIJE ZA RAZVOJ ZAJEDNICE', path: '/projects/zavrseni-projekti/lokalne-koalicije-za-razvoj-zajenice' },
-          { title: 'VOJVOĐANSKA INICIJATIVA ZA EU', path: '/projects/zavrseni-projekti/vojvodjanska-inicijativa-za-eu' },
-          { title: 'RADIMO LI DOSTOJANSTVENO', path: '/projects/zavrseni-projekti/radimo-li-dostojanstveno' },
-          {
-            title: 'Regionalna partnerstva za gradove',
-            path: '/projects/zavrseni-projekti/regionalna-partnerstva-za-gradove',
-            children: [
-              { title: 'O projektu', path: '/projects/zavrseni-projekti/regionalna-partnerstva-za-gradove/o-projektu' },
-              { title: 'Vesti', path: '/projects/zavrseni-projekti/regionalna-partnerstva-za-gradove/vesti' },
-              { title: 'Mostar', path: '/projects/zavrseni-projekti/regionalna-partnerstva-za-gradove/mostar' },
-              { title: 'Wolverhampton', path: '/projects/zavrseni-projekti/regionalna-partnerstva-za-gradove/wolverhampton' },
-              { title: 'Duzijanca', path: '/projects/zavrseni-projekti/regionalna-partnerstva-za-gradove/duzijanca' },
-            ]
-          },
-          { title: 'Evropske i naše teme', path: '/projects/zavrseni-projekti/evropske-i-nase-teme' },
-          {
-            title: 'Mikrokredit',
-            path: '/projects/zavrseni-projekti/mikrokredit',
-            children: [
-              { title: 'Vesti', path: '/projects/zavrseni-projekti/mikrokredit/vesti' },
-              { title: 'Uslovi', path: '/projects/zavrseni-projekti/mikrokredit/uslovi' }
-            ]
-          },
-          { title: 'Lokalne koalicije za eu integracije', path: '/projects/zavrseni-projekti/lokalne-koalicije-za-eu-integracije' },
-          {
-            title: 'Lokalne koalicije za toleranciju',
-            path: '/projects/zavrseni-projekti/lokalne-koalicije-za-toleranciju',
-            children: [
-              { title: 'O projektu', path: '/projects/zavrseni-projekti/lokalne-koalicije-za-toleranciju/o-projektu' },
-              { title: 'Aktivnosti', path: '/projects/zavrseni-projekti/lokalne-koalicije-za-toleranciju/aktivnosti' }
-            ]
-          },
-          { title: 'Mladi su zakon', path: '/projects/zavrseni-projekti/mladi-su-zakon' },
+        title: 'Završeni projekti', path: '#', children: [
+          { title: 'Pregled i analiza lokalne prakse u opštinama Bačka Topola, Kanjiža, Subotica, Ruma,Sombor', path: '/projects/pregled-i-analiza-lokalne-prakse-u-opstinama-subotica-backa-topola-kanjiza-ruma-sombor' },
+          { title: 'Regionalna platforma za učešće i dijalog mladih', path: '/projects/regionalna-platforma-za-ucesce-i-dijalog-mladih' },
+          { title: 'Lokalni građanski monitor Local Civic Monitor', path: '/projects/lokalni-gradjanski-monitor' },
+          { title: 'CLINK Kulturno nasleđe', path: '/projects/clink-kulturno-nasledje' },
+          { title: 'Balkan Kaleidoskop', path: '/projects/balkan-kaledioskop' },
+          { title: 'New Intercultural Concept', path: '/projects/novi-interkulturalni-koncept' },
+          { title: 'Svako je dugme važno', path: '/projects/svako-je-dugme-vazno' },
+          { title: 'Mreža za razvoj Subotice', path: '/projects/mreza-za-razvoj-subotice' },
+          { title: 'Balkan Compact', path: '/projects/balkan-koncept' },
+          { title: 'snet.eu', path: '/projects/snet-eu' },
+          { title: 'Lokalne koalicije za razvoj zajenice', path: '/projects/lokalne-koalicije-za-razvoj-zajenice' },
+          { title: 'Vojvođanska inicijativa za eu', path: '/projects/vojvodjanska-inicijativa-za-eu' },
+          { title: 'Radim li dostojanstveno', path: '/projects/radimo-li-dostojanstveno' },
+          { title: 'Regionalna partnerstva za gradove', path: '/projects/regionalna-partnerstva-za-gradove' },
+          { title: 'Evropske i naše teme', path: '/projects/evropske-i-nase-teme' },
+          { title: 'Mikrokredit', path: '/projects/mikrokredit' },
+          { title: 'Townlab MEET', path: '/projects/townlab-meet' },
+          { title: 'Mladi su zakon', path: '/projects/mladi-su-zakon' },
+          { title: 'Lokalne koalicije za eu integracije', path: '/projects/lokalne-koalicije-za-eu-integracije' },
+          { title: 'Lokalne koalicije za toleranciju', path: '/projects/lokalne-koalicije-za-toleranciju' },
+          { title: 'Vesti', path: '/projects/regionalna-partnerstva-za-gradove/vesti' },
+          { title: 'Mostar', path: '/projects/regionalna-partnerstva-za-gradove/mostar' },
+          { title: 'Wolverhampton', path: '/projects/regionalna-partnerstva-za-gradove/wolverhampton' },
+          { title: 'Duzijanca', path: '/projects/regionalna-partnerstva-za-gradove/duzijanca' },
         ],
       },
-      { title: 'Townlab MEET', path: '/projects/townlab-meet' },
-    ],
+      { title: 'Projekti u toku', path: '#' },
+    ]
   },
+
   {
     title: 'Aktivnosti',
     path: '#',

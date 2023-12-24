@@ -41,8 +41,8 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB')
-               let data: Project = await db.collection('Projects').find({ link: link }).toArray()
-               return data
+               let data: Project[] = await db.collection('Projects').find({ link: link }).toArray()
+               return data[0]
           } catch (error: any) {
                console.log({ message: error.message })
           }

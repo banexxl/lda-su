@@ -14,6 +14,7 @@ type ProjectPageProps = {
     projectURL: string
   }
 }
+
 const getProject = async (link: string) => {
   const project = await projectsServices().getProjectByLink(link)
   return project

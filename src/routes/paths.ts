@@ -8,6 +8,7 @@ export const paths = {
   stanka: '/profile/stanka',
   silvija: '/profile/silvija',
   boris: '/profile/boris',
+  projects: '/projects',
   // LDA Subotica
   alda: {
     alda: 'https://www.alda-europe.eu/',

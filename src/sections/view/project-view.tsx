@@ -55,26 +55,26 @@ export const ProjectView = ({ project }: ProjectProps) => {
       <Container sx={{ overflow: 'hidden' }}>
         <CustomBreadcrumbs
           links={[
-            { name: 'home', href: '/' },
-            { name: 'project', href: paths.alda.alda },
+            { name: 'Home', href: '/' },
+            { name: 'Projects', href: paths.projects },
             { name: project.title },
           ]}
           sx={{ mt: 3, mb: 5 }}
         />
 
-        {/* <ProjectDetailsGallery images={project.gallery} /> */}
+        <ProjectDetailsGallery galery={project.gallery} />
 
         <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse">
           <Grid xs={12} md={5} lg={4}>
-            {/* <ProjectDetailsReserveForm project={project} /> */}
+            <ProjectDetailsReserveForm project={project} />
           </Grid>
 
           <Grid xs={12} md={7} lg={8}>
-            {/* <TourDetailsHeader project={_mockTour} /> */}
+            <ProjectDetailsHeader project={project} />
 
             <Divider sx={{ borderStyle: 'dashed', my: 5 }} />
 
-            {/* <TourDetailsSummary project={_mockTour} /> */}
+            {/* <ProjectDetailsSummary project={project} /> */}
 
             <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
               <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5 }}>
@@ -110,7 +110,7 @@ export const ProjectView = ({ project }: ProjectProps) => {
 
       <Divider sx={{ my: 10 }} />
 
-      {/* <TourListSimilar projects={_tours.slice(-4)} /> */}
+      {/* <ProjectListSimilar projects={pojects.slice(-4)} /> */}
 
       {/* <Newsletter /> */}
     </>
