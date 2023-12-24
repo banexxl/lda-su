@@ -51,7 +51,7 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
 
     if (externalLink)
       return (
-        <Link href={path} target="_blank" rel="noopener" underline="none">
+        <Link href={path} target="_blank" rel="noopener" color='whitesmoke' underline="none">
           {renderContent}
         </Link>
       );
