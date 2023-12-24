@@ -117,7 +117,7 @@ const StyledNavItem = styled(ListItemButton, {
         ...baseStyles.arrow,
       },
       ...(active && {
-        color: theme.palette.primary.main,
+        color: 'whitesmoke',
         fontWeight: theme.typography.fontWeightSemiBold,
       }),
       ...(opened && {
