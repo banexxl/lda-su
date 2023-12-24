@@ -14,14 +14,14 @@ type ProjectPageProps = {
     projectURL: string
   }
 }
-const getProjectByLink = async (link: string) => {
+const getProject = async (link: string) => {
   const project = await projectsServices().getProjectByLink(link)
   return project
 }
 
 export async function generateStaticParams() {
   try {
-    const allProjects = await projectsServices().getAllProjectLinks();
+    const allProjects = await projectsServices().getAllProjects();
     return allProjects!.map((project: Project) => (
       {
         link: project.projectURL.toString()
@@ -35,7 +35,7 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const project = await getProjectByLink(params.projectURL)
+  const project = await getProject(params.projectURL)
   if (!project) {
     // Handle the case where the project is undefined
     return <NotFoundView />

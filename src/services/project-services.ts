@@ -5,15 +5,12 @@ import { ObjectId } from "mongodb"
 const projectsServices = () => {
 
      const getAllProjects = async () => {
-          console.log('usao u getallprojects');
 
           const client = await MongoClient.connect(process.env.MONGODB_URI!);
 
           try {
                const db = client.db('LDA_DB');
                const data: any = await db.collection('Projects').find({}).toArray()
-               console.log('data', data);
-
                return data;
           } catch (error: any) {
                console.log({ message: error.message })
@@ -23,13 +20,13 @@ const projectsServices = () => {
      };
 
      const getAllProjectLinks = async () => {
+
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
                const db = client.db('LDA_DB')
-               let data: Project[] = await db.collection('Projects').distinct('link')
-               const returnData = JSON.parse(JSON.stringify(data))
-               return returnData
+               let data: Project[] = await db.collection('Projects').distinct('projectURL')
+               return data
           } catch (error: any) {
                console.log({ message: error.message })
           }

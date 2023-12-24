@@ -67,7 +67,7 @@ export const ProjectListSimilar = ({ projects }: Props) => {
           }}
         >
           {projects.map((project) => (
-            <ProjectItem key={project.id} project={project} />
+            <ProjectItem key={project._id} project={project} />
           ))}
         </Box>
 

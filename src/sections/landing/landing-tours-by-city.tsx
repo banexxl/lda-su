@@ -97,7 +97,7 @@ type TourItemProps = {
 };
 
 const ProjectItem = ({ project }: TourItemProps) => {
-  const { coverUrl, location } = project;
+  const { coverUrl, locations } = project;
 
   return (
     <Link component={RouterLink} href={paths.alda.alda} color="inherit" underline="none">
@@ -119,7 +119,7 @@ const ProjectItem = ({ project }: TourItemProps) => {
 
           <Stack spacing={0.5}>
             <TextMaxLine variant="h6" line={1}>
-              {location}
+              {locations}
             </TextMaxLine>
 
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>

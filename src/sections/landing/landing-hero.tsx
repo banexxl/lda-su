@@ -73,7 +73,7 @@ export const ProjectLandingHero = ({ projects }: Props) => {
           ref={carouselLarge.carouselRef}
         >
           {projects.map((project) => (
-            <CarouselItem key={project.id} project={project} />
+            <CarouselItem key={project._id} project={project} />
           ))}
         </Carousel>
       )}
@@ -98,7 +98,7 @@ export const ProjectLandingHero = ({ projects }: Props) => {
             >
               {projects.map((project, index) => (
                 <ThumbnailItem
-                  key={project.id}
+                  key={project._id}
                   project={project}
                   selected={carouselLarge.currentIndex === index}
                 />
@@ -158,11 +158,11 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
         }}
       >
         <Typography variant="overline" sx={{ color: 'info.main', mb: 5 }}>
-          {project.location}
+          {project.locations}
         </Typography>
 
         <Typography variant="h1" sx={{ maxWidth: 480 }}>
-          {project.createdAt}
+          {project.startDateTime.toString()}
         </Typography>
 
         <Stack
@@ -173,7 +173,7 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
         >
           <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
             <Iconify icon="carbon:time" width={24} sx={{ mr: 1, color: 'primary.main' }} />
-            {project.duration}
+            {project.endDateTime.toString()}
           </Stack>
 
           <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
@@ -246,7 +246,7 @@ const ThumbnailItem = ({ project, selected }: ThumbnailItemProps) => {
 
       <Stack spacing={0.5}>
         <TextMaxLine variant="h6" line={1}>
-          {project.location}
+          {project.locations}
         </TextMaxLine>
 
       </Stack>

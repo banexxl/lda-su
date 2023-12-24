@@ -73,7 +73,7 @@ export const LandingFavoriteDestinations = ({ projects }: Props) => {
         <Grid container xs={12} md={6} spacing={{ xs: 4, md: 3 }}>
           {projects.map((project, index) => (
             <Grid
-              key={project.id}
+              key={project._id}
               xs={12}
               sm={6}
               sx={{
@@ -104,7 +104,7 @@ const DestinationItem = ({ project, order }: DestinationItemProps) => {
 
   const mdUp = useResponsive('up', 'md');
 
-  const { location, coverUrl } = project;
+  const { locations, coverUrl } = project;
 
   return (
     <Box
@@ -116,7 +116,7 @@ const DestinationItem = ({ project, order }: DestinationItemProps) => {
       }}
     >
       <Image
-        alt={location}
+        //alt={locations}
         src={coverUrl}
         ratio={(!mdUp && '1/1') || (order && '1/1') || '4/6'}
         overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
@@ -135,7 +135,7 @@ const DestinationItem = ({ project, order }: DestinationItemProps) => {
         }}
       >
         <TextMaxLine variant="h5" line={1}>
-          {location}
+          {locations}
         </TextMaxLine>
 
         {/* <Stack direction="row" alignItems="center">
