@@ -54,9 +54,9 @@ export const LandingIntroduce = () => {
         >
           <Box>
 
-            <Typography variant="h2">ALDA</Typography>
+            <Typography variant="h2" color={'whitesmoke'}>ALDA</Typography>
 
-            <Typography sx={{ color: 'text.secondary', textAlign: 'start', width: '70%' }}>
+            <Typography sx={{ color: 'whitesmoke', textAlign: 'start', width: '70%' }}>
               Agencije lokalne demokratije nastale su kao izraz želje lokalnih i regionalnih vlasti Evrope da pruže podršku i pomoć lokalnim vlastima tokom ratnih sukoba u bivšoj Jugoslaviji. Prva Agencija osnovana je u Subotici, 1993. godine.<br />
               <br />
               U početnoj fazi aktivnosti Agencija bile su usmerene na pružanje humanitarne pomoći a ubrzo potom one bivaju uključene u složeni proces revitalizacije lokalnih zajednica u najširem smislu, obnove poverenja i dijaloga između različitih etničkih grupa i zaštite ljudskih prava.<br />
