@@ -57,7 +57,7 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
       );
 
     return (
-      <Link component={RouterLink} href={path} underline="none">
+      <Link component={RouterLink} href={path} color='whitesmoke' underline="none">
         {renderContent}
       </Link>
     );
