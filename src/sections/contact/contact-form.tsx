@@ -13,6 +13,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import Image from 'src/components/image';
 import { FormProvider, RHFTextField } from 'src/components/hook-form';
 import { ContactMap } from './contact-map';
+import { Box } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -59,55 +60,48 @@ export const ContactForm = () => {
         py: { xs: 10, md: 15 },
       }}
     >
-      <Grid container spacing={3} justifyContent="space-between">
-        {mdUp && (
-          <Grid xs={12} md={6} lg={5}>
-            <ContactMap mapApiKey={process.env.NEXT_PUBLIC_MAP_API!} />
-          </Grid>
-        )}
 
-        <Grid xs={12} md={6} lg={6}>
-          <Stack
-            spacing={2}
-            sx={{
-              mb: 5,
-              textAlign: { xs: 'center', md: 'left' },
-            }}
-          >
-            <Typography variant="h3">Drop Us A Line</Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <Stack
+          spacing={2}
+          sx={{
+            mb: 5,
+            textAlign: { xs: 'center', md: 'left' },
+          }}
+        >
+          <Typography variant="h3">Drop Us A Line</Typography>
 
-            <Typography sx={{ color: 'text.secondary' }}>
-              We normally respond within 2 business days
-              <a href='https://lda-su.s3.eu-central-1.amazonaws.com/Publications/Publikacija-Local-Civic-Monitor.pdf' target='_blank'>Publikacija</a>
-            </Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            We normally respond within 2 business days
+            <a href='https://lda-su.s3.eu-central-1.amazonaws.com/Publications/Publikacija-Local-Civic-Monitor.pdf' target='_blank'>Publikacija</a>
+          </Typography>
+        </Stack>
+        <FormProvider methods={methods} onSubmit={onSubmit}>
+          <Stack spacing={2.5} alignItems="flex-start">
+            <RHFTextField name="fullName" label="Full name" />
+
+            <RHFTextField name="email" label="Email" />
+
+            <RHFTextField name="subject" label="Subject" />
+
+            <RHFTextField name="message" multiline rows={4} label="Message" sx={{ pb: 2.5 }} />
+
+            <LoadingButton
+              size="large"
+              type="submit"
+              variant="contained"
+              color="inherit"
+              loading={isSubmitting}
+              sx={{
+                alignSelf: { xs: 'center', md: 'unset' },
+              }}
+            >
+              Send Request
+            </LoadingButton>
           </Stack>
-
-          <FormProvider methods={methods} onSubmit={onSubmit}>
-            <Stack spacing={2.5} alignItems="flex-start">
-              <RHFTextField name="fullName" label="Full name" />
-
-              <RHFTextField name="email" label="Email" />
-
-              <RHFTextField name="subject" label="Subject" />
-
-              <RHFTextField name="message" multiline rows={4} label="Message" sx={{ pb: 2.5 }} />
-
-              <LoadingButton
-                size="large"
-                type="submit"
-                variant="contained"
-                color="inherit"
-                loading={isSubmitting}
-                sx={{
-                  alignSelf: { xs: 'center', md: 'unset' },
-                }}
-              >
-                Send Request
-              </LoadingButton>
-            </Stack>
-          </FormProvider>
-        </Grid>
-      </Grid>
-    </Container>
+        </FormProvider>
+        <ContactMap mapApiKey={process.env.NEXT_PUBLIC_MAP_API!} />
+      </Box>
+    </Container >
   );
 }

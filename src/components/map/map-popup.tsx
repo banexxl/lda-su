@@ -25,7 +25,6 @@ export const MapPopup = ({ office, onClose, lat, lng }: Props) => {
     (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
       onClose();
-      console.log('lat-lng', lat, lng);
     },
     [lat, lng, onClose]
   );

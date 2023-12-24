@@ -35,8 +35,6 @@ type ProjectProps = {
 }
 
 export const ProjectView = ({ project }: ProjectProps) => {
-  console.log(project);
-
 
   const loading = useBoolean(true);
 

@@ -37,15 +37,11 @@ const projectsServices = () => {
 
      const getProjectByLink = async (link: string) => {
 
-          console.log('usao u getProjectByLink');
-
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
                const db = client.db('LDA_DB')
                let data: Project = await db.collection('Projects').find({ link: link }).toArray()
-               console.log(data);
-
                return data
           } catch (error: any) {
                console.log({ message: error.message })

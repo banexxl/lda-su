@@ -14,8 +14,6 @@ export default function ProfileView({ params }: any) {
      const [loading, setLoading] = useState(true)
      const profileToRender = profilesData.find(user => user.id === params.name);
 
-     console.log(profileToRender);
-
      useEffect(() => {
           const timer = setTimeout(() => {
                setLoading(false); // Simulate loading completion after 2 seconds
