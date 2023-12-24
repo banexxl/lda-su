@@ -11,21 +11,20 @@ export const metadata = {
 
 type ProjectPageProps = {
   params: {
-    link: string
+    projectURL: string
   }
 }
-const getProjectByID = async (link: string) => {
-  const project = projectsServices().getProjectByLink(link)
+const getProjectByLink = async (link: string) => {
+  const project = await projectsServices().getProjectByLink(link)
   return project
 }
 
 export async function generateStaticParams() {
   try {
     const allProjects = await projectsServices().getAllProjectLinks();
-
     return allProjects!.map((project: Project) => (
       {
-        link: project.link.toString()
+        link: project.projectURL.toString()
       }
     ))
 
@@ -36,8 +35,7 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const project = await getProjectByID(params.link)
-
+  const project = await getProjectByLink(params.projectURL)
   if (!project) {
     // Handle the case where the project is undefined
     return <NotFoundView />

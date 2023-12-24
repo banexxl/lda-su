@@ -4,9 +4,11 @@ type ProjectType = 'economy' | 'democracy' | 'eu-integrations' | 'cultural-herit
 
 export type Project = {
   _id: string;
-  link: string;
+  projectURL: string;
+  link1: string;
+  link2: string;
   title: string;
-  subTitle: string[],
+  subTitle: string,
   parargaph1: string;
   parargaph2: string;
   parargaph3: string;
@@ -15,7 +17,7 @@ export type Project = {
   parargaph6: string;
   parargaph7: string;
   parargaph8: string;
-  projectType: string;
+  category: string;
   coverUrl: string;
   gallery: string[];
   locations: string[];
@@ -24,5 +26,5 @@ export type Project = {
   endDateTime: Date,
   favorited: boolean;
   favoritedNumber: number;
-  organizers: TeamMember[];
+  organizers: string;
 };

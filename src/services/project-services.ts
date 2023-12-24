@@ -7,27 +7,26 @@ const projectsServices = () => {
      const getAllProjects = async () => {
           console.log('usao u getallprojects');
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client = await MongoClient.connect(process.env.MONGODB_URI!);
 
           try {
-               const db = client.db('LDA_Projects')
-               let data: Project[] = await db.collection('Projects').find({}).toArray()
+               const db = client.db('LDA_DB');
+               const data: any = await db.collection('Projects').find({}).toArray()
                console.log('data', data);
 
-               return data
+               return data;
           } catch (error: any) {
-               return { message: error.message }
-          }
-          finally {
+               console.log({ message: error.message })
+          } finally {
                await client.close();
           }
-     }
+     };
 
      const getAllProjectLinks = async () => {
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
-               const db = client.db('LDA_Projects')
+               const db = client.db('LDA_DB')
                let data: Project[] = await db.collection('Projects').distinct('link')
                const returnData = JSON.parse(JSON.stringify(data))
                return returnData
@@ -40,13 +39,17 @@ const projectsServices = () => {
      }
 
      const getProjectByLink = async (link: string) => {
+
+          console.log('usao u getProjectByLink');
+
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
-               const db = client.db('LDA_Projects')
-               let data: Project[] = await db.collection('Projects').find({ link: link })
-               const returnData = JSON.parse(JSON.stringify(data))
-               return returnData
+               const db = client.db('LDA_DB')
+               let data: Project = await db.collection('Projects').find({ link: link }).toArray()
+               console.log(data);
+
+               return data
           } catch (error: any) {
                console.log({ message: error.message })
           }
