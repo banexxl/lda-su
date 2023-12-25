@@ -59,7 +59,7 @@ export const ProjectDetails = ({ project }: Props) => {
   }, [router]);
 
   return (
-    <Card sx={{ p: 3, backgroundColor: theme.palette.primary.darker }}>
+    <Card sx={{ p: 3 }}>
       <Stack spacing={3}>
         <Stack spacing={1.5}>
           <Typography variant="body2" sx={{ color: 'text.disabled' }}>Project start date/time</Typography>

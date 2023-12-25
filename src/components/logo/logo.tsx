@@ -22,7 +22,7 @@ const Logo = ({ single = false, sx }: LogoProps) => {
     <Link
       component={RouterLink}
       href="/"
-      color="inherit"
+
       aria-label="go to homepage"
       sx={{ lineHeight: 0 }}
     >

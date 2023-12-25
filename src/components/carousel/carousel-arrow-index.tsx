@@ -60,7 +60,7 @@ export const CarouselArrowIndex = ({
 
   return (
     <StyledRoot sx={sx} {...other}>
-      <StyledIconButton color="inherit" onClick={onPrev}>
+      <StyledIconButton onClick={onPrev}>
         <LeftIcon icon={icon} isRTL={isRTL} />
       </StyledIconButton>
 
@@ -68,7 +68,7 @@ export const CarouselArrowIndex = ({
         {index + 1}/{total}
       </Typography>
 
-      <StyledIconButton color="inherit" onClick={onNext}>
+      <StyledIconButton onClick={onNext}>
         <RightIcon icon={icon} isRTL={isRTL} />
       </StyledIconButton>
     </StyledRoot>

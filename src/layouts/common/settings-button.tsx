@@ -47,7 +47,7 @@ export const SettingsButton = ({ sx }: Props) => {
           whileTap="tap"
           whileHover="hover"
           variants={varHover(1.05)}
-          color="inherit"
+
           aria-label="settings"
           onClick={settings.onToggle}
         >

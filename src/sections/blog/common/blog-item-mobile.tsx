@@ -37,7 +37,7 @@ export const BlogItemMobile = ({ post, onSiderbar }: Props) => {
       />
 
       <Stack spacing={onSiderbar ? 0.5 : 1}>
-        <Link color="inherit">
+        <Link >
           <TextMaxLine variant={onSiderbar ? 'subtitle2' : 'h6'}>{post.title}</TextMaxLine>
         </Link>
 

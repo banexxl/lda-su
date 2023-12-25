@@ -55,7 +55,7 @@ export const FeaturedBlogItem = ({ post, largePost }: Props) => {
           sx={{ color: 'inherit', opacity: 0.72 }}
         />
 
-        <Link component={RouterLink} href={paths.alda.alda} color="inherit">
+        <Link component={RouterLink} href={paths.alda.alda} >
           <TextMaxLine
             sx={{
               typography: 'h6',

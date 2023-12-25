@@ -96,7 +96,7 @@ export const Footer = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <Button variant="contained" color="inherit" size="large" sx={{ mr: -1.25 }}>
+                  <Button variant="contained" size="large" sx={{ mr: -1.25 }}>
                     Subscribe
                   </Button>
                 </InputAdornment>

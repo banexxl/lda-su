@@ -28,7 +28,7 @@ export const ProjectListSimilar = ({ projects }: Props) => {
     <Button
       component={RouterLink}
       href={paths.alda.alda}
-      color="inherit"
+
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >
       View All

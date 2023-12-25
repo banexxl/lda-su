@@ -39,7 +39,7 @@ export const AccountLayout = ({ children }: Props) => {
           <Container>
             <Button
               size="small"
-              color="inherit"
+
               startIcon={<Iconify icon="carbon:menu" />}
               onClick={menuOpen.onTrue}
             >

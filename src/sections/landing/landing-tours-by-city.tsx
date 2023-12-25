@@ -30,7 +30,7 @@ export const LandingProjectsByCity = ({ projects }: Props) => {
     <Button
       component={RouterLink}
       href={paths.alda.alda}
-      color="inherit"
+
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >
       View All
@@ -100,7 +100,7 @@ const ProjectItem = ({ project }: TourItemProps) => {
   const { coverUrl, locations } = project;
 
   return (
-    <Link component={RouterLink} href={paths.alda.alda} color="inherit" underline="none">
+    <Link component={RouterLink} href={paths.alda.alda} underline="none">
       <Paper
         variant="outlined"
         sx={{

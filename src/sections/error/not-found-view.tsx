@@ -43,7 +43,7 @@ export const NotFoundView = () => {
           />
         </m.div>
 
-        <Button component={RouterLink} href="/" size="large" color="inherit" variant="contained">
+        <Button component={RouterLink} href="/" size="large" variant="contained">
           Go to Home
         </Button>
       </MotionContainer>

@@ -27,7 +27,7 @@ const TextMaxLine = forwardRef<HTMLAnchorElement, TextMaxLineProps>(
 
     if (asLink) {
       return (
-        <Link color="inherit" ref={ref} variant={variant} sx={{ ...styles }} {...other}>
+        <Link ref={ref} variant={variant} sx={{ ...styles }} {...other}>
           {children}
         </Link>
       );

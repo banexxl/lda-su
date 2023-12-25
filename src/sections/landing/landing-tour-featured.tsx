@@ -55,7 +55,7 @@ export const LandingTourFeatured = ({ projects }: Props) => {
           href={paths.alda.alda}
           size="large"
           variant="outlined"
-          color="inherit"
+
         >
           View All Tours
         </Button>

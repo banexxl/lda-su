@@ -79,7 +79,7 @@ export const BlogSidebar = ({
             }}
           />
 
-          <Link variant="body2" href={category.path} color="inherit">
+          <Link variant="body2" href={category.path} >
             {category.label}
           </Link>
         </Stack>

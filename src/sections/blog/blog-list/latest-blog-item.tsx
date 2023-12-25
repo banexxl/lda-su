@@ -29,7 +29,7 @@ export const LatestBlogItem = ({ post }: Props) => {
       <Stack spacing={1}>
         {/* <BlogTimeBlock createdAt={fDate(post.createdAt)} duration={post.duration} /> */}
 
-        <Link component={RouterLink} href={paths.alda.alda} color="inherit">
+        <Link component={RouterLink} href={paths.alda.alda} >
           <TextMaxLine variant="h6" persistent>
             {post.title}
           </TextMaxLine>

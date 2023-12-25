@@ -99,7 +99,7 @@ export const ProjectItem = ({ project }: Props) => {
           </Link>
         </Typography>
 
-        {/* <Link component={RouterLink} href={paths.alda.alda} color="inherit">
+        {/* <Link component={RouterLink} href={paths.alda.alda} >
           <TextMaxLine variant="h6" persistent>
             {slug}
           </TextMaxLine>

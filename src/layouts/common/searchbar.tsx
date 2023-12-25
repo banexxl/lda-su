@@ -46,7 +46,7 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
   return (
     <ClickAwayListener onClickAway={searchOpen.onFalse}>
       <div>
-        <IconButton color="inherit" aria-label="search" onClick={searchOpen.onTrue} sx={sx}>
+        <IconButton aria-label="search" onClick={searchOpen.onTrue} sx={sx}>
           <Iconify icon="carbon:search" />
         </IconButton>
 

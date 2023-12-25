@@ -59,7 +59,7 @@ export const NavMobile = ({ data }: NavProps) => {
           </List>
 
           <Stack spacing={1.5} sx={{ p: 3 }}>
-            <Button fullWidth variant="contained" color="inherit">
+            <Button fullWidth variant="contained" >
               Buy Now
             </Button>
           </Stack>

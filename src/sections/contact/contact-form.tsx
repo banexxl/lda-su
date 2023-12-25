@@ -90,7 +90,7 @@ export const ContactForm = () => {
               size="large"
               type="submit"
               variant="contained"
-              color="inherit"
+
               loading={isSubmitting}
               sx={{
                 alignSelf: { xs: 'center', md: 'unset' },

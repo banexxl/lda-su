@@ -51,7 +51,7 @@ type PostItemProps = {
 function PostItem({ coverUrl, title, icon, isNext }: PostItemProps) {
   return (
     <CardActionArea sx={{ borderRadius: 2 }}>
-      <Link color="inherit" underline="none">
+      <Link underline="none">
         <Stack
           alignItems="center"
           direction={isNext ? 'row-reverse' : 'row'}
