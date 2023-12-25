@@ -73,6 +73,7 @@ export const ProjectDetails = ({ project }: Props) => {
           >
 
             <FilterTime
+              sx={{ color: theme.palette.text.primary }}
               departureDay={project.startDateTime}
               onChangeDepartureDay={() => { }}
             />
@@ -89,6 +90,7 @@ export const ProjectDetails = ({ project }: Props) => {
           >
 
             <FilterTime
+              sx={{ color: theme.palette.text.primary }}
               departureDay={project.endDateTime}
               onChangeDepartureDay={() => { }}
             />
@@ -99,7 +101,7 @@ export const ProjectDetails = ({ project }: Props) => {
           <Typography variant="body2" sx={{ color: 'text.disabled' }}>
             Organizers
           </Typography>
-          <Typography>
+          <Typography sx={{ color: theme.palette.text.primary }}>
             {project.organizers.join(', ')}
           </Typography>
         </Stack>
@@ -109,6 +111,7 @@ export const ProjectDetails = ({ project }: Props) => {
             Published
           </Typography>
           <FilterTime
+            sx={{ color: theme.palette.text.primary }}
             departureDay={project.published}
             onChangeDepartureDay={() => { }}
           />

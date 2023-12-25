@@ -60,7 +60,7 @@ export const ProjectView = ({ project }: ProjectProps) => {
             { name: 'Projects', href: paths.projects },
             { name: project.title },
           ]}
-          sx={{ mt: 3, mb: 5 }}
+          sx={{ mt: 3, mb: 5, color: theme.palette.text.primary }}
         />
 
         <ProjectDetailsGallery galery={project.gallery} />
@@ -78,7 +78,7 @@ export const ProjectView = ({ project }: ProjectProps) => {
             <ProjectDetailsSummary project={project} />
 
             <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
-              <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5 }}>
+              <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5, color: theme.palette.text.primary }}>
                 Share:
               </Typography>
 
@@ -96,8 +96,8 @@ export const ProjectView = ({ project }: ProjectProps) => {
                     sx={{
                       m: 0.5,
                       flexShrink: 0,
-                      color: theme.palette.primary.dark,
-                      borderColor: theme.palette.primary.dark,
+                      color: theme.palette.primary.lighter,
+                      borderColor: theme.palette.primary.lighter,
                       '&:hover': {
                         borderColor: theme.palette.primary.dark,
                         bgcolor: alpha(theme.palette.primary.dark, 0.08),
@@ -119,8 +119,8 @@ export const ProjectView = ({ project }: ProjectProps) => {
                     sx={{
                       m: 0.5,
                       flexShrink: 0,
-                      color: theme.palette.primary.dark,
-                      borderColor: theme.palette.primary.dark,
+                      color: theme.palette.primary.lighter,
+                      borderColor: theme.palette.primary.lighter,
                       '&:hover': {
                         borderColor: theme.palette.primary.dark,
                         bgcolor: alpha(theme.palette.primary.dark, 0.08),
@@ -139,8 +139,8 @@ export const ProjectView = ({ project }: ProjectProps) => {
                     sx={{
                       m: 0.5,
                       flexShrink: 0,
-                      color: theme.palette.primary.dark,
-                      borderColor: theme.palette.primary.dark,
+                      color: theme.palette.primary.lighter,
+                      borderColor: theme.palette.primary.lighter,
                       '&:hover': {
                         borderColor: theme.palette.primary.dark,
                         bgcolor: alpha(theme.palette.primary.dark, 0.08),
@@ -162,8 +162,8 @@ export const ProjectView = ({ project }: ProjectProps) => {
                     sx={{
                       m: 0.5,
                       flexShrink: 0,
-                      color: theme.palette.primary.dark,
-                      borderColor: theme.palette.primary.dark,
+                      color: theme.palette.primary.lighter,
+                      borderColor: theme.palette.primary.lighter,
                       '&:hover': {
                         borderColor: theme.palette.primary.dark,
                         bgcolor: alpha(theme.palette.primary.dark, 0.08),
@@ -186,8 +186,8 @@ export const ProjectView = ({ project }: ProjectProps) => {
                     sx={{
                       m: 0.5,
                       flexShrink: 0,
-                      color: theme.palette.primary.dark,
-                      borderColor: theme.palette.primary.dark,
+                      color: theme.palette.primary.light,
+                      borderColor: theme.palette.primary.light,
                       '&:hover': {
                         borderColor: theme.palette.primary.dark,
                         bgcolor: alpha(theme.palette.primary.dark, 0.08),

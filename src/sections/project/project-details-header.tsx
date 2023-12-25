@@ -55,7 +55,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
         }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
-          <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 } }}>
+          <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
             {project.title}
           </Typography>
           <br />
@@ -65,30 +65,31 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           <br />
           <Divider />
           <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify' }}>
+          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
             {project.paragraph1}
           </Typography>
           <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify' }}>
+          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
             {project.paragraph2}
           </Typography>
           <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify' }}>
+          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
             {project.paragraph3}
           </Typography>
           <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify' }}>
+          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
             {project.paragraph4}
           </Typography>
           <br />
         </Box>
         <Stack direction="row" alignItems="center" flexShrink={0}>
           <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
-            <Iconify icon="carbon:share" />
+            <Iconify icon="carbon:share" sx={{ color: theme.palette.text.primary }} />
           </IconButton>
 
           <Checkbox
             color="error"
+            sx={{ color: theme.palette.error.light }}
             checked={favorite}
             onChange={handleChangeFavorite}
             icon={<Iconify icon="carbon:favorite" />}
@@ -110,8 +111,8 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           </Link> */}
         </Stack>
 
-        <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-          <Iconify icon="carbon:location" sx={{ mr: 0.5 }} />
+        <Stack direction="row" alignItems="center" sx={{ typography: 'body2', color: theme.palette.text.primary }}>
+          <Iconify icon="carbon:location" sx={{ mr: 0.5, color: theme.palette.text.primary }} />
           {project.locations.join(', ')}
         </Stack>
 
@@ -122,7 +123,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
             Project title
           </Typography>
 
-          <Link variant="subtitle2" color="inherit">
+          <Link variant="subtitle2" color={theme.palette.text.primary}>
             {project.title}
           </Link>
         </Stack>
@@ -143,7 +144,9 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
         {_socials.map((social) => (
           <MenuItem key={social.value} onClick={handleClose}>
             <Iconify icon={social.icon} width={24} sx={{ mr: 1, color: social.color }} />
-            Share via {social.label}
+            <Typography sx={{ color: theme.palette.text.primary }}>
+              Share via {social.label}
+            </Typography>
           </MenuItem>
         ))}
       </Popover>

@@ -10,7 +10,7 @@ import { TOUR_SERVICE_OPTIONS } from 'src/_mock';
 import Iconify, { IconifyProps } from 'src/components/iconify';
 
 import { Project } from 'src/types/project';
-import { Link } from '@mui/material';
+import { Link, useTheme } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -20,10 +20,12 @@ type Props = {
 
 export const ProjectDetailsSummary = ({ project }: Props) => {
 
+  const theme = useTheme()
   return (
     <Stack spacing={5}>
       <Stack spacing={3}>
-        <Typography variant="h5">Pregled Projekta</Typography>
+
+        <Typography variant="h5" sx={{ color: theme.palette.text.primary }}>Pregled Projekta</Typography>
         <Box
           sx={{
             rowGap: 2.5,
@@ -47,14 +49,14 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
       </Stack>
 
       <Divider />
-      <Typography variant="h5">Linkovi</Typography>
+      <Typography variant="h5" sx={{ color: theme.palette.text.primary }}>Linkovi</Typography>
       <Box sx={{ display: 'flex', gap: '20px' }}>
         <Link href={project.links.join(', ')}>
           {project.links}
         </Link>
       </Box>
       <Divider sx={{ mb: '30px' }} />
-      <Typography variant="h5">Publikacije</Typography>
+      <Typography variant="h5" sx={{ color: theme.palette.text.primary }}>Publikacije</Typography>
       <Box sx={{ display: 'flex', gap: '20px' }}>
         <Link href={project.publications.join(', ')}>
           {project.publications.join(', ')}
