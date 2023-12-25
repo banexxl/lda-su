@@ -15,6 +15,7 @@ export const StyledLabel = styled(Box)(({
     variant: LabelVariant;
   };
 }) => {
+
   const lightMode = theme.palette.mode === 'light';
 
   const filledVariant = ownerState.variant === 'filled';
