@@ -16,7 +16,8 @@ import { _socials } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
-import { Project } from 'src/types/project';;
+import { Project } from 'src/types/project'; import { Divider, useTheme } from '@mui/material';
+;
 
 // ----------------------------------------------------------------------
 
@@ -25,9 +26,10 @@ type Props = {
 };
 
 export const ProjectDetailsHeader = ({ project }: Props) => {
-  const { locations, favorited } = project;
 
-  const [favorite, setFavorite] = useState(favorited);
+  const theme = useTheme()
+
+  const [favorite, setFavorite] = useState(project.favorited);
 
   const [open, setOpen] = useState<HTMLElement | null>(null);
 
@@ -52,10 +54,34 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           mb: 3,
         }}
       >
-        <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 } }}>
-          sdsd
-        </Typography>
-
+        <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
+          <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 } }}>
+            {project.title}
+          </Typography>
+          <br />
+          <Typography sx={{ color: theme.palette.text.disabled }}>
+            {project.subTitle}
+          </Typography>
+          <br />
+          <Divider />
+          <br />
+          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify' }}>
+            {project.paragraph1}
+          </Typography>
+          <br />
+          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify' }}>
+            {project.paragraph2}
+          </Typography>
+          <br />
+          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify' }}>
+            {project.paragraph3}
+          </Typography>
+          <br />
+          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify' }}>
+            {project.paragraph4}
+          </Typography>
+          <br />
+        </Box>
         <Stack direction="row" alignItems="center" flexShrink={0}>
           <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
             <Iconify icon="carbon:share" />
@@ -85,18 +111,19 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
         </Stack>
 
         <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-          <Iconify icon="carbon:location" sx={{ mr: 0.5 }} /> {locations}
+          <Iconify icon="carbon:location" sx={{ mr: 0.5 }} />
+          {project.locations.join(', ')}
         </Stack>
 
         <Stack direction="row" alignItems="center">
           {/* <Avatar src={tourGuide?.avatarUrl} sx={{ width: 24, height: 24 }} /> */}
 
           <Typography variant="body2" sx={{ color: 'text.secondary', mx: 0.5 }}>
-            Tour guide by
+            Project title
           </Typography>
 
           <Link variant="subtitle2" color="inherit">
-            {/* {tourGuide?.name} */}
+            {project.title}
           </Link>
         </Stack>
       </Stack>
@@ -109,7 +136,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
         slotProps={{
           paper: {
-            sx: { width: 220 },
+            sx: { width: 220, backgroundColor: theme.palette.primary.dark },
           },
         }}
       >

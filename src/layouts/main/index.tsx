@@ -77,6 +77,8 @@ export const MainLayout = ({ children }: Props) => {
         sx={{
           flexGrow: 1,
           backgroundImage: `url(${backgroundURL.src})`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'repeat-y',
         }}
       >
         {!actionPage(spacingLayout) && <Spacing />}

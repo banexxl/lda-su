@@ -9,7 +9,8 @@ import { TOUR_SERVICE_OPTIONS } from 'src/_mock';
 
 import Iconify, { IconifyProps } from 'src/components/iconify';
 
-import { Project } from 'src/types/project';;
+import { Project } from 'src/types/project';
+import { Link } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -17,18 +18,12 @@ type Props = {
   project: Project;
 };
 
-export const ProjectDetailsSummary = (project: Project) => {
-  const {
-    locations,
-    startDateTime,
-    endDateTime,
-    title
-  } = project;
+export const ProjectDetailsSummary = ({ project }: Props) => {
 
   return (
     <Stack spacing={5}>
       <Stack spacing={3}>
-        <Typography variant="h5">Tour Overview</Typography>
+        <Typography variant="h5">Pregled Projekta</Typography>
         <Box
           sx={{
             rowGap: 2.5,
@@ -40,85 +35,33 @@ export const ProjectDetailsSummary = (project: Project) => {
             },
           }}
         >
-          {/* <OverviewItem
-            icon="carbon:calendar"
-            label="Available"
-            text={`${fDate(available.start, 'dd/MM/yyyy')} - ${fDate(available.end, 'dd/MM/yyyy')}`}
-          /> */}
-          {/* <OverviewItem icon="carbon:user" label="Contact name" text={tourGuide?.name} /> */}
-          {/* <OverviewItem icon="carbon:location" label="Location" text={locations} /> */}
-          {/* <OverviewItem
-            icon="carbon:mobile"
-            label="Contact phone"
-          // text={tourGuide?.phoneNumber || ''}
-          /> */}
-          <OverviewItem icon="carbon:time" label="Durations" text={startDateTime.toString()} />
-          {/* <OverviewItem icon="carbon:translate" label="Languages" text={languages.join(', ')} /> */}
+          <OverviewItem icon="carbon:calendar" label="Available" text={`${fDate(project.startDateTime, 'dd/MM/yyyy')} - ${fDate(project.endDateTime, 'dd/MM/yyyy')}`} />
+          <OverviewItem icon="carbon:user" label="Contact name" text={project.organizers.join(', ')} />
+          <OverviewItem icon="carbon:location" label="Location" text={project.locations.join(', ')} />
+          <OverviewItem icon="carbon:mobile" label="Contact phone" text={project.phoneNumberLDA} />
+          <OverviewItem icon="carbon:time" label="Start Date" text={project.startDateTime.toString()} />
+          <OverviewItem icon="carbon:collapse-categories" label="Category" text={project.category} />
+          <OverviewItem icon="carbon:user-multiple" label="Applicants" text={project.applicants.join(', ')} />
+          <OverviewItem icon="carbon:money" label="Donators" text={project.donators.join(', ')} />
         </Box>
       </Stack>
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
-
-      <Stack spacing={2}>
-        <Typography variant="h5">Tour Description</Typography>
-        <Typography>{title}</Typography>
-      </Stack>
-
-      <Stack spacing={2}>
-        <Typography variant="h5">Tour Highlights</Typography>
-
-        {/* <ul>
-          {highlights.map((highlight) => (
-            <li key={highlight}>{highlight}</li>
-          ))}
-        </ul> */}
-      </Stack>
-
-      <Stack spacing={2}>
-        <Typography variant="h6"> Services</Typography>
-
-        <Box
-          rowGap={2}
-          display="grid"
-          gridTemplateColumns={{
-            xs: 'repeat(1, 1fr)',
-            md: 'repeat(2, 1fr)',
-          }}
-        >
-          {TOUR_SERVICE_OPTIONS.map((service) => (
-            <Stack
-              key={service.label}
-              spacing={1}
-              direction="row"
-              alignItems="center"
-            // sx={{
-            //   ...(services.includes(service.label) && {
-            //     color: 'text.disabled',
-            //   }),
-            // }}
-            >
-              <Iconify
-                icon="carbon:checkmark"
-              // sx={{
-              //   color: 'primary.main',
-              //   ...(services.includes(service.label) && {
-              //     color: 'text.disabled',
-              //   }),
-              // }}
-              />
-              {service.label}
-            </Stack>
-          ))}
-        </Box>
-      </Stack>
-
-      <Stack spacing={2}>
-        <Typography variant="h5">Tour Program</Typography>
-        {/* {program.map((content) => (
-          <HighlightItem key={content.label} label={content.label} text={content.text} />
-        ))} */}
-      </Stack>
-    </Stack>
+      <Divider />
+      <Typography variant="h5">Linkovi</Typography>
+      <Box sx={{ display: 'flex', gap: '20px' }}>
+        <Link href={project.links.join(', ')}>
+          {project.links}
+        </Link>
+      </Box>
+      <Divider sx={{ mb: '30px' }} />
+      <Typography variant="h5">Publikacije</Typography>
+      <Box sx={{ display: 'flex', gap: '20px' }}>
+        <Link href={project.publications.join(', ')}>
+          {project.publications.join(', ')}
+        </Link>
+      </Box>
+      <Divider sx={{ mb: '30px' }} />
+    </Stack >
   );
 }
 

@@ -36,7 +36,9 @@ export const LandingIntroduce = () => {
         pt: { xs: 10, md: 15 },
         pb: { xs: 5, md: 10 },
         backgroundImage: `url(${bgImage.src})`,
-        width: '100dvw'
+        height: '100vh',
+        width: '100dvw',
+        backgroundRepeat: 'no-repeat'
       }}
     >
       <Container ref={containerRef}>

@@ -5,11 +5,11 @@ import { useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import { alpha } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
-
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { paths } from 'src/routes/paths';
 
 import { useBoolean } from 'src/hooks/use-boolean';
@@ -19,14 +19,15 @@ import { _tours, _socials } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 import { SplashScreen } from 'src/components/loading-screen';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-
+import { FaViber } from "react-icons/fa";
 // import { Newsletter } from '../newsletter';
 import { ProjectListSimilar } from '../project-list/project-list-similar';
 import { ProjectDetailsHeader } from '../project/project-details-header';
 import { ProjectDetailsSummary } from '../project/project-details-summary';
 import { ProjectDetailsGallery } from '../project/project-details-gallery';
-import { ProjectDetailsReserveForm } from '../project/project-details-reserve-form';
+import { ProjectDetails } from '../project/project-details';
 import { Project } from 'src/types/project';
+import { EmailIcon, EmailShareButton, FacebookIcon, FacebookShareButton, LinkedinShareButton, TwitterShareButton, ViberIcon, ViberShareButton } from 'next-share';
 
 // ----------------------------------------------------------------------
 
@@ -37,7 +38,7 @@ type ProjectProps = {
 export const ProjectView = ({ project }: ProjectProps) => {
 
   const loading = useBoolean(true);
-
+  const theme = useTheme()
   useEffect(() => {
     const fakeLoading = async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
@@ -66,15 +67,15 @@ export const ProjectView = ({ project }: ProjectProps) => {
 
         <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse">
           <Grid xs={12} md={5} lg={4}>
-            <ProjectDetailsReserveForm project={project} />
+            <ProjectDetails project={project} />
           </Grid>
 
           <Grid xs={12} md={7} lg={8}>
             <ProjectDetailsHeader project={project} />
 
-            <Divider sx={{ borderStyle: 'dashed', my: 5 }} />
+            <Divider sx={{ my: 5 }} />
 
-            {/* <ProjectDetailsSummary project={project} /> */}
+            <ProjectDetailsSummary project={project} />
 
             <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
               <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5 }}>
@@ -82,26 +83,120 @@ export const ProjectView = ({ project }: ProjectProps) => {
               </Typography>
 
               <Stack direction="row" alignItems="center" flexWrap="wrap">
-                {_socials.map((social) => (
+                <FacebookShareButton
+                  url={'https://github.com/next-share'}
+                  quote={'next-share is a social share buttons for your next React apps.'}
+                  hashtag={'#nextshare'}
+                >
                   <Button
-                    key={social.value}
+                    key={'fb'}
                     size="small"
                     variant="outlined"
-                    startIcon={<Iconify icon={social.icon} />}
+                    startIcon={<Iconify icon={'carbon:logo-facebook'} />}
                     sx={{
                       m: 0.5,
                       flexShrink: 0,
-                      color: social.color,
-                      borderColor: social.color,
+                      color: theme.palette.primary.dark,
+                      borderColor: theme.palette.primary.dark,
                       '&:hover': {
-                        borderColor: social.color,
-                        bgcolor: alpha(social.color, 0.08),
+                        borderColor: theme.palette.primary.dark,
+                        bgcolor: alpha(theme.palette.primary.dark, 0.08),
                       },
                     }}
                   >
-                    {social.label}
+                    Facebook
                   </Button>
-                ))}
+                </FacebookShareButton>
+                <TwitterShareButton
+                  url={'https://github.com/next-share'}
+                  title={'next-share is a social share buttons for your next React apps.'}
+                >
+                  <Button
+                    key={'fb'}
+                    size="small"
+                    variant="outlined"
+                    startIcon={<Iconify icon={'carbon:logo-twitter'} />}
+                    sx={{
+                      m: 0.5,
+                      flexShrink: 0,
+                      color: theme.palette.primary.dark,
+                      borderColor: theme.palette.primary.dark,
+                      '&:hover': {
+                        borderColor: theme.palette.primary.dark,
+                        bgcolor: alpha(theme.palette.primary.dark, 0.08),
+                      },
+                    }}
+                  >
+                    Twitter
+                  </Button>
+                </TwitterShareButton>
+                <LinkedinShareButton url={'https://github.com/next-share'}>
+                  <Button
+                    key={'fb'}
+                    size="small"
+                    variant="outlined"
+                    startIcon={<Iconify icon={'carbon:logo-linkedin'} />}
+                    sx={{
+                      m: 0.5,
+                      flexShrink: 0,
+                      color: theme.palette.primary.dark,
+                      borderColor: theme.palette.primary.dark,
+                      '&:hover': {
+                        borderColor: theme.palette.primary.dark,
+                        bgcolor: alpha(theme.palette.primary.dark, 0.08),
+                      },
+                    }}
+                  >
+                    Linkedin
+                  </Button>
+                </LinkedinShareButton>
+                <ViberShareButton
+                  url={'https://github.com/next-share'}
+                  title={'next-share is a social share buttons for your next React apps.'}
+                >
+                  <Button
+                    key={'fb'}
+                    size="small"
+                    variant="outlined"
+                    startIcon={<FaViber />}
+                    sx={{
+                      m: 0.5,
+                      flexShrink: 0,
+                      color: theme.palette.primary.dark,
+                      borderColor: theme.palette.primary.dark,
+                      '&:hover': {
+                        borderColor: theme.palette.primary.dark,
+                        bgcolor: alpha(theme.palette.primary.dark, 0.08),
+                      },
+                    }}
+                  >
+                    Viber
+                  </Button>
+                </ViberShareButton>
+                <EmailShareButton
+                  url={'https://github.com/next-share'}
+                  subject={'Next Share'}
+                  body="body"
+                >
+                  <Button
+                    key={'fb'}
+                    size="small"
+                    variant="outlined"
+                    startIcon={<AlternateEmailIcon />}
+                    sx={{
+                      m: 0.5,
+                      flexShrink: 0,
+                      color: theme.palette.primary.dark,
+                      borderColor: theme.palette.primary.dark,
+                      '&:hover': {
+                        borderColor: theme.palette.primary.dark,
+                        bgcolor: alpha(theme.palette.primary.dark, 0.08),
+                      },
+                    }}
+                  >
+                    Email
+                  </Button>
+                </EmailShareButton>
               </Stack>
             </Stack>
           </Grid>

@@ -5,18 +5,17 @@ type ProjectType = 'economy' | 'democracy' | 'eu-integrations' | 'cultural-herit
 export type Project = {
   _id: string;
   projectURL: string;
-  link1: string;
-  link2: string;
+  links: string[];
   title: string;
   subTitle: string,
-  parargaph1: string;
-  parargaph2: string;
-  parargaph3: string;
-  parargaph4: string;
-  parargaph5: string;
-  parargaph6: string;
-  parargaph7: string;
-  parargaph8: string;
+  paragraph1: string;
+  paragraph2: string;
+  paragraph3: string;
+  paragraph4: string;
+  paragraph5: string;
+  paragraph6: string;
+  paragraph7: string;
+  paragraph8: string;
   category: string;
   coverUrl: string;
   gallery: string[];
@@ -26,5 +25,9 @@ export type Project = {
   endDateTime: Date,
   favorited: boolean;
   favoritedNumber: number;
-  organizers: string;
+  organizers: string[];
+  phoneNumberLDA: string;
+  applicants: string[];
+  donators: string[];
+  publications: string[];
 };
