@@ -53,7 +53,7 @@ const preset02 = {
     main: '#1AD5A6',
     dark: '#0D9991',
     darker: '#045966',
-    contrastText: grey[800],
+    contrastText: grey[300],
   },
   secondary: {
     lighter: '#D6E5FD',
@@ -80,7 +80,7 @@ const preset03 = {
     main: '#FFA03F',
     dark: '#B75D1F',
     darker: '#7A2D0C',
-    contrastText: grey[800],
+    contrastText: grey[300],
   },
 };
 

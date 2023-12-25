@@ -48,7 +48,7 @@ export const fab = (theme: Theme) => {
         }),
         ...(inheritColor && {
           backgroundColor: theme.palette.text.primary,
-          color: lightMode ? theme.palette.common.white : theme.palette.grey[800],
+          color: lightMode ? theme.palette.common.white : theme.palette.grey[300],
           '&:hover': {
             backgroundColor: lightMode ? theme.palette.grey[700] : theme.palette.grey[400],
           },
@@ -77,7 +77,7 @@ export const fab = (theme: Theme) => {
       ...((softVariant || softExtendedVariant) && {
         boxShadow: 'none',
         ...(defaultColor && {
-          color: theme.palette.grey[800],
+          color: theme.palette.grey[300],
           backgroundColor: theme.palette.grey[300],
           '&:hover': {
             backgroundColor: theme.palette.grey[400],

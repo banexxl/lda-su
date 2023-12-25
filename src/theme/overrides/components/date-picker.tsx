@@ -68,7 +68,7 @@ export const datePicker = (theme: Theme) => {
               color:
                 theme.palette.mode === 'light'
                   ? theme.palette.common.white
-                  : theme.palette.grey[800],
+                  : theme.palette.grey[300],
             },
           },
         },

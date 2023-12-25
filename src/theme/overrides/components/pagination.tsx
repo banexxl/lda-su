@@ -49,7 +49,7 @@ export const pagination = (theme: Theme) => {
           ...(defaultColor && {
             backgroundColor: alpha(theme.palette.grey[500], 0.08),
             ...(filledVariant && {
-              color: lightMode ? theme.palette.common.white : theme.palette.grey[800],
+              color: lightMode ? theme.palette.common.white : theme.palette.grey[300],
               backgroundColor: theme.palette.text.primary,
               '&:hover': {
                 backgroundColor: lightMode ? theme.palette.grey[700] : theme.palette.grey[100],
