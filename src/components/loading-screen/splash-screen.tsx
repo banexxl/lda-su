@@ -16,6 +16,7 @@ const StyledRoot = styled('div')(({ theme }) => ({
     opacity: 0.24,
     color: theme.palette.background.default,
   }),
+  borderRadius: '60px',
   top: 0,
   zIndex: 9999,
   width: '100%',
@@ -50,7 +51,7 @@ export const SplashScreen = ({ sx }: Props) => {
             repeat: Infinity,
           }}
         >
-          <Logo single sx={{ width: 128, height: 128 }} />
+          <Logo single sx={{ width: 200, height: 200, backgroundSize: 'cover', borderRadius: '240px' }} />
         </m.div>
       </StyledRoot>
 

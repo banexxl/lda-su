@@ -40,8 +40,8 @@ export const Header = ({ headerOnDark }: Props) => {
 
   const renderContent = (
     <>
-      <Box sx={{ lineHeight: 0, position: 'relative', mb: '60px', borderRadius: '40px' }}>
-        <Logo />
+      <Box sx={{ lineHeight: 0, position: 'relative', mb: '60px', }}>
+        <Logo sx={{ borderRadius: '40px' }} />
         <Link href="/" />
       </Box>
 
@@ -60,7 +60,7 @@ export const Header = ({ headerOnDark }: Props) => {
 
       </Stack>
 
-      {!mdUp && <NavMobile data={[]} />}
+      {!mdUp && <NavMobile data={navConfig} />}
     </>
   );
 

@@ -20,7 +20,7 @@ import { NAV } from '../../../config-layout';
 
 // ----------------------------------------------------------------------
 
-export const NavMobile = ({ data }: NavProps) => {
+export const NavMobile = ({ data }: any) => {
 
   const pathname = usePathname();
 
@@ -53,7 +53,7 @@ export const NavMobile = ({ data }: NavProps) => {
           <Logo sx={{ mx: 2.5, my: 3 }} />
 
           <List component="nav" disablePadding>
-            {data.map((list) => (
+            {data.map((list: any) => (
               <NavList key={list.title} data={list} />
             ))}
           </List>
