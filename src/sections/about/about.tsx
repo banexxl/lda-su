@@ -3,25 +3,24 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
-
 import { useResponsive } from 'src/hooks/use-responsive';
-
 import { fShortenNumber } from 'src/utils/format-number';
-
-import { _mock } from 'src/_mock';
-
 import Image from 'src/components/image';
 import { CountUp } from 'src/components/count-up';
 
 // ----------------------------------------------------------------------
-
-const IMAGES = [...Array(4)].map((_, index) => _mock.image.travel(index + 2));
+const imageURLs = [
+  'https://lda-su.s3.eu-central-1.amazonaws.com/AboutUsImages/pexels-photo-3184639.jpeg',
+  'https://lda-su.s3.eu-central-1.amazonaws.com/AboutUsImages/pexels-photo-3277808.jpeg',
+  'https://lda-su.s3.eu-central-1.amazonaws.com/AboutUsImages/pexels-thirdman-5256816.jpg',
+  'https://lda-su.s3.eu-central-1.amazonaws.com/AboutUsImages/dylan-gillis-KdeqA3aTnBY-unsplash.jpg'
+]
 
 const SUMMARY = [
-  { name: 'Air tickets sold', number: 130 },
-  { name: 'Tours booked', number: 196 },
-  { name: 'Site visitors', number: 10679 },
-  { name: 'Verified hotels', number: 877 },
+  { name: 'Projekata realizovano', number: 130 },
+  { name: 'Projektnih aktivnosti', number: 196 },
+  { name: 'Lokacija posećenih', number: 10679 },
+  { name: 'Publikacija napisanih', number: 877 },
 ];
 
 // ----------------------------------------------------------------------
@@ -45,16 +44,23 @@ export const About = () => {
           pb: { xs: 5, md: 10 },
         }}
       >
-        <Typography variant="h1">About us</Typography>
+        <Typography variant="h1">O nama</Typography>
 
-        <Typography sx={{ color: 'text.secondary' }}>
-          Master Digital Marketing Strategy, Social Media Marketing, SEO, YouTube, Email, Facebook
-          Marketing, Analytics & More!
-        </Typography>
+
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+          <Typography variant="body2" sx={{ color: 'text.primary' }}>
+            ALDA – Evropska asocijacija za lokalnu demokratiju
+            <Typography sx={{ color: 'text.secondary', textAlign: { xs: 'center', md: 'justify' }, }}>
+              Danas, 14 aktivnih Agencija za lokalnu demokratiju sa sedištem u zemljama Zapadnog Balkana i Južnog Kavkaza, deluju kao statutarni članovi ALDA – Evropske asocijacije za lokalnu demokratiju.
+              ALDA je osnovana 1999. godine na inicijativu Kongresa lokalnih i regionalnih vlasti Saveta Evrope, sa ciljem da koordiniše i podržava mrežu Agencija lokalne demokratije koja su osnovane u ranim 1990-tim godinama. Ona je krovna organizacija Agencija koje su lokalno registrovana udruženja koja deluju sa glavnom misijom unapređenja lokalne uprave i aktivne participacije građana u lokanim zajednicama.
+              ALDA je organizacija zasnovana na članstvu koja okuplja više od 180 članova (uključujući lokalne vlasti, asocijacije lokalnih vlasti i nevladine organizacije) iz više od 35 zemalja Evrope. ALDA finansira svoje programe od članarina i projekata podržanih od strane Evropske komisije, Saveta Evrope i drugih javnih i privatnih donatora.
+            </Typography>
+          </Typography>
+        </Box>
       </Stack>
 
       <Grid container spacing={3}>
-        {(smUp ? IMAGES : IMAGES.slice(0, 1)).map((img, index) => (
+        {(smUp ? imageURLs : imageURLs.slice(0, 1)).map((img, index) => (
           <Grid key={img} xs={12} sm={6} md={index === 0 ? 6 : 2}>
             <Image alt={img} src={img} sx={{ height: 350, borderRadius: 2, width: 1 }} />
           </Grid>
@@ -99,47 +105,6 @@ export const About = () => {
           </Stack>
         ))}
       </Box>
-
-      <Grid
-        container
-        spacing={{ xs: 5, md: 3 }}
-        justifyContent="space-between"
-        sx={{
-          textAlign: { xs: 'center', md: 'left' },
-        }}
-      >
-        <Grid xs={12} md={6} lg={5}>
-          <Box
-            sx={{
-              mb: 2,
-              width: 24,
-              height: 3,
-              borderRadius: 3,
-              bgcolor: 'primary.main',
-              mx: { xs: 'auto', md: 0 },
-            }}
-          />
-          <Typography variant="h3">
-            Maecenas malesuada. Cras ultricies mi eu turpis hendrerit fringilla Nunc egestas
-          </Typography>
-        </Grid>
-
-        <Grid xs={12} md={6} lg={6}>
-          <Typography variant="h4" paragraph>
-            Fusce convallis metus id felis luctus
-          </Typography>
-
-          <Typography sx={{ color: 'text.secondary' }}>
-            Fusce convallis metus id felis luctus adipiscing. Etiam imperdiet imperdiet orci.
-            Vestibulum eu odio. Phasellus nec sem in justo pellentesque facilisis.
-            <br />
-            <br />
-            Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Maecenas nec odio et
-            ante tincidunt tempus. Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec,
-            nisi. Vestibulum eu odio. Curabitur ullamcorper ultricies nisi.
-          </Typography>
-        </Grid>
-      </Grid>
-    </Container>
+    </Container >
   );
 }

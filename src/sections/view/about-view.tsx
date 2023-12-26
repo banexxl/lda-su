@@ -16,7 +16,7 @@ export const AboutView = () => {
 
       <AboutOurVision />
 
-      <LandingBlog posts={[]} />
+      {/* <LandingBlog posts={[]} /> */}
 
       {/* <Newsletter /> */}
     </>

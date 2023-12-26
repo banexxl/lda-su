@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import Box, { BoxProps } from '@mui/material/Box';
 
 import { RouterLink } from 'src/routes/components';
+import { useResponsive } from 'src/hooks/use-responsive';
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +16,7 @@ interface LogoProps extends BoxProps {
 
 const Logo = ({ single = true, sx }: LogoProps) => {
   const theme = useTheme();
-
+  const mdUp = useResponsive('up', 'md');
   const PRIMARY_MAIN = theme.palette.primary.main;
 
   return (
@@ -37,6 +38,7 @@ const Logo = ({ single = true, sx }: LogoProps) => {
           cursor: 'pointer',
           display: 'inline-flex',
           borderRadius: '10px',
+          marginTop: mdUp ? '0px' : '10px',
           ...sx,
         }}
       />

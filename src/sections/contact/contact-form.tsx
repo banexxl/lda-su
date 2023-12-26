@@ -57,7 +57,7 @@ export const ContactForm = () => {
   return (
     <Container
       sx={{
-        py: { xs: 10, md: 15 },
+        py: { xs: 5, md: 15 },
       }}
     >
 
@@ -73,7 +73,6 @@ export const ContactForm = () => {
 
           <Typography sx={{ color: 'text.secondary' }}>
             We normally respond within 2 business days
-            <a href='https://lda-su.s3.eu-central-1.amazonaws.com/Publications/Publikacija-Local-Civic-Monitor.pdf' target='_blank'>Publikacija</a>
           </Typography>
         </Stack>
         <FormProvider methods={methods} onSubmit={onSubmit}>
@@ -96,7 +95,7 @@ export const ContactForm = () => {
                 alignSelf: { xs: 'center', md: 'unset' },
               }}
             >
-              Send Request
+              Send
             </LoadingButton>
           </Stack>
         </FormProvider>

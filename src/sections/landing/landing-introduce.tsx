@@ -36,9 +36,7 @@ export const LandingIntroduce = () => {
         pt: { xs: 10, md: 15 },
         pb: { xs: 5, md: 10 },
         backgroundImage: `url(${bgImage.src})`,
-        height: '100vh',
-        width: '100dvw',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <Container ref={containerRef}>
@@ -50,15 +48,14 @@ export const LandingIntroduce = () => {
             textAlign: { xs: 'center', md: 'unset' },
             backgroundImage: `url(${imageURL})`,
             display: 'flex',
-            flexDirection: 'row',
+            flexDirection: mdUp ? 'row' : 'column',
             justifyContent: 'space-between'
           }}
         >
-          <Box>
+          <Box sx={{ marginBottom: '20px' }}>
+            <Typography variant="h2" sx={{ color: 'whitesmoke', marginBottom: '20px' }}>LDA Subotica</Typography>
 
-            <Typography variant="h2" color={'whitesmoke'}>ALDA</Typography>
-
-            <Typography sx={{ color: 'whitesmoke', textAlign: 'start', width: '70%' }}>
+            <Typography sx={{ color: 'whitesmoke', textAlign: mdUp ? 'start' : 'justify', width: mdUp ? '70%' : '100%' }}>
               Agencije lokalne demokratije nastale su kao izraz želje lokalnih i regionalnih vlasti Evrope da pruže podršku i pomoć lokalnim vlastima tokom ratnih sukoba u bivšoj Jugoslaviji. Prva Agencija osnovana je u Subotici, 1993. godine.<br />
               <br />
               U početnoj fazi aktivnosti Agencija bile su usmerene na pružanje humanitarne pomoći a ubrzo potom one bivaju uključene u složeni proces revitalizacije lokalnih zajednica u najširem smislu, obnove poverenja i dijaloga između različitih etničkih grupa i zaštite ljudskih prava.<br />
@@ -70,7 +67,7 @@ export const LandingIntroduce = () => {
             <Image
               alt="cover"
               src="/assets/logo_main.jpg"
-              sx={{ width: '400px', height: mdUp ? '250px' : '200px' }}
+              sx={{ width: '400px', height: mdUp ? '250px' : '200px', display: mdUp ? 'flex' : 'none' }}
             />
           </Box>
         </Stack>
@@ -107,6 +104,7 @@ export const LandingIntroduce = () => {
           email: ''
         }
       }} />
+
     </Box>
   );
 }

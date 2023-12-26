@@ -32,16 +32,22 @@ export const AboutOurVision = () => {
       <Stack
         spacing={3}
         sx={{
-          maxWidth: 466,
+          maxWidth: 800,
           mb: { xs: 8, md: 5 },
           mx: { xs: 'auto', md: 'unset' },
-          textAlign: { xs: 'center', md: 'left' },
+          textAlign: { xs: 'center', md: 'justify' },
         }}
       >
-        <Typography variant="h2">Our Mission</Typography>
+        <Typography variant="h2">Naša misija</Typography>
 
         <Typography sx={{ color: 'text.secondary' }}>
-          Curabitur ullamcorper ultricies nisi. Aenean viverra rhoncus pede.
+          Centar lokalne demokratije LDA Subotica je osnovan 1993. godine pod pokroviteljstvom Saveta Evrope na osnovu sporazuma sa Gradom Subotica kao lokalna nevladina organizacija čiji je glavni zadatak bio da promoviše lokalnu demokratiju i ljudska prava u multikulturalnim zajednicama u tadašnjoj ratom razorenoj bivšoj Jugoslaviji.
+        </Typography>
+        <Typography sx={{ color: 'text.secondary' }}>
+          Danas, LDA Subotica je registrovana kao lokalno udruženje, član Evropske asocijacije za lokalnu demokratiju – ALDA, čija je glavna misija unapređenje demokratskog upravljanja na lokalnom nivou, podsticanje aktivne participacije građana i približavanje procesa pridruživanja EU građanima u lokalnim zajednicama u Srbiji i AP Vojvodini.
+        </Typography>
+        <Typography sx={{ color: 'text.secondary' }}>
+          Naši osnovni programi su fokusirani na izgradnju kapaciteta, podizanje svesti i aktivnosti zagovaranja namenjeni donosiocima odluka na lokalnom nivou, organizacijama civilnog društva i građanima (sa posebnim fokusom na mlade). Edukacije za demokratsko aktivno građanstvo, promovisanje interkulturalnog dijaloga , regionalna saradnja, međusektorska partnerstva za lokalni održivi razvoj su osnovne vrste naših aktivnosti, uključujući i umrežavanja na regionalnom i evropskom nivou.
         </Typography>
       </Stack>
 
@@ -112,6 +118,6 @@ export const AboutOurVision = () => {
           </Stack>
         </Grid>
       </Grid>
-    </Container>
+    </Container >
   );
 }

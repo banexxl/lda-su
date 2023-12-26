@@ -25,7 +25,7 @@ import { NavSubListProps } from './nav/types';
 import { pageLinks, navConfig, europaLinks, suboticaLinks } from './config-navigation';
 import { Box } from '@mui/system';
 import Icon from 'src/assets/illustrations/pattern/icon';
-import { Link } from '@mui/material';
+import { Grid, Link } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -50,14 +50,9 @@ export const Footer = () => {
 
   const pathname = usePathname();
 
-  const mobileList = navConfig.find((i) => i.title === 'Pages')?.children || [];
-
-  const desktopList = pageLinks.sort((listA, listB) => Number(listA.order) - Number(listB.order));
-
-  const renderLists = mdUp ? desktopList : mobileList;
+  const aldaList = pageLinks.sort((listA, listB) => Number(listA.order) - Number(listB.order));
 
   const isHome = pathname === '/';
-
 
   const mainFooter = (
     <Box sx={{
@@ -65,9 +60,10 @@ export const Footer = () => {
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      boxShadow: `inset 0px -5px 10px -5px ${theme.palette.secondary}`
+      boxShadow: `inset 0px -5px 10px -5px ${theme.palette.secondary}`,
     }}>
       <Divider sx={{ boxShadow: '1' }} />
+
       <Box
         sx={{
           display: 'flex',
@@ -77,76 +73,39 @@ export const Footer = () => {
           margin: '30px'
         }}
       >
-        <Box sx={{ display: 'flex', flexDirection: 'column', width: '30%', gap: '30px' }}>
-          <Typography variant="body2" sx={{ color: 'text.primary' }}>
-            Aktivnosti LDA Subotica fokusirane su na kreiranje aktivnog građanstva s jedne,
-            te transparentnih i odgovornih vlasti s druge strane,
-            s krajnjim ciljem uspostavljanja modernog i demokratskog društva.
-          </Typography>
-
-          <Typography variant="h6">Let’s stay in touch</Typography>
-
-          <Typography variant="caption" sx={{ color: 'text.primary' }}>
-            Subscribe to our newsletter to receive latest articles to your inbox weekly.
-          </Typography>
-
-          <TextField
-            hiddenLabel
-            placeholder="Email address"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Button variant="contained" size="large" sx={{ mr: -1.25 }}>
-                    Subscribe
-                  </Button>
-                </InputAdornment>
-              ),
-            }}
-          />
-
-          <Box>
-            <Typography variant="h6">Social</Typography>
-
-            <Link href='https://www.facebook.com/LocalDemocracyAgencySubotica' target='_blank' >
-              <FacebookIcon sx={{ color: 'primary.main' }} />
-            </Link>
-
-            <Link href='https://www.facebook.com/LocalDemocracyAgencySubotica' target='_blank'>
-              <LinkedInIcon sx={{ color: 'primary.main' }} />
-            </Link>
-          </Box>
-
-        </Box>
-
-        <Box>
-          <Typography variant="h5" sx={{ marginBottom: '20px' }}>ALDA mreža</Typography>
-          {mdUp ? (
-            <Box >
-              {renderLists.map((list: any) => (
-                <ListDesktop key={list.subheader} list={list} />
-              ))}
+        <Box >
+          <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+            <Box sx={{ marginRight: '50px' }}>
+              {mdUp ? (
+                <Box>
+                  {aldaList.map((list: any) => (
+                    <ListDesktop key={list.subheader} list={list} />
+                  ))}
+                </Box>
+              ) : (
+                <Stack spacing={1.5}>
+                  {aldaList.map((list: any) => (
+                    <ListDesktop key={list.subheader} list={list} />
+                  ))}
+                </Stack>
+              )}
             </Box>
-          ) : (
-            <Box >
-              {renderLists.map((list: any) => (
-                <ListDesktop key={list.subheader} list={list} />
-              ))}
-            </Box>
-          )}
-        </Box>
 
-        <Box sx={{ gap: '30px' }}>
-          <Typography variant="h5" sx={{ marginBottom: '20px' }}>Subotica</Typography>
-          <Box >
-            {suboticaLinks.map((list: any) => (
-              <ListDesktop key={list.subheader} list={list} />
-            ))}
-          </Box>
-          <Typography variant="h5" sx={{ margin: '20px 0px' }}>Europe</Typography>
-          <Box >
-            {europaLinks.map((list: any) => (
-              <ListDesktop key={list.subheader} list={list} />
-            ))}
+            <Box sx={{ gap: '30px' }}>
+              <Typography sx={{ marginBottom: '20px' }}>Subotica</Typography>
+              <Box >
+                {suboticaLinks.map((list: any) => (
+                  <ListDesktop key={list.subheader} list={list} />
+                ))}
+              </Box>
+              <Typography sx={{ margin: '20px 0px' }}>Europe</Typography>
+              <Box sx={{ marginBottom: '30px' }}>
+                {europaLinks.map((list: any) => (
+                  <ListDesktop key={list.subheader} list={list} />
+                ))}
+              </Box>
+
+            </Box>
           </Box>
         </Box>
       </Box >
@@ -160,22 +119,26 @@ export const Footer = () => {
           justifyContent="space-between"
           sx={{ py: 3, textAlign: 'center' }}
         >
+          <Stack direction="row" spacing={3} justifyContent="center">
+            <Box>
+              <Typography variant="h6">Social</Typography>
+
+              <Link href='https://www.facebook.com/LocalDemocracyAgencySubotica' target='_blank' >
+                <FacebookIcon sx={{ color: 'primary.main' }} />
+              </Link>
+
+              <Link href='https://www.facebook.com/LocalDemocracyAgencySubotica' target='_blank'>
+                <LinkedInIcon sx={{ color: 'primary.main' }} />
+              </Link>
+            </Box>
+
+          </Stack>
           <Typography variant="caption" sx={{ color: 'text.primary' }}>
             © 2023. All rights reserved, LDA Subotica
           </Typography>
-
-          <Stack direction="row" spacing={3} justifyContent="center">
-            {/* <Link variant="caption" sx={{ color: 'text.primary' }}>
-              Help Center
-            </Link>
-
-            <Link variant="caption" sx={{ color: 'text.primary' }}>
-              Terms of Service
-            </Link> */}
-          </Stack>
         </Stack>
-
       </Container>
+
     </Box >
   );
 
@@ -194,7 +157,7 @@ function ListDesktop({ list }: any) {
         <Link
           key={link.title}
           href={link.path}
-          sx={{ color: theme.palette.primary.contrastText }}
+          sx={{ color: theme.palette.primary.contrastText, cursor: 'pointer' }}
           target="_blank"
         >
           {link.title}
@@ -205,6 +168,7 @@ function ListDesktop({ list }: any) {
 }
 
 function ListMobile({ list }: any) {
+
   const pathname = usePathname();
   const listExpand = useBoolean();
 
@@ -221,11 +185,8 @@ function ListMobile({ list }: any) {
       >
         {list.subheader}
         <Iconify
-          icon={
-            listExpand.value
-              ? 'carbon:chevron-down'
-              : 'carbon:chevron-right'
-          }
+          width={16}
+          icon={listExpand.value ? 'carbon:chevron-down' : 'carbon:chevron-right'}
           sx={{ ml: 0.5 }}
         />
       </Typography>
@@ -233,13 +194,24 @@ function ListMobile({ list }: any) {
       <Collapse in={listExpand.value} unmountOnExit sx={{ width: 1 }}>
         <Stack spacing={1.5} alignItems="flex-start">
           {list.items?.map((link: any) => (
-            <Typography key={link.title}>
-              <Link
-                href={link.path}
-              >
-                {link.title}
-              </Link>
-            </Typography>
+            <Link
+              component={RouterLink}
+              key={link.title}
+              href={link.path}
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+                '&:hover': {
+                  color: 'text.primary',
+                },
+                ...(pathname === `${link.path}/` && {
+                  color: 'text.primary',
+                  fontWeight: 'fontWeightSemiBold',
+                }),
+              }}
+            >
+              {link.title}
+            </Link>
           ))}
         </Stack>
       </Collapse>

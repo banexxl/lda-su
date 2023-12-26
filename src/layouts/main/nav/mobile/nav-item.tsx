@@ -14,42 +14,43 @@ import { NavItemProps, NavItemStateProps } from '../types';
 // ----------------------------------------------------------------------
 
 // eslint-disable-next-line react/display-name
-const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
-  ({ title, path, open, active, hasChild, externalLink, ...other }, ref) => {
-    const renderContent = (
-      <StyledNavItem ref={ref} active={active} {...other}>
-        <Box component="span" sx={{ flexGrow: 1 }}>
-          {title}
-        </Box>
+const NavItem = forwardRef<HTMLDivElement, NavItemProps>(({ title, path, open, active, hasChild, externalLink, ...other }, ref) => {
+  console.log(hasChild);
 
-        {hasChild && (
-          <Iconify
-            width={16}
-            icon={open ? 'carbon:chevron-down' : 'carbon:chevron-right'}
-            sx={{ ml: 0.75 }}
-          />
-        )}
-      </StyledNavItem>
-    );
+  const renderContent = (
+    <StyledNavItem ref={ref} active={active} {...other}>
+      <Box component="span" sx={{ flexGrow: 1 }}>
+        {title}
+      </Box>
 
-    if (hasChild) {
-      return renderContent;
-    }
+      {hasChild && (
+        <Iconify
+          width={16}
+          icon={open ? 'carbon:chevron-down' : 'carbon:chevron-right'}
+          sx={{ ml: 0.75 }}
+        />
+      )}
+    </StyledNavItem>
+  );
 
-    if (externalLink) {
-      return (
-        <Link href={path} target="_blank" rel="noopener" underline="none">
-          {renderContent}
-        </Link>
-      );
-    }
+  if (hasChild) {
+    return renderContent;
+  }
 
+  if (externalLink) {
     return (
-      <Link component={RouterLink} href={path} underline="none">
+      <Link href={path} target="_blank" rel="noopener" underline="none">
         {renderContent}
       </Link>
     );
   }
+
+  return (
+    <Link component={RouterLink} href={path} underline="none">
+      {renderContent}
+    </Link>
+  );
+}
 );
 
 export default NavItem;

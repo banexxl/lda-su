@@ -39,29 +39,29 @@ export const Header = ({ headerOnDark }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const renderContent = (
-    <>
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+
       <Box sx={{ lineHeight: 0, position: 'relative', mb: '60px', }}>
         <Logo sx={{ borderRadius: '40px' }} />
         <Link href="/" />
       </Box>
 
-      {mdUp ? (
-        <Stack flexGrow={1} alignItems="center" sx={{ height: 1 }}>
-          <NavBasicDesktop data={navConfig} />
-        </Stack>
-      ) : (
-        <Box sx={{ flexGrow: 1 }} />
-      )}
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '40px', marginRight: '20px' }}>
+        {mdUp ? (
+          <Stack flexGrow={1} alignItems="center" sx={{ height: 1, marginRight: '20px' }}>
+            <NavBasicDesktop data={navConfig} />
+          </Stack>
+        ) : (
+          <Box sx={{ flexGrow: 1 }} />
+        )}
 
-      <Stack spacing={2} direction="row" alignItems="center" justifyContent="flex-end" sx={{ pb: '60px' }}>
-        <Stack spacing={1} direction="row" alignItems="center">
+        <Box>
           <Searchbar />
-        </Stack>
+        </Box>
 
-      </Stack>
-
-      {!mdUp && <NavMobile data={navConfig} />}
-    </>
+        {!mdUp && <NavMobile data={navConfig} />}
+      </Box>
+    </Box>
   );
 
   return (
@@ -92,10 +92,6 @@ export const Header = ({ headerOnDark }: Props) => {
         <Container
           sx={{
             mt: '50px',
-            height: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
           }}
         >
           {renderContent}

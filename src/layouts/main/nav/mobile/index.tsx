@@ -58,11 +58,6 @@ export const NavMobile = ({ data }: any) => {
             ))}
           </List>
 
-          <Stack spacing={1.5} sx={{ p: 3 }}>
-            <Button fullWidth variant="contained" >
-              Buy Now
-            </Button>
-          </Stack>
         </Scrollbar>
       </Drawer>
     </>

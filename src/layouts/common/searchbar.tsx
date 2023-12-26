@@ -64,7 +64,7 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
               }
               sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
             />
-            <Button variant="contained" onClick={searchOpen.onFalse}>
+            <Button variant="contained" onClick={searchOpen.onFalse} sx={{ marginRight: '20px' }}>
               Search
             </Button>
           </StyledSearchbar>

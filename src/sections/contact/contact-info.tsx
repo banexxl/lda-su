@@ -20,19 +20,38 @@ export const ContactInfo = () => {
   return (
     <Container
       sx={{
-        pt: 5,
-        pb: 10,
         textAlign: { xs: 'center', md: 'left' },
       }}
     >
-      <Typography variant="h2">
-        We Work <br />
-        Worldwide.
+      <Typography variant="h2" sx={{ marginBottom: '20px' }}>
+        LDA <br />
+        Subotica
       </Typography>
 
-      <Typography sx={{ color: 'text.secondary', mt: 3 }}>
-        {`We'd love to talk about how we can help you.`}
-      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+        <Iconify icon="entypo:address" width={24} sx={{ color: 'primary.main' }} />
+        <Typography sx={{ color: 'text.secondary', ml: '10px' }}>
+          Trg Cara Jovana Nenada 15, I sprat, kancelarija 214 24000 Subotica
+        </Typography>
+      </Box>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+        <Iconify icon="carbon:email" width={24} sx={{ color: 'primary.main' }} />
+        <Link href={`mailto:ldasubotica@aldaintranet.org`}>
+          <Typography sx={{ color: 'text.secondary', ml: '10px' }}>
+            ldasubotica@aldaintranet.org
+          </Typography>
+        </Link>
+      </Box>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+        <Iconify icon="carbon:phone" width={24} sx={{ color: 'primary.main' }} />
+        <Link href={`tel:+38124554587`}>
+          <Typography sx={{ color: 'text.secondary', ml: '10px' }}>
+            +38124554587
+          </Typography>
+        </Link>
+      </Box>
     </Container>
   );
 }
