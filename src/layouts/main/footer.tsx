@@ -22,7 +22,7 @@ import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 
 import { NavSubListProps } from './nav/types';
-import { pageLinks, navConfig, europaLinks, suboticaLinks } from './config-navigation';
+import { aldaLinks, navConfig, europaLinks, suboticaLinks } from './config-navigation';
 import { Box } from '@mui/system';
 import Icon from 'src/assets/illustrations/pattern/icon';
 import { Grid, Link } from '@mui/material';
@@ -50,7 +50,7 @@ export const Footer = () => {
 
   const pathname = usePathname();
 
-  const aldaList = pageLinks.sort((listA, listB) => Number(listA.order) - Number(listB.order));
+  const aldaList = aldaLinks.sort((listA, listB) => Number(listA.order) - Number(listB.order));
 
   const isHome = pathname === '/';
 

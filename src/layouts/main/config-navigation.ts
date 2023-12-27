@@ -2,7 +2,7 @@ import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
-export const pageLinks = [
+export const aldaLinks = [
   {
     order: '6',
     subheader: 'ALDA',
@@ -41,7 +41,6 @@ export const europaLinks = [
   }
 ];
 
-
 export const suboticaLinks = [
   {
     order: '6',
@@ -55,32 +54,57 @@ export const suboticaLinks = [
   }
 ];
 
+const aboutUsLinks =
+{
+  order: '1',
+  path: '#',
+  //subheader: 'Tim',
+  cover: '/assets/images/menu/menu_marketing.jpg',
+  items: [
+    { title: 'Stanka', path: paths.stanka },
+    { title: 'Silvija', path: paths.silvija },
+    { title: 'Boris', path: paths.boris },
+  ],
+}
+
+const projectLinks =
+{
+  order: '2',
+  path: '#',
+  //subheader: 'Tim',
+  cover: '/assets/images/menu/menu_marketing.jpg',
+  items: [
+    { title: 'Svi projekti', path: paths.allProjects },
+    { title: 'Završeni projekti', path: paths.pastProjects },
+    { title: 'Projekti u toku', path: paths.currentProjects },
+  ],
+}
+
+const publicationLinks = {
+  order: '3',
+  path: '#',
+  //subheader: 'Tim',
+  cover: '/assets/images/menu/menu_marketing.jpg',
+  items: [
+    { title: 'ALDA', path: paths.publications },
+    { title: 'LDA', path: paths.publications },
+  ],
+}
+
 export const navConfig = [
   { title: 'Naslovna', path: paths.home },
   {
     title: 'O nama',
     path: paths.aboutUs,
     children: [
-      {
-        title: 'Tim',
-        path: '#',
-        children: [
-          { title: 'Stanka', path: paths.stanka },
-          { title: 'Silvija', path: paths.silvija },
-          { title: 'Boris', path: paths.boris },
-        ],
-      },
-      { title: 'Dokumenti', path: paths.docs },
-      { title: 'Kontakt', path: paths.contact },
+      aboutUsLinks
     ],
   },
   {
     title: 'Projekti',
     path: '#',
     children: [
-      { title: 'Svi projekti', path: paths.allProjects },
-      { title: 'Završeni projekti', path: paths.pastProjects },
-      { title: 'Projekti u toku', path: paths.currentProjects }
+      projectLinks
       // children: [
       //   { title: 'Pregled i analiza lokalne prakse u opštinama Bačka Topola, Kanjiža, Subotica, Ruma,Sombor', path: '/projects/pregled-i-analiza-lokalne-prakse-u-opstinama-subotica-backa-topola-kanjiza-ruma-sombor' },
       //   { title: 'Regionalna platforma za učešće i dijalog mladih', path: '/projects/regionalna-platforma-za-ucesce-i-dijalog-mladih' },
@@ -111,6 +135,8 @@ export const navConfig = [
 
   },
 
+
+  ///////////////////////////
   {
     title: 'Aktivnosti',
     path: '#',
@@ -152,8 +178,7 @@ export const navConfig = [
     title: 'Publikacije',
     path: '#',
     children: [
-      { title: 'ALDA', path: '/publikacije/alda' },
-      { title: 'LDA', path: '/publikacije/lda' },
+      publicationLinks
     ],
   },
 ];

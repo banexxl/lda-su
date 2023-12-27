@@ -13,6 +13,7 @@ export const paths = {
   pastProjects: '/zavrseni-projekti',
   allProjects: '/svi-projekti',
   currentProjects: '/projekti-u-toku',
+  publications: '/publications',
   // LDA Subotica
   alda: {
     alda: 'https://www.alda-europe.eu/',

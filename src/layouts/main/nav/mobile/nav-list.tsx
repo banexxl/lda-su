@@ -3,7 +3,7 @@ import Collapse from '@mui/material/Collapse';
 import { useActiveLink } from 'src/routes/hooks/use-active-link';
 
 import { useBoolean } from 'src/hooks/use-boolean';
-
+import { NavSectionVertical } from 'src/components/nav-section';
 import NavItem from './nav-item';
 import { NavListProps } from '../types';
 
@@ -11,7 +11,6 @@ import { NavListProps } from '../types';
 
 export const NavList = ({ data }: NavListProps) => {
   const active = useActiveLink(data.path, !!data.children);
-
   const menuOpen = useBoolean();
 
   return (
@@ -27,6 +26,23 @@ export const NavList = ({ data }: NavListProps) => {
         hasChild={!!data.children}
         externalLink={data.path.includes('http')}
       />
+
+      {!!data.children && (
+        <Collapse in={menuOpen.value} unmountOnExit>
+          <NavSectionVertical
+            data={data.children}
+            slotProps={{
+              rootItem: {
+                pl: 1,
+                minHeight: 30,
+              },
+              subheader: {
+                pl: 1,
+              },
+            }}
+          />
+        </Collapse>
+      )}
     </>
   );
 }

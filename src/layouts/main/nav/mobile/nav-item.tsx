@@ -15,7 +15,6 @@ import { NavItemProps, NavItemStateProps } from '../types';
 
 // eslint-disable-next-line react/display-name
 const NavItem = forwardRef<HTMLDivElement, NavItemProps>(({ title, path, open, active, hasChild, externalLink, ...other }, ref) => {
-  console.log(hasChild);
 
   const renderContent = (
     <StyledNavItem ref={ref} active={active} {...other}>
