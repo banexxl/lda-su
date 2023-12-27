@@ -17,13 +17,14 @@ import Scrollbar from 'src/components/scrollbar';
 import { NavList } from './nav-list';
 import { NavProps } from '../types';
 import { NAV } from '../../../config-layout';
+import { useTheme } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
 export const NavMobile = ({ data }: any) => {
 
   const pathname = usePathname();
-
+  const theme = useTheme()
   const mobileOpen = useBoolean();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export const NavMobile = ({ data }: any) => {
 
   return (
     <>
-      <IconButton onClick={mobileOpen.onTrue} sx={{ ml: 1, color: 'inherit' }}>
+      <IconButton onClick={mobileOpen.onTrue} sx={{ ml: 1, color: theme.palette.primary.main }}>
         <Iconify icon="carbon:menu" />
       </IconButton>
 
@@ -46,12 +47,12 @@ export const NavMobile = ({ data }: any) => {
           sx: {
             pb: 5,
             width: NAV.W_VERTICAL,
+            color: theme.palette.primary.light
           },
         }}
       >
         <Scrollbar>
           <Logo sx={{ mx: 2.5, my: 3 }} />
-
           <List component="nav" disablePadding>
             {data.map((list: any) => (
               <NavList key={list.title} data={list} />

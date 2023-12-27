@@ -23,8 +23,8 @@ import { HEADER } from '../config-layout';
 import { Searchbar } from '../common/searchbar';
 import { navConfig } from './config-navigation';
 import { HeaderShadow } from '../common/header-shadow';
-import { SettingsButton } from '../common/settings-button';
-import Iconify from 'src/components/iconify';
+// import { SettingsButton } from '../common/settings-button';
+// import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 type Props = {
@@ -39,10 +39,10 @@ export const Header = ({ headerOnDark }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const renderContent = (
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: '40px' }}>
 
       <Box sx={{ lineHeight: 0, position: 'relative', mb: '60px', }}>
-        <Logo sx={{ borderRadius: '40px' }} />
+        <Logo sx={{ borderRadius: '40px', }} />
         <Link href="/" />
       </Box>
 
@@ -89,11 +89,7 @@ export const Header = ({ headerOnDark }: Props) => {
           }),
         }}
       >
-        <Container
-          sx={{
-            mt: '50px',
-          }}
-        >
+        <Container        >
           {renderContent}
         </Container>
       </Toolbar>

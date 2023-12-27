@@ -18,7 +18,7 @@ export const paper = ({
   ...bgBlur({
     blur: 20,
     opacity: 0.9,
-    color: theme.palette.background.paper,
+    color: theme.palette.primary.darker,
     ...(!!bgcolor && {
       color: bgcolor,
     }),

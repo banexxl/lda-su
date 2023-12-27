@@ -29,9 +29,16 @@ export const ContactInfo = () => {
       </Typography>
 
       <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Iconify icon="entypo:address" width={24} sx={{ color: 'primary.main' }} />
+        <Iconify icon="solar:city-bold-duotone" width={24} sx={{ color: 'primary.main' }} />
         <Typography sx={{ color: 'text.secondary', ml: '10px' }}>
-          Trg Cara Jovana Nenada 15, I sprat, kancelarija 214 24000 Subotica
+          24000 Subotica
+        </Typography>
+      </Box>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+        <Iconify icon="entypo:address" width={24} sx={{ color: 'primary.main' }} />
+        <Typography sx={{ color: 'text.secondary' }}>
+          Trg Cara Jovana Nenada 15, I sprat, kancelarija 214
         </Typography>
       </Box>
 

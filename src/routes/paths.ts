@@ -3,12 +3,16 @@
 export const paths = {
   //AboutUs
   home: '/',
-  aboutUs: '/about',
-  docs: '/docs',
-  stanka: '/profile/stanka',
-  silvija: '/profile/silvija',
-  boris: '/profile/boris',
-  projects: '/projects',
+  aboutUs: '/o-nama',
+  docs: '/dokumenti',
+  stanka: '/profil/stanka',
+  silvija: '/profil/silvija',
+  boris: '/profil/boris',
+  projects: '/projekti',
+  contact: '/kontakt',
+  pastProjects: '/zavrseni-projekti',
+  allProjects: '/svi-projekti',
+  currentProjects: '/projekti-u-toku',
   // LDA Subotica
   alda: {
     alda: 'https://www.alda-europe.eu/',
@@ -48,8 +52,8 @@ export const paths = {
   // forgotPassword: '/auth/forgot-password',
   // verify: '/auth/verify',
   // Common
-  maintenance: '/maintenance',
-  comingsoon: '/coming-soon',
-  page404: '/error/404',
-  page500: '/error/500',
+  maintenance: '/odrzavanje',
+  comingSoon: '/uskoro',
+  page404: '/greska/404',
+  page500: '/greska/500',
 };
