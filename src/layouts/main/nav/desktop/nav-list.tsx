@@ -24,6 +24,8 @@ import { NavListProps, NavSubListProps } from '../types';
 // ----------------------------------------------------------------------
 
 export const NavList = ({ data }: NavListProps) => {
+  console.log('desktop nav list data', data);
+
   const pathname = usePathname();
 
   const menuOpen = useBoolean();

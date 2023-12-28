@@ -54,131 +54,57 @@ export const suboticaLinks = [
   }
 ];
 
-const aboutUsLinks =
-{
-  order: '1',
-  path: '#',
-  //subheader: 'Tim',
-  cover: '/assets/images/menu/menu_marketing.jpg',
-  items: [
-    { title: 'Stanka', path: paths.stanka },
-    { title: 'Silvija', path: paths.silvija },
-    { title: 'Boris', path: paths.boris },
-  ],
-}
-
-const projectLinks =
-{
-  order: '2',
-  path: '#',
-  //subheader: 'Tim',
-  cover: '/assets/images/menu/menu_marketing.jpg',
-  items: [
-    { title: 'Svi projekti', path: paths.allProjects },
-    { title: 'Završeni projekti', path: paths.pastProjects },
-    { title: 'Projekti u toku', path: paths.currentProjects },
-  ],
-}
-
-const publicationLinks = {
-  order: '3',
-  path: '#',
-  //subheader: 'Tim',
-  cover: '/assets/images/menu/menu_marketing.jpg',
-  items: [
-    { title: 'ALDA', path: paths.publications },
-    { title: 'LDA', path: paths.publications },
-  ],
-}
-
 export const navConfig = [
   { title: 'Naslovna', path: paths.home },
   {
     title: 'O nama',
-    path: paths.aboutUs,
+    path: '/o-nama',
     children: [
-      aboutUsLinks
+      {
+        // subheader: 'Subheader 1',
+        isNew: true,
+        // cover: 'image.jpg',
+        items: [
+          { title: 'Stanka', path: paths.stanka },
+          { title: 'Silvija', path: paths.silvija },
+          { title: 'Boris', path: paths.boris },
+        ],
+      },
     ],
   },
   {
     title: 'Projekti',
-    path: '#',
+    path: '/projekti',
     children: [
-      projectLinks
-      // children: [
-      //   { title: 'Pregled i analiza lokalne prakse u opštinama Bačka Topola, Kanjiža, Subotica, Ruma,Sombor', path: '/projects/pregled-i-analiza-lokalne-prakse-u-opstinama-subotica-backa-topola-kanjiza-ruma-sombor' },
-      //   { title: 'Regionalna platforma za učešće i dijalog mladih', path: '/projects/regionalna-platforma-za-ucesce-i-dijalog-mladih' },
-      //   { title: 'Lokalni građanski monitor Local Civic Monitor', path: '/projects/lokalni-gradjanski-monitor' },
-      //   { title: 'CLINK Kulturno nasleđe', path: '/projects/clink-kulturno-nasledje' },
-      //   { title: 'Balkan Kaleidoskop', path: '/projects/balkan-kaledioskop' },
-      //   { title: 'New Intercultural Concept', path: '/projects/novi-interkulturalni-koncept' },
-      //   { title: 'Svako je dugme važno', path: '/projects/svako-je-dugme-vazno' },
-      //   { title: 'Mreža za razvoj Subotice', path: '/projects/mreza-za-razvoj-subotice' },
-      //   { title: 'Balkan Compact', path: '/projects/balkan-koncept' },
-      //   { title: 'snet.eu', path: '/projects/snet-eu' },
-      //   { title: 'Lokalne koalicije za razvoj zajenice', path: '/projects/lokalne-koalicije-za-razvoj-zajenice' },
-      //   { title: 'Vojvođanska inicijativa za eu', path: '/projects/vojvodjanska-inicijativa-za-eu' },
-      //   { title: 'Radim li dostojanstveno', path: '/projects/radimo-li-dostojanstveno' },
-      //   { title: 'Regionalna partnerstva za gradove', path: '/projects/regionalna-partnerstva-za-gradove' },
-      //   { title: 'Evropske i naše teme', path: '/projects/evropske-i-nase-teme' },
-      //   { title: 'Mikrokredit', path: '/projects/mikrokredit' },
-      //   { title: 'Townlab MEET', path: '/projects/townlab-meet' },
-      //   { title: 'Mladi su zakon', path: '/projects/mladi-su-zakon' },
-      //   { title: 'Lokalne koalicije za eu integracije', path: '/projects/lokalne-koalicije-za-eu-integracije' },
-      //   { title: 'Lokalne koalicije za toleranciju', path: '/projects/lokalne-koalicije-za-toleranciju' },
-      //   { title: 'Vesti', path: '/projects/regionalna-partnerstva-za-gradove/vesti' },
-      //   { title: 'Mostar', path: '/projects/regionalna-partnerstva-za-gradove/mostar' },
-      //   { title: 'Wolverhampton', path: '/projects/regionalna-partnerstva-za-gradove/wolverhampton' },
-      //   { title: 'Duzijanca', path: '/projects/regionalna-partnerstva-za-gradove/duzijanca' },
-      // ],
-    ]
-
+      {
+        // subheader: 'Subheader 1',
+        isNew: true,
+        // cover: 'image.jpg',
+        items: [
+          { title: 'Svi projekti', path: paths.allProjects },
+          { title: 'Završeni projekti', path: paths.pastProjects },
+          { title: 'Projekti u toku', path: paths.currentProjects },
+        ],
+      },
+    ],
   },
-
-
-  ///////////////////////////
   {
     title: 'Aktivnosti',
-    path: '#',
+    path: '/aktivnosti',
     children: [
-      { title: 'ALDA', path: '/aktivnosti/alda' },
       {
-        title: 'EU kutak',
-        path: '#',
-        children: [
-          { title: 'Dan Evrope - 9.maj', path: '/aktivnosti/au-kutak/dan-evrope' },
-          { title: 'Eu info point', path: '/aktivnosti/eu-kutak/eu-info-point' },
+        // subheader: 'Subheader 1',
+        isNew: true,
+        // cover: 'image.jpg',
+        items: [
+          { title: 'ALDA', path: paths.activitiesALDA },
+          { title: 'LDA', path: paths.activitiesLDA },
         ],
       },
-      { title: 'Vojvodjanska inicijativa za EU', path: '/aktivnosti/vojvodjanska-inicijativa-za-eu' },
-      {
-        title: 'Gradovi interkulturalnosti',
-        path: '#',
-        children: [
-          { title: 'Vesti', path: '/aktivnosti/gradovi-interkulturalnosti/vesti' },
-        ],
-      },
-      { title: 'Regionalna platforma za učešće i dijalog mladih', path: '/aktivnosti/regionalna-platforma-za-ucesce-i-dijalog-mladih' },
-      {
-        title: 'Mladi',
-        path: '#',
-        children: [
-          { title: 'Volontiranje u Subotici', path: '/aktivnosti/mladi/volontiranje-u-subotici' },
-          { title: 'Volontiranje u inostranstvu', path: '/aktivnosti/mladi/volontiranje-u-inostranstvu' },
-          { title: 'Dešavanja', path: '/aktvnosti/mladi/desavanja' },
-          { title: 'Šta je Volonterizam?', path: '/aktivnosti/mladi/sta-je-volonterizam' }
-        ],
-      },
-      { title: 'Programi lokalnih partnera', path: '/docs' },
-      { title: 'Lokalne koalicije za razvoj zajednice', path: '/docs' },
-      { title: 'Mreža za razvoj Subotice', path: '/docs' },
     ],
   },
   {
     title: 'Publikacije',
-    path: '#',
-    children: [
-      publicationLinks
-    ],
+    path: '/publikacije',
   },
 ];

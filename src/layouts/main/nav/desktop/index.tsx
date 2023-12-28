@@ -6,6 +6,8 @@ import { NavProps } from '../types';
 // ----------------------------------------------------------------------
 
 export const NavDesktop = ({ data, sx, ...other }: NavProps) => {
+  console.log('navdesktop data', data);
+
   return (
     <Stack
       component="nav"
