@@ -7,54 +7,44 @@ import { Box, CircularProgress, Divider, Grid, ImageListItem, Typography, useThe
 // import profileURL from "../../../public/assets/team/stanka-parac-damjanovic.jpg"
 // import Loading from "src/app/loading";
 import { profilesData } from "src/_mock/profile-data";
+import { useResponsive } from "src/hooks/use-responsive";
 
 export default function ProfileView({ params }: any) {
 
+     const mdUp = useResponsive('up', 'md');
      const theme = useTheme()
-     // const [loading, setLoading] = useState(true)
+
      const profileToRender = profilesData.find(user => user.id === params.name);
-
-     // useEffect(() => {
-     //      const timer = setTimeout(() => {
-     //           setLoading(false); // Simulate loading completion after 2 seconds
-     //      }, 1000);
-
-     //      return () => clearTimeout(timer);
-     // }, []);
 
      return (
           <Box
                sx={{
-                    width: '90dvw',
-                    margin: '50px',
+                    width: mdUp ? '90vw' : '90%',
+                    margin: mdUp ? '50px' : '20px',
                     display: 'flex',
                     justifyContent: 'flex-start',
                     gap: '50px',
                     borderRadius: '10px',
-                    padding: '20px',
+                    padding: mdUp ? '20px' : '0px',
                     boxShadow: `5px 10px 20px ${theme.palette.primary.dark} inset`
                }}
           >
 
                <Box sx={{ alignItems: 'center', justifyContent: 'center' }}>
-                    {/* {
-                         loading ?
-                              <CircularProgress color='primary' sx={{ marginLeft: '500px' }} />
-                              : */}
                     <Box
                          sx={{
-                              margin: '50px',
+                              margin: '20px',
                               display: 'flex',
                               flexDirection: 'column', // Change to column layout
                               gap: '20px',
                          }}
                     >
-                         <Box sx={{ display: 'flex', gap: '20px' }}>
+                         <Box sx={{ display: 'flex', gap: '20px', flexDirection: mdUp ? 'row' : 'column' }}>
                               <Box
                                    sx={{
                                         borderRadius: '10px',
                                         overflow: 'hidden',
-                                        width: '33%',
+                                        width: mdUp ? '33%' : '45%',
                                         height: '300px',
                                         boxShadow: `10px 5px 5px ${theme.palette.primary.dark}`,
                                         backgroundImage: `url(${profileToRender?.imageURL})`,
@@ -65,30 +55,29 @@ export default function ProfileView({ params }: any) {
 
                               <Box sx={{ flex: '1' }}>
                                    <Typography variant="h4" sx={{ marginBottom: '10px', color: theme.palette.primary.main }}>
-                                        Ime: <span style={{ color: theme.palette.text.primary, fontSize: '1.5rem' }}>{profileToRender!.name}</span>
+                                        Ime: <span style={{ color: theme.palette.text.primary, fontSize: mdUp ? '1.5rem' : '1rem' }}>{profileToRender!.name}</span>
                                    </Typography>
                                    <Typography variant="h4" sx={{ marginBottom: '10px', color: theme.palette.primary.main }}>
-                                        Email: <span style={{ color: theme.palette.text.primary, fontSize: '1.2rem' }}>{profileToRender!.email}</span>
+                                        Email: <span style={{ color: theme.palette.text.primary, fontSize: mdUp ? '1.5rem' : '1rem' }}>{profileToRender!.email}</span>
                                    </Typography>
                                    <Typography variant="h4" sx={{ marginBottom: '10px', color: theme.palette.primary.main }}>
-                                        Age: <span style={{ color: theme.palette.text.primary, fontSize: '1.2rem' }}>{profileToRender!.dateOfBirth}</span>
+                                        Age: <span style={{ color: theme.palette.text.primary, fontSize: mdUp ? '1.5rem' : '1rem' }}>{profileToRender!.dateOfBirth}</span>
                                    </Typography>
                                    <Typography variant="h4" sx={{ marginBottom: '10px', color: theme.palette.primary.main }}>
-                                        Location: <span style={{ color: theme.palette.text.primary, fontSize: '1.2rem' }}>{profileToRender!.location}</span>
+                                        Location: <span style={{ color: theme.palette.text.primary, fontSize: mdUp ? '1.5rem' : '1rem' }}>{profileToRender!.location}</span>
                                    </Typography>
                               </Box>
                          </Box>
 
-                         <Box>
+                         <Box sx={{ width: mdUp ? '100%' : '55%' }}>
                               <Typography variant="h4" sx={{ marginBottom: '10px', color: theme.palette.primary.main }}>
                                    Biografija:
                               </Typography>
-                              <Typography variant="h4" sx={{ marginBottom: '10px', color: theme.palette.primary.main, textAlign: 'justify' }}>
-                                   <span style={{ color: theme.palette.text.primary, fontSize: '1rem' }}>{profileToRender!.bio}</span>
+                              <Typography sx={{ marginBottom: '10px', color: theme.palette.text.primary, textAlign: 'justify', fontSize: mdUp ? '1rem' : '.9re' }}>
+                                   {profileToRender!.bio}
                               </Typography>
                          </Box>
                     </Box>
-                    {/* } */}
                </Box>
 
           </Box>
