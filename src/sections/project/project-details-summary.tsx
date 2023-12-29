@@ -2,15 +2,15 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-
+import LinkIcon from '@mui/icons-material/Link';
 import { fDate } from 'src/utils/format-time';
-
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { TOUR_SERVICE_OPTIONS } from 'src/_mock';
 
 import Iconify, { IconifyProps } from 'src/components/iconify';
 
 import { Project } from 'src/types/project';
-import { Link, useTheme } from '@mui/material';
+import { Link, List, ListItem, useTheme } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -21,6 +21,21 @@ type Props = {
 export const ProjectDetailsSummary = ({ project }: Props) => {
 
   const theme = useTheme()
+
+  const extractFileName = (url: string) => {
+    const parts = url.split('/');
+    return parts[parts.length - 1]; // Get the last part (file name)
+  };
+
+  const extractNameFromUrl = (url: string) => {
+    const regex = /^https?:\/\/(?:www\.)?([^/]+)\.\w+\/?/;
+    const match = url.match(regex);
+    if (match && match.length > 1) {
+      return match[1];
+    }
+    return ''; // Return empty string if the match is not found
+  };
+
   return (
     <Stack spacing={5}>
       <Stack spacing={3}>
@@ -51,16 +66,30 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
       <Divider />
       <Typography variant="h5" sx={{ color: theme.palette.text.primary }}>Linkovi</Typography>
       <Box sx={{ display: 'flex', gap: '20px' }}>
-        <Link href={project.links.join(', ')}>
-          {project.links}
-        </Link>
+        <List>
+          {project.links.map((link, index) => (
+            <ListItem key={index}>
+              <LinkIcon sx={{ mr: '5px' }} />
+              <Link href={link} target="_blank" rel="noopener">
+                {extractNameFromUrl(link)}
+              </Link>
+            </ListItem>
+          ))}
+        </List>
       </Box>
       <Divider sx={{ mb: '30px' }} />
       <Typography variant="h5" sx={{ color: theme.palette.text.primary }}>Publikacije</Typography>
       <Box sx={{ display: 'flex', gap: '20px' }}>
-        <Link href={project.publications.join(', ')}>
-          {project.publications.join(', ')}
-        </Link>
+        <List>
+          {project.publications.map((publicationUrl, index) => (
+            <ListItem key={index}>
+              <PictureAsPdfIcon sx={{ mr: '5px' }} />
+              <Link href={publicationUrl} target="_blank" rel="noopener">
+                {extractFileName(publicationUrl)}
+              </Link>
+            </ListItem>
+          ))}
+        </List>
       </Box>
       <Divider sx={{ mb: '30px' }} />
     </Stack >
