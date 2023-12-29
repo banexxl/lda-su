@@ -59,51 +59,31 @@ export const navConfig = [
   {
     title: 'O nama', path: paths.aboutUs,
     children: [
-      {
-        subheader: '',
-        isNew: true,
-        cover: '',
-        items: [
-          { title: 'Stanka', path: paths.stanka },
-          { title: 'Silvija', path: paths.silvija },
-          { title: 'Boris', path: paths.boris },
-        ],
-      },
+      { title: 'Stanka', path: paths.stanka },
+      { title: 'Silvija', path: paths.silvija },
+      { title: 'Boris', path: paths.boris },
     ],
   },
-  // {
-  //   title: 'Projekti',
-  //   path: '/projekti',
-  //   children: [
-  //     {
-  //       subheader: '',
-  //       isNew: true,
-  //       cover: '',
-  //       items: [
-  //         { title: 'Svi projekti', path: paths.allProjects },
-  //         { title: 'Završeni projekti', path: paths.pastProjects },
-  //         { title: 'Projekti u toku', path: paths.currentProjects },
-  //       ],
-  //     },
-  //   ],
-  // },
-  // {
-  //   title: 'Aktivnosti',
-  //   path: '#',
-  //   children: [
-  //     {
-  //       subheader: '',
-  //       isNew: true,
-  //       cover: '',
-  //       items: [
-  //         { title: 'ALDA', path: paths.activitiesALDA },
-  //         { title: 'LDA', path: paths.activitiesLDA },
-  //       ],
-  //     },
-  //   ],
-  // },
-  // {
-  //   title: 'Publikacije',
-  //   path: paths.publications
-  // },
+  {
+    title: 'Projekti',
+    path: '/projekti',
+    children: [
+
+      { title: 'Svi projekti', path: paths.allProjects },
+      { title: 'Završeni projekti', path: paths.pastProjects },
+      { title: 'Projekti u toku', path: paths.currentProjects },
+    ],
+  },
+  {
+    title: 'Aktivnosti',
+    path: '#',
+    children: [
+      { title: 'ALDA', path: paths.activitiesALDA },
+      { title: 'LDA', path: paths.activitiesLDA },
+    ],
+  },
+  {
+    title: 'Publikacije',
+    path: paths.publications
+  },
 ];
