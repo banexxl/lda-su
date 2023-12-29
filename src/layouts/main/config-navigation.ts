@@ -66,7 +66,7 @@ export const navConfig = [
   },
   {
     title: 'Projekti',
-    path: '/projekti',
+    path: '#',
     children: [
 
       { title: 'Svi projekti', path: paths.allProjects },

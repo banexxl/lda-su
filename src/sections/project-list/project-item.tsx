@@ -91,7 +91,7 @@ export const ProjectItem = ({ project }: Props) => {
       <Stack spacing={0.5} sx={{ p: 2.5 }}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           <Link
-            href={`/projects/${project.projectURL}`}
+            href={`/projekat/${project.projectURL}`}
             sx={{
               cursor: 'pointer'
             }}>
