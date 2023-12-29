@@ -11,8 +11,6 @@ import { NavListProps, NavSubListProps } from '../types';
 // ----------------------------------------------------------------------
 
 export const NavList = ({ data, depth, slotProps }: NavListProps) => {
-  console.log('aaaaaaaaa', data);
-
   const pathname = usePathname();
 
   const active = useActiveLink(data.path, !!data.children);

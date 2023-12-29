@@ -44,7 +44,7 @@ export default function ProfileView({ params }: any) {
                                    sx={{
                                         borderRadius: '10px',
                                         overflow: 'hidden',
-                                        width: mdUp ? '33%' : '45%',
+                                        width: mdUp ? '33%' : '100%',
                                         height: '300px',
                                         boxShadow: `10px 5px 5px ${theme.palette.primary.dark}`,
                                         backgroundImage: `url(${profileToRender?.imageURL})`,
@@ -69,7 +69,7 @@ export default function ProfileView({ params }: any) {
                               </Box>
                          </Box>
 
-                         <Box sx={{ width: mdUp ? '100%' : '55%' }}>
+                         <Box >
                               <Typography variant="h4" sx={{ marginBottom: '10px', color: theme.palette.primary.main }}>
                                    Biografija:
                               </Typography>
