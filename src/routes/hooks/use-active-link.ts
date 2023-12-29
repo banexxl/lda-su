@@ -6,7 +6,7 @@ type ReturnType = boolean;
 
 export const useActiveLink = (path: string, deep = true): ReturnType => {
 
-  console.log(path);
+  console.log('aaaaaaa', path);
 
 
   const pathname = usePathname();

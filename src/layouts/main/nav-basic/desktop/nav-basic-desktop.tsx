@@ -8,7 +8,7 @@ import { NavProps } from '../types';
 // ----------------------------------------------------------------------
 
 const NavBasicDesktop = ({ data, slotProps, ...other }: NavProps) => {
-  console.log('navbasic desktop', data);
+  console.log('NavBasicDesktop', data);
 
   return (
     <Stack component="nav" id="nav-basic-desktop" spacing={5} direction="row" {...other}>

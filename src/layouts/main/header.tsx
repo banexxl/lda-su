@@ -6,7 +6,6 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
-import { NavBasicMobile, NavBasicDesktop } from 'src/components/nav-basic';
 import { paths } from 'src/routes/paths';
 
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
@@ -17,12 +16,12 @@ import { bgBlur } from 'src/theme/css';
 import Logo from 'src/components/logo';
 import Label from 'src/components/label';
 
-import { NavMobile } from './nav/mobile';
-import { NavDesktop } from './nav/desktop';
 import { HEADER } from '../config-layout';
 import { Searchbar } from '../common/searchbar';
 import { navConfig } from './config-navigation';
 import { HeaderShadow } from '../common/header-shadow';
+import NavBasicDesktop from './nav-basic/desktop/nav-basic-desktop';
+import NavBasicMobile from './nav-basic/mobile/nav-basic-mobile';
 // import { SettingsButton } from '../common/settings-button';
 // import Iconify from 'src/components/iconify';
 
@@ -59,7 +58,7 @@ export const Header = ({ headerOnDark }: Props) => {
           <Searchbar />
         </Box>
 
-        {!mdUp && <NavMobile data={navConfig} />}
+        {!mdUp && <NavBasicMobile data={navConfig} />}
       </Box>
     </Box>
   );

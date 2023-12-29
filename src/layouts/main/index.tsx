@@ -8,9 +8,9 @@ import { HEADER } from '../config-layout';
 import { Container, Stack } from '@mui/system';
 import { Drawer, IconButton, Typography } from '@mui/material';
 import Logo from 'src/components/logo';
-import { NavBasicDesktop, NavBasicMobile } from 'src/components/nav-basic';
 import { useBoolean } from 'src/hooks/use-boolean';
 import Iconify from 'src/components/iconify';
+import NavBasicMobile from './nav-basic/mobile/nav-basic-mobile';
 
 // ----------------------------------------------------------------------
 

@@ -57,13 +57,12 @@ export const suboticaLinks = [
 export const navConfig = [
   { title: 'Naslovna', path: paths.home },
   {
-    title: 'O nama',
-    path: '/o-nama',
+    title: 'O nama', path: paths.aboutUs,
     children: [
       {
-        // subheader: 'Subheader 1',
+        subheader: '',
         isNew: true,
-        // cover: 'image.jpg',
+        cover: '',
         items: [
           { title: 'Stanka', path: paths.stanka },
           { title: 'Silvija', path: paths.silvija },
@@ -72,39 +71,39 @@ export const navConfig = [
       },
     ],
   },
-  {
-    title: 'Projekti',
-    path: '/projekti',
-    children: [
-      {
-        // subheader: 'Subheader 1',
-        isNew: true,
-        // cover: 'image.jpg',
-        items: [
-          { title: 'Svi projekti', path: paths.allProjects },
-          { title: 'Završeni projekti', path: paths.pastProjects },
-          { title: 'Projekti u toku', path: paths.currentProjects },
-        ],
-      },
-    ],
-  },
-  {
-    title: 'Aktivnosti',
-    path: '/aktivnosti',
-    children: [
-      {
-        // subheader: 'Subheader 1',
-        isNew: true,
-        // cover: 'image.jpg',
-        items: [
-          { title: 'ALDA', path: paths.activitiesALDA },
-          { title: 'LDA', path: paths.activitiesLDA },
-        ],
-      },
-    ],
-  },
-  {
-    title: 'Publikacije',
-    path: '/publikacije',
-  },
+  // {
+  //   title: 'Projekti',
+  //   path: '/projekti',
+  //   children: [
+  //     {
+  //       subheader: '',
+  //       isNew: true,
+  //       cover: '',
+  //       items: [
+  //         { title: 'Svi projekti', path: paths.allProjects },
+  //         { title: 'Završeni projekti', path: paths.pastProjects },
+  //         { title: 'Projekti u toku', path: paths.currentProjects },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: 'Aktivnosti',
+  //   path: '#',
+  //   children: [
+  //     {
+  //       subheader: '',
+  //       isNew: true,
+  //       cover: '',
+  //       items: [
+  //         { title: 'ALDA', path: paths.activitiesALDA },
+  //         { title: 'LDA', path: paths.activitiesLDA },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: 'Publikacije',
+  //   path: paths.publications
+  // },
 ];

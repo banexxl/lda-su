@@ -21,7 +21,7 @@ import footerImage from 'public/eu-lda-h-1000x450.jpg'
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 
-import { NavSubListProps } from './nav/types';
+import { NavSubListProps } from './nav-basic/types';
 import { aldaLinks, navConfig, europaLinks, suboticaLinks } from './config-navigation';
 import { Box } from '@mui/system';
 import Icon from 'src/assets/illustrations/pattern/icon';
