@@ -13,7 +13,7 @@ export const paths = {
   pastProjects: '/projekti-zavrseni',
   allProjects: '/projekti-svi',
   currentProjects: '/projekti-u-toku',
-  publications: '/publications',
+  publications: '/publikacije',
   activitiesALDA: '/aktivnsoti-alda',
   activitiesLDA: '/aktivnsoti-lda',
   // LDA Subotica

@@ -4,13 +4,28 @@ import { ObjectId } from "mongodb"
 
 const projectsServices = () => {
 
+     const getAllPublications = async () => {
+
+          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+
+          try {
+               const db = client.db('LDA_DB');
+               const data: any = await db.collection('Publications').find({}).toArray()
+               return data[0].publications;
+          } catch (error: any) {
+               console.log({ message: error.message })
+          } finally {
+               await client.close();
+          }
+     };
+
      const getAllProjects = async () => {
 
           const client = await MongoClient.connect(process.env.MONGODB_URI!);
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('Projects').find({}).toArray()
+               const data: any = await db.collection('Publications').find({}).toArray()
                return data;
           } catch (error: any) {
                console.log({ message: error.message })
@@ -301,6 +316,7 @@ const projectsServices = () => {
 
 
      return {
+          getAllPublications,
           getAllProjects,
           getProjectByLink,
           getAllProjectLinks,
