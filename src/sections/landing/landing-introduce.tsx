@@ -40,7 +40,7 @@ export const LandingIntroduce = () => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* <Container ref={containerRef}>
+      <Container ref={containerRef}>
         <Stack
           spacing={3}
           sx={{
@@ -82,11 +82,11 @@ export const LandingIntroduce = () => {
 
       <TrendingTopics />
 
-      <BlogList posts={[]} /> */}
+      <BlogList posts={[]} />
 
       <BlogsPrevAndNext />
 
-      {/* <LandingBlogItemCarousel post={{
+      <LandingBlogItemCarousel post={{
         id: '',
         title: '',
         heroUrl: '',
@@ -104,7 +104,7 @@ export const LandingIntroduce = () => {
           phoneNumber: undefined,
           email: ''
         }
-      }} /> */}
+      }} />
 
     </Box>
   );
