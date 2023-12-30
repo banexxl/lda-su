@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 
 import { usePathname } from 'src/routes/hooks';
-import backgroundURL from "../../../public/background-scaled-wpv_1024x.jpg"
+import backgroundURL from "../../../public/larger.png"
 import { Header } from './header';
 import { Footer } from './footer';
 import { HEADER } from '../config-layout';
@@ -78,7 +78,7 @@ export const MainLayout = ({ children }: Props) => {
           flexGrow: 1,
           backgroundImage: `url(${backgroundURL.src})`,
           backgroundSize: 'cover',
-          backgroundRepeat: 'repeat-y',
+          backgroundRepeat: 'repeat',
         }}
       >
         {!actionPage(spacingLayout) && <Spacing />}

@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-
+import bgImage from "public/larger.png"
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import { _mock } from 'src/_mock';
@@ -55,40 +55,40 @@ export const TrendingTopics = () => {
   });
 
   return (
-    <Box sx={{ bgcolor: 'background.neutral' }}>
-      <Container
+    <Box sx={{
+      backgroundImage: `url(${bgImage.src})`,
+      backgroundSize: 'inherit',
+      backgroundRepeat: 'no-repeat',
+    }}>
+
+      <Stack
+        direction="row"
+        justifyContent={{ md: 'space-between' }}
         sx={{
-          py: { xs: 8, md: 10 },
+          mb: { xs: 8, md: 10 },
         }}
       >
-        <Stack
-          direction="row"
-          justifyContent={{ md: 'space-between' }}
-          sx={{
-            mb: { xs: 8, md: 10 },
-          }}
-        >
-          <Typography variant="h3">Trending Topics</Typography>
+        <Typography variant="h3">Trending Topics</Typography>
 
-          {mdUp && <CarouselArrows onNext={carousel.onNext} onPrev={carousel.onPrev} spacing={2} />}
-        </Stack>
+        {mdUp && <CarouselArrows onNext={carousel.onNext} onPrev={carousel.onPrev} spacing={2} />}
+      </Stack>
 
-        <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
-          {TOPICS.map((topic) => (
-            <TrendingTopicBlogItem key={topic.id} topic={topic} />
-          ))}
-        </Carousel>
+      <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
+        {TOPICS.map((topic) => (
+          <TrendingTopicBlogItem key={topic.id} topic={topic} />
+        ))}
+      </Carousel>
 
-        {!mdUp && (
-          <CarouselArrows
-            spacing={2}
-            justifyContent="center"
-            onNext={carousel.onNext}
-            onPrev={carousel.onPrev}
-            sx={{ mt: 8, width: 1 }}
-          />
-        )}
-      </Container>
+      {!mdUp && (
+        <CarouselArrows
+          spacing={2}
+          justifyContent="center"
+          onNext={carousel.onNext}
+          onPrev={carousel.onPrev}
+          sx={{ mt: 8, width: 1 }}
+        />
+      )}
+
     </Box>
   );
 }

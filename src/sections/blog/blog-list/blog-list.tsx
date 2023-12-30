@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
+import backgroundURL from "/public/larger.png"
 import { Blog } from 'src/types/blog';
 
 import { PostItem } from './blog-item';
@@ -23,6 +24,9 @@ export const BlogList = ({ posts }: Props) => {
             xs: 'repeat(1, 1fr)',
             sm: 'repeat(2, 1fr)',
           },
+          backgroundImage: `url(${backgroundURL.src})`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'repeat',
         }}
       >
         {posts.slice(0, 8).map((post) => (

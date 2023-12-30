@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import bgImage from "public/background-scaled-wpv_1024x.jpg"
+import bgImage from "public/larger.png"
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useBoundingClientRect } from 'src/hooks/use-bounding-client-rect';
 
@@ -36,10 +36,11 @@ export const LandingIntroduce = () => {
         pt: { xs: 10, md: 15 },
         pb: { xs: 5, md: 10 },
         backgroundImage: `url(${bgImage.src})`,
+        backgroundSize: 'inherit',
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <Container ref={containerRef}>
+      {/* <Container ref={containerRef}>
         <Stack
           spacing={3}
           sx={{
@@ -81,11 +82,11 @@ export const LandingIntroduce = () => {
 
       <TrendingTopics />
 
-      <BlogList posts={[]} />
+      <BlogList posts={[]} /> */}
 
       <BlogsPrevAndNext />
 
-      <LandingBlogItemCarousel post={{
+      {/* <LandingBlogItemCarousel post={{
         id: '',
         title: '',
         heroUrl: '',
@@ -103,7 +104,7 @@ export const LandingIntroduce = () => {
           phoneNumber: undefined,
           email: ''
         }
-      }} />
+      }} /> */}
 
     </Box>
   );

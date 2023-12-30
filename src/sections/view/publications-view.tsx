@@ -18,7 +18,7 @@ export const PublicationsView = ({ publications }: PublicationsViewProps) => {
           <Box>
                <Divider sx={{ mb: '30px' }} />
                <Typography variant="h3" sx={{ color: theme.palette.text.primary, textAlign: 'center' }}>Publikacije</Typography>
-               <Box sx={{ gap: '20px', }}>
+               <Box >
                     <List>
                          {publications.map((publicationUrl, index) => (
                               <ListItem key={index}>

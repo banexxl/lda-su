@@ -18,12 +18,12 @@ type Props = {
 
 export const BlogsPrevAndNext = ({ prevPost, nextPost }: Props) => {
   return (
-    <Grid container spacing={5} sx={{ py: 8 }}>
+    <Grid container spacing={5} columnSpacing={0} sx={{ py: 8 }}>
       <Grid xs={12} md={6}>
         <PostItem
           title={prevPost?.title}
           coverUrl={prevPost?.coverUrl}
-          icon={<Iconify icon="carbon:chevron-left" width={24} sx={{ color: 'text.disabled' }} />}
+          icon={<Iconify icon="carbon:chevron-left" width={18} sx={{ color: 'text.disabled' }} />}
         />
       </Grid>
 
@@ -55,7 +55,7 @@ function PostItem({ coverUrl, title, icon, isNext }: PostItemProps) {
         <Stack
           alignItems="center"
           direction={isNext ? 'row-reverse' : 'row'}
-          spacing={2}
+          spacing={.5}
           sx={{
             p: 2.5,
             pl: 1,
