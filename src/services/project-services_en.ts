@@ -55,7 +55,7 @@ const projectsServices = () => {
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
-               const db = client.db('DAR_DB')
+               const db = client.db('LDA_DB')
                // Get one random document from the mycoll collection.
                //db.mycoll.aggregate([{ $sample: { size: 1 } }])
                // Get one random document matching {a: 10} from the mycoll collection.
@@ -82,7 +82,7 @@ const projectsServices = () => {
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
-               const db = client.db('DAR_DB')
+               const db = client.db('LDA_DB')
                // Get one random document from the mycoll collection.
                //db.mycoll.aggregate([{ $sample: { size: 1 } }])
                // Get one random document matching {a: 10} from the mycoll collection.
@@ -109,7 +109,7 @@ const projectsServices = () => {
 
           try {
                await client.connect();
-               const db = client.db('DAR_DB');
+               const db = client.db('LDA_DB');
                const mainCategories = await db.collection('Projects').distinct('mainCategory')
                return mainCategories;
           } catch (error: any) {
@@ -125,7 +125,7 @@ const projectsServices = () => {
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
-               const db = client.db('DAR_DB')
+               const db = client.db('LDA_DB')
                let data: Project[] = await db.collection('LogoURLs').find().toArray()
                return data
           } catch (error: any) {
@@ -139,7 +139,7 @@ const projectsServices = () => {
      const getProductById = async (_id: any) => {
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
           try {
-               const db = client.db('DAR_DB')
+               const db = client.db('LDA_DB')
                let product: Project = await db.collection('Projects').findOne({ _id: new ObjectId(_id) })
                return product
           } catch (error: any) {
@@ -154,7 +154,7 @@ const projectsServices = () => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
           try {
-               const db = client.db('DAR_DB')
+               const db = client.db('LDA_DB')
                let products: Project[] = await db.collection('Projects')
                     .find({ "manufacturer": { $regex: `${manufacturer}`, $options: 'i' } })
                     .limit(2)
@@ -175,7 +175,7 @@ const projectsServices = () => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
           try {
-               const db = client.db('DAR_DB')
+               const db = client.db('LDA_DB')
                let products: Project[] = await db.collection('Projects')
                     .find({
                          $or: [
@@ -199,7 +199,7 @@ const projectsServices = () => {
      const getProjectsByDiscount = async () => {
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
           try {
-               const db = client.db('DAR_DB')
+               const db = client.db('LDA_DB')
                let products: Project[] = await db.collection('Projects')
                     .find({ "discount": true })
                     .limit(10)
@@ -219,7 +219,7 @@ const projectsServices = () => {
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
-               const db = client.db('DAR_DB')
+               const db = client.db('LDA_DB')
                let products: Project[] = await db.collection('Projects')
                     .find({ mainCategory: `${mainCategory}` })
                     .skip(12 * (loadedParts - 1)) // Adjust the skip based on loadedParts
@@ -238,7 +238,7 @@ const projectsServices = () => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
           try {
-               const db = client.db('DAR_DB')
+               const db = client.db('LDA_DB')
                let products: Project[] = await db.collection('Projects').
                     find({ mainCategory: mainCategory, midCategory: midCategory })
                     .skip(10 * (loadedParts - 1)) // Adjust the skip based on loadedParts
@@ -258,7 +258,7 @@ const projectsServices = () => {
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
-               const db = client.db('DAR_DB')
+               const db = client.db('LDA_DB')
                let products: Project[] = await db.collection('Projects')
                     .find({ mainCategory: mainCategory, midCategory: midCategory, subCategory: subCategory })
                     .skip(10 * (loadedParts - 1)) // Adjust the skip based on loadedParts
@@ -278,7 +278,7 @@ const projectsServices = () => {
 
           try {
                await client.connect();
-               const db = client.db('DAR_DB');
+               const db = client.db('LDA_DB');
                const productsCollection = db.collection('Projects');
 
                const manufacturers = await new Promise((resolve, reject) => {

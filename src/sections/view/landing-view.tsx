@@ -11,25 +11,47 @@ import { Filters } from '../filters/filters';
 import { ProjectLandingHero } from '../landing/landing-hero';
 import { LandingSummary } from '../landing/landing-summary';
 import { LandingIntroduce } from '../landing/landing-introduce';
-import { FeaturedBlog } from '../blog/blog-list/featured-blog';
+import { FeaturedActivities } from '../activity/activities-list/featured-activities';
 import { LandingFavoriteDestinations } from '../landing/landing-favorite-destinations';
+import { Project } from 'src/types/project';
+import { Activity } from 'src/types/activity';
 
 
 // ----------------------------------------------------------------------
 
-export const LandingView = () => {
+type LandingViewProps = {
+  activeProjects: Project[],
+  allActivities: Activity[],
+  inProgressActivities: Activity[],
+  completedActivities: Activity[], featuredActivities: Activity[],
+  featuredCompletedActivities: Activity[],
+  trendingActivities: Activity[],
+}
+
+
+
+export const LandingView = ({
+  activeProjects,
+  allActivities,
+  completedActivities,
+  featuredActivities,
+  featuredCompletedActivities,
+  inProgressActivities,
+  trendingActivities }:
+  LandingViewProps) => {
+
   return (
     <Box>
 
-      <LandingIntroduce />
+      <LandingIntroduce activeProjects={activeProjects} />
 
-      <LandingSummary />
+      {/* <LandingSummary /> */}
 
       {/* <LandingProjectsByCity projects={[]} /> */}
 
-      {/* <LandingTourFeatured projects={[]} /> */}
+      {/* <LandingProjectFeatured projects={[]} /> */}
 
-      {/* <FeaturedBlog posts={[]} /> */}
+      <FeaturedActivities featuredCompletedActivities={featuredCompletedActivities} />
 
       {/* <Newsletter /> */}
     </Box>

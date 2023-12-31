@@ -6,19 +6,28 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import bgImage from "public/larger.png"
+import bgImage2 from "public/background-blue-gradient.png"
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useBoundingClientRect } from 'src/hooks/use-bounding-client-rect';
-
+import imageURL from "public/logo_main.jpg"
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
-import { BlogsPrevAndNext } from '../blog/common/blog-prev-and-next';
-import { LandingBlogItemCarousel } from '../blog/blog-list/landing-blog-item-carousel';
-import { BlogList } from '../blog/blog-list/blog-list';
-import { TrendingTopicBlogItem } from '../blog/blog-list/trending-topic-blog';
-import { TrendingTopics } from '../blog/blog-list/trending-topics-blog-list';
+import { ActivityPrevAndNext } from '../activity/common/activities-prev-and-next';
+import { LandingActivityItemCarousel } from '../activity/activities-list/landing-activities-item-carousel';
+import { ActivityList } from '../activity/activities-list/activities-list';
+import { TrendingTopicActivityItem } from '../activity/activities-list/trending-topics-activities';
+import { TrendingTopics } from '../activity/activities-list/trending-topics-activities-list';
+import { Project } from 'src/types/project';
 
-export const LandingIntroduce = () => {
+
+type LandingViewIntroProps = {
+  activeProjects: Project[]
+}
+
+
+
+export const LandingIntroduce = ({ activeProjects }: LandingViewIntroProps) => {
 
   const mdUp = useResponsive('up', 'md');
 
@@ -28,7 +37,7 @@ export const LandingIntroduce = () => {
 
   const offsetLeft = container && container.left + 20;
 
-  const imageURL = "../../../public/logoblue.png"
+
 
   return (
     <Box
@@ -36,21 +45,20 @@ export const LandingIntroduce = () => {
         pt: { xs: 10, md: 15 },
         pb: { xs: 5, md: 10 },
         backgroundImage: `url(${bgImage.src})`,
-        backgroundSize: 'inherit',
         backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
       }}
     >
       <Container ref={containerRef}>
         <Stack
           spacing={3}
           sx={{
-            width: '100%',
             mx: { xs: 'auto', md: 'unset' },
             textAlign: { xs: 'center', md: 'unset' },
-            backgroundImage: `url(${imageURL})`,
             display: 'flex',
             flexDirection: mdUp ? 'row' : 'column',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+
           }}
         >
           <Box sx={{ marginBottom: '20px' }}>
@@ -64,29 +72,28 @@ export const LandingIntroduce = () => {
               Agencije lokalne demokratije danas predstavljaju značajne aktere u procesu stabilizacije i dugoročnog jačanja demokratskih institucija u zemljama Jugoistočne Evrope.<br />
             </Typography>
           </Box>
-          <Box sx={{ marginTop: '50px' }}>
+          <Box sx={{}}>
             <Image
               alt="cover"
-              src="/assets/logo_main.jpg"
-              sx={{ width: '400px', height: mdUp ? '250px' : '200px', display: mdUp ? 'flex' : 'none' }}
+              sx={{
+                width: '300px',
+                height: mdUp ? '250px' : '300px',
+                display: mdUp ? 'flex' : 'none',
+                backgroundImage: `url(${imageURL.src})`,
+                backgroundSize: 'cover',
+              }}
             />
           </Box>
         </Stack>
       </Container>
 
-      <TrendingTopicBlogItem topic={{
-        cover: '',
-        totalPost: 0,
-        category: ''
-      }} />
+      {/* <TrendingTopics /> */}
 
-      <TrendingTopics />
+      <ActivityList posts={[]} />
 
-      <BlogList posts={[]} />
+      {/* <ActivitiesPrevAndNext /> */}
 
-      <BlogsPrevAndNext />
-
-      <LandingBlogItemCarousel post={{
+      {/* <LandingActivityItemCarousel post={{
         id: '',
         title: '',
         heroUrl: '',
@@ -104,7 +111,7 @@ export const LandingIntroduce = () => {
           phoneNumber: undefined,
           email: ''
         }
-      }} />
+      }} /> */}
 
     </Box>
   );

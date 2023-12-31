@@ -1,6 +1,5 @@
-import { TeamMember } from './team-member';
-
 type ProjectType = 'economy' | 'democracy' | 'eu-integrations' | 'cultural-heritage' | 'interethnic-dialogue' | 'migrations' | 'youth' | 'other'
+type ProjectStatus = 'completed' | 'in-progress'
 
 export type Project = {
   _id: string;
@@ -16,7 +15,7 @@ export type Project = {
   paragraph6: string;
   paragraph7: string;
   paragraph8: string;
-  category: string;
+  category: ProjectType;
   coverUrl: string;
   gallery: string[];
   locations: string[];
@@ -30,4 +29,5 @@ export type Project = {
   applicants: string[];
   donators: string[];
   publications: string[];
+  status: ProjectStatus
 };

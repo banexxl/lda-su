@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 
 import { usePathname } from 'src/routes/hooks';
-import backgroundURL from "../../../public/larger.png"
+// import backgroundURL from "../../../public/large.png"
 import { Header } from './header';
 import { Footer } from './footer';
 import { HEADER } from '../config-layout';
@@ -52,7 +52,7 @@ const BASIC_NAV_ITEMS = [
       { title: 'Page 3', path: '#' },
     ],
   },
-  { title: 'Blog', path: '#' },
+  { title: 'Activity', path: '#' },
   { title: 'About', path: '#' },
   { title: 'Contact', path: '#' },
   { title: 'External', path: 'https://www.google.com/' },
@@ -76,9 +76,9 @@ export const MainLayout = ({ children }: Props) => {
         component="main"
         sx={{
           flexGrow: 1,
-          backgroundImage: `url(${backgroundURL.src})`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'repeat',
+          // backgroundImage: `url(${backgroundURL.src})`,
+          // backgroundSize: 'cover',
+          // backgroundRepeat: 'repeat',
         }}
       >
         {!actionPage(spacingLayout) && <Spacing />}
