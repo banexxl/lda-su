@@ -12,7 +12,6 @@ type Props = {
 };
 
 export const FeaturedActivities = ({ featuredCompletedActivities }: Props) => {
-  console.log(featuredCompletedActivities);
 
   const featuredActivity = featuredCompletedActivities[0];
 

@@ -16,6 +16,8 @@ const getAllProjects = () => {
 
 export default async function ProjectsPage() {
   let allProjects: any = await getAllProjects()
+  console.log('aaaaa', allProjects);
+
   return <ProjectsView allProjects={allProjects} />; // Render ProjectsView component with fetched projects
 }
 

@@ -25,8 +25,6 @@ type Props = {
 
 export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
 
-  console.log(activity, largeActivity);
-
   const theme = useTheme();
 
   return (

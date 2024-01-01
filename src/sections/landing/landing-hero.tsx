@@ -27,6 +27,7 @@ type Props = {
 };
 
 export const ProjectLandingHero = ({ projects }: Props) => {
+
   const mdUp = useResponsive('up', 'md');
 
   const carouselLarge = useCarousel({
@@ -119,7 +120,8 @@ type CarouselItemProps = {
 
 const CarouselItem = ({ project }: CarouselItemProps) => {
   const theme = useTheme();
-
+  const dateParts = project.startDateTime.toString().split(' ');
+  const extractedDateString = dateParts.slice(0, 4).join(' ');
   const renderOverlay = (
     <Box
       sx={{
@@ -158,11 +160,11 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
         }}
       >
         <Typography variant="overline" sx={{ color: 'info.main', mb: 5 }}>
-          {project.locations}
+          {project.locations.join(', ')}
         </Typography>
 
         <Typography variant="h1" sx={{ maxWidth: 480 }}>
-          {project.startDateTime.toString()}
+          {project.title}
         </Typography>
 
         <Stack
@@ -173,7 +175,7 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
         >
           <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
             <Iconify icon="carbon:time" width={24} sx={{ mr: 1, color: 'primary.main' }} />
-            {project.endDateTime.toString()}
+            {extractedDateString}
           </Stack>
 
           <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
@@ -183,8 +185,8 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
 
         </Stack>
 
-        <Button variant="contained" size="large" color="primary">
-          Book Now
+        <Button variant="contained" size="large" color="primary" href={project.projectURL}>
+          Pogledaj
         </Button>
       </Stack>
 

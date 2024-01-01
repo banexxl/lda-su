@@ -43,7 +43,34 @@ export const LandingView = ({
   return (
     <Box>
 
-      <LandingIntroduce activeProjects={activeProjects} />
+      <Box sx={{ position: 'relative' }}>
+
+        <ProjectLandingHero projects={activeProjects} />
+
+        {/* <Container
+          sx={{
+            mb: { md: 10 },
+            left: { md: 0 },
+            right: { md: 0 },
+            bottom: { md: 0 },
+            mx: { md: 'auto' },
+            pt: { xs: 3, md: 0 },
+            position: { md: 'absolute' },
+          }}
+        >
+          <Filters
+            sx={{
+              color: { md: 'common.white' },
+              bgcolor: (theme) => ({
+                xs: 'background.neutral',
+                md: alpha(theme.palette.common.white, 0.08),
+              }),
+            }}
+          />
+        </Container> */}
+      </Box>
+
+      <LandingIntroduce activeProjects={activeProjects} allActivities={allActivities} completedActivities={completedActivities} featuredActivities={featuredActivities} featuredCompletedActivities={featuredCompletedActivities} inProgressActivities={inProgressActivities} trendingActivities={trendingActivities} />
 
       {/* <LandingSummary /> */}
 
@@ -51,7 +78,7 @@ export const LandingView = ({
 
       {/* <LandingProjectFeatured projects={[]} /> */}
 
-      <FeaturedActivities featuredCompletedActivities={featuredCompletedActivities} />
+      {/* <FeaturedActivities featuredCompletedActivities={featuredCompletedActivities} /> */}
 
       {/* <Newsletter /> */}
     </Box>

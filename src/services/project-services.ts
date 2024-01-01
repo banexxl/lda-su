@@ -40,7 +40,9 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('Projects').find({ status: 'in-progress' }).toArray()
+               const data: any = await db.collection('Projects').find({ 'status': 'in-progress' }).toArray()
+               console.log('in progress projects');
+
                return data;
           } catch (error: any) {
                console.log({ message: error.message })
@@ -71,7 +73,7 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB')
-               let data: Project[] = await db.collection('Projects').find({ link: link }).toArray()
+               let data: Project[] = await db.collection('Projects').find({ 'link': link }).toArray()
                return data[0]
           } catch (error: any) {
                console.log({ message: error.message })

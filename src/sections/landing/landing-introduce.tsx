@@ -19,15 +19,22 @@ import { ActivityList } from '../activity/activities-list/activities-list';
 import { TrendingTopicActivityItem } from '../activity/activities-list/trending-topics-activities';
 import { TrendingTopics } from '../activity/activities-list/trending-topics-activities-list';
 import { Project } from 'src/types/project';
+import { Activity } from 'src/types/activity';
 
 
 type LandingViewIntroProps = {
-  activeProjects: Project[]
+  activeProjects: Project[];
+  allActivities: Activity[];
+  completedActivities: Activity[];
+  featuredActivities: Activity[];
+  featuredCompletedActivities: Activity[];
+  inProgressActivities: Activity[];
+  trendingActivities: Activity[];
 }
 
 
 
-export const LandingIntroduce = ({ activeProjects }: LandingViewIntroProps) => {
+export const LandingIntroduce = ({ activeProjects, allActivities, completedActivities, featuredActivities, featuredCompletedActivities, inProgressActivities, trendingActivities }: LandingViewIntroProps) => {
 
   const mdUp = useResponsive('up', 'md');
 
@@ -37,8 +44,6 @@ export const LandingIntroduce = ({ activeProjects }: LandingViewIntroProps) => {
 
   const offsetLeft = container && container.left + 20;
 
-
-
   return (
     <Box
       sx={{
@@ -46,7 +51,7 @@ export const LandingIntroduce = ({ activeProjects }: LandingViewIntroProps) => {
         pb: { xs: 5, md: 10 },
         backgroundImage: `url(${bgImage.src})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
+        backgroundSize: 'cover',
       }}
     >
       <Container ref={containerRef}>
@@ -72,7 +77,7 @@ export const LandingIntroduce = ({ activeProjects }: LandingViewIntroProps) => {
               Agencije lokalne demokratije danas predstavljaju značajne aktere u procesu stabilizacije i dugoročnog jačanja demokratskih institucija u zemljama Jugoistočne Evrope.<br />
             </Typography>
           </Box>
-          <Box sx={{}}>
+          <Box >
             <Image
               alt="cover"
               sx={{
@@ -89,7 +94,7 @@ export const LandingIntroduce = ({ activeProjects }: LandingViewIntroProps) => {
 
       {/* <TrendingTopics /> */}
 
-      <ActivityList posts={[]} />
+      {/* <ActivityList posts={allActivities} /> */}
 
       {/* <ActivitiesPrevAndNext /> */}
 
