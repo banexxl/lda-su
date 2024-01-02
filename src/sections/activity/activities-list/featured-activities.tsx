@@ -16,6 +16,7 @@ export const FeaturedActivities = ({ featuredCompletedActivities }: Props) => {
 
   const featuredActivity = featuredCompletedActivities[0];
 
+
   return (
     <Container
       sx={{
