@@ -88,7 +88,7 @@ export const Header = ({ headerOnDark }: Props) => {
           }),
         }}
       >
-        <Container        >
+        <Container>
           {renderContent}
         </Container>
       </Toolbar>

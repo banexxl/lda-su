@@ -6,12 +6,19 @@ import { About } from '../about/about';
 // import { Newsletter } from '../newsletter';
 import { AboutOurVision } from '../about/about-our-mission';
 import { LandingActivity } from '../activity/activities-list/landing-activities';
+import { Box } from '@mui/system';
 
+import bgImage from "public/larger.png"
+import bgImage2 from "public/background-scaled-wpv_1024x.jpg"
 // ----------------------------------------------------------------------
 
 export const AboutView = () => {
   return (
-    <>
+    <Box sx={{
+      backgroundImage: `url(${bgImage2.src})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+    }}>
       <About />
 
       <AboutOurVision />
@@ -19,6 +26,6 @@ export const AboutView = () => {
       {/* <LandingActivity posts={[]} /> */}
 
       {/* <Newsletter /> */}
-    </>
+    </Box>
   );
 }

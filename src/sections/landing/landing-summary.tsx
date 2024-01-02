@@ -13,22 +13,22 @@ import { CountUp } from 'src/components/count-up';
 const SUMMARY = [
   {
     total: 130,
-    description: 'Air tickets sold',
+    description: 'Realizovanih projekata',
     icon: '/assets/icons/travel/ic_travel_tickets.svg',
   },
   {
     total: 196,
-    description: 'Tours booked',
+    description: 'Aktivnosti realizovano',
     icon: '/assets/icons/travel/ic_travel_booking.svg',
   },
   {
     total: 10670,
-    description: 'Site visitors',
+    description: 'Posećenih gradova',
     icon: '/assets/icons/travel/ic_travel_site_visitors.svg',
   },
   {
     total: 877,
-    description: 'Verified hotels',
+    description: 'Izdatih publikacija',
     icon: '/assets/icons/travel/ic_travel_verified_hotels.svg',
   },
 ];
@@ -43,9 +43,6 @@ export const LandingSummary = () => {
         py: { xs: 5, md: 10 },
       }}
     >
-
-
-
       <Stack
         spacing={3}
         sx={{
@@ -54,11 +51,10 @@ export const LandingSummary = () => {
           mb: { xs: 8, md: 10 },
         }}
       >
-        <Typography variant="h2">Fastest Way to Book over 450 Great Tours</Typography>
+        <Typography variant="h2">Projekte aktivnosti LDA Subotica su započete sad već davne 2002. godine</Typography>
 
         <Typography sx={{ color: 'text.secondary' }}>
-          Since wire-frame renderings are relatively simple and fast to calculate, they are often
-          used in cases
+          Za ovaj period smo uspešno realizovali na desetine projekata, u više gradova širom Srbije
         </Typography>
       </Stack>
 

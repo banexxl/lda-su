@@ -72,7 +72,7 @@ export const LandingView = ({
 
       <LandingIntroduce activeProjects={activeProjects} allActivities={allActivities} completedActivities={completedActivities} featuredActivities={featuredActivities} featuredCompletedActivities={featuredCompletedActivities} inProgressActivities={inProgressActivities} trendingActivities={trendingActivities} />
 
-      {/* <LandingSummary /> */}
+      <LandingSummary />
 
       {/* <LandingProjectsByCity projects={[]} /> */}
 
