@@ -29,8 +29,8 @@ export const ActivityList = ({ posts }: Props) => {
           backgroundRepeat: 'repeat',
         }}
       >
-        {posts.slice(0, 8).map((post) => (
-          <PostItem key={post._id} post={post} />
+        {posts.slice(0, 8).map((activity) => (
+          <PostItem key={activity._id} activity={activity} />
         ))}
       </Box>
 

@@ -16,7 +16,7 @@ import { ActivityTags } from '../activity/common/activities-tags';
 // import { Newsletter } from '../newsletter';
 import { ActivityAuthor } from '../activity/common/activities-author';
 import { ActivitySidebar } from '../activity/common/activities-sidebar';
-import { PostHero } from '../activity/activities-list/activities-hero';
+import { ActivityHero } from '../activity/activities-list/activities-hero';
 import { ActivitySocialsShare } from '../activity/common/activities-socials-share';
 import { LatestActivities } from '../activity/activities-list/latest-activities';
 
@@ -28,7 +28,7 @@ export const ActivityView = () => {
 
   return (
     <>
-      {/* <PostHero post={_travelPosts[0]} /> */}
+      {/* <ActivityHero activity={_travelPosts[0]} /> */}
 
       <Container>
         <CustomBreadcrumbs

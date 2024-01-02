@@ -10,7 +10,7 @@ import { _mock } from 'src/_mock';
 
 import Carousel, { useCarousel, CarouselArrows } from 'src/components/carousel';
 
-import { TrendingTopicActivityItem } from './trending-topics-activities';
+import { TrendingTopicActivityItem } from './trending-activities';
 
 // ----------------------------------------------------------------------
 

@@ -18,10 +18,10 @@ import { Activity } from 'src/types/activity';
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: Activity;
+  activity: Activity;
 };
 
-export const PostHero = ({ post }: Props) => {
+export const ActivityHero = ({ activity }: Props) => {
   const theme = useTheme();
 
   return (
@@ -30,9 +30,9 @@ export const PostHero = ({ post }: Props) => {
         py: 20,
         position: 'relative',
         ...bgGradient({
-          startColor: `${alpha(theme.palette.common.black, 0)} 0%`,
-          endColor: `${theme.palette.common.black} 75%`,
-          imgUrl: post.heroUrl,
+          startColor: `${alpha(theme.palette.primary.main, 0)} 70%`,
+          endColor: `${theme.palette.primary.main} 99%`,
+          imgUrl: activity.heroUrl,
         }),
       }}
     >
@@ -53,16 +53,20 @@ export const PostHero = ({ post }: Props) => {
                 },
               }}
             >
-              {/* <Typography variant="body2" sx={{ opacity: 0.72 }}>
-                {post.duration}
-              </Typography> */}
+              <Typography variant="body2" sx={{ opacity: 0.72 }}>
+                {fDate(activity.fromDate, 'dd/MM/yyyy p')}
+              </Typography>
+
+              <Typography variant="body2" sx={{ opacity: 0.72 }}>
+                {fDate(activity.toDate, 'dd/MM/yyyy p')}
+              </Typography>
 
               <Typography variant="h2" component="h1">
-                {post.title}
+                {activity.title}
               </Typography>
 
               <Typography variant="caption" sx={{ opacity: 0.72 }}>
-                {fDate(post.createdAt, 'dd/MM/yyyy p')}
+                {fDate(activity.publishedDate, 'dd/MM/yyyy p')}
               </Typography>
 
               <Stack direction="row">

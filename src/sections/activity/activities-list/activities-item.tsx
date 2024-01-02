@@ -17,27 +17,27 @@ import { ActivityTimeBlock } from '../common/activities-time-block';
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: Activity;
+  activity: Activity;
 };
 
-export const PostItem = ({ post }: Props) => {
+export const PostItem = ({ activity }: Props) => {
   return (
     <Stack spacing={2.5}>
-      <Image src={post.coverUrl} alt={post.title} ratio="1/1" sx={{ borderRadius: 2 }} />
+      <Image src={activity.coverUrl} alt={activity.title} ratio="1/1" sx={{ borderRadius: 2 }} />
 
       <Stack spacing={1}>
-        {/* <ActivityTimeBlock createdAt={fDate(post.createdAt)} duration={post.duration} /> */}
+        <ActivityTimeBlock published={fDate(activity.publishedDate)} duration={activity.publishedDate.toString()} />
 
         <Link component={RouterLink} href={paths.alda.alda} >
           <TextMaxLine variant="h5" persistent>
-            {post.title}
+            {activity.title}
           </TextMaxLine>
         </Link>
       </Stack>
 
       <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-        <Avatar src={post.author.avatarUrl} sx={{ mr: 1 }} />
-        {post.author.name}
+        <Avatar src={activity.author.avatarUrl} sx={{ mr: 1 }} />
+        {activity.author.name}
       </Stack>
     </Stack>
   );

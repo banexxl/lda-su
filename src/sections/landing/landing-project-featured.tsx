@@ -52,10 +52,9 @@ export const LandingProjectFeatured = ({ projects }: Props) => {
       <Box sx={{ textAlign: 'center' }}>
         <Button
           component={RouterLink}
-          href={paths.alda.alda}
+          href={paths.allProjects}
           size="large"
           variant="outlined"
-
         >
           Pogledajte sve projekte
         </Button>

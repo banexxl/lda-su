@@ -24,7 +24,7 @@ interface Props extends StackProps {
   author?: TeamMember;
   popularTags?: string[];
   categories?: ActivityCategoryProps[];
-  recentPosts?: {
+  recentActivities?: {
     list: Activity[];
   };
 }
@@ -33,7 +33,7 @@ export const ActivitySidebar = ({
   author,
   categories,
   popularTags,
-  recentPosts,
+  recentActivities,
   sx,
   ...other
 }: Props) => {
@@ -87,12 +87,12 @@ export const ActivitySidebar = ({
     </Stack>
   );
 
-  const renderRecentPosts = recentPosts && (
+  const renderRecentPosts = recentActivities && (
     <Stack spacing={3}>
       <Typography variant="h5">Recent Posts</Typography>
 
-      {recentPosts.list.map((post) => (
-        <ActivityItemMobile key={post._id} post={post} onSiderbar />
+      {recentActivities.list.map((activity) => (
+        <ActivityItemMobile key={activity._id} activity={activity} onSiderbar />
       ))}
     </Stack>
   );

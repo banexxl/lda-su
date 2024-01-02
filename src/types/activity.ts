@@ -16,7 +16,9 @@ export type Activity = {
   subTitle2: string;
   subTitle3: string;
   heroUrl: string;
-  createdAt: Date;
+  publishedDate: Date;
+  fromDate: Date;
+  toDate: Date;
   category: string;
   coverUrl: string;
   favorited: boolean;

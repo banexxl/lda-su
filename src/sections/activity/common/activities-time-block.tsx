@@ -6,11 +6,11 @@ import { fDate } from 'src/utils/format-time';
 // ----------------------------------------------------------------------
 
 interface Props extends StackProps {
-  createdAt: string;
+  published: string;
   duration?: string;
 }
 
-export const ActivityTimeBlock = ({ createdAt, duration, sx, ...other }: Props) => {
+export const ActivityTimeBlock = ({ published, duration, sx, ...other }: Props) => {
   return (
     <Stack
       flexWrap="wrap"
@@ -19,7 +19,7 @@ export const ActivityTimeBlock = ({ createdAt, duration, sx, ...other }: Props) 
       sx={{ typography: 'caption', color: 'text.disabled', ...sx }}
       {...other}
     >
-      {fDate(createdAt)}
+      {fDate(published)}
 
       {duration && (
         <>

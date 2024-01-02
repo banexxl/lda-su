@@ -17,10 +17,10 @@ import { Activity } from 'src/types/activity';
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: Activity;
+  activity: Activity;
 };
 
-export const LandingActivityItemCarousel = ({ post }: Props) => {
+export const LandingActivityItemCarousel = ({ activity }: Props) => {
   const theme = useTheme();
 
   return (
@@ -40,14 +40,14 @@ export const LandingActivityItemCarousel = ({ post }: Props) => {
       >
         <Box sx={{ mx: 'auto', maxWidth: 400 }}>
           <Typography variant="body2" sx={{ color: 'primary.main' }}>
-            {fDate(post.createdAt)}
+            {fDate(activity.publishedDate)}
           </Typography>
 
           <Typography variant="h3" sx={{ mt: 1, mb: 5 }}>
-            {post.title}
+            {activity.title}
           </Typography>
 
-          <Typography sx={{ opacity: 0.72, mb: 10 }}>{post.description1}</Typography>
+          <Typography sx={{ opacity: 0.72, mb: 10 }}>{activity.description1}</Typography>
 
           <Fab component={RouterLink} href={paths.alda.alda}>
             <Iconify icon="carbon:chevron-right" />
@@ -56,8 +56,8 @@ export const LandingActivityItemCarousel = ({ post }: Props) => {
       </Stack>
 
       <Image
-        src={post.coverUrl}
-        alt={post.title}
+        src={activity.coverUrl}
+        alt={activity.title}
         overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
           } 75%)`}
         sx={{

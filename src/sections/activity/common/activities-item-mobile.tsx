@@ -13,11 +13,11 @@ import { ActivityTimeBlock } from './activities-time-block';
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: Activity;
+  activity: Activity;
   onSiderbar?: boolean;
 };
 
-export const ActivityItemMobile = ({ post, onSiderbar }: Props) => {
+export const ActivityItemMobile = ({ activity, onSiderbar }: Props) => {
   return (
     <Stack
       spacing={2}
@@ -26,8 +26,8 @@ export const ActivityItemMobile = ({ post, onSiderbar }: Props) => {
       sx={{ width: 1 }}
     >
       <Image
-        alt={post.title}
-        src={post.coverUrl}
+        alt={activity.title}
+        src={activity.coverUrl}
         sx={{
           width: 80,
           height: 80,
@@ -38,10 +38,10 @@ export const ActivityItemMobile = ({ post, onSiderbar }: Props) => {
 
       <Stack spacing={onSiderbar ? 0.5 : 1}>
         <Link >
-          <TextMaxLine variant={onSiderbar ? 'subtitle2' : 'h6'}>{post.title}</TextMaxLine>
+          <TextMaxLine variant={onSiderbar ? 'subtitle2' : 'h6'}>{activity.title}</TextMaxLine>
         </Link>
 
-        <ActivityTimeBlock createdAt={fDate(post.createdAt)} duration={post.createdAt.toString()} />
+        <ActivityTimeBlock published={fDate(activity.publishedDate)} duration={activity.publishedDate.toString()} />
       </Stack>
     </Stack>
   );

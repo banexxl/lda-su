@@ -33,8 +33,8 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
         src={activity.coverUrl}
         alt={activity.title}
         ratio="1/1"
-        overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
-          } 75%)`}
+        overlay={`linear-gradient(to bottom, ${alpha(theme.palette.primary.main, 0)} 60%, ${theme.palette.primary.main
+          } 99%)`}
       />
 
       <Stack
@@ -51,7 +51,7 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
         }}
       >
         <ActivityTimeBlock
-          createdAt={fDate(activity.createdAt)}
+          published={fDate(activity.publishedDate)}
           // duration={activity.duration}
           sx={{ color: 'inherit', opacity: 0.72 }}
         />

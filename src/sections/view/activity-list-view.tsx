@@ -10,7 +10,7 @@ import { ActivitySidebar } from '../activity/common/activities-sidebar';
 import { ActivityList } from '../activity/activities-list/activities-list';
 import { ActivitySearchMobile } from '../activity/common/activities-search-mobile';
 import { FeaturedActivities } from '../activity/activities-list/featured-activities';
-import { TrendingTopics } from '../activity/activities-list/trending-topics-activities-list';
+import { TrendingTopics } from '../activity/activities-list/trending-activities-list';
 import { Activity } from 'src/types/activity';
 
 // ----------------------------------------------------------------------

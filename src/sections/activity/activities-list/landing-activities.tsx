@@ -19,10 +19,10 @@ import { LandingActivityItemCarousel } from './landing-activities-item-carousel'
 // ----------------------------------------------------------------------
 
 type Props = {
-  posts: Activity[];
+  activities: Activity[];
 };
 
-export const LandingActivity = ({ posts }: Props) => {
+export const LandingActivity = ({ activities }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const carousel = useCarousel({
@@ -59,8 +59,8 @@ export const LandingActivity = ({ posts }: Props) => {
             rightButtonProps={{ sx: { color: 'common.white' } }}
           >
             <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
-              {posts.map((post) => (
-                <LandingActivityItemCarousel key={post._id} post={post} />
+              {activities.map((activity) => (
+                <LandingActivityItemCarousel key={activity._id} activity={activity} />
               ))}
             </Carousel>
           </CarouselArrows>
@@ -78,8 +78,8 @@ export const LandingActivity = ({ posts }: Props) => {
           )}
 
           <Stack spacing={3}>
-            {posts.slice(0, 3).map((post) => (
-              <LandingActivityItem key={post._id} post={post} />
+            {activities.slice(0, 3).map((activity) => (
+              <LandingActivityItem key={activity._id} activity={activity} />
             ))}
           </Stack>
 

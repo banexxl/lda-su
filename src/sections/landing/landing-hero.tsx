@@ -18,7 +18,8 @@ import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 import Carousel, { useCarousel, CarouselDots } from 'src/components/carousel';
 
-import { Project } from 'src/types/project';;
+import { Project } from 'src/types/project'; import Link from 'next/link';
+;
 
 // ----------------------------------------------------------------------
 
@@ -126,8 +127,8 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
     <Box
       sx={{
         ...bgGradient({
-          startColor: `${alpha(theme.palette.common.black, 0)} 0%`,
-          endColor: `${theme.palette.common.black} 75%`,
+          startColor: `${alpha(theme.palette.primary.main, 0)} 70%`,
+          endColor: `${theme.palette.primary.main} 99%`,
         }),
         backgroundColor: alpha(theme.palette.common.black, 0.24),
         top: 0,
@@ -185,7 +186,7 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
 
         </Stack>
 
-        <Button variant="contained" size="large" color="primary" href={project.projectURL}>
+        <Button variant="contained" size="large" color="primary" href={'/projekat' + project.projectURL}>
           Pogledaj
         </Button>
       </Stack>

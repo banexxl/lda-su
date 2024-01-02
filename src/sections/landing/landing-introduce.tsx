@@ -16,8 +16,8 @@ import SvgColor from 'src/components/svg-color';
 import { ActivityPrevAndNext } from '../activity/common/activities-prev-and-next';
 import { LandingActivityItemCarousel } from '../activity/activities-list/landing-activities-item-carousel';
 import { ActivityList } from '../activity/activities-list/activities-list';
-import { TrendingTopicActivityItem } from '../activity/activities-list/trending-topics-activities';
-import { TrendingTopics } from '../activity/activities-list/trending-topics-activities-list';
+import { TrendingTopicActivityItem } from '../activity/activities-list/trending-activities';
+import { TrendingTopics } from '../activity/activities-list/trending-activities-list';
 import { Project } from 'src/types/project';
 import { Activity } from 'src/types/activity';
 

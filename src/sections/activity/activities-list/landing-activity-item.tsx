@@ -14,24 +14,24 @@ import { Activity } from 'src/types/activity';
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: Activity;
+  activity: Activity;
 };
 
-export const LandingActivityItem = ({ post }: Props) => {
+export const LandingActivityItem = ({ activity }: Props) => {
   return (
     <div>
       <Typography variant="caption" sx={{ color: 'primary.main' }}>
-        {fDate(post.createdAt)}
+        {fDate(activity.publishedDate)}
       </Typography>
 
       <Link component={RouterLink} href={paths.alda.alda} sx={{ color: 'common.white' }}>
         <TextMaxLine variant="h5" sx={{ mt: 1, mb: 2 }}>
-          {post.title}
+          {activity.title}
         </TextMaxLine>
       </Link>
 
       <TextMaxLine variant="body2" sx={{ color: 'text.secondary' }}>
-        {post.description1}
+        {activity.description1}
       </TextMaxLine>
 
       <Divider sx={{ borderStyle: 'dashed', mt: 3 }} />
