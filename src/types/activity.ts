@@ -10,7 +10,7 @@ export type ActivityStatusProps = 'completed' | 'in-progress' | 'to-do'
 
 export type Activity = {
   _id: string;
-  link: string;
+  activityURL: string;
   title: string;
   subTitle1: string;
   subTitle2: string;

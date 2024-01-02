@@ -78,14 +78,14 @@ export const Footer = () => {
             <Box sx={{ marginRight: '50px' }}>
               {mdUp ? (
                 <Box>
-                  {aldaList.map((list: any) => (
-                    <ListDesktop key={list.subheader} list={list} />
+                  {aldaList.map((list: any, index: any) => (
+                    <ListDesktop key={index} list={list} />
                   ))}
                 </Box>
               ) : (
                 <Stack spacing={1.5}>
-                  {aldaList.map((list: any) => (
-                    <ListDesktop key={list.subheader} list={list} />
+                  {aldaList.map((list: any, index: any) => (
+                    <ListDesktop key={index} list={list} />
                   ))}
                 </Stack>
               )}
@@ -94,14 +94,14 @@ export const Footer = () => {
             <Box sx={{ gap: '30px' }}>
               <Typography sx={{ marginBottom: '20px' }}>Subotica</Typography>
               <Box >
-                {suboticaLinks.map((list: any) => (
-                  <ListDesktop key={list.subheader} list={list} />
+                {suboticaLinks.map((list: any, index: any) => (
+                  <ListDesktop key={index} list={list} />
                 ))}
               </Box>
               <Typography sx={{ margin: '20px 0px' }}>Europe</Typography>
               <Box sx={{ marginBottom: '30px' }}>
-                {europaLinks.map((list: any) => (
-                  <ListDesktop key={list.subheader} list={list} />
+                {europaLinks.map((list: any, index: any) => (
+                  <ListDesktop key={index} list={list} />
                 ))}
               </Box>
 

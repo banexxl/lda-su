@@ -56,7 +56,7 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
           sx={{ color: 'inherit', opacity: 0.72 }}
         />
 
-        <Link component={RouterLink} href={paths.alda.alda} >
+        <Link component={RouterLink} href={activity.activityURL} >
           <TextMaxLine
             sx={{
               typography: 'h6',

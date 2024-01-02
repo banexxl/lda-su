@@ -20,16 +20,24 @@ export const PublicationsView = ({ publications }: PublicationsViewProps) => {
                <Divider sx={{ mb: '30px' }} />
                <Typography variant="h3" sx={{ color: theme.palette.text.primary, textAlign: 'center' }}>Publikacije</Typography>
                <Box sx={{ width: '100vw' }}>
-                    <Grid columns={2}>
+                    <Grid container spacing={2} sx={{ mt: '20px' }}>
                          {publications.map((publicationUrl, index) => (
-                              <ListItem key={publicationUrl} sx={{ my: '5px' }}>
-                                   <PictureAsPdfIcon sx={{ mr: '5px' }} />
-                                   <Link href={publicationUrl} target="_blank" rel="noopener">
-                                        <Typography sx={{ fontSize: '.8rem', wordWrap: 'break-word' }}>
-                                             {extractFileName(publicationUrl)}
-                                        </Typography>
-                                   </Link>
-                              </ListItem>
+                              <Grid item xs={12} xl={6}>
+                                   <ListItem key={publicationUrl} sx={{ my: '5px' }}>
+                                        <PictureAsPdfIcon sx={{ mr: '5px' }} />
+                                        <Link href={publicationUrl} target="_blank" rel="noopener">
+                                             <Typography
+                                                  sx={{
+                                                       fontSize: '.8rem',
+                                                       overflowWrap: 'break-word',
+                                                       wordBreak: 'break-all',
+                                                       maxWidth: '100%',
+                                                  }}>
+                                                  {extractFileName(publicationUrl)}
+                                             </Typography>
+                                        </Link>
+                                   </ListItem>
+                              </Grid>
                          ))}
                     </Grid>
                </Box>

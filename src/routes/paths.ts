@@ -14,8 +14,8 @@ export const paths = {
   allProjects: '/projekti-svi',
   currentProjects: '/projekti-u-toku',
   publications: '/publikacije',
-  activitiesALDA: '/aktivnosti-alda',
-  activitiesLDA: '/aktivnosti-lda',
+  activitiesALDA: '/aktivnosti',
+  activitiesLDA: '/aktivnosti',
   // LDA Subotica
   alda: {
     alda: 'https://www.alda-europe.eu/',

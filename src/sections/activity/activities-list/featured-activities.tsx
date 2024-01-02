@@ -26,7 +26,7 @@ export const FeaturedActivities = ({ featuredCompletedActivities }: Props) => {
       }}
     >
       <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
-        Istakunte aktivnosti
+        Istaknute aktivnosti
       </Typography>
       <Box
         sx={{

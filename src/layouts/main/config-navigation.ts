@@ -5,12 +5,12 @@ import { paths } from 'src/routes/paths';
 export const aldaLinks = [
   {
     order: '6',
-    subheader: 'ALDA',
+    // subheader: 'ALDA',
     cover: '/assets/images/menu/menu_alda.jpg',
     items: [
       { title: 'ALDA', path: paths.alda.alda },
       { title: 'LDA Knjaževac', path: paths.alda.ldaKnjazevac },
-      { title: 'LDA MOstar', path: paths.alda.ldaMostar },
+      { title: 'LDA Mostar', path: paths.alda.ldaMostar },
       { title: 'LDA Zavidovići', path: paths.alda.ldaZavidovici },
       { title: 'LDA Prijedor', path: paths.alda.ldaPrijedor },
       { title: 'LDA Sisak', path: paths.alda.ldaSisak },
