@@ -14,22 +14,22 @@ const SUMMARY = [
   {
     total: 22,
     description: 'Realizovanih projekata',
-    icon: '/assets/icons/travel/ic_travel_tickets.svg',
+    icon: '/assets/icons/travel/project.svg',
   },
   {
     total: 196,
     description: 'Aktivnosti realizovano',
-    icon: '/assets/icons/travel/ic_travel_booking.svg',
+    icon: '/assets/icons/travel/activity.svg',
   },
   {
     total: 28,
     description: 'Posećenih gradova',
-    icon: '/assets/icons/travel/ic_travel_site_visitors.svg',
+    icon: '/assets/icons/travel/buildings.svg',
   },
   {
     total: 33,
     description: 'Izdatih publikacija',
-    icon: '/assets/icons/travel/ic_travel_verified_hotels.svg',
+    icon: '/assets/icons/travel/document.svg',
   },
 ];
 
