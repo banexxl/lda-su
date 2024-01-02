@@ -17,7 +17,7 @@ type Props = {
   projects: Project[];
 };
 
-export const LandingTourFeatured = ({ projects }: Props) => {
+export const LandingProjectFeatured = ({ projects }: Props) => {
   return (
     <Container
       sx={{
@@ -25,10 +25,10 @@ export const LandingTourFeatured = ({ projects }: Props) => {
       }}
     >
       <Stack spacing={3} sx={{ textAlign: 'center' }}>
-        <Typography variant="h3">Featured Tours</Typography>
+        <Typography variant="h3">Istaknuti projekti</Typography>
 
         <Typography sx={{ color: 'text.secondary' }}>
-          {`Our Featured Tours can help you find the trip that's perfect for you!`}
+          Pogledajte naše istaknute projekte, i povezane aktivnosti
         </Typography>
       </Stack>
 
@@ -57,7 +57,7 @@ export const LandingTourFeatured = ({ projects }: Props) => {
           variant="outlined"
 
         >
-          View All Tours
+          Pogledajte sve projekte
         </Button>
       </Box>
     </Container>

@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import { Activity } from 'src/types/activity';
 
 import { FeaturedActivityItem } from './featured-activities-item';
+import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -20,8 +21,12 @@ export const FeaturedActivities = ({ featuredCompletedActivities }: Props) => {
       sx={{
         pt: { xs: 0, md: 5 },
         pb: 10,
+        alignItems: 'center'
       }}
     >
+      <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
+        Istakunte aktivnosti
+      </Typography>
       <Box
         sx={{
           gap: 3,
@@ -32,6 +37,7 @@ export const FeaturedActivities = ({ featuredCompletedActivities }: Props) => {
           },
         }}
       >
+
         <FeaturedActivityItem activity={featuredActivity} largeActivity />
 
         <Box

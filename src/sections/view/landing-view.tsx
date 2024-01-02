@@ -15,6 +15,7 @@ import { FeaturedActivities } from '../activity/activities-list/featured-activit
 import { LandingFavoriteDestinations } from '../landing/landing-favorite-destinations';
 import { Project } from 'src/types/project';
 import { Activity } from 'src/types/activity';
+import { LandingProjectFeatured } from '../landing/landing-project-featured';
 
 
 // ----------------------------------------------------------------------
@@ -23,7 +24,8 @@ type LandingViewProps = {
   activeProjects: Project[],
   allActivities: Activity[],
   inProgressActivities: Activity[],
-  completedActivities: Activity[], featuredActivities: Activity[],
+  completedActivities: Activity[],
+  featuredActivities: Activity[],
   featuredCompletedActivities: Activity[],
   trendingActivities: Activity[],
 }
@@ -76,9 +78,9 @@ export const LandingView = ({
 
       {/* <LandingProjectsByCity projects={[]} /> */}
 
-      {/* <LandingProjectFeatured projects={[]} /> */}
+      <LandingProjectFeatured projects={activeProjects} />
 
-      {/* <FeaturedActivities featuredCompletedActivities={featuredCompletedActivities} /> */}
+      <FeaturedActivities featuredCompletedActivities={featuredCompletedActivities} />
 
       {/* <Newsletter /> */}
     </Box>
