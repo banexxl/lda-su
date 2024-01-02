@@ -1,11 +1,6 @@
 "use client"
-import { Box, CircularProgress, Divider, Grid, ImageListItem, Typography, useTheme } from "@mui/material";
-// import CardMedia from '@mui/material/CardMedia';
-// import { useSearchParams } from "next/navigation";
-// import { useEffect, useState } from "react";
-// import backgroundURL from "../../../public/background-scaled-wpv_1024x.jpg"
-// import profileURL from "../../../public/assets/team/stanka-parac-damjanovic.jpg"
-// import Loading from "src/app/loading";
+import { Box, Typography, useTheme } from "@mui/material";
+import backgroundURL from "../../../public/background-scaled-wpv_1024x.jpg"
 import { profilesData } from "src/_mock/profile-data";
 import { useResponsive } from "src/hooks/use-responsive";
 
@@ -19,14 +14,17 @@ export default function ProfileView({ params }: any) {
      return (
           <Box
                sx={{
-                    width: mdUp ? '90vw' : '90%',
-                    margin: mdUp ? '50px' : '20px',
+                    // width: mdUp ? '100vw' : '90%',
+                    // margin: mdUp ? '50px' : '20px',
                     display: 'flex',
                     justifyContent: 'flex-start',
                     gap: '50px',
                     borderRadius: '10px',
                     padding: mdUp ? '20px' : '0px',
-                    boxShadow: `5px 10px 20px ${theme.palette.primary.dark} inset`
+                    boxShadow: `5px 10px 20px ${theme.palette.primary.dark} inset`,
+                    backgroundImage: `url(${backgroundURL.src})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
                }}
           >
 
