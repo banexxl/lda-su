@@ -12,7 +12,7 @@ import { CountUp } from 'src/components/count-up';
 
 const SUMMARY = [
   {
-    total: 130,
+    total: 22,
     description: 'Realizovanih projekata',
     icon: '/assets/icons/travel/ic_travel_tickets.svg',
   },
@@ -22,12 +22,12 @@ const SUMMARY = [
     icon: '/assets/icons/travel/ic_travel_booking.svg',
   },
   {
-    total: 10670,
+    total: 28,
     description: 'Posećenih gradova',
     icon: '/assets/icons/travel/ic_travel_site_visitors.svg',
   },
   {
-    total: 877,
+    total: 33,
     description: 'Izdatih publikacija',
     icon: '/assets/icons/travel/ic_travel_verified_hotels.svg',
   },

@@ -17,10 +17,10 @@ const imageURLs = [
 ]
 
 const SUMMARY = [
-  { name: 'Realizovanih projekata', number: 130 },
+  { name: 'Realizovanih projekata', number: 22 },
   { name: 'Projektnih aktivnosti', number: 196 },
-  { name: 'Posećenih gradova', number: 10679 },
-  { name: 'Izdatih publikacija', number: 877 },
+  { name: 'Posećenih gradova', number: 28 },
+  { name: 'Izdatih publikacija', number: 33 },
 ];
 
 // ----------------------------------------------------------------------
