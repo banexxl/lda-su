@@ -1,4 +1,4 @@
-import { ProjectsView } from 'src/sections/view/project-list-view';
+import { ProjectsSummariesView } from 'src/sections/view/project-summaries-list-view';
 import projectsServices from 'src/services/project-services';
 
 // ----------------------------------------------------------------------
@@ -7,17 +7,16 @@ export const metadata = {
   title: 'LDA Subotica: Projects',
 };
 
-const getAllProjects = () => {
+const getAllProjectSummaries = () => {
 
-  const projects = projectsServices().getAllProjects()
-  return projects
+  const projectSummaries = projectsServices().getAllProjectSummaries()
+  return projectSummaries
 
 }
 
 export default async function ProjectsPage() {
-  let allProjects: any = await getAllProjects()
-  console.log('aaaaa', allProjects);
+  let allProjectSummaries: any = await getAllProjectSummaries()
 
-  return <ProjectsView allProjects={allProjects} />; // Render ProjectsView component with fetched projects
+  return <ProjectsSummariesView allProjects={allProjectSummaries} />; // Render ProjectsView component with fetched projects
 }
 

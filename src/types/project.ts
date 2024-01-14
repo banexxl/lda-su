@@ -1,5 +1,5 @@
 type ProjectType = 'economy' | 'democracy' | 'eu-integrations' | 'cultural-heritage' | 'interethnic-dialogue' | 'migrations' | 'youth' | 'other'
-type ProjectStatus = 'completed' | 'in-progress'
+export type ProjectStatus = 'completed' | 'in-progress'
 
 export type Project = {
   _id: string;
@@ -22,10 +22,9 @@ export type Project = {
   published: Date;
   startDateTime: Date,
   endDateTime: Date,
-  favorited: boolean;
-  favoritedNumber: number;
+  // favorited: boolean;
+  // favoritedNumber: number;
   organizers: string[];
-  phoneNumberLDA: string;
   applicants: string[];
   donators: string[];
   publications: string[];

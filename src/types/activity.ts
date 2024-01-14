@@ -21,8 +21,8 @@ export type Activity = {
   toDate: Date;
   category: string;
   coverUrl: string;
-  favorited: boolean;
-  favoritedNumber: number;
+  // favorited: boolean;
+  // favoritedNumber: number;
   description1: string;
   description2: string;
   description3: string;

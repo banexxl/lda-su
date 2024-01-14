@@ -10,11 +10,11 @@ import { _tours } from 'src/_mock';
 
 // import { Newsletter } from '../newsletter';
 import { Filters } from '../filters/filters';
-import { ProjectList } from '../project-list/project-list';
+import { ProjectList } from '../project-summaries-list/project-summary-list';
 
 // ----------------------------------------------------------------------
 
-export const ProjectsView = ({ allProjects }: any) => {
+export const ProjectsSummariesView = ({ allProjects }: any) => {
 
   const loading = useBoolean(true);
 
@@ -36,7 +36,7 @@ export const ProjectsView = ({ allProjects }: any) => {
           }}
         /> */}
 
-        <ProjectList projects={allProjects} loading={loading.value} />
+        <ProjectList projectSummary={allProjects} loading={loading.value} />
       </Container>
 
       {/* <Newsletter /> */}

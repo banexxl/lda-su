@@ -2,6 +2,7 @@ import { LandingView } from 'src/sections/view/landing-view';
 import activityServices from 'src/services/activities-services';
 import projectsServices from 'src/services/project-services';
 import { Activity } from 'src/types/activity';
+import { ProjectSummary } from 'src/types/projectSummary';
 
 // ----------------------------------------------------------------------
 
@@ -66,21 +67,33 @@ const retrieveInProgressActivities = async () => {
   }
 };
 
-
-const retrieveAllProjects = async () => {
+const retrieveAllProjectSummaries = async () => {
   try {
-    const completedActivities: Activity[] | undefined = await projectsServices().getAllProjects();
+    const allProjectSummaries: ProjectSummary[] | undefined = await projectsServices().getAllProjectSummaries();
+    if (allProjectSummaries) {
+      return allProjectSummaries;
+    } else {
+      throw new Error('Failed to retrieve allProjectSummaries');
+    }
+  } catch (error) {
+    console.error('Error retrieving allProjectSummaries:', error);
+    throw error;
+  }
+};
+
+const retrieveActiveProjectSummaries = async () => {
+  try {
+    const completedActivities: ProjectSummary[] | undefined = await projectsServices().getInProgressProjectSummaries();
     if (completedActivities) {
       return completedActivities;
     } else {
-      throw new Error('Failed to retrieve projects');
+      throw new Error('Failed to retrieve activities');
     }
   } catch (error) {
     console.error('Error retrieving activities:', error);
     throw error;
   }
 };
-
 
 export default async function LandingPage() {
 
@@ -89,7 +102,8 @@ export default async function LandingPage() {
   const featuredCompletedActivities: Activity[] = await retrieveFeaturedCompletedActivities()
   const inProgressActivities: Activity[] = await retrieveInProgressActivities()
   const trendingActivities: Activity[] = await retrieveFeaturedCompletedActivities()
-  const activeProjects: any = await retrieveAllProjects()
+  const activeProjectSummaries: any = await retrieveActiveProjectSummaries()
+  const allProjectSummaries: any = await retrieveAllProjectSummaries()
 
-  return <LandingView activeProjects={activeProjects} allActivities={allActivities} inProgressActivities={inProgressActivities} completedActivities={completedActivities} featuredActivities={trendingActivities} featuredCompletedActivities={featuredCompletedActivities} trendingActivities={trendingActivities} />;
-}
+  return <LandingView activeProjectSummaries={activeProjectSummaries} allActivities={allActivities} inProgressActivities={inProgressActivities} completedActivities={completedActivities} featuredActivities={trendingActivities} featuredCompletedActivities={featuredCompletedActivities} trendingActivities={trendingActivities} allProjectSummaries={allProjectSummaries} />;
+} 

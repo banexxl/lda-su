@@ -8,32 +8,27 @@ import Divider from '@mui/material/Divider';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
-
-import { fCurrency } from 'src/utils/format-number';
-
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
-import TextMaxLine from 'src/components/text-max-line';
-
-import { Project } from 'src/types/project'; import { Backdrop, Modal } from '@mui/material';
+import { Backdrop, Modal } from '@mui/material';
+import { ProjectSummary } from 'src/types/projectSummary';
 ;
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  project: Project;
+  projectSummary: ProjectSummary;
 };
 
-export const ProjectItem = ({ project }: Props) => {
-  const { favorited, title, coverUrl, locations, startDateTime, endDateTime } = project;
-  const [open, setOpen] = useState(false);
-  const [favorite, setFavorite] = useState(favorited);
+export const ProjectSummaryItem = ({ projectSummary }: Props) => {
 
-  const handleChangeFavorite = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setFavorite(event.target.checked);
-  }, []);
+  const { projectSummaryTitle, projectSummaryCoverURL } = projectSummary;
+  const [open, setOpen] = useState(false);
+  // const [favorite, setFavorite] = useState(favorited);
+
+  // const handleChangeFavorite = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFavorite(event.target.checked);
+  // }, []);
 
   return (
     <Card>
@@ -76,26 +71,26 @@ export const ProjectItem = ({ project }: Props) => {
           {fCurrency(price)} */}
         </Stack>
 
-        <Checkbox
+        {/* <Checkbox
           color="error"
           checked={favorite}
           onChange={handleChangeFavorite}
           icon={<Iconify icon="carbon:favorite" />}
           checkedIcon={<Iconify icon="carbon:favorite-filled" />}
           sx={{ color: 'common.white' }}
-        />
+        /> */}
       </Stack>
 
-      <Image alt={'cover image'} src={coverUrl} ratio="1/1" onClick={() => setOpen(true)} />
+      <Image alt={'cover image'} src={projectSummaryCoverURL} ratio="1/1" onClick={() => setOpen(true)} />
 
       <Stack spacing={0.5} sx={{ p: 2.5 }}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           <Link
-            href={`/projekat/${project.projectURL}`}
+            href={`/pregled-projekta/${projectSummary.projectSummaryURL}`}
             sx={{
               cursor: 'pointer'
             }}>
-            {title}
+            {projectSummaryTitle}
           </Link>
         </Typography>
 
@@ -109,7 +104,7 @@ export const ProjectItem = ({ project }: Props) => {
       <Divider sx={{ borderStyle: 'dashed' }} />
 
       <Stack direction="row" alignItems="center" sx={{ p: 2.5 }}>
-        <Stack
+        {/* <Stack
           flexGrow={1}
           direction="row"
           alignItems="center"
@@ -117,7 +112,7 @@ export const ProjectItem = ({ project }: Props) => {
         >
           <Iconify icon="carbon:time" width={16} sx={{ mr: 1 }} /> Start date: {moment(startDateTime).format('YYYY/MM/DD')}
           <Iconify icon="carbon:time" width={16} sx={{ mr: 1 }} /> End date: {moment(endDateTime).format('YYYY/MM/DD')}
-        </Stack>
+        </Stack> */}
 
         <Stack spacing={0.5} direction="row" alignItems="center">
           <Iconify icon="carbon:star-filled" sx={{ color: 'warning.main' }} />
@@ -150,7 +145,7 @@ export const ProjectItem = ({ project }: Props) => {
             boxShadow: 24,
             p: 4,
           }}>
-            <Image alt={'cover image'} src={coverUrl} ratio="1/1" onClick={() => setOpen(false)} height={650} />
+            <Image alt={'cover image'} src={projectSummaryCoverURL} ratio="1/1" onClick={() => setOpen(false)} height={650} />
           </Box>
         </Modal>
       </Backdrop>

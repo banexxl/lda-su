@@ -1,6 +1,7 @@
 import { Project } from "src/types/project"
 import { MongoClient } from "mongodb"
 import { ObjectId } from "mongodb"
+import { ProjectSummary } from "src/types/projectSummary";
 
 const projectsServices = () => {
 
@@ -18,6 +19,52 @@ const projectsServices = () => {
                await client.close();
           }
      };
+
+     const getAllProjectSummaries = async () => {
+
+          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+
+          try {
+               const db = client.db('LDA_DB');
+               const data: any = await db.collection('ProjectSummaries').find({}).toArray()
+               return data;
+          } catch (error: any) {
+               console.log({ message: error.message })
+          } finally {
+               await client.close();
+          }
+     }
+
+     const getInProgressProjectSummaries = async () => {
+
+          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+
+          try {
+               const db = client.db('LDA_DB');
+               const data: any = await db.collection('ProjectSummaries').find({ 'status': 'in-progress' }).toArray()
+               return data;
+          } catch (error: any) {
+               console.log({ message: error.message })
+          } finally {
+               await client.close();
+          }
+     };
+
+     const getProjectSummaryByLink = async (link: string) => {
+
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+
+          try {
+               const db = client.db('LDA_DB')
+               let data: ProjectSummary = await db.collection('ProjectSummaries').find({ 'projectSummaryURL': link }).toArray()
+               return data
+          } catch (error: any) {
+               console.log({ message: error.message })
+          }
+          finally {
+               await client.close();
+          }
+     }
 
      const getAllProjects = async () => {
 
@@ -67,13 +114,13 @@ const projectsServices = () => {
           }
      }
 
-     const getProjectByLink = async (link: string) => {
+     const getProjectByLink = async (projectURL: string) => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
                const db = client.db('LDA_DB')
-               let data: Project[] = await db.collection('Projects').find({ 'link': link }).toArray()
+               let data: Project[] = await db.collection('Projects').find({ 'projectURL': projectURL }).toArray()
                return data[0]
           } catch (error: any) {
                console.log({ message: error.message })
@@ -136,53 +183,6 @@ const projectsServices = () => {
           }
      }
 
-     const getAllMainCategories = async () => {
-
-          const client = new MongoClient(process.env.MONGODB_URI!);
-
-          try {
-               await client.connect();
-               const db = client.db('LDA_DB');
-               const mainCategories = await db.collection('Projects').distinct('mainCategory')
-               return mainCategories;
-          } catch (error: any) {
-               console.error('Error fetching main categories:', error);
-               return { message: error.message };
-          } finally {
-               await client.close();
-          }
-     }
-
-     const getAllLogos = async () => {
-
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               const db = client.db('LDA_DB')
-               let data: Project[] = await db.collection('LogoURLs').find().toArray()
-               return data
-          } catch (error: any) {
-               return { message: error.message }
-          }
-          finally {
-               await client.close();
-          }
-     }
-
-     const getProductById = async (_id: any) => {
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-          try {
-               const db = client.db('LDA_DB')
-               let product: Project = await db.collection('Projects').findOne({ _id: new ObjectId(_id) })
-               return product
-          } catch (error: any) {
-               return { message: error.message }
-          }
-          finally {
-               await client.close();
-          }
-     }
-
      const getProjectsByManufacturer = async (manufacturer: string) => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
@@ -229,24 +229,6 @@ const projectsServices = () => {
           }
      }
 
-     const getProjectsByDiscount = async () => {
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-          try {
-               const db = client.db('LDA_DB')
-               let products: Project[] = await db.collection('Projects')
-                    .find({ "discount": true })
-                    .limit(10)
-                    .toArray()
-
-               return products
-          } catch (error: any) {
-               return { message: error.message }
-          }
-          finally {
-               await client.close();
-          }
-     }
-
      const getLimitedProjectsByMainCategory = async (mainCategory: string, loadedParts: number) => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
@@ -267,88 +249,19 @@ const projectsServices = () => {
           }
      }
 
-     const getProjectsByMainCategoryMidCategory = async (mainCategory: string, midCategory: string, loadedParts: any) => {
-
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-          try {
-               const db = client.db('LDA_DB')
-               let products: Project[] = await db.collection('Projects').
-                    find({ mainCategory: mainCategory, midCategory: midCategory })
-                    .skip(10 * (loadedParts - 1)) // Adjust the skip based on loadedParts
-                    .limit(10)
-                    .toArray()
-               return products
-          } catch (error: any) {
-               return { message: error.message }
-          }
-          finally {
-               await client.close();
-          }
-     }
-
-     const getProjectsByMainCategoryMidCategorySubCategory = async (mainCategory: string, midCategory: string, subCategory: string, loadedParts: any) => {
-
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               const db = client.db('LDA_DB')
-               let products: Project[] = await db.collection('Projects')
-                    .find({ mainCategory: mainCategory, midCategory: midCategory, subCategory: subCategory })
-                    .skip(10 * (loadedParts - 1)) // Adjust the skip based on loadedParts
-                    .limit(10)
-                    .toArray()
-               return products
-          } catch (error: any) {
-               return { message: error.message }
-          }
-          finally {
-               await client.close();
-          }
-     }
-
-     const getAllManufacturers = async () => {
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               await client.connect();
-               const db = client.db('LDA_DB');
-               const productsCollection = db.collection('Projects');
-
-               const manufacturers = await new Promise((resolve, reject) => {
-                    productsCollection.distinct("manufacturer", (error: any, manufacturers: any) => {
-                         if (error) {
-                              reject(error);
-                         } else {
-                              resolve(manufacturers);
-                         }
-                    });
-               });
-               return manufacturers;
-          } catch (error) {
-               return { message: error };
-          } finally {
-               client.close();
-          }
-     }
-
-
      return {
           getAllPublications,
           getAllProjects,
           getInProgressProjects,
           getProjectByLink,
           getAllProjectLinks,
-          getAllMainCategories,
-          getProductById,
           getProjectsByNameAndOrManufacturer,
           getProjectsByManufacturer,
-          getProjectsByDiscount,
           getLimitedProjectsByMainCategory,
-          getProjectsByMainCategoryMidCategory,
-          getProjectsByMainCategoryMidCategorySubCategory,
-          getAllLogos,
-          getAllManufacturers,
           getRandomHerbalabProjects,
+          getAllProjectSummaries,
+          getProjectSummaryByLink,
+          getInProgressProjectSummaries
      }
 }
 

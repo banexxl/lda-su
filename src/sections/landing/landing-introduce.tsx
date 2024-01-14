@@ -20,10 +20,11 @@ import { TrendingTopicActivityItem } from '../activity/activities-list/trending-
 import { TrendingTopics } from '../activity/activities-list/trending-activities-list';
 import { Project } from 'src/types/project';
 import { Activity } from 'src/types/activity';
+import { ProjectSummary } from 'src/types/projectSummary';
 
 
 type LandingViewIntroProps = {
-  activeProjects: Project[];
+  activeProjectSummaries: ProjectSummary[];
   allActivities: Activity[];
   completedActivities: Activity[];
   featuredActivities: Activity[];
@@ -34,7 +35,7 @@ type LandingViewIntroProps = {
 
 
 
-export const LandingIntroduce = ({ activeProjects, allActivities, completedActivities, featuredActivities, featuredCompletedActivities, inProgressActivities, trendingActivities }: LandingViewIntroProps) => {
+export const LandingIntroduce = ({ activeProjectSummaries, allActivities, completedActivities, featuredActivities, featuredCompletedActivities, inProgressActivities, trendingActivities }: LandingViewIntroProps) => {
 
   const mdUp = useResponsive('up', 'md');
 

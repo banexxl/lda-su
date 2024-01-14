@@ -1,4 +1,4 @@
-import { ProjectsView } from 'src/sections/view/project-list-view';
+import { ProjectsSummariesView } from 'src/sections/view/project-summaries-list-view';
 import projectsServices from 'src/services/project-services';
 import { Project } from 'src/types/project';
 
@@ -15,6 +15,6 @@ const getAllProjects = () => {
 }
 export default async function ProjectsPage() {
   let allProjects: any = await getAllProjects()
-  return <ProjectsView allProjects={allProjects} />; // Render ProjectsView component with fetched projects
+  return <ProjectsSummariesView allProjects={allProjects} />; // Render ProjectsView component with fetched projects
 }
 

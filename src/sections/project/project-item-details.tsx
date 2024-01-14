@@ -13,9 +13,8 @@ import { useRouter } from 'src/routes/hooks';
 
 import { fCurrency } from 'src/utils/format-number';
 
-import { Project } from 'src/types/project';;
-
 import { FilterTime } from '../filters/filter-time';
+import { Project } from 'src/types/project';
 
 // ----------------------------------------------------------------------
 

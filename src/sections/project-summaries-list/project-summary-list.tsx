@@ -1,19 +1,17 @@
 import Box from '@mui/material/Box';
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
-
-import { Project } from 'src/types/project';;
-
-import { ProjectItem } from './project-item';
-import { ProjectItemSkeleton } from './project-item-skeleton';
+import { ProjectSummaryItem } from './project-summary-item';
+import { ProjectSummaryItemSkeleton } from './project-summary-item-skeleton';
+import { ProjectSummary } from 'src/types/projectSummary';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  projects: Project[];
+  projectSummary: ProjectSummary[];
   loading?: boolean;
 };
 
-export const ProjectList = ({ projects, loading }: Props) => {
+export const ProjectList = ({ projectSummary, loading }: Props) => {
   return (
     <>
       <Box
@@ -28,11 +26,11 @@ export const ProjectList = ({ projects, loading }: Props) => {
           },
         }}
       >
-        {(loading ? [...Array(12)] : projects).map((project, index) =>
-          project ? (
-            <ProjectItem key={project._id} project={project} />
+        {(loading ? [...Array(12)] : projectSummary).map((projectSummary, index) =>
+          projectSummary ? (
+            <ProjectSummaryItem key={projectSummary._id} projectSummary={projectSummary} />
           ) : (
-            <ProjectItemSkeleton key={index} />
+            <ProjectSummaryItemSkeleton key={index} />
           )
         )}
       </Box>

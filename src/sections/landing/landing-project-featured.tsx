@@ -9,15 +9,16 @@ import { RouterLink } from 'src/routes/components';
 
 import { Project } from 'src/types/project';;
 
-import { ProjectItem } from '../project-list/project-item';
+import { ProjectSummaryItem } from '../project-summaries-list/project-summary-item';
+import { ProjectSummary } from 'src/types/projectSummary';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  projects: Project[];
+  projectSummaries: ProjectSummary[];
 };
 
-export const LandingProjectFeatured = ({ projects }: Props) => {
+export const LandingProjectSummariesFeatured = ({ projectSummaries }: Props) => {
   return (
     <Container
       sx={{
@@ -44,8 +45,8 @@ export const LandingProjectFeatured = ({ projects }: Props) => {
           },
         }}
       >
-        {projects.map((project: any) => (
-          <ProjectItem key={project.id} project={project} />
+        {projectSummaries.map((projectSummary: any) => (
+          <ProjectSummaryItem key={projectSummary.id} projectSummary={projectSummary} />
         ))}
       </Box>
 

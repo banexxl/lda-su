@@ -5,7 +5,7 @@ import Card, { CardProps } from '@mui/material/Card';
 
 // ----------------------------------------------------------------------
 
-export const ProjectItemSkeleton = ({ ...other }: CardProps) => {
+export const ProjectSummaryItemSkeleton = ({ ...other }: CardProps) => {
   return (
     <Card {...other}>
       <Skeleton variant="rectangular" sx={{ width: 1, height: 240 }} />

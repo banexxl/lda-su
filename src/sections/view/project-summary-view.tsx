@@ -20,22 +20,20 @@ import Iconify from 'src/components/iconify';
 import { SplashScreen } from 'src/components/loading-screen';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 import { FaViber } from "react-icons/fa";
-// import { Newsletter } from '../newsletter';
-import { ProjectListSimilar } from '../project-summaries-list/project-summary-list-similar';
-import { ProjectDetailsHeader } from '../project/project-item-details-header';
-import { ProjectDetailsSummary } from '../project/project-item-details-summary';
-import { ProjectDetailsGallery } from '../project/project-item-details-gallery';
-import { ProjectDetails } from '../project/project-item-details';
-import { Project } from 'src/types/project';
+import { ProjectSummaryDetailsGallery } from '../project-summary/project-summary-details-gallery';
+import { ProjectSummaryDetails } from '../project-summary/project-summary-details';
 import { EmailIcon, EmailShareButton, FacebookIcon, FacebookShareButton, LinkedinShareButton, TwitterShareButton, ViberIcon, ViberShareButton } from 'next-share';
+import { ProjectSummary } from 'src/types/projectSummary';
+import { ProjectSummaryDetailsHeader } from '../project-summary/project-summary-details-header';
+import { ProjectSummaryDetailsSummary } from '../project-summary/project-summary-details-summary';
 
 // ----------------------------------------------------------------------
 
-type ProjectProps = {
-  project: Project
+type ProjectSummaryProps = {
+  projectSummary: ProjectSummary
 }
 
-export const ProjectView = ({ project }: ProjectProps) => {
+export const ProjectSummaryView = ({ projectSummary }: ProjectSummaryProps) => {
 
   const loading = useBoolean(true);
   const theme = useTheme()
@@ -54,28 +52,29 @@ export const ProjectView = ({ project }: ProjectProps) => {
   return (
     <>
       <Container sx={{ overflow: 'hidden', color: theme.palette.text.primary }}>
+
         <CustomBreadcrumbs
           links={[
             { name: 'Home', href: '/' },
             { name: 'Projects', href: paths.projects },
-            { name: project.title },
+            { name: projectSummary.projectSummaryTitle },
           ]}
           sx={{ mt: 3, mb: 5, color: theme.palette.text.primary }}
         />
 
-        <ProjectDetailsGallery galery={project.gallery} />
+        <ProjectSummaryDetailsGallery gallery={projectSummary.gallery} />
 
         <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse">
           <Grid xs={12} md={5} lg={4}>
-            <ProjectDetails project={project} />
+            <ProjectSummaryDetails projectSummary={projectSummary} />
           </Grid>
 
           <Grid xs={12} md={7} lg={8}>
-            <ProjectDetailsHeader project={project} />
+            <ProjectSummaryDetailsHeader projectSummary={projectSummary} />
 
             <Divider sx={{ my: 5 }} />
 
-            <ProjectDetailsSummary project={project} />
+            <ProjectSummaryDetailsSummary projectSummary={projectSummary} />
 
             <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
               <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5, color: theme.palette.text.primary }}>

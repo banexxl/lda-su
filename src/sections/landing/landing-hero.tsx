@@ -19,15 +19,16 @@ import TextMaxLine from 'src/components/text-max-line';
 import Carousel, { useCarousel, CarouselDots } from 'src/components/carousel';
 
 import { Project } from 'src/types/project'; import Link from 'next/link';
+import { ProjectSummary } from 'src/types/projectSummary';
 ;
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  projects: Project[];
+  projectSummaries: ProjectSummary[];
 };
 
-export const ProjectLandingHero = ({ projects }: Props) => {
+export const ProjectLandingHero = ({ projectSummaries }: Props) => {
 
   const mdUp = useResponsive('up', 'md');
 
@@ -68,14 +69,14 @@ export const ProjectLandingHero = ({ projects }: Props) => {
 
   return (
     <Box sx={{ minHeight: { md: '100vh' }, position: 'relative' }}>
-      {!!projects.length && (
+      {!!projectSummaries.length && (
         <Carousel
           {...carouselLarge.carouselSettings}
           asNavFor={carouselThumb.nav}
           ref={carouselLarge.carouselRef}
         >
-          {projects.map((project) => (
-            <CarouselItem key={project._id} project={project} />
+          {projectSummaries.map((projectSummary) => (
+            <CarouselItem key={projectSummary._id} projectSummary={projectSummary} />
           ))}
         </Carousel>
       )}
@@ -92,16 +93,16 @@ export const ProjectLandingHero = ({ projects }: Props) => {
             right: { xs: 20, lg: '6%', xl: '10%' },
           }}
         >
-          {!!projects.length && (
+          {!!projectSummaries.length && (
             <Carousel
               {...carouselThumb.carouselSettings}
               asNavFor={carouselLarge.nav}
               ref={carouselThumb.carouselRef}
             >
-              {projects.map((project, index) => (
+              {projectSummaries.map((projectSummary, index) => (
                 <ThumbnailItem
-                  key={project._id}
-                  project={project}
+                  key={projectSummary._id}
+                  projectSummary={projectSummary}
                   selected={carouselLarge.currentIndex === index}
                 />
               ))}
@@ -116,13 +117,13 @@ export const ProjectLandingHero = ({ projects }: Props) => {
 // ----------------------------------------------------------------------
 
 type CarouselItemProps = {
-  project: Project;
+  projectSummary: ProjectSummary;
 };
 
-const CarouselItem = ({ project }: CarouselItemProps) => {
+const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
   const theme = useTheme();
-  const dateParts = project.startDateTime.toString().split(' ');
-  const extractedDateString = dateParts.slice(0, 4).join(' ');
+  // const dateParts = project.startDateTime.toString().split(' ');
+  // const extractedDateString = dateParts.slice(0, 4).join(' ');
   const renderOverlay = (
     <Box
       sx={{
@@ -160,12 +161,12 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
           position: { md: 'absolute' },
         }}
       >
-        <Typography variant="overline" sx={{ color: 'info.main', mb: 5 }}>
+        {/* <Typography variant="overline" sx={{ color: 'info.main', mb: 5 }}>
           {project.locations.join(', ')}
-        </Typography>
+        </Typography> */}
 
         <Typography variant="h1" sx={{ maxWidth: 480 }}>
-          {project.title}
+          {projectSummary.projectSummaryTitle}
         </Typography>
 
         <Stack
@@ -174,19 +175,19 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
           direction={{ xs: 'column', md: 'row' }}
           sx={{ my: 5 }}
         >
-          <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
+          {/* <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
             <Iconify icon="carbon:time" width={24} sx={{ mr: 1, color: 'primary.main' }} />
             {extractedDateString}
-          </Stack>
+          </Stack> */}
 
-          <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
+          {/* <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
             <Iconify icon="carbon:star" width={24} sx={{ mr: 1, color: 'primary.main' }} />
             {`${project.favoritedNumber} reviews`}
-          </Stack>
+          </Stack> */}
 
         </Stack>
 
-        <Button variant="contained" size="large" color="primary" href={'/projekat' + project.projectURL}>
+        <Button variant="contained" size="large" color="primary" href={'/pregled-projekta/' + projectSummary.projectSummaryURL}>
           Pogledaj
         </Button>
       </Stack>
@@ -205,7 +206,7 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
 
         <Image
           alt="hero"
-          src={project.coverUrl}
+          src={projectSummary.projectSummaryCoverURL}
           sx={{
             width: 1,
             height: { xs: 1, md: '100vh' },
@@ -219,11 +220,11 @@ const CarouselItem = ({ project }: CarouselItemProps) => {
 // ----------------------------------------------------------------------
 
 type ThumbnailItemProps = {
-  project: Project;
+  projectSummary: ProjectSummary;
   selected?: boolean;
 };
 
-const ThumbnailItem = ({ project, selected }: ThumbnailItemProps) => {
+const ThumbnailItem = ({ projectSummary, selected }: ThumbnailItemProps) => {
   const theme = useTheme();
 
   return (
@@ -245,12 +246,13 @@ const ThumbnailItem = ({ project, selected }: ThumbnailItemProps) => {
         }),
       }}
     >
-      <Avatar src={project.coverUrl} sx={{ width: 48, height: 48 }} />
+      <Avatar src={projectSummary.projectSummaryCoverURL} sx={{ width: 48, height: 48 }} />
 
       <Stack spacing={0.5}>
-        <TextMaxLine variant="h6" line={1}>
-          {project.locations}
-        </TextMaxLine>
+        lokacije
+        {/* <TextMaxLine variant="h6" line={1}>
+          {projectSummary.locations}
+        </TextMaxLine> */}
 
       </Stack>
     </Stack>

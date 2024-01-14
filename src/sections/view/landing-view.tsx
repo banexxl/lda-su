@@ -1,27 +1,22 @@
 'use client';
 
 import Box from '@mui/material/Box';
-import { alpha } from '@mui/material/styles';
-import Container from '@mui/material/Container';
-
-import { _tours, _travelPosts, _testimonials } from 'src/_mock';
-
-// import { Newsletter } from '../newsletter';
-import { Filters } from '../filters/filters';
 import { ProjectLandingHero } from '../landing/landing-hero';
 import { LandingSummary } from '../landing/landing-summary';
 import { LandingIntroduce } from '../landing/landing-introduce';
 import { FeaturedActivities } from '../activity/activities-list/featured-activities';
 import { LandingFavoriteDestinations } from '../landing/landing-favorite-destinations';
-import { Project } from 'src/types/project';
 import { Activity } from 'src/types/activity';
-import { LandingProjectFeatured } from '../landing/landing-project-featured';
+import { LandingProjectSummariesFeatured } from '../landing/landing-project-featured';
+import { LandingProjectsByCity } from '../landing/landing-project-by-city';
+import { ProjectSummary } from 'src/types/projectSummary';
 
 
 // ----------------------------------------------------------------------
 
 type LandingViewProps = {
-  activeProjects: Project[],
+  activeProjectSummaries: ProjectSummary[],
+  allProjectSummaries: ProjectSummary[],
   allActivities: Activity[],
   inProgressActivities: Activity[],
   completedActivities: Activity[],
@@ -33,7 +28,8 @@ type LandingViewProps = {
 
 
 export const LandingView = ({
-  activeProjects,
+  activeProjectSummaries,
+  allProjectSummaries,
   allActivities,
   completedActivities,
   featuredActivities,
@@ -47,7 +43,7 @@ export const LandingView = ({
 
       <Box sx={{ position: 'relative' }}>
 
-        <ProjectLandingHero projects={activeProjects} />
+        <ProjectLandingHero projectSummaries={activeProjectSummaries} />
 
         {/* <Container
           sx={{
@@ -72,13 +68,13 @@ export const LandingView = ({
         </Container> */}
       </Box>
 
-      <LandingIntroduce activeProjects={activeProjects} allActivities={allActivities} completedActivities={completedActivities} featuredActivities={featuredActivities} featuredCompletedActivities={featuredCompletedActivities} inProgressActivities={inProgressActivities} trendingActivities={trendingActivities} />
+      <LandingIntroduce activeProjectSummaries={activeProjectSummaries} allActivities={allActivities} completedActivities={completedActivities} featuredActivities={featuredActivities} featuredCompletedActivities={featuredCompletedActivities} inProgressActivities={inProgressActivities} trendingActivities={trendingActivities} />
 
       <LandingSummary />
 
-      {/* <LandingProjectsByCity projects={[]} /> */}
+      <LandingProjectsByCity projects={[]} />
 
-      <LandingProjectFeatured projects={activeProjects} />
+      <LandingProjectSummariesFeatured projectSummaries={allProjectSummaries} />
 
       <FeaturedActivities featuredCompletedActivities={featuredCompletedActivities} />
 

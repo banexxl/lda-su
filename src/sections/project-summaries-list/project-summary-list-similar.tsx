@@ -11,17 +11,16 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
 
-import { Project } from 'src/types/project';;
-
-import { ProjectItem } from './project-item';
+import { ProjectSummaryItem } from './project-summary-item';
+import { ProjectSummary } from 'src/types/projectSummary';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  projects: Project[];
+  projectSummary: ProjectSummary[];
 };
 
-export const ProjectListSimilar = ({ projects }: Props) => {
+export const ProjectListSimilar = ({ projectSummary }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const viewAllBtn = (
@@ -66,8 +65,8 @@ export const ProjectListSimilar = ({ projects }: Props) => {
             },
           }}
         >
-          {projects.map((project) => (
-            <ProjectItem key={project._id} project={project} />
+          {projectSummary.map((projectSummary) => (
+            <ProjectSummaryItem key={projectSummary._id} projectSummary={projectSummary} />
           ))}
         </Box>
 

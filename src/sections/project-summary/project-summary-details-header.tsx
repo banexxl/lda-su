@@ -16,20 +16,19 @@ import { _socials } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
-import { Project } from 'src/types/project'; import { Divider, useTheme } from '@mui/material';
+import { Divider, useTheme } from '@mui/material';
+import { ProjectSummary } from 'src/types/projectSummary';
 ;
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  project: Project;
+  projectSummary: ProjectSummary;
 };
 
-export const ProjectDetailsHeader = ({ project }: Props) => {
+export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
 
   const theme = useTheme()
-
-  const [favorite, setFavorite] = useState(project.favorited);
 
   const [open, setOpen] = useState<HTMLElement | null>(null);
 
@@ -41,9 +40,9 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
     setOpen(null);
   }, []);
 
-  const handleChangeFavorite = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setFavorite(event.target.checked);
-  }, []);
+  // const handleChangeFavorite = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFavorite(event.target.checked);
+  // }, []);
 
   return (
     <>
@@ -56,45 +55,45 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
           <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
-            {project.title}
+            {projectSummary.projectSummaryTitle}
           </Typography>
           <br />
           <Typography sx={{ color: theme.palette.text.disabled }}>
-            {project.subTitle}
+            {projectSummary.projectSummary1DateTime}
           </Typography>
           <br />
           <Divider />
           <br />
           <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {project.paragraph1}
+            {projectSummary.projectSummary1Description}
+          </Typography>
+          <br />
+          {/* <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
+            {projectSummary.paragraph2}
           </Typography>
           <br />
           <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {project.paragraph2}
+            {projectSummary.paragraph3}
           </Typography>
           <br />
           <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {project.paragraph3}
+            {projectSummary.paragraph4}
           </Typography>
-          <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {project.paragraph4}
-          </Typography>
-          <br />
+          <br /> */}
         </Box>
         <Stack direction="row" alignItems="center" flexShrink={0}>
           <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
             <Iconify icon="carbon:share" sx={{ color: theme.palette.text.primary }} />
           </IconButton>
 
-          <Checkbox
+          {/* <Checkbox
             color="error"
             sx={{ color: theme.palette.error.light }}
             checked={favorite}
             onChange={handleChangeFavorite}
             icon={<Iconify icon="carbon:favorite" />}
             checkedIcon={<Iconify icon="carbon:favorite-filled" />}
-          />
+          /> */}
         </Stack>
       </Stack>
 
@@ -113,7 +112,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
 
         <Stack direction="row" alignItems="center" sx={{ typography: 'body2', color: theme.palette.text.primary }}>
           <Iconify icon="carbon:location" sx={{ mr: 0.5, color: theme.palette.text.primary }} />
-          {project.locations.join(', ')}
+          {projectSummary.locations.join(', ')}
         </Stack>
 
         <Stack direction="row" alignItems="center">
@@ -124,7 +123,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           </Typography>
 
           <Link variant="subtitle2" color={theme.palette.text.primary}>
-            {project.title}
+            {projectSummary.projectSummaryTitle}
           </Link>
         </Stack>
       </Stack>

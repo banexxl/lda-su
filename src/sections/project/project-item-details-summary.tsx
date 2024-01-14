@@ -55,7 +55,7 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
           <OverviewItem icon="carbon:calendar" label="Available" text={`${fDate(project.startDateTime, 'dd/MM/yyyy')} - ${fDate(project.endDateTime, 'dd/MM/yyyy')}`} />
           <OverviewItem icon="carbon:user" label="Contact name" text={project.organizers.join(', ')} />
           <OverviewItem icon="carbon:location" label="Location" text={project.locations.join(', ')} />
-          <OverviewItem icon="carbon:mobile" label="Contact phone" text={project.phoneNumberLDA} />
+          <OverviewItem icon="carbon:mobile" label="Contact phone" text={"+38124554587"} />
           <OverviewItem icon="carbon:time" label="Start Date" text={project.startDateTime.toString()} />
           <OverviewItem icon="carbon:collapse-categories" label="Category" text={project.category} />
           <OverviewItem icon="carbon:user-multiple" label="Applicants" text={project.applicants.join(', ')} />

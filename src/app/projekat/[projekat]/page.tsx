@@ -35,8 +35,11 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const project = await getProject(params.projectURL)
+export default async function ProjectPage({ params }: any) {
+  console.log(params);
+
+  const project = await getProject(params['projekat'])
+
   if (!project) {
     // Handle the case where the project is undefined
     return <NotFoundView />
