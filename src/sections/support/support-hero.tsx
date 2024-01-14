@@ -19,7 +19,7 @@ export const SupportHero = () => {
       sx={{
         ...bgGradient({
           color: alpha(theme.palette.grey[900], 0.8),
-          imgUrl: '/assets/background/overlay_2.jpg',
+          imgUrl: '/public/assets/transparent.png',
         }),
         py: 15,
         px: 2.5,
@@ -27,11 +27,11 @@ export const SupportHero = () => {
       }}
     >
       <Typography variant="h2" sx={{ textAlign: 'center', color: 'common.white', mb: 5 }}>
-        Welcome to <br />
+        Dobro nam došli<br />
         <Box component="span" sx={{ color: 'primary.main' }}>
-          {`ZONE `}
+          {`LDA Subotica `}
         </Box>
-        Support
+        Podrška
       </Typography>
 
       <TextField

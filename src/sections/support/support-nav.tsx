@@ -93,11 +93,11 @@ export const SupportNav = ({ topic, data, onChangeTopic, open, onClose }: Props)
         }}
       >
         <Typography variant="h4" paragraph>
-          Do you still need help?
+          Ako želite da saznate čime se bavimo
         </Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 4 }}>
-          Always support whenever you need (24/7).
+          Tu smo za sva vaša pitanja
         </Typography>
 
         <Stack spacing={2}>
@@ -114,9 +114,9 @@ export const SupportNav = ({ topic, data, onChangeTopic, open, onClose }: Props)
           <StyledButton>
             <Iconify icon="carbon:mobile" width={24} />
             <Typography variant="subtitle2">
-              {`Call `}
+              {`Pozovite `}
               <Box component="span" sx={{ color: 'primary.main' }}>
-                552-917-1454
+                +381 24 554587
               </Box>
             </Typography>
           </StyledButton>

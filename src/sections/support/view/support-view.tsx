@@ -90,7 +90,7 @@ export const SupportView = () => {
 
       <Container>
         <Typography variant="h3" sx={{ py: { xs: 3, md: 10 } }}>
-          Frequently Asked Questions
+          Najčešća pitanja
         </Typography>
 
         <Stack direction="row" sx={{ pb: { xs: 10, md: 15 } }}>
