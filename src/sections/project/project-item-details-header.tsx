@@ -121,7 +121,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
             Project title
           </Typography>
 
-          <Link variant="subtitle2" color={theme.palette.text.primary}>
+          <Link variant="subtitle2" color={theme.palette.text.primary} href={project.projectSummaryURL} sx={{ cursor: 'pointer' }}>
             {project.title}
           </Link>
         </Stack>

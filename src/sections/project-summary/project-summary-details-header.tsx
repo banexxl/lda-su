@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { _socials } from 'src/_mock';
 import Iconify from 'src/components/iconify';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { Divider, Link, useTheme } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
 
@@ -52,10 +53,11 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
           mb: 3,
         }}
       >
-        <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
-          {projectSummary.projectSummaryTitle}
-        </Typography>
+
         <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
+          <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
+            {projectSummary.projectSummaryTitle}
+          </Typography>
           {[...Array(projectSummary.projectSummarySubtitles.length)].map((_, index) => (
             <Box key={index} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
               <br />
@@ -70,11 +72,12 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
               </Typography>
               <br />
               <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-                {projectSummary.projectSummaryDescriptions[index]}
+                {projectSummary.projectSummaryDescriptions[index]}...
+                <Link href={projectSummary.projectSummarySubtitleURLs[index]} color='whitesmoke' underline='none' sx={{ marginBottom: '5px' }}>
+                  pročitaj ostatak teksta.
+                </Link>
               </Typography>
-              <Link href={projectSummary.projectSummarySubtitleURLs[index]} color='whitesmoke' underline='none'>
-                pročitaj ostatak...
-              </Link>
+
               <br />
             </Box>
           ))}

@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import { NotFoundView } from 'src/sections/error/not-found-view';
 import { ProjectView } from 'src/sections/view/project-view';
 import projectsServices from 'src/services/project-services';
@@ -36,9 +35,9 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectPage({ params }: any) {
-  console.log(params);
+  console.log('aaaaaaaaaaaa', params);
 
-  const project = await getProject(params['projekat'])
+  const project = await getProject('/' + Object.keys(params)[0] + '/' + params['projekat'])
 
   if (!project) {
     // Handle the case where the project is undefined

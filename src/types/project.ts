@@ -3,6 +3,7 @@ export type ProjectStatus = 'completed' | 'in-progress'
 
 export type Project = {
   _id: string;
+  projectSummaryURL: string;
   projectURL: string;
   links: string[];
   title: string;
