@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
@@ -9,16 +8,10 @@ import Checkbox from '@mui/material/Checkbox';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-
-import { fShortenNumber } from 'src/utils/format-number';
-
 import { _socials } from 'src/_mock';
-
 import Iconify from 'src/components/iconify';
-
-import { Divider, useTheme } from '@mui/material';
+import { Divider, Link, useTheme } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
-;
 
 // ----------------------------------------------------------------------
 
@@ -27,10 +20,16 @@ type Props = {
 };
 
 export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
+  console.log('projectSummary', projectSummary);
 
   const theme = useTheme()
 
   const [open, setOpen] = useState<HTMLElement | null>(null);
+
+  const extractFileName = (url: string) => {
+    const parts = url.split('/');
+    return parts[parts.length - 1]; // Get the last part (file name)
+  };
 
   const handleOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setOpen(event.currentTarget);
@@ -53,33 +52,34 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
           mb: 3,
         }}
       >
+        <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
+          {projectSummary.projectSummaryTitle}
+        </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
-          <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
-            {projectSummary.projectSummaryTitle}
-          </Typography>
-          <br />
-          <Typography sx={{ color: theme.palette.text.disabled }}>
-            {projectSummary.projectSummary1DateTime}
-          </Typography>
-          <br />
-          <Divider />
-          <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {projectSummary.projectSummary1Description}
-          </Typography>
-          <br />
-          {/* <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {projectSummary.paragraph2}
-          </Typography>
-          <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {projectSummary.paragraph3}
-          </Typography>
-          <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {projectSummary.paragraph4}
-          </Typography>
-          <br /> */}
+          {[...Array(projectSummary.projectSummarySubtitles.length)].map((_, index) => (
+            <Box key={index} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
+              <br />
+              <Typography sx={{ color: theme.palette.text.disabled }}>
+                {projectSummary.projectSummaryDateTime[index]}
+              </Typography>
+              <br />
+              <Divider />
+              <br />
+              <Typography sx={{ color: theme.palette.text.disabled }}>
+                {projectSummary.projectSummarySubtitles[index]}
+              </Typography>
+              <br />
+              <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
+                {projectSummary.projectSummaryDescriptions[index]}
+              </Typography>
+              <Link href={projectSummary.projectSummarySubtitleURLs[index]} color='whitesmoke' underline='none'>
+                pročitaj ostatak...
+              </Link>
+              <br />
+            </Box>
+          ))}
+
+
         </Box>
         <Stack direction="row" alignItems="center" flexShrink={0}>
           <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
@@ -122,9 +122,9 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
             Project title
           </Typography>
 
-          <Link variant="subtitle2" color={theme.palette.text.primary}>
+          <Typography variant="subtitle2" color={theme.palette.text.primary}>
             {projectSummary.projectSummaryTitle}
-          </Link>
+          </Typography>
         </Stack>
       </Stack>
 
