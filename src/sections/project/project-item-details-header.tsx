@@ -63,22 +63,14 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           <br />
           <Divider />
           <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {project.paragraph1}
-          </Typography>
-          <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {project.paragraph2}
-          </Typography>
-          <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {project.paragraph3}
-          </Typography>
-          <br />
-          <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
-            {project.paragraph4}
-          </Typography>
-          <br />
+          {[...Array(project.paragraphs.length)].map((_, index) => (
+            <Typography key={index} variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
+              {project.paragraphs[index]}
+              <br />
+              <br />
+            </Typography>
+          ))}
+
         </Box>
         <Stack direction="row" alignItems="center" flexShrink={0}>
           <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>

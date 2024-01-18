@@ -8,14 +8,7 @@ export type Project = {
   links: string[];
   title: string;
   subTitle: string,
-  paragraph1: string;
-  paragraph2: string;
-  paragraph3: string;
-  paragraph4: string;
-  paragraph5: string;
-  paragraph6: string;
-  paragraph7: string;
-  paragraph8: string;
+  paragraphs: string[];
   category: ProjectType;
   coverUrl: string;
   gallery: string[];
