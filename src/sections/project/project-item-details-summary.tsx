@@ -5,8 +5,6 @@ import Typography from '@mui/material/Typography';
 import LinkIcon from '@mui/icons-material/Link';
 import { fDate } from 'src/utils/format-time';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import { TOUR_SERVICE_OPTIONS } from 'src/_mock';
-
 import Iconify, { IconifyProps } from 'src/components/iconify';
 
 import { Project } from 'src/types/project';
@@ -56,7 +54,7 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
           <OverviewItem icon="carbon:user" label="Contact name" text={project.organizers.join(', ')} />
           <OverviewItem icon="carbon:location" label="Location" text={project.locations.join(', ')} />
           <OverviewItem icon="carbon:mobile" label="Contact phone" text={"+38124554587"} />
-          <OverviewItem icon="carbon:time" label="Start Date" text={project.startDateTime.toString()} />
+          <OverviewItem icon="carbon:time" label="Start Date" text={fDate(project.startDateTime, 'dd/MM/yyyy')} />
           <OverviewItem icon="carbon:collapse-categories" label="Category" text={project.category} />
           <OverviewItem icon="carbon:user-multiple" label="Applicants" text={project.applicants.join(', ')} />
           <OverviewItem icon="carbon:money" label="Donators" text={project.donators.join(', ')} />

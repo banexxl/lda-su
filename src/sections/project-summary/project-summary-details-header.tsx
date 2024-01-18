@@ -13,6 +13,7 @@ import Iconify from 'src/components/iconify';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { Divider, Link, useTheme } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
+import { fDate } from 'src/utils/format-time';
 
 // ----------------------------------------------------------------------
 
@@ -62,7 +63,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
             <Box key={index} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
               <br />
               <Typography sx={{ color: theme.palette.text.disabled }}>
-                {projectSummary.projectSummaryDateTime[index]}
+                {fDate(projectSummary.projectSummaryDateTime[index], 'dd/MM/yyyy')}
               </Typography>
               <br />
               <Divider />
