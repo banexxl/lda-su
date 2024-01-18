@@ -73,7 +73,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
               <br />
               <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
                 {projectSummary.projectSummaryDescriptions[index]}...
-                <Link href={projectSummary.projectSummarySubtitleURLs[index]} color='whitesmoke' underline='none' sx={{ marginBottom: '5px' }}>
+                <Link href={projectSummary.projectSummarySubtitleURLs[index]} color={'primary.main'} underline='none' sx={{ marginBottom: '5px' }}>
                   pročitaj ostatak teksta.
                 </Link>
               </Typography>
