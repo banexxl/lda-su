@@ -6,20 +6,14 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
-
 import { useResponsive } from 'src/hooks/use-responsive';
-
-import { fCurrency } from 'src/utils/format-number';
-
 import { bgBlur, bgGradient } from 'src/theme/css';
-
 import Image from 'src/components/image';
-import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 import Carousel, { useCarousel, CarouselDots } from 'src/components/carousel';
-
-import { Project } from 'src/types/project'; import Link from 'next/link';
 import { ProjectSummary } from 'src/types/projectSummary';
+import Iconify from 'src/components/iconify';
+import { fDate } from 'src/utils/format-time';
 ;
 
 // ----------------------------------------------------------------------
@@ -29,6 +23,7 @@ type Props = {
 };
 
 export const ProjectLandingHero = ({ projectSummaries }: Props) => {
+  console.log('projectSummaries', projectSummaries);
 
   const mdUp = useResponsive('up', 'md');
 
@@ -121,9 +116,9 @@ type CarouselItemProps = {
 };
 
 const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
+
   const theme = useTheme();
-  // const dateParts = project.startDateTime.toString().split(' ');
-  // const extractedDateString = dateParts.slice(0, 4).join(' ');
+
   const renderOverlay = (
     <Box
       sx={{
@@ -161,9 +156,9 @@ const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
           position: { md: 'absolute' },
         }}
       >
-        {/* <Typography variant="overline" sx={{ color: 'info.main', mb: 5 }}>
-          {project.locations.join(', ')}
-        </Typography> */}
+        <Typography variant="overline" sx={{ color: 'info.main', mb: 5 }}>
+          {projectSummary.locations.join(', ')}
+        </Typography>
 
         <Typography variant="h1" sx={{ maxWidth: 480 }}>
           {projectSummary.projectSummaryTitle}
@@ -175,14 +170,14 @@ const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
           direction={{ xs: 'column', md: 'row' }}
           sx={{ my: 5 }}
         >
-          {/* <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
+          <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
             <Iconify icon="carbon:time" width={24} sx={{ mr: 1, color: 'primary.main' }} />
-            {extractedDateString}
-          </Stack> */}
+            {fDate(projectSummary.projectStartDateTime, 'dd/MM/yyyy')}
+          </Stack>
 
           {/* <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
             <Iconify icon="carbon:star" width={24} sx={{ mr: 1, color: 'primary.main' }} />
-            {`${project.favoritedNumber} reviews`}
+            {`${projectSummary.} reviews`}
           </Stack> */}
 
         </Stack>
@@ -249,11 +244,9 @@ const ThumbnailItem = ({ projectSummary, selected }: ThumbnailItemProps) => {
       <Avatar src={projectSummary.projectSummaryCoverURL} sx={{ width: 48, height: 48 }} />
 
       <Stack spacing={0.5}>
-        lokacije
-        {/* <TextMaxLine variant="h6" line={1}>
-          {projectSummary.locations}
-        </TextMaxLine> */}
-
+        <TextMaxLine variant="h6" line={1}>
+          {projectSummary.locations.join(', ')}
+        </TextMaxLine>
       </Stack>
     </Stack>
   );
