@@ -35,8 +35,6 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectPage({ params }: any) {
-  console.log('aaaaaaaaaaaa', params);
-
   const project = await getProject('/' + Object.keys(params)[0] + '/' + params['projekat'])
 
   if (!project) {

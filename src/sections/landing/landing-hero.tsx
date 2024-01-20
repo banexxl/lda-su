@@ -23,7 +23,6 @@ type Props = {
 };
 
 export const ProjectLandingHero = ({ projectSummaries }: Props) => {
-  console.log('projectSummaries', projectSummaries);
 
   const mdUp = useResponsive('up', 'md');
 
@@ -220,6 +219,7 @@ type ThumbnailItemProps = {
 };
 
 const ThumbnailItem = ({ projectSummary, selected }: ThumbnailItemProps) => {
+
   const theme = useTheme();
 
   return (
@@ -245,7 +245,7 @@ const ThumbnailItem = ({ projectSummary, selected }: ThumbnailItemProps) => {
 
       <Stack spacing={0.5}>
         <TextMaxLine variant="h6" line={1}>
-          {projectSummary.locations.join(', ')}
+          {projectSummary.projectSummaryTitle}
         </TextMaxLine>
       </Stack>
     </Stack>

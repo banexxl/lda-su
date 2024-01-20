@@ -60,7 +60,7 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
     <Card sx={{ p: 3 }}>
       <Stack spacing={3}>
         <Stack spacing={1.5}>
-          <Typography variant="body2" sx={{ color: 'text.disabled' }}>Project start date/time</Typography>
+          <Typography variant="body2" sx={{ color: 'text.disabled' }}>Početak projekta</Typography>
           <Box
             sx={{
               py: 0.5,
@@ -77,7 +77,7 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
             />
           </Box>
 
-          <Typography variant="body2" sx={{ color: 'text.disabled' }}>Project end date/time</Typography>
+          <Typography variant="body2" sx={{ color: 'text.disabled' }}>Kraj projekta</Typography>
           <Box
             sx={{
               py: 0.5,
@@ -97,7 +97,7 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
         <Divider />
         <Stack sx={{ display: 'flex', flexDirection: 'column' }}>
           <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-            Organizers
+            Organizatori
           </Typography>
           <Typography sx={{ color: theme.palette.text.primary }}>
             {projectSummary.organizers.join(', ')}
@@ -106,7 +106,7 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
 
         <Stack sx={{ display: 'flex', flexDirection: 'column' }}>
           <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-            Published
+            Objavljeno
           </Typography>
           <FilterTime
             sx={{ color: theme.palette.text.primary }}

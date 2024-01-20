@@ -42,7 +42,7 @@ export const FilterTime = ({ departureDay, onChangeDepartureDay, sx }: Props) =>
             inputProps={{
               ...inputProps,
               ...(inputOther as any),
-              placeholder: 'Departure day',
+              placeholder: 'Objavljeno',
             }}
             startAdornment={
               <InputAdornment position="start">

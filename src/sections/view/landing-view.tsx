@@ -43,7 +43,7 @@ export const LandingView = ({
 
       <Box sx={{ position: 'relative' }}>
 
-        <ProjectLandingHero projectSummaries={activeProjectSummaries} />
+        <ProjectLandingHero projectSummaries={allProjectSummaries} />
 
         {/* <Container
           sx={{

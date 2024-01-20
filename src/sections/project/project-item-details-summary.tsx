@@ -9,6 +9,7 @@ import Iconify, { IconifyProps } from 'src/components/iconify';
 
 import { Project } from 'src/types/project';
 import { Link, List, ListItem, useTheme } from '@mui/material';
+import { extractFileName, extractNameFromUrl, extractStringFromPDFUrl } from 'src/utils/format-string';
 
 // ----------------------------------------------------------------------
 
@@ -19,20 +20,6 @@ type Props = {
 export const ProjectDetailsSummary = ({ project }: Props) => {
 
   const theme = useTheme()
-
-  const extractFileName = (url: string) => {
-    const parts = url.split('/');
-    return parts[parts.length - 1]; // Get the last part (file name)
-  };
-
-  const extractNameFromUrl = (url: string) => {
-    const regex = /^https?:\/\/(?:www\.)?([^/]+)\.\w+\/?/;
-    const match = url.match(regex);
-    if (match && match.length > 1) {
-      return match[1];
-    }
-    return ''; // Return empty string if the match is not found
-  };
 
   return (
     <Stack spacing={5}>
@@ -50,14 +37,14 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
             },
           }}
         >
-          <OverviewItem icon="carbon:calendar" label="Available" text={`${fDate(project.startDateTime, 'dd/MM/yyyy')} - ${fDate(project.endDateTime, 'dd/MM/yyyy')}`} />
-          <OverviewItem icon="carbon:user" label="Contact name" text={project.organizers.join(', ')} />
-          <OverviewItem icon="carbon:location" label="Location" text={project.locations.join(', ')} />
-          <OverviewItem icon="carbon:mobile" label="Contact phone" text={"+38124554587"} />
-          <OverviewItem icon="carbon:time" label="Start Date" text={fDate(project.startDateTime, 'dd/MM/yyyy')} />
-          <OverviewItem icon="carbon:collapse-categories" label="Category" text={project.category} />
-          <OverviewItem icon="carbon:user-multiple" label="Applicants" text={project.applicants.join(', ')} />
-          <OverviewItem icon="carbon:money" label="Donators" text={project.donators.join(', ')} />
+          <OverviewItem icon="carbon:calendar" label="Trajanje projekta" text={`${fDate(project.startDateTime, 'dd/MM/yyyy')} - ${fDate(project.endDateTime, 'dd/MM/yyyy')}`} />
+          <OverviewItem icon="carbon:user" label="Organizatori" text={project.organizers.join(', ')} />
+          <OverviewItem icon="carbon:location" label="Lokacije" text={project.locations.join(', ')} />
+          <OverviewItem icon="carbon:mobile" label="Telefon" text={'+38124554587'} />
+          <OverviewItem icon="carbon:time" label="Datum početka" text={fDate(project.startDateTime, 'dd/MM/yyyy')} />
+          <OverviewItem icon="carbon:collapse-categories" label="Kategorija" text={project.category} />
+          <OverviewItem icon="carbon:user-multiple" label="Aplikanti" text={project.applicants.join(', ')} />
+          <OverviewItem icon="carbon:money" label="Donatori" text={project.donators.join(', ')} />
         </Box>
       </Stack>
 
@@ -69,7 +56,7 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
             <ListItem key={index}>
               <LinkIcon sx={{ mr: '5px' }} />
               <Link href={link} target="_blank" rel="noopener">
-                {extractNameFromUrl(link)}
+                {extractFileName(link)}
               </Link>
             </ListItem>
           ))}
@@ -83,7 +70,7 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
             <ListItem key={index}>
               <PictureAsPdfIcon sx={{ mr: '5px' }} />
               <Link href={publicationUrl} target="_blank" rel="noopener">
-                {extractFileName(publicationUrl)}
+                {extractStringFromPDFUrl(publicationUrl)}
               </Link>
             </ListItem>
           ))}
