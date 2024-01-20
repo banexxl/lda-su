@@ -4,13 +4,10 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
-
 import { useResponsive } from 'src/hooks/use-responsive';
-
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
-
 import { Project } from 'src/types/project';
 
 // ----------------------------------------------------------------------

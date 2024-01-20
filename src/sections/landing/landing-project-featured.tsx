@@ -46,7 +46,7 @@ export const LandingProjectSummariesFeatured = ({ projectSummaries }: Props) => 
         }}
       >
         {projectSummaries.map((projectSummary: any) => (
-          <ProjectSummaryItem key={projectSummary.id} projectSummary={projectSummary} />
+          <ProjectSummaryItem key={projectSummary._id} projectSummary={projectSummary} />
         ))}
       </Box>
 
