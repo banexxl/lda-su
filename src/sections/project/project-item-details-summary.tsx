@@ -92,7 +92,7 @@ type OverviewItemProp = {
 function OverviewItem({ icon, label, text = '-' }: OverviewItemProp) {
   return (
     <Stack spacing={1.5} direction="row" alignItems="flex-start">
-      <Iconify icon={icon} width={24} />
+      <Iconify icon={icon} minWidth={24} />
       <Stack spacing={0.5}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {label}
