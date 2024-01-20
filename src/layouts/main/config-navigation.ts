@@ -74,14 +74,14 @@ export const navConfig = [
       { title: 'Projekti u toku', path: paths.currentProjects },
     ],
   },
-  {
-    title: 'Aktivnosti',
-    path: '#',
-    children: [
-      { title: 'ALDA', path: paths.activitiesALDA },
-      { title: 'LDA', path: paths.activitiesLDA },
-    ],
-  },
+  // {
+  //   title: 'Aktivnosti',
+  //   path: '#',
+  //   children: [
+  //     { title: 'ALDA', path: paths.activitiesALDA },
+  //     { title: 'LDA', path: paths.activitiesLDA },
+  //   ],
+  // },
   {
     title: 'Publikacije',
     path: paths.publications

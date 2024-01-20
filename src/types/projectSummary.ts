@@ -14,6 +14,7 @@ export type ProjectSummary = {
   applicants: string[],
   donators: string[];
   publications: string[];
+  links: string[];
   projectSummaryCoverURL: string,
   projectSummaryDescriptions: string[],
   projectSummarySubtitles: string[],

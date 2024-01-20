@@ -11,6 +11,7 @@ import Iconify, { IconifyProps } from 'src/components/iconify';
 
 import { Link, List, ListItem, useTheme } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
+import { extractFileName, extractNameFromUrl, extractStringFromPDFUrl } from 'src/utils/format-string';
 
 // ----------------------------------------------------------------------
 
@@ -43,12 +44,13 @@ export const ProjectSummaryDetailsSummary = ({ projectSummary }: Props) => {
         <Box
           sx={{
             rowGap: 2.5,
-            columnGap: 3,
+            columnGap: 10,
             display: 'grid',
             gridTemplateColumns: {
               xs: 'repeat(1, 1fr)',
               sm: 'repeat(2, 1fr)',
             },
+            gridColumn: 'span 5'
           }}
         >
           <OverviewItem icon="carbon:calendar" label="Trajanje projekta" text={`${fDate(projectSummary.projectStartDateTime, 'dd/MM/yyyy')} - ${fDate(projectSummary.projectEndDateTime, 'dd/MM/yyyy')}`} />
@@ -61,6 +63,20 @@ export const ProjectSummaryDetailsSummary = ({ projectSummary }: Props) => {
           <OverviewItem icon="carbon:money" label="Donatori" text={projectSummary.donators.join(', ')} />
         </Box>
       </Stack>
+      <Divider />
+      <Typography variant="h5" sx={{ color: theme.palette.text.primary }}>Linkovi</Typography>
+      <Box sx={{ display: 'flex', gap: '20px' }}>
+        <List>
+          {projectSummary.links.map((link, index) => (
+            <ListItem key={index}>
+              <LinkIcon sx={{ mr: '5px' }} />
+              <Link href={link} target="_blank" rel="noopener">
+                {extractNameFromUrl(link)}
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
       <Divider sx={{ mb: '30px' }} />
       <Typography variant="h5" sx={{ color: theme.palette.text.primary }}>Publikacije</Typography>
       <Box sx={{ display: 'flex', gap: '20px' }}>
@@ -69,7 +85,7 @@ export const ProjectSummaryDetailsSummary = ({ projectSummary }: Props) => {
             <ListItem key={index}>
               <PictureAsPdfIcon sx={{ mr: '5px' }} />
               <Link href={publicationUrl} target="_blank" rel="noopener">
-                {extractStringFromUrl(publicationUrl)}
+                {extractStringFromPDFUrl(publicationUrl)}
               </Link>
             </ListItem>
           ))}
@@ -91,7 +107,7 @@ type OverviewItemProp = {
 function OverviewItem({ icon, label, text = '-' }: OverviewItemProp) {
   return (
     <Stack spacing={1.5} direction="row" alignItems="flex-start">
-      <Iconify icon={icon} width={24} />
+      <Iconify icon={icon} minWidth={24} />
       <Stack spacing={0.5}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {label}
