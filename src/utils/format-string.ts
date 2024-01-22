@@ -4,16 +4,22 @@ import numeral from 'numeral';
 
 type InputValue = string | number | null;
 
-export const extractStringFromPDFUrl = (InputValue: string) => {
-  const regex = /\/([^\/]+)\.pdf$/;
-  const match = InputValue.match(regex);
+export const extractStringFromUrl = (inputValue: string) => {
+  const pdfRegex = /\/([^\/]+)\.pdf$/;
+  const docxRegex = /\/([^\/]+)\.docx$/;
 
-  if (match && match[1]) {
-    return match[1];
+  const pdfMatch = inputValue.match(pdfRegex);
+  const docxMatch = inputValue.match(docxRegex);
+
+  if (pdfMatch && pdfMatch[1]) {
+    return pdfMatch[1]; // Found a match for PDF
+  } else if (docxMatch && docxMatch[1]) {
+    return docxMatch[1]; // Found a match for DOCX
   } else {
-    return null; // No match found
+    return null; // No match found for PDF or DOCX
   }
-}
+};
+
 
 export const extractFileName = (url: string) => {
   const parts = url.split('/');

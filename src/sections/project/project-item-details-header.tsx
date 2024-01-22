@@ -64,7 +64,13 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           <Divider />
           <br />
           {[...Array(project.paragraphs.length)].map((_, index) => (
-            <Typography key={index} variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
+            <Typography key={index} variant="body1" component="h6" sx={{
+              flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary, ":first-letter": {
+                textTransform: 'capitalize',
+                fontWeight: 'bold',
+                fontSize: '2rem'
+              }
+            }}>
               {project.paragraphs[index]}
               <br />
               <br />

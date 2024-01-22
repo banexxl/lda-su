@@ -59,7 +59,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
           <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
             {projectSummary.projectSummaryTitle}
           </Typography>
-          {[...Array(projectSummary.projectSummarySubtitles.length)].map((_, index) => (
+          {[...Array(projectSummary.projectSummaryDescriptions.length)].map((_, index) => (
             <Box key={index} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
               <br />
               <Typography sx={{ color: theme.palette.text.disabled }}>
@@ -72,13 +72,22 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
                 {projectSummary.projectSummarySubtitles[index]}
               </Typography>
               <br />
-              <Typography variant="body1" component="h6" sx={{ flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary }}>
+              <Typography variant="body1" component="h6" sx={{
+                flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary, ":first-letter": {
+                  textTransform: 'capitalize',
+                  fontWeight: 'bold',
+                  fontSize: '3rem'
+                }
+              }}>
                 {projectSummary.projectSummaryDescriptions[index]}
                 {
                   projectSummary.projectSummarySubtitleURLs.length != 0 ?
-                    <Link href={projectSummary.projectSummarySubtitleURLs[index]} color={'primary.main'} underline='none' sx={{ marginBottom: '5px' }}>
-                      ...pročitaj ostatak teksta.
-                    </Link>
+                    projectSummary.projectSummarySubtitleURLs[index] ?
+                      <Link href={projectSummary.projectSummarySubtitleURLs[index]} color={'primary.main'} underline='none' sx={{ marginBottom: '5px' }}>
+                        ...pročitaj ostatak teksta.
+                      </Link>
+                      :
+                      null
                     :
                     null
                 }

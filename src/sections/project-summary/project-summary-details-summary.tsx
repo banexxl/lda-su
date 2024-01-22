@@ -11,7 +11,7 @@ import Iconify, { IconifyProps } from 'src/components/iconify';
 
 import { Link, List, ListItem, useTheme } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
-import { extractFileName, extractNameFromUrl, extractStringFromPDFUrl } from 'src/utils/format-string';
+import { extractNameFromUrl, extractStringFromUrl } from 'src/utils/format-string';
 
 // ----------------------------------------------------------------------
 
@@ -85,7 +85,7 @@ export const ProjectSummaryDetailsSummary = ({ projectSummary }: Props) => {
             <ListItem key={index}>
               <PictureAsPdfIcon sx={{ mr: '5px' }} />
               <Link href={publicationUrl} target="_blank" rel="noopener">
-                {extractStringFromPDFUrl(publicationUrl)}
+                {extractStringFromUrl(publicationUrl)}
               </Link>
             </ListItem>
           ))}
