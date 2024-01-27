@@ -61,7 +61,7 @@ export const ProjectDetails = ({ project }: Props) => {
     <Card sx={{ p: 3 }}>
       <Stack spacing={3}>
         <Stack spacing={1.5}>
-          <Typography variant="body2" sx={{ color: 'text.disabled' }}>Početak projekta</Typography>
+          <Typography variant="body2" sx={{ color: 'text.disabled' }}>Početak projektne aktivnosti</Typography>
           <Box
             sx={{
               py: 0.5,
@@ -78,7 +78,7 @@ export const ProjectDetails = ({ project }: Props) => {
             />
           </Box>
 
-          <Typography variant="body2" sx={{ color: 'text.disabled' }}>Kraj projekta</Typography>
+          <Typography variant="body2" sx={{ color: 'text.disabled' }}>Kraj projektne aktivnosti</Typography>
           <Box
             sx={{
               py: 0.5,
@@ -107,7 +107,7 @@ export const ProjectDetails = ({ project }: Props) => {
 
         <Stack sx={{ display: 'flex', flexDirection: 'column' }}>
           <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-            {project.published.toString()}
+            Objavljeno
           </Typography>
           <FilterTime
             sx={{ color: theme.palette.text.primary }}
