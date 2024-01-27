@@ -8,7 +8,7 @@ type PublicationsViewProps = {
 
 export const PublicationsView = ({ publications }: PublicationsViewProps) => {
 
-     const extractFileName = (url: string) => {
+     const extractURLName = (url: string) => {
           const parts = url.split('/');
           return parts[parts.length - 1]; // Get the last part (file name)
      };
@@ -33,7 +33,7 @@ export const PublicationsView = ({ publications }: PublicationsViewProps) => {
                                                        wordBreak: 'break-all',
                                                        maxWidth: '100%',
                                                   }}>
-                                                  {extractFileName(publicationUrl)}
+                                                  {extractURLName(publicationUrl)}
                                              </Typography>
                                         </Link>
                                    </ListItem>

@@ -23,19 +23,6 @@ export const ProjectSummaryDetailsSummary = ({ projectSummary }: Props) => {
 
   const theme = useTheme()
 
-
-  function extractStringFromUrl(url: string) {
-    const regex = /\/([^\/]+)\.pdf$/;
-    const match = url.match(regex);
-
-    if (match && match[1]) {
-      return match[1];
-    } else {
-      return null; // No match found
-    }
-  }
-
-
   return (
     <Stack spacing={5}>
       <Stack spacing={3}>

@@ -107,7 +107,7 @@ export const ProjectDetails = ({ project }: Props) => {
 
         <Stack sx={{ display: 'flex', flexDirection: 'column' }}>
           <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-            Objavljeno
+            {project.published.toString()}
           </Typography>
           <FilterTime
             sx={{ color: theme.palette.text.primary }}

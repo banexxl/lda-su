@@ -28,7 +28,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
 
   const [open, setOpen] = useState<HTMLElement | null>(null);
 
-  const extractFileName = (url: string) => {
+  const extractURLName = (url: string) => {
     const parts = url.split('/');
     return parts[parts.length - 1]; // Get the last part (file name)
   };
@@ -68,7 +68,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
               <br />
               <Divider />
               <br />
-              <Typography sx={{ color: theme.palette.text.disabled }}>
+              <Typography sx={{ color: theme.palette.text.disabled, fontSize: '1.3rem' }}>
                 {projectSummary.projectSummarySubtitles[index]}
               </Typography>
               <br />

@@ -99,21 +99,21 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
           <Typography variant="body2" sx={{ color: 'text.disabled' }}>
             Organizatori
           </Typography>
-          <Typography sx={{ color: theme.palette.text.primary }}>
+          <Typography sx={{ color: theme.palette.text.primary, marginBottom: '30px' }}>
             {projectSummary.organizers.join(', ')}
           </Typography>
         </Stack>
 
-        <Stack sx={{ display: 'flex', flexDirection: 'column' }}>
+        {/* <Stack sx={{ display: 'flex', flexDirection: 'column' }}>
           <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-            Objavljeno
+            {projectSummary.publishedDateTime.toString()}
           </Typography>
           <FilterTime
             sx={{ color: theme.palette.text.primary }}
             departureDay={projectSummary.publishedDateTime}
             onChangeDepartureDay={() => { }}
           />
-        </Stack>
+        </Stack> */}
       </Stack>
 
       <Divider />
