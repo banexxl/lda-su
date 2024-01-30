@@ -4,24 +4,38 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import Image from 'src/components/image';
+import { Box, useTheme } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-const VISIONS = [
+const VISIONS_TOP = [
   {
-    name: 'Vestibulum',
-    description: 'In dui magna, posuere eget, vestibulum et, tempor auctor, justo.',
+    name: 'Unapređenje',
+    description: 'kulture učešća i građanskog dijaloga na lokalnom nivou',
   },
   {
-    name: 'Fusce',
-    description: 'Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.',
+    name: 'Podrška',
+    description: 'aktivizmu i volonterizmu mladih',
   },
-  { name: 'Praesent', description: 'Suspendisse feugiat. Quisque id odio.' },
+  { name: 'Jačanje', description: 'kapaciteta necivilnog društva za učešće u procesu pregovora Republike Srbije o pristupanju u članstvo Evropske unije' },
+];
+
+const VISIONS_BOT = [
+  {
+    name: 'promovisanje',
+    description: 'ljudskih i manjinskih prava u lokalnim zajednicama',
+  },
+  {
+    name: 'Izgradnja',
+    description: 'međusektorskih partnerstva u kreiranju javnih politika',
+  },
+  { name: 'Umrežavanje', description: 'i razmena dobre prakse na regionalnom, prekograničnom i evropskom nivou' },
 ];
 
 // ----------------------------------------------------------------------
 
 export const AboutOurVision = () => {
+  const theme = useTheme()
   return (
     <Container
       sx={{
@@ -51,19 +65,18 @@ export const AboutOurVision = () => {
         </Typography>
       </Stack>
 
-      <Grid
-        container
-        spacing={{ xs: 8, md: 3 }}
-        justifyContent="space-between"
-        alignItems={{ md: 'center' }}
+      <Box
+        sx={{
+          spacing: { xs: 8, md: 3 },
+          justifyContent: "space-between",
+          alignItems: { md: 'center' },
+
+        }}
       >
-        <Grid xs={12} md={6} lg={5}>
-          <Image alt="vision" src="/assets/illustrations/illustration_vision.svg" />
-        </Grid>
 
         <Grid xs={12} md={6} lg={6}>
           <Stack alignItems={{ md: 'flex-end' }} sx={{ position: 'relative' }}>
-            {VISIONS.map((vision, index) => {
+            {VISIONS_TOP.map((vision, index) => {
               const { name, description } = vision;
 
               const firstVision = index === 0;
@@ -78,24 +91,17 @@ export const AboutOurVision = () => {
                   sx={{
                     p: 4,
                     mt: 4,
-                    width: { md: 'calc(50% - 16px)' },
+                    width: { md: 'calc(30%)' },
                     ...(firstVision && {
                       top: { md: 0 },
                       left: { md: 0 },
                       bottom: { md: 0 },
                       my: { md: 'auto' },
-                      boxShadow: { md: 0 },
                       maxHeight: { md: 304 },
                       display: { md: 'flex' },
                       position: { md: 'absolute' },
                       flexDirection: { md: 'column' },
                       justifyContent: { md: 'center' },
-                    }),
-                    ...(secondVision && {
-                      boxShadow: (theme) => ({ md: theme.customShadows.z24 }),
-                    }),
-                    ...(thirdVision && {
-                      boxShadow: { md: 0 },
                     }),
                   }}
                 >
@@ -117,7 +123,63 @@ export const AboutOurVision = () => {
             })}
           </Stack>
         </Grid>
-      </Grid>
+
+        <Grid xs={12} md={6} lg={5}>
+          <Image alt="vision" src="/assets/illustrations/illustration_vision.svg" />
+        </Grid>
+
+        <Grid xs={12} md={6} lg={6}>
+          <Stack alignItems={{ md: 'flex-end' }} sx={{ position: 'relative' }}>
+            {VISIONS_BOT.map((vision, index) => {
+              const { name, description } = vision;
+
+              const firstVision = index === 0;
+
+              const secondVision = index === 1;
+
+              const thirdVision = index === 2;
+
+              return (
+                <Card
+                  key={name}
+                  sx={{
+                    p: 4,
+                    mt: 4,
+                    // boxShadow: `29px 31px 7px 0px ${theme.palette.primary.main}`,
+                    width: { md: 'calc(30%)' },
+                    ...(firstVision && {
+                      top: { md: 0 },
+                      left: { md: 0 },
+                      bottom: { md: 0 },
+                      my: { md: 'auto' },
+
+                      maxHeight: { md: 304 },
+                      display: { md: 'flex' },
+                      position: { md: 'absolute' },
+                      flexDirection: { md: 'column' },
+                      justifyContent: { md: 'center' },
+                    })
+                  }}
+                >
+                  <Typography
+                    variant="h1"
+                    component="h2"
+                    sx={{ color: 'text.disabled', opacity: 0.24, mb: 3 }}
+                  >
+                    {`0${index + 4}`}
+                  </Typography>
+
+                  <Typography variant="h4" paragraph>
+                    {name}
+                  </Typography>
+
+                  <Typography sx={{ color: 'text.secondary' }}>{description}</Typography>
+                </Card>
+              );
+            })}
+          </Stack>
+        </Grid>
+      </Box>
     </Container >
   );
 }

@@ -8,7 +8,7 @@ export const card = (theme: Theme) => {
       styleOverrides: {
         root: {
           position: 'relative',
-          boxShadow: theme.customShadows.card,
+          boxShadow: `10px 10px 10px 3px ${theme.palette.primary.main}`,
           borderRadius: theme.shape.borderRadius * 2,
           zIndex: 0, // Fix Safari overflow: hidden with border radius
         },
