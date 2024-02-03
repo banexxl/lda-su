@@ -19,20 +19,20 @@ const getProject = async (link: string) => {
   return project
 }
 
-export async function generateStaticParams() {
-  try {
-    const allProjects = await projectsServices().getAllProjects();
-    return allProjects!.map((project: Project) => (
-      {
-        link: project.projectURL.toString()
-      }
-    ))
+// export async function generateStaticParams() {
+//   try {
+//     const allProjects = await projectsServices().getAllProjects();
+//     return allProjects!.map((project: Project) => (
+//       {
+//         link: project.projectURL.toString()
+//       }
+//     ))
 
-  } catch (error) {
-    console.error('Error fetching projects:', error);
-    return null;
-  }
-}
+//   } catch (error) {
+//     console.error('Error fetching projects:', error);
+//     return null;
+//   }
+// }
 
 export default async function ProjectPage({ params }: any) {
   const project = await getProject('/' + Object.keys(params)[0] + '/' + params['projekat'])
