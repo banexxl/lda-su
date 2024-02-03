@@ -73,7 +73,7 @@ export const AboutOurVision = () => {
 
         }}
       >
-
+        <Typography variant="h2">Naši ciljevi</Typography>
         <Grid xs={12} md={6} lg={6}>
           <Stack alignItems={{ md: 'flex-end' }} sx={{ position: 'relative' }}>
             {VISIONS_TOP.map((vision, index) => {
@@ -128,7 +128,7 @@ export const AboutOurVision = () => {
           <Image alt="vision" src="/assets/illustrations/illustration_vision.svg" />
         </Grid>
 
-        <Grid xs={12} md={6} lg={6}>
+        <Grid xs={4} md={6} lg={6}>
           <Stack alignItems={{ md: 'flex-end' }} sx={{ position: 'relative' }}>
             {VISIONS_BOT.map((vision, index) => {
               const { name, description } = vision;
@@ -145,14 +145,12 @@ export const AboutOurVision = () => {
                   sx={{
                     p: 4,
                     mt: 4,
-                    // boxShadow: `29px 31px 7px 0px ${theme.palette.primary.main}`,
                     width: { md: 'calc(30%)' },
                     ...(firstVision && {
                       top: { md: 0 },
                       left: { md: 0 },
                       bottom: { md: 0 },
                       my: { md: 'auto' },
-
                       maxHeight: { md: 304 },
                       display: { md: 'flex' },
                       position: { md: 'absolute' },

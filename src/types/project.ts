@@ -14,8 +14,6 @@ export type Project = {
   gallery: string[];
   locations: string[];
   published: Date;
-  startDateTime: Date,
-  endDateTime: Date,
   // favorited: boolean;
   // favoritedNumber: number;
   organizers: string[];

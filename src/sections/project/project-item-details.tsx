@@ -61,8 +61,8 @@ export const ProjectDetails = ({ project }: Props) => {
     <Card sx={{ p: 3 }}>
       <Stack spacing={3}>
         <Stack spacing={1.5}>
-          <Typography variant="body2" sx={{ color: 'text.disabled' }}>Početak projektne aktivnosti</Typography>
-          <Box
+          {/* <Typography variant="body2" sx={{ color: 'text.disabled' }}>Početak projektne aktivnosti</Typography> */}
+          {/* <Box
             sx={{
               py: 0.5,
               px: 1.5,
@@ -76,9 +76,9 @@ export const ProjectDetails = ({ project }: Props) => {
               departureDay={project.startDateTime}
               onChangeDepartureDay={() => { }}
             />
-          </Box>
+          </Box> */}
 
-          <Typography variant="body2" sx={{ color: 'text.disabled' }}>Kraj projektne aktivnosti</Typography>
+          {/* <Typography variant="body2" sx={{ color: 'text.disabled' }}>Kraj projektne aktivnosti</Typography>
           <Box
             sx={{
               py: 0.5,
@@ -93,7 +93,7 @@ export const ProjectDetails = ({ project }: Props) => {
               departureDay={project.endDateTime}
               onChangeDepartureDay={() => { }}
             />
-          </Box>
+          </Box> */}
         </Stack>
         <Divider />
         <Stack sx={{ display: 'flex', flexDirection: 'column' }}>
