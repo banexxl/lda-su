@@ -101,7 +101,7 @@ const DestinationItem = ({ project, order }: DestinationItemProps) => {
 
   const mdUp = useResponsive('up', 'md');
 
-  const { locations, coverUrl } = project;
+  const { locations } = project;
 
   return (
     <Box
@@ -114,7 +114,7 @@ const DestinationItem = ({ project, order }: DestinationItemProps) => {
     >
       <Image
         //alt={locations}
-        src={coverUrl}
+        // src={project.gallery}
         ratio={(!mdUp && '1/1') || (order && '1/1') || '4/6'}
         overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
           } 75%)`}

@@ -5,7 +5,7 @@ import { ProjectLandingHero } from '../landing/landing-hero';
 import { LandingSummary } from '../landing/landing-summary';
 import { LandingIntroduce } from '../landing/landing-introduce';
 import { FeaturedActivities } from '../activity/activities-list/featured-activities';
-import { LandingFavoriteDestinations } from '../landing/landing-favorite-destinations';
+// import { LandingFavoriteDestinations } from '../landing/landing-favorite-destinations';
 import { Activity } from 'src/types/activity';
 import { LandingProjectSummariesFeatured } from '../landing/landing-project-featured';
 import { LandingProjectsByCity } from '../landing/landing-project-by-city';

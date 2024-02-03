@@ -10,7 +10,7 @@ export type Project = {
   subTitle: string,
   paragraphs: string[];
   category: ProjectType;
-  coverUrl: string;
+  //coverUrl: string;
   gallery: string[];
   locations: string[];
   published: Date;
