@@ -5,7 +5,7 @@ import { Project } from 'src/types/project';
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'LDA Subotica: Project',
+  title: 'LDA Subotica: Projekat',
 };
 
 type ProjectPageProps = {
