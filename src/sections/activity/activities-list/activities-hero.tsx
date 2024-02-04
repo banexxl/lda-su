@@ -14,6 +14,8 @@ import { bgGradient } from 'src/theme/css';
 import Iconify from 'src/components/iconify';
 
 import { Activity } from 'src/types/activity';
+import { MenuItem, Popover } from '@mui/material';
+import { useCallback, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +26,15 @@ type Props = {
 export const ActivityHero = ({ activity }: Props) => {
   const theme = useTheme();
 
+  const [open, setOpen] = useState<HTMLElement | null>(null);
+
+  const handleOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
+    setOpen(event.currentTarget);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setOpen(null);
+  }, []);
   return (
     <Box
       sx={{
@@ -32,7 +43,7 @@ export const ActivityHero = ({ activity }: Props) => {
         ...bgGradient({
           startColor: `${alpha(theme.palette.primary.main, 0)} 70%`,
           endColor: `${theme.palette.primary.main} 99%`,
-          imgUrl: activity.heroUrl,
+          imgUrl: activity.coverURL,
         }),
       }}
     >
@@ -53,13 +64,13 @@ export const ActivityHero = ({ activity }: Props) => {
                 },
               }}
             >
-              <Typography variant="body2" sx={{ opacity: 0.72 }}>
+              {/* <Typography variant="body2" sx={{ opacity: 0.72 }}>
                 {fDate(activity.fromDate, 'dd/MM/yyyy p')}
               </Typography>
 
               <Typography variant="body2" sx={{ opacity: 0.72 }}>
                 {fDate(activity.toDate, 'dd/MM/yyyy p')}
-              </Typography>
+              </Typography> */}
 
               <Typography variant="h2" component="h1">
                 {activity.title}
@@ -70,11 +81,27 @@ export const ActivityHero = ({ activity }: Props) => {
               </Typography>
 
               <Stack direction="row">
-                {_socials.map((social) => (
-                  <IconButton key={social.value}>
-                    <Iconify icon={social.icon} sx={{ color: social.color }} />
-                  </IconButton>
-                ))}
+                <Popover
+                  open={!!open}
+                  onClose={handleClose}
+                  anchorEl={open}
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                  transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                  slotProps={{
+                    paper: {
+                      sx: { width: 220, backgroundColor: theme.palette.primary.dark },
+                    },
+                  }}
+                >
+                  {_socials.map((social) => (
+                    <MenuItem key={social.value} onClick={handleClose}>
+                      <Iconify icon={social.icon} width={24} sx={{ mr: 1, color: social.color }} />
+                      <Typography sx={{ color: theme.palette.text.primary }}>
+                        Share via {social.label}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Popover>
               </Stack>
             </Stack>
           </Grid>

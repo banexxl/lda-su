@@ -28,6 +28,7 @@ import { ProjectDetailsGallery } from '../project/project-item-details-gallery';
 // import { ProjectDetails } from '../project/project-item-details';
 import { Project } from 'src/types/project';
 import { EmailIcon, EmailShareButton, FacebookIcon, FacebookShareButton, LinkedinShareButton, TwitterShareButton, ViberIcon, ViberShareButton } from 'next-share';
+import { SocialShare } from 'src/components/social-share/socials-share';
 
 // ----------------------------------------------------------------------
 
@@ -77,133 +78,15 @@ export const ProjectView = ({ project }: ProjectProps) => {
 
           <ProjectDetailsSummary project={project} />
 
-          <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
-            <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5, color: theme.palette.text.primary }}>
-              Share:
-            </Typography>
+          <SocialShare shareURL={'https://lda-subotica.org' + project.projectURL} />
 
-            <Stack direction="row" alignItems="center" flexWrap="wrap">
-              <FacebookShareButton
-                url={'https://github.com/next-share'}
-                quote={'next-share is a social share buttons for your next React apps.'}
-                hashtag={'#nextshare'}
-              >
-                <Button
-                  key={'fb'}
-                  size="small"
-                  variant="outlined"
-                  startIcon={<Iconify icon={'carbon:logo-facebook'} />}
-                  sx={{
-                    m: 0.5,
-                    flexShrink: 0,
-                    color: theme.palette.primary.lighter,
-                    borderColor: theme.palette.primary.lighter,
-                    '&:hover': {
-                      borderColor: theme.palette.primary.dark,
-                      bgcolor: alpha(theme.palette.primary.dark, 0.08),
-                    },
-                  }}
-                >
-                  Facebook
-                </Button>
-              </FacebookShareButton>
-              <TwitterShareButton
-                url={'https://github.com/next-share'}
-                title={'next-share is a social share buttons for your next React apps.'}
-              >
-                <Button
-                  key={'fb'}
-                  size="small"
-                  variant="outlined"
-                  startIcon={<Iconify icon={'carbon:logo-twitter'} />}
-                  sx={{
-                    m: 0.5,
-                    flexShrink: 0,
-                    color: theme.palette.primary.lighter,
-                    borderColor: theme.palette.primary.lighter,
-                    '&:hover': {
-                      borderColor: theme.palette.primary.dark,
-                      bgcolor: alpha(theme.palette.primary.dark, 0.08),
-                    },
-                  }}
-                >
-                  Twitter
-                </Button>
-              </TwitterShareButton>
-              <LinkedinShareButton url={'https://github.com/next-share'}>
-                <Button
-                  key={'fb'}
-                  size="small"
-                  variant="outlined"
-                  startIcon={<Iconify icon={'carbon:logo-linkedin'} />}
-                  sx={{
-                    m: 0.5,
-                    flexShrink: 0,
-                    color: theme.palette.primary.lighter,
-                    borderColor: theme.palette.primary.lighter,
-                    '&:hover': {
-                      borderColor: theme.palette.primary.dark,
-                      bgcolor: alpha(theme.palette.primary.dark, 0.08),
-                    },
-                  }}
-                >
-                  Linkedin
-                </Button>
-              </LinkedinShareButton>
-              <ViberShareButton
-                url={'https://github.com/next-share'}
-                title={'next-share is a social share buttons for your next React apps.'}
-              >
-                <Button
-                  key={'fb'}
-                  size="small"
-                  variant="outlined"
-                  startIcon={<FaViber />}
-                  sx={{
-                    m: 0.5,
-                    flexShrink: 0,
-                    color: theme.palette.primary.lighter,
-                    borderColor: theme.palette.primary.lighter,
-                    '&:hover': {
-                      borderColor: theme.palette.primary.dark,
-                      bgcolor: alpha(theme.palette.primary.dark, 0.08),
-                    },
-                  }}
-                >
-                  Viber
-                </Button>
-              </ViberShareButton>
-              <EmailShareButton
-                url={'https://github.com/next-share'}
-                subject={'Next Share'}
-                body="body"
-              >
-                <Button
-                  key={'fb'}
-                  size="small"
-                  variant="outlined"
-                  startIcon={<AlternateEmailIcon />}
-                  sx={{
-                    m: 0.5,
-                    flexShrink: 0,
-                    color: theme.palette.primary.light,
-                    borderColor: theme.palette.primary.light,
-                    '&:hover': {
-                      borderColor: theme.palette.primary.dark,
-                      bgcolor: alpha(theme.palette.primary.dark, 0.08),
-                    },
-                  }}
-                >
-                  Email
-                </Button>
-              </EmailShareButton>
-            </Stack>
-          </Stack>
         </Grid>
         {/* </Grid> */}
       </Container>
 
       <Divider sx={{ my: 10 }} />
+
+
 
       {/* <ProjectListSimilar projects={pojects.slice(-4)} /> */}
 

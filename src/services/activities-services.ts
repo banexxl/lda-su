@@ -20,6 +20,25 @@ const activityServices = () => {
           }
      }
 
+     const getActivityByLink = async (activityURL: string) => {
+          console.log('usao u get aktiviti baj link');
+
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+
+          try {
+               const db = client.db('LDA_DB')
+               let data: Activity[] = await db.collection('Activities').find({ activityURL: activityURL }).toArray()
+               console.log('data iz get aktivnost', data);
+
+               return data[0]
+          } catch (error: any) {
+               console.log({ message: error.message })
+          }
+          finally {
+               await client.close();
+          }
+     }
+
      const getCompletedActivities = async () => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
@@ -104,6 +123,7 @@ const activityServices = () => {
 
      return {
           getAllActivities,
+          getActivityByLink,
           getCompletedActivities,
           getToDoActivities,
           getInProgressActivities,

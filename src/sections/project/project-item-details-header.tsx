@@ -16,8 +16,10 @@ import { _socials } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
-import { Project } from 'src/types/project'; import { Divider, useTheme } from '@mui/material';
-;
+import { Project } from 'src/types/project';
+import { Divider, useTheme } from '@mui/material';
+import { SocialShare } from 'src/components/social-share/socials-share';
+
 
 // ----------------------------------------------------------------------
 
@@ -79,9 +81,9 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
 
         </Box>
         <Stack direction="row" alignItems="center" flexShrink={0}>
-          <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
+          {/* <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
             <Iconify icon="carbon:share" sx={{ color: theme.palette.text.primary }} />
-          </IconButton>
+          </IconButton> */}
 
           {/* <Checkbox
             color="error"
@@ -125,27 +127,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
         </Stack>
       </Stack>
 
-      <Popover
-        open={!!open}
-        onClose={handleClose}
-        anchorEl={open}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-        slotProps={{
-          paper: {
-            sx: { width: 220, backgroundColor: theme.palette.primary.dark },
-          },
-        }}
-      >
-        {_socials.map((social) => (
-          <MenuItem key={social.value} onClick={handleClose}>
-            <Iconify icon={social.icon} width={24} sx={{ mr: 1, color: social.color }} />
-            <Typography sx={{ color: theme.palette.text.primary }}>
-              Share via {social.label}
-            </Typography>
-          </MenuItem>
-        ))}
-      </Popover>
+
     </>
   );
 }
