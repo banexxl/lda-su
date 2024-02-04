@@ -30,7 +30,7 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
   return (
     <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative' }}>
       <Image
-        src={activity.coverUrl}
+        src={activity.coverURL}
         alt={activity.title}
         ratio="1/1"
         overlay={`linear-gradient(to bottom, ${alpha(theme.palette.primary.main, 0)} 60%, ${theme.palette.primary.main
@@ -69,11 +69,11 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
           </TextMaxLine>
         </Link>
 
-        {largeActivity && <TextMaxLine sx={{ opacity: 0.48 }}>{activity.description1}</TextMaxLine>}
+        {largeActivity && <TextMaxLine sx={{ opacity: 0.48 }}>{activity.descriptions[0]}</TextMaxLine>}
 
         <Stack direction="row" alignItems="center" sx={{ typography: 'body2', pt: 1.5 }}>
-          <Avatar
-            src={activity.author.avatarUrl}
+          {/* <Avatar
+            src={activity.author}
             sx={{
               mr: 1,
               width: 32,
@@ -83,8 +83,8 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
                 height: { xs: 32, md: 40 },
               }),
             }}
-          />
-          {activity.author.name}
+          /> */}
+          {activity.author}
         </Stack>
       </Stack>
     </Box>

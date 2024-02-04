@@ -1,5 +1,3 @@
-import { TeamMember } from './team-member';
-
 export type ActivityCategoryProps = {
   label: string;
   path: string;
@@ -19,7 +17,7 @@ export type Activity = {
   favorited: boolean;
   favoritedNumber: number;
   descriptions: string;
-  author: TeamMember;
+  author: string;
   status: ActivityStatusProps;
   list: string[];
   listTitle: string;

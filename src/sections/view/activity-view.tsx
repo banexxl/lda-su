@@ -120,7 +120,9 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             <Divider sx={{ mt: 8 }} />
 
             {/* <ActivityAuthor author={author} /> */}
-
+            <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
+              Galerija
+            </Typography>
             <ProjectDetailsGallery galery={activity.galery} />
           </Grid>
 
