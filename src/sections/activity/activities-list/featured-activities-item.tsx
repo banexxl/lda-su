@@ -15,6 +15,7 @@ import TextMaxLine from 'src/components/text-max-line';
 import { Activity } from 'src/types/activity';
 
 import { ActivityTimeBlock } from '../common/activities-time-block';
+import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -71,7 +72,7 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
 
         {largeActivity && <TextMaxLine sx={{ opacity: 0.48 }}>{activity.descriptions[0]}</TextMaxLine>}
 
-        <Stack direction="row" alignItems="center" sx={{ typography: 'body2', pt: 1.5 }}>
+        <Stack direction="row" alignItems="center" sx={{ typography: 'body2', pt: 1.5, display: 'flex', justifyContent: 'space-between' }}>
           {/* <Avatar
             src={activity.author}
             sx={{
@@ -87,6 +88,6 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
           {activity.author}
         </Stack>
       </Stack>
-    </Box>
+    </Box >
   );
 }

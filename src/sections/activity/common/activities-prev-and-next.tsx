@@ -22,7 +22,7 @@ export const ActivityPrevAndNext = ({ prevPost, nextPost }: Props) => {
       <Grid xs={12} md={6}>
         <PostItem
           title={prevPost?.title}
-          coverUrl={prevPost?.coverUrl}
+          coverUrl={prevPost?.coverURL}
           icon={<Iconify icon="carbon:chevron-left" width={18} sx={{ color: 'text.disabled' }} />}
         />
       </Grid>
@@ -31,7 +31,7 @@ export const ActivityPrevAndNext = ({ prevPost, nextPost }: Props) => {
         <PostItem
           isNext
           title={nextPost?.title}
-          coverUrl={nextPost?.coverUrl}
+          coverUrl={nextPost?.coverURL}
           icon={<Iconify width={24} icon="carbon:chevron-right" sx={{ color: 'text.disabled' }} />}
         />
       </Grid>

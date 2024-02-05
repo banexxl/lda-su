@@ -77,7 +77,7 @@ export const ActivityHero = ({ activity }: Props) => {
               </Typography>
 
               <Typography variant="caption" sx={{ opacity: 0.72 }}>
-                {fDate(activity.publishedDate, 'dd/MM/yyyy p')}
+                Objavljeno: {fDate(activity.publishedDate, 'dd/MM/yyyy')}
               </Typography>
 
               <Stack direction="row">

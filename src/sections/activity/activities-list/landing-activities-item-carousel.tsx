@@ -47,7 +47,7 @@ export const LandingActivityItemCarousel = ({ activity }: Props) => {
             {activity.title}
           </Typography>
 
-          <Typography sx={{ opacity: 0.72, mb: 10 }}>{activity.description1}</Typography>
+          <Typography sx={{ opacity: 0.72, mb: 10 }}>{activity.descriptions}</Typography>
 
           <Fab component={RouterLink} href={paths.alda.alda}>
             <Iconify icon="carbon:chevron-right" />
@@ -56,7 +56,7 @@ export const LandingActivityItemCarousel = ({ activity }: Props) => {
       </Stack>
 
       <Image
-        src={activity.coverUrl}
+        src={activity.coverURL}
         alt={activity.title}
         overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
           } 75%)`}

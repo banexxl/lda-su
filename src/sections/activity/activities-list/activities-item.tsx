@@ -23,7 +23,7 @@ type Props = {
 export const PostItem = ({ activity }: Props) => {
   return (
     <Stack spacing={2.5}>
-      <Image src={activity.coverUrl} alt={activity.title} ratio="1/1" sx={{ borderRadius: 2 }} />
+      <Image src={activity.coverURL} alt={activity.title} ratio="1/1" sx={{ borderRadius: 2 }} />
 
       <Stack spacing={1}>
         <ActivityTimeBlock published={fDate(activity.publishedDate)} duration={activity.publishedDate.toString()} />
@@ -36,8 +36,8 @@ export const PostItem = ({ activity }: Props) => {
       </Stack>
 
       <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-        <Avatar src={activity.author.avatarUrl} sx={{ mr: 1 }} />
-        {activity.author.name}
+        <Avatar src={activity.author} sx={{ mr: 1 }} />
+        {activity.author}
       </Stack>
     </Stack>
   );

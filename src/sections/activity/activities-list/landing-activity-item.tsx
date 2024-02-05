@@ -31,7 +31,7 @@ export const LandingActivityItem = ({ activity }: Props) => {
       </Link>
 
       <TextMaxLine variant="body2" sx={{ color: 'text.secondary' }}>
-        {activity.description1}
+        {activity.descriptions}
       </TextMaxLine>
 
       <Divider sx={{ borderStyle: 'dashed', mt: 3 }} />

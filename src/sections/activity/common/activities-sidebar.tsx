@@ -14,14 +14,13 @@ import { _socials } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
-import { TeamMember } from 'src/types/team-member';
 import { Activity, ActivityCategoryProps } from 'src/types/activity';
 
 import { ActivityItemMobile } from './activities-item-mobile';
 // ----------------------------------------------------------------------
 
 interface Props extends StackProps {
-  author?: TeamMember;
+  author?: string;
   popularTags?: string[];
   categories?: ActivityCategoryProps[];
   recentActivities?: {
@@ -41,13 +40,13 @@ export const ActivitySidebar = ({
 
   const renderAuthor = author && (
     <Stack spacing={2} direction="row" sx={{ mb: { md: 5 } }}>
-      <Avatar src={author.avatarUrl} sx={{ width: 64, height: 64 }} />
+      <Avatar src={author} sx={{ width: 64, height: 64 }} />
 
       <Stack>
-        <Typography variant="h5">{author.name}</Typography>
+        <Typography variant="h5">{author}</Typography>
 
         <Typography variant="body2" sx={{ mt: 0.5, mb: 2, color: 'text.secondary' }}>
-          {author.role}
+          {author}
         </Typography>
 
         <Stack direction="row">

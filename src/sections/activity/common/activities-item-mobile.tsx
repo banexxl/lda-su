@@ -27,7 +27,7 @@ export const ActivityItemMobile = ({ activity, onSiderbar }: Props) => {
     >
       <Image
         alt={activity.title}
-        src={activity.coverUrl}
+        src={activity.coverURL}
         sx={{
           width: 80,
           height: 80,

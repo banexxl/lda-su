@@ -21,7 +21,7 @@ const activityServices = () => {
      }
 
      const getActivityByLink = async (activityURL: string) => {
-          console.log('usao u get aktiviti baj link');
+          console.log('usao u get aktiviti baj link', activityURL);
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 

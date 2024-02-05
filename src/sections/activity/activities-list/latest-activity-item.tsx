@@ -24,7 +24,7 @@ type Props = {
 export const LatestActivityItem = ({ post }: Props) => {
   return (
     <Stack spacing={2.5}>
-      <Image src={post.coverUrl} alt={post.title} ratio="1/1" sx={{ borderRadius: 2 }} />
+      <Image src={post.coverURL} alt={post.title} ratio="1/1" sx={{ borderRadius: 2 }} />
 
       <Stack spacing={1}>
         {/* <ActivityTimeBlock createdAt={fDate(post.createdAt)} duration={post.duration} /> */}
@@ -37,8 +37,8 @@ export const LatestActivityItem = ({ post }: Props) => {
       </Stack>
 
       <Stack spacing={1} direction="row" alignItems="center">
-        <Avatar src={post.author.avatarUrl} sx={{ width: 32, height: 32 }} />
-        <Typography variant="body2">{post.author.name}</Typography>
+        <Avatar src={post.author} sx={{ width: 32, height: 32 }} />
+        <Typography variant="body2">{post.author}</Typography>
       </Stack>
     </Stack>
   );

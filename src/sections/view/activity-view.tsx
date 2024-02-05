@@ -7,7 +7,6 @@ import { Markdown } from 'src/components/markdown';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 import Image from 'src/components/image';
 import { ActivityTags } from '../activity/common/activities-tags';
-import { ActivityAuthor } from '../activity/common/activities-author';
 import { ActivitySidebar } from '../activity/common/activities-sidebar';
 import { ActivityHero } from '../activity/activities-list/activities-hero';
 import { SocialShare } from '../../components/social-share/socials-share';
@@ -120,7 +119,7 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             <Divider sx={{ mt: 8 }} />
 
             {/* <ActivityAuthor author={author} /> */}
-            <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
+            <Typography variant="h3" component="h1" sx={{ flexGrow: 1, padding: { md: 1, lg: 2 }, color: theme.palette.text.primary }}>
               Galerija
             </Typography>
             <ProjectDetailsGallery galery={activity.galery} />

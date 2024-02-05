@@ -9,7 +9,6 @@ export const metadata = {
   title: 'LDA Subotica: Aktivnost',
 };
 
-
 type ActivityPageProps = {
   params: {
     activityURL: string
@@ -21,18 +20,18 @@ const getActivity = async (link: string) => {
   return activity
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<any[]> {
   try {
     const allActivities = await activityServices().getAllActivities();
     return allActivities!.map((activity: Activity) => (
       {
-        link: activity.activityURL.toString()
+        aktivnost: activity.activityURL.toString()
       }
     ))
 
   } catch (error) {
     console.error('Error fetching projects:', error);
-    return null;
+    return [];
   }
 }
 
