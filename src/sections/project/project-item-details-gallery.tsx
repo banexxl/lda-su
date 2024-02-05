@@ -39,10 +39,10 @@ export const ProjectDetailsGallery = ({ galery }: Props) => {
           sx={{
             gap: 1,
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateColumns: 'repeat(3, 1fr)',
           }}
         >
-          {slides.slice(1, 5).map((slide) => (
+          {slides.slice(1, 10).map((slide) => (
             <PhotoItem
               key={slide.src}
               photo={slide.src}
@@ -81,9 +81,9 @@ export const PhotoItem = ({ photo, onOpenLightbox }: PhotoItemProps) => {
       <Image
         alt="photo"
         src={photo}
-        ratio="1/1"
+        //ratio="1/1"
         onClick={onOpenLightbox}
-        sx={{ borderRadius: 2, cursor: 'pointer' }}
+        sx={{ borderRadius: 2, cursor: 'pointer', height: '100%', width: 'auto' }}
       />
     </m.div >
   );

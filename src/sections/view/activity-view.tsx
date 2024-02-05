@@ -47,8 +47,8 @@ export const ActivityView = ({ activity }: ActivityProps) => {
         <CustomBreadcrumbs
           sx={{ my: 3 }}
           links={[
-            { name: 'Home', href: '/' },
-            { name: 'Activity', href: paths.activitiesALDA },
+            { name: 'Početna', href: '/' },
+            { name: 'Aktivnosti', href: paths.activitiesALDA },
             { name: `${activity.title}` },
           ]}
         />
