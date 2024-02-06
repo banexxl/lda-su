@@ -16,7 +16,7 @@ import { ProjectSummary } from 'src/types/projectSummary';
 
 type LandingViewProps = {
   activeProjectSummaries: ProjectSummary[],
-  allProjectSummaries: ProjectSummary[],
+  featuredProjectSummaries: ProjectSummary[],
   allActivities: Activity[],
   inProgressActivities: Activity[],
   completedActivities: Activity[],
@@ -29,7 +29,7 @@ type LandingViewProps = {
 
 export const LandingView = ({
   activeProjectSummaries,
-  allProjectSummaries,
+  featuredProjectSummaries,
   allActivities,
   completedActivities,
   featuredActivities,
@@ -43,7 +43,7 @@ export const LandingView = ({
 
       <Box sx={{ position: 'relative' }}>
 
-        <ProjectLandingHero projectSummaries={allProjectSummaries} />
+        <ProjectLandingHero projectSummaries={featuredProjectSummaries} />
 
         {/* <Container
           sx={{
@@ -74,7 +74,7 @@ export const LandingView = ({
 
       <LandingProjectsByCity projects={[]} />
 
-      <LandingProjectSummariesFeatured projectSummaries={allProjectSummaries} />
+      <LandingProjectSummariesFeatured projectSummaries={featuredProjectSummaries} />
 
       <FeaturedActivities featuredCompletedActivities={featuredActivities} />
 

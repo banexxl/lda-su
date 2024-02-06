@@ -97,13 +97,13 @@ const retrieveActiveProjectSummaries = async () => {
 
 export default async function LandingPage() {
 
-  const allActivities: Activity[] = await retrieveAllActivities()
-  const completedActivities: Activity[] = await retrieveCompletedActivities()
-  const featuredCompletedActivities: Activity[] = await retrieveFeaturedCompletedActivities()
-  const inProgressActivities: Activity[] = await retrieveInProgressActivities()
-  const trendingActivities: Activity[] = await retrieveFeaturedCompletedActivities()
-  const activeProjectSummaries: ProjectSummary[] = await retrieveActiveProjectSummaries()
-  const allProjectSummaries: ProjectSummary[] = await retrieveAllProjectSummaries()
+  const allActivities: Activity[] = await activityServices().getAllActivities()
+  const completedActivities: Activity[] = await activityServices().getCompletedActivities()
+  const featuredCompletedActivities: Activity[] = await activityServices().getFeaturedCompletedActivities()
+  const inProgressActivities: Activity[] = await activityServices().getInProgressActivities()
+  const trendingActivities: Activity[] = await activityServices().getFeaturedCompletedActivities()
+  const activeProjectSummaries: ProjectSummary[] = await projectsServices().getInProgressProjectSummaries()
+  const featuredProjectSummaries: ProjectSummary[] = await projectsServices().getRandomCompletedProjectSummaries()
 
   return <LandingView
     activeProjectSummaries={activeProjectSummaries}
@@ -113,6 +113,6 @@ export default async function LandingPage() {
     featuredActivities={trendingActivities}
     featuredCompletedActivities={featuredCompletedActivities}
     trendingActivities={trendingActivities}
-    allProjectSummaries={allProjectSummaries}
+    featuredProjectSummaries={featuredProjectSummaries}
   />;
 } 
