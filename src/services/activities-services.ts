@@ -14,6 +14,7 @@ const activityServices = () => {
                return data
           } catch (error: any) {
                console.log({ message: error.message })
+               return []
           }
           finally {
                await client.close();
@@ -21,7 +22,7 @@ const activityServices = () => {
      }
 
      const getActivityByLink = async (activityURL: string) => {
-          console.log('usao u get aktiviti baj link', activityURL);
+          console.log('aktiviti servisi get by link', activityURL);
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
@@ -33,6 +34,7 @@ const activityServices = () => {
                return data[0]
           } catch (error: any) {
                console.log({ message: error.message })
+               return {}
           }
           finally {
                await client.close();
@@ -49,6 +51,7 @@ const activityServices = () => {
                return data
           } catch (error: any) {
                console.log({ message: error.message })
+               return []
           }
           finally {
                await client.close();
@@ -65,6 +68,7 @@ const activityServices = () => {
                return data
           } catch (error: any) {
                console.log({ message: error.message })
+               return []
           }
           finally {
                await client.close();
@@ -81,6 +85,7 @@ const activityServices = () => {
                return data
           } catch (error: any) {
                console.log({ message: error.message })
+               return []
           }
           finally {
                await client.close();
@@ -97,6 +102,7 @@ const activityServices = () => {
                return data
           } catch (error: any) {
                console.log({ message: error.message })
+               return []
           }
           finally {
                await client.close();
@@ -113,6 +119,7 @@ const activityServices = () => {
                return data
           } catch (error: any) {
                console.log({ message: error.message })
+               return []
           }
           finally {
                await client.close();

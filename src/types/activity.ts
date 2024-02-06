@@ -12,6 +12,7 @@ export type Activity = {
   title: string;
   galery: string[];
   coverURL: string;
+  links: string[];
   publishedDate: Date;
   category: string;
   favorited: boolean;

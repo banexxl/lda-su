@@ -12,12 +12,14 @@ import { ActivityHero } from '../activity/activities-list/activities-hero';
 import { SocialShare } from '../../components/social-share/socials-share';
 import { LatestActivities } from '../activity/activities-list/latest-activities';
 import { ProjectDetailsGallery } from '../project/project-item-details-gallery';
-import { Divider, List, ListItem, ListItemIcon, ListItemText, MenuItem, Popover, useTheme } from '@mui/material';
+import LinkIcon from '@mui/icons-material/Link';
+import { Divider, Link, List, ListItem, ListItemIcon, ListItemText, MenuItem, Popover, useTheme } from '@mui/material';
 import { Box } from '@mui/material';
 import { Activity } from 'src/types/activity';
 import { _socials } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 import { useCallback, useState } from 'react';
+import { extractStringFromUrl } from 'src/utils/format-string';
 
 // ----------------------------------------------------------------------
 
@@ -117,7 +119,20 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             <SocialShare shareURL={'https://lda-subotica.org' + activity.activityURL} />
 
             <Divider sx={{ mt: 8 }} />
-
+            <Typography variant="h5" sx={{ color: theme.palette.text.primary, mt: '20px' }}>Linkovi</Typography>
+            <Box sx={{ display: 'flex', gap: '20px' }}>
+              <List>
+                {activity.links.map((link, index) => (
+                  <ListItem key={index}>
+                    <LinkIcon sx={{ mr: '5px' }} />
+                    <Link href={link} target="_blank" rel="noopener">
+                      {extractStringFromUrl(link)}
+                    </Link>
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+            <Divider sx={{ mt: 8 }} />
             {/* <ActivityAuthor author={author} /> */}
             <Typography variant="h3" component="h1" sx={{ flexGrow: 1, padding: { md: 1, lg: 2 }, color: theme.palette.text.primary }}>
               Galerija

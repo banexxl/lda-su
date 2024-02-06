@@ -20,7 +20,7 @@ const getActivity = async (link: string) => {
   return activity
 }
 
-export async function generateStaticParams(): Promise<any[]> {
+export async function generateStaticParams() {
   try {
     const allActivities = await activityServices().getAllActivities();
     return allActivities!.map((activity: Activity) => (
@@ -36,13 +36,14 @@ export async function generateStaticParams(): Promise<any[]> {
 }
 
 export default async function ActivityPage({ params }: any) {
-
-  const activity = await getActivity('/' + Object.keys(params)[0] + '/' + params['aktivnost'])
+  console.log('sa stranice params', Object.keys(params)[0]);
+  console.log('sa stranice params', params['aktivnost']);
+  const activity: any = await getActivity(params['aktivnost'])
 
   if (!activity) {
     // Handle the case where the activity is undefined
     return <NotFoundView />
   }
 
-  return <ActivityView key={activity?._id} activity={activity} />
+  return <ActivityView key={activity._id} activity={activity} />
 }
