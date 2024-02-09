@@ -47,7 +47,6 @@ export const ContactForm = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      console.log('DATA', data);
       reset();
     } catch (error) {
       console.error(error);

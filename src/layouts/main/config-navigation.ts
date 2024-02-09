@@ -68,20 +68,19 @@ export const navConfig = [
     title: 'Projekti',
     path: '#',
     children: [
-
-      { title: 'Svi projekti', path: paths.allProjects },
-      { title: 'Završeni projekti', path: paths.pastProjects },
-      { title: 'Projekti u toku', path: paths.currentProjects },
+      // { title: 'Svi projekti', path: paths.allProjects },
+      { title: 'Završeni projekti', path: paths.pastProjectSummaries },
+      { title: 'Projekti u toku', path: paths.inProgressProjectSummaries },
     ],
   },
-  // {
-  //   title: 'Aktivnosti',
-  //   path: '#',
-  //   children: [
-  //     { title: 'ALDA', path: paths.activitiesALDA },
-  //     { title: 'LDA', path: paths.activitiesLDA },
-  //   ],
-  // },
+  {
+    title: 'Aktivnosti',
+    path: '#',
+    children: [
+      { title: 'ALDA', path: paths.activitiesALDA },
+      { title: 'Arhiva', path: paths.activitiesArchive },
+    ],
+  },
   {
     title: 'Publikacije',
     path: paths.publications

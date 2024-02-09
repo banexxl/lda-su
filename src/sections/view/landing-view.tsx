@@ -4,12 +4,12 @@ import Box from '@mui/material/Box';
 import { ProjectLandingHero } from '../landing/landing-hero';
 import { LandingSummary } from '../landing/landing-summary';
 import { LandingIntroduce } from '../landing/landing-introduce';
-import { FeaturedActivities } from '../activity/activities-list/featured-activities';
 // import { LandingFavoriteDestinations } from '../landing/landing-favorite-destinations';
 import { Activity } from 'src/types/activity';
 import { LandingProjectSummariesFeatured } from '../landing/landing-project-featured';
-import { LandingProjectsByCity } from '../landing/landing-project-by-city';
+// import { LandingProjectsByCity } from '../landing/landing-project-by-city';
 import { ProjectSummary } from 'src/types/projectSummary';
+import { Activities } from '../activity/activities-list/featured-activities';
 
 
 // ----------------------------------------------------------------------
@@ -72,11 +72,11 @@ export const LandingView = ({
 
       <LandingSummary />
 
-      <LandingProjectsByCity projects={[]} />
+      {/* LDA Subotica<LandingProjectsByCity projects={[]} /> */}
 
       <LandingProjectSummariesFeatured projectSummaries={featuredProjectSummaries} />
 
-      <FeaturedActivities featuredCompletedActivities={featuredActivities} />
+      <Activities activites={featuredActivities} />
 
       {/* <Newsletter /> */}
     </Box>

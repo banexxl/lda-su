@@ -9,12 +9,12 @@ import { Typography } from '@mui/material';
 // ----------------------------------------------------------------------
 
 type Props = {
-  featuredCompletedActivities: Activity[];
+  activites: Activity[];
 };
 
-export const FeaturedActivities = ({ featuredCompletedActivities }: Props) => {
+export const Activities = ({ activites }: Props) => {
 
-  const featuredActivity = featuredCompletedActivities[0];
+  const featuredActivity = activites[0];
 
 
   return (
@@ -51,7 +51,7 @@ export const FeaturedActivities = ({ featuredCompletedActivities }: Props) => {
             },
           }}
         >
-          {featuredCompletedActivities.slice(1, 5).map((activity) => (
+          {activites.slice(1, 10).map((activity) => (
             <FeaturedActivityItem key={activity._id} activity={activity} />
           ))}
         </Box>

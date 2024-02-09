@@ -22,7 +22,6 @@ type Props = {
 };
 
 export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
-  console.log('projectSummary', projectSummary);
 
   const theme = useTheme()
 

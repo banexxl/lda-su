@@ -10,11 +10,20 @@ import { _tours } from 'src/_mock';
 
 // import { Newsletter } from '../newsletter';
 import { Filters } from '../filters/filters';
-import { ProjectList } from '../project-summaries-list/project-summary-list';
+import { ProjectSummary } from 'src/types/projectSummary';
+import ProjectSummaryList from '../project-summaries-list/project-summary-list';
+import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-export const ProjectsSummariesView = ({ allProjects }: any) => {
+
+type ProjectSummariesListProps = {
+  completedProjectSummaries?: ProjectSummary[];
+  inProgressProjectSummaries?: ProjectSummary[];
+  featuredProjectSummaries?: ProjectSummary[];
+}
+
+export const ProjectsSummariesView = ({ completedProjectSummaries, inProgressProjectSummaries, featuredProjectSummaries }: ProjectSummariesListProps) => {
 
   const loading = useBoolean(true);
 
@@ -35,8 +44,16 @@ export const ProjectsSummariesView = ({ allProjects }: any) => {
             mb: { xs: 5, md: 10 },
           }}
         /> */}
-
-        <ProjectList projectSummary={allProjects} loading={loading.value} />
+        {
+          completedProjectSummaries!.length > 0 ?
+            <ProjectSummaryList projectSummaries={completedProjectSummaries!} loading={loading.value} />
+            : inProgressProjectSummaries!.length > 0 ?
+              <ProjectSummaryList projectSummaries={inProgressProjectSummaries!} loading={loading.value} />
+              : featuredProjectSummaries!.length > 0 ?
+                <ProjectSummaryList projectSummaries={featuredProjectSummaries!} loading={loading.value} />
+                :
+                <Typography variant="h2" sx={{ padding: '20px' }} paragraph>Trenutno nemamo aktivnih projekata</Typography>
+        }
       </Container>
 
       {/* <Newsletter /> */}

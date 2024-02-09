@@ -8,14 +8,13 @@ export const paths = {
   stanka: '/profil/stanka',
   silvija: '/profil/silvija',
   boris: '/profil/boris',
-  projects: '/pregled-projekta',
+  projectSummary: '/pregled-projekta',
   contact: '/kontakt',
-  pastProjects: '/projekti-zavrseni',
-  allProjects: '/projekti-svi',
-  currentProjects: '/projekti-u-toku',
+  pastProjectSummaries: '/projekti/zavrseni',
+  inProgressProjectSummaries: '/projekti/u-toku',
   publications: '/publikacije',
   activitiesALDA: '/aktivnosti',
-  activitiesLDA: '/aktivnosti',
+  activitiesArchive: '/aktivnosti/arhiva',
   // LDA Subotica
   alda: {
     alda: 'https://www.alda-europe.eu/',

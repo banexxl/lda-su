@@ -1,46 +1,48 @@
 import { NotFoundView } from 'src/sections/error/not-found-view';
-import { ProjectView } from 'src/sections/view/project-view';
+import { ProjectSummaryView } from 'src/sections/view/project-summary-view';
 import projectsServices from 'src/services/project-services';
-import { Project } from 'src/types/project';
+import { ProjectSummary } from 'src/types/projectSummary';
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'LDA Subotica: Projekat',
+  title: 'LDA Subotica: Pregled Projekta',
 };
 
-type ProjectPageProps = {
+type ProjectSummaryPageProps = {
   params: {
-    projectURL: string
+    projectSummaryURL: string
   }
 }
 
-const getProject = async (link: string) => {
-  const project = await projectsServices().getProjectByLink(link)
-  return project
+const getProjectSummary = async (link: string) => {
+  const projectSummary = await projectsServices().getProjectSummaryByLink(link)
+  return projectSummary
 }
 
 export async function generateStaticParams() {
   try {
-    const allProjects = await projectsServices().getAllProjects();
-    return allProjects!.map((project: Project) => (
+    const allProjectSummaries = await projectsServices().getAllProjectSummaries();
+
+    return allProjectSummaries.map((projectSummary: ProjectSummary) => (
       {
-        link: project.projectURL.toString()
+        link: projectSummary.projectSummaryURL.toString()
       }
     ))
 
   } catch (error) {
-    console.error('Error fetching projects:', error);
+    console.error('Error fetching project summaries:', error);
     return null;
   }
 }
 
-export default async function ProjectPage({ params }: any) {
-  const project = await getProject('/' + Object.keys(params)[0] + '/' + params['projekat'])
+export default async function ProjectSummaryPage({ params }: any) {
 
-  if (!project) {
+  const projectSummary: any = await getProjectSummary(params['pregled-projekta'])
+
+  if (!projectSummary || projectSummary.length == 0) {
     // Handle the case where the project is undefined
     return <NotFoundView />
   }
 
-  return <ProjectView project={project} />
+  return <ProjectSummaryView projectSummary={projectSummary[0]} />
 }

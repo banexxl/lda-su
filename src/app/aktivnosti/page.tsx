@@ -8,70 +8,11 @@ export const metadata = {
   title: 'LDA Subotica: Aktivnosti',
 };
 
-const retrieveAllActivities = async () => {
-  try {
-    const allActivities: Activity[] | undefined = await activityServices().getAllActivities();
-    if (allActivities) {
-      return allActivities;
-    } else {
-      throw new Error('Failed to retrieve activities');
-    }
-  } catch (error) {
-    console.error('Error retrieving activities:', error);
-    throw error;
-  }
-};
-
-const retrieveCompletedActivities = async () => {
-  try {
-    const completedActivities: Activity[] | undefined = await activityServices().getCompletedActivities();
-    if (completedActivities) {
-      return completedActivities;
-    } else {
-      throw new Error('Failed to retrieve activities');
-    }
-  } catch (error) {
-    console.error('Error retrieving activities:', error);
-    throw error;
-  }
-};
-
-const retrieveFeaturedCompletedActivities = async () => {
-  try {
-    const completedActivities: Activity[] | undefined = await activityServices().getFeaturedCompletedActivities();
-
-    if (completedActivities) {
-      return completedActivities;
-    } else {
-      throw new Error('Failed to retrieve activities');
-    }
-  } catch (error) {
-    console.error('Error retrieving activities:', error);
-    throw error;
-  }
-};
-
-const retrieveInProgressActivities = async () => {
-  try {
-    const completedActivities: Activity[] | undefined = await activityServices().getInProgressActivities();
-    if (completedActivities) {
-      return completedActivities;
-    } else {
-      throw new Error('Failed to retrieve activities');
-    }
-  } catch (error) {
-    console.error('Error retrieving activities:', error);
-    throw error;
-  }
-};
-
 export default async function ActivitiesPage() {
 
-  const allActivities: Activity[] = await retrieveAllActivities()
-  const completedActivities: Activity[] = await retrieveCompletedActivities()
-  const featuredCompletedActivities: Activity[] = await retrieveFeaturedCompletedActivities()
-  const inProgressActivities: Activity[] = await retrieveInProgressActivities()
-  const trendingActivities: Activity[] = await retrieveFeaturedCompletedActivities()
+  const completedActivities: Activity[] = await activityServices().getCompletedActivities();
+  const featuredCompletedActivities: Activity[] = await activityServices().getFeaturedCompletedActivities();
+  const inProgressActivities: Activity[] = await activityServices().getInProgressActivities();
 
-  return <ActivitiesView allActivities={allActivities} inProgressActivities={inProgressActivities} completedActivities={completedActivities} featuredActivities={featuredCompletedActivities} trendingActivities={trendingActivities} />;
+  return <ActivitiesView inProgressActivities={inProgressActivities} completedActivities={completedActivities} featuredActivities={featuredCompletedActivities} />;
 }

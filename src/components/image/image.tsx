@@ -67,10 +67,10 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
         effect={disabledEffect ? undefined : effect}
         useIntersectionObserver={useIntersectionObserver}
         wrapperClassName={wrapperClassName || 'component-image-wrapper'}
-        placeholderSrc={disabledEffect ? '/assets/transparent.png' : '/assets/placeholder.svg'}
+        placeholderSrc={disabledEffect ? '/assets/transparent.png' : '/public/viber_slika_srednja.png'}
         sx={{
           width: '100%',
-          borderRadius: '10px',
+          borderRadius: '20px',
           height: 1,
           objectFit: 'cover',
           verticalAlign: 'bottom',
@@ -93,6 +93,7 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
           position: 'relative',
           verticalAlign: 'bottom',
           display: 'inline-block',
+          borderRadius: '20px',
           ...(!!ratio && {
             width: 1,
           }),

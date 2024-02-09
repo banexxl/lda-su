@@ -9,28 +9,36 @@ import { _mock, _categories, _travelPosts } from 'src/_mock';
 import { ActivitySidebar } from '../activity/common/activities-sidebar';
 import { ActivityList } from '../activity/activities-list/activities-list';
 import { ActivitySearchMobile } from '../activity/common/activities-search-mobile';
-import { FeaturedActivities } from '../activity/activities-list/featured-activities';
 import { TrendingTopics } from '../activity/activities-list/trending-activities-list';
 import { Activity } from 'src/types/activity';
+import { Activities } from '../activity/activities-list/featured-activities';
 
 // ----------------------------------------------------------------------
 
 type ActivitiesListProps = {
-  allActivities: Activity[];
   inProgressActivities?: Activity[];
-  completedActivities: Activity[];
-  featuredActivities: Activity[];
-  trendingActivities: Activity[]
+  completedActivities?: Activity[];
+  featuredActivities?: Activity[];
 }
 
-export const ActivitiesView = ({ allActivities, inProgressActivities, completedActivities, featuredActivities, trendingActivities }: ActivitiesListProps) => {
+export const ActivitiesView = ({ inProgressActivities, completedActivities, featuredActivities }: ActivitiesListProps) => {
+
   return (
     <>
       <ActivitySearchMobile />
+      {
+        inProgressActivities!.length > 0 ?
+          <Activities activites={inProgressActivities!} />
+          :
+          completedActivities!.length > 0 ?
+            <Activities activites={completedActivities!} />
+            :
+            featuredActivities!.length > 0 ?
+              <Activities activites={featuredActivities!} />
+              :
+              null
+      }
 
-      <FeaturedActivities featuredCompletedActivities={featuredActivities} />
-
-      {/* <TrendingTopics /> */}
 
       <Container
         sx={{
@@ -51,7 +59,6 @@ export const ActivitiesView = ({ allActivities, inProgressActivities, completedA
         </Grid>
       </Container>
 
-      {/* <Newsletter /> */}
     </>
   );
 }

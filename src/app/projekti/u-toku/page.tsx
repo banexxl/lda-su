@@ -7,16 +7,10 @@ export const metadata = {
   title: 'LDA Subotica: Projects',
 };
 
-const getAllProjectSummaries = () => {
-
-  const projectSummaries = projectsServices().getAllProjectSummaries()
-  return projectSummaries
-
-}
-
 export default async function ProjectsPage() {
-  let allProjectSummaries: any = await getAllProjectSummaries()
 
-  return <ProjectsSummariesView allProjects={allProjectSummaries} />; // Render ProjectsView component with fetched projects
+  let inProgressProjectSummaries: any = await projectsServices().getInProgressProjectSummaries()
+
+  return <ProjectsSummariesView inProgressProjectSummaries={inProgressProjectSummaries} completedProjectSummaries={[]} featuredProjectSummaries={[]} />; // Render ProjectsView component with fetched projects
 }
 

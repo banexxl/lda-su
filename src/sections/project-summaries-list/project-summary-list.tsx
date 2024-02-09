@@ -1,19 +1,38 @@
-import Box from '@mui/material/Box';
-import Pagination, { paginationClasses } from '@mui/material/Pagination';
+import React, { useState } from 'react';
+import { Box, Typography, Grid } from '@mui/material';
+import Pagination from '@mui/material/Pagination';
 import { ProjectSummaryItem } from './project-summary-item';
 import { ProjectSummaryItemSkeleton } from './project-summary-item-skeleton';
 import { ProjectSummary } from 'src/types/projectSummary';
 
-// ----------------------------------------------------------------------
-
-type Props = {
-  projectSummary: ProjectSummary[];
+type ProjectSummaryListProps = {
+  projectSummaries?: ProjectSummary[];
   loading?: boolean;
-};
+}
 
-export const ProjectList = ({ projectSummary, loading }: Props) => {
+const ProjectSummaryList = ({ projectSummaries, loading }: ProjectSummaryListProps) => {
+
+  const [page, setPage] = useState(1);
+  const projectsPerPage = 12;
+
+  const handleChangePage = (event: any, value: any) => {
+    setPage(value);
+  };
+
+  const startIndex = (page - 1) * projectsPerPage;
+  const paginatedProjects = projectSummaries!.slice(startIndex, startIndex + projectsPerPage);
+
   return (
     <>
+      {
+        projectSummaries![0].status == 'completed' ?
+          <Typography variant="h3" paragraph>Završeni projekti</Typography>
+          : projectSummaries![0].status == 'in-progress' ?
+            <Typography variant="h3" paragraph>Projekti u toku</Typography>
+            :
+            <Typography variant="h3" paragraph>Projekti</Typography>
+      }
+
       <Box
         sx={{
           columnGap: 3,
@@ -26,25 +45,29 @@ export const ProjectList = ({ projectSummary, loading }: Props) => {
           },
         }}
       >
-        {(loading ? [...Array(12)] : projectSummary).map((projectSummary, index) =>
+
+        {(loading ? [...Array(8)] : paginatedProjects).map((projectSummary, index) =>
           projectSummary ? (
-            <ProjectSummaryItem key={projectSummary._id} projectSummary={projectSummary} />
+            <Grid item xs={8} key={projectSummary._id}>
+              <ProjectSummaryItem projectSummary={projectSummary} />
+            </Grid>
           ) : (
-            <ProjectSummaryItemSkeleton key={index} />
+            <Grid item xs={12} key={index}>
+              <ProjectSummaryItemSkeleton />
+            </Grid>
           )
         )}
       </Box>
 
-      <Pagination
-        count={10}
-        color="primary"
-        sx={{
-          my: 10,
-          [`& .${paginationClasses.ul}`]: {
-            justifyContent: 'center',
-          },
-        }}
-      />
+      <Box mt={4} display="flex" justifyContent="center">
+        <Pagination
+          count={Math.ceil(projectSummaries!.length / projectsPerPage)}
+          page={page}
+          onChange={handleChangePage}
+        />
+      </Box>
     </>
   );
-}
+};
+
+export default ProjectSummaryList;

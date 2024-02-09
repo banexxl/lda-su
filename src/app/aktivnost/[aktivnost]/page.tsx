@@ -36,8 +36,7 @@ export async function generateStaticParams() {
 }
 
 export default async function ActivityPage({ params }: any) {
-  console.log('sa stranice params', Object.keys(params)[0]);
-  console.log('sa stranice params', params['aktivnost']);
+
   const activity: any = await getActivity(params['aktivnost'])
 
   if (!activity) {

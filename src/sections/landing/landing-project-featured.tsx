@@ -53,7 +53,7 @@ export const LandingProjectSummariesFeatured = ({ projectSummaries }: Props) => 
       <Box sx={{ textAlign: 'center' }}>
         <Button
           component={RouterLink}
-          href={paths.allProjects}
+          href={paths.pastProjectSummaries}
           size="large"
           variant="outlined"
         >

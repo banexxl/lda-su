@@ -50,6 +50,21 @@ const projectsServices = () => {
           }
      };
 
+     const getCompletedProjectSummaries = async () => {
+
+          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+
+          try {
+               const db = client.db('LDA_DB');
+               const data: any = await db.collection('ProjectSummaries').find({ 'status': 'completed' }).toArray()
+               return data;
+          } catch (error: any) {
+               console.log({ message: error.message })
+          } finally {
+               await client.close();
+          }
+     };
+
      const getRandomCompletedProjectSummaries = async () => {
 
           const client = await MongoClient.connect(process.env.MONGODB_URI!);
@@ -270,6 +285,7 @@ const projectsServices = () => {
      return {
           getAllPublications,
           getAllProjects,
+          getCompletedProjectSummaries,
           getRandomCompletedProjectSummaries,
           getInProgressProjects,
           getProjectByLink,
