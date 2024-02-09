@@ -38,27 +38,27 @@ export const ActivitySidebar = ({
 }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
-  const renderAuthor = author && (
-    <Stack spacing={2} direction="row" sx={{ mb: { md: 5 } }}>
-      <Avatar src={author} sx={{ width: 64, height: 64 }} />
+  // const renderAuthor = author && (
+  //   <Stack spacing={2} direction="row" sx={{ mb: { md: 5 } }}>
+  //     <Avatar src={author} sx={{ width: 64, height: 64 }} />
 
-      <Stack>
-        <Typography variant="h5">{author}</Typography>
+  //     <Stack>
+  //       <Typography variant="h5">{author}</Typography>
 
-        <Typography variant="body2" sx={{ mt: 0.5, mb: 2, color: 'text.secondary' }}>
-          {author}
-        </Typography>
+  //       <Typography variant="body2" sx={{ mt: 0.5, mb: 2, color: 'text.secondary' }}>
+  //         {author}
+  //       </Typography>
 
-        <Stack direction="row">
-          {_socials.map((social) => (
-            <IconButton key={social.value}>
-              <Iconify icon={social.icon} sx={{ color: social.color }} />
-            </IconButton>
-          ))}
-        </Stack>
-      </Stack>
-    </Stack>
-  );
+  //       <Stack direction="row">
+  //         {_socials.map((social) => (
+  //           <IconButton key={social.value}>
+  //             <Iconify icon={social.icon} sx={{ color: social.color }} />
+  //           </IconButton>
+  //         ))}
+  //       </Stack>
+  //     </Stack>
+  //   </Stack>
+  // );
 
   const renderCategories = categories && (
     <Stack spacing={1}>
@@ -110,9 +110,9 @@ export const ActivitySidebar = ({
 
   return (
     <>
-      {mdUp && renderAuthor}
+      {/* {mdUp && renderAuthor} */}
 
-      {mdUp && (
+      {/* {mdUp && (
         <TextField
           fullWidth
           hiddenLabel
@@ -125,13 +125,13 @@ export const ActivitySidebar = ({
             ),
           }}
         />
-      )}
+      )} */}
 
       <Stack
         spacing={5}
         sx={{
           pt: { md: 5 },
-          pb: { xs: 8, md: 0 },
+          pb: { xs: 8, md: 10 },
           ...sx,
         }}
         {...other}

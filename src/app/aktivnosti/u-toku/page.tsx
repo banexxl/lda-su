@@ -10,9 +10,7 @@ export const metadata = {
 
 export default async function ActivitiesPage() {
 
-  const completedActivities: Activity[] = await activityServices().getCompletedActivities();
-  const featuredCompletedActivities: Activity[] = await activityServices().getFeaturedCompletedActivities();
   const inProgressActivities: Activity[] = await activityServices().getInProgressActivities();
 
-  return <ActivitiesView inProgressActivities={inProgressActivities} completedActivities={completedActivities} featuredActivities={featuredCompletedActivities} />;
+  return <ActivitiesView inProgressActivities={inProgressActivities} completedActivities={[]} featuredActivities={[]} />;
 }

@@ -50,7 +50,7 @@ export const ActivityView = ({ activity }: ActivityProps) => {
           sx={{ my: 3 }}
           links={[
             { name: 'Početna', href: '/' },
-            { name: 'Aktivnosti', href: paths.activitiesALDA },
+            { name: 'Aktivnosti', href: paths.activitiesInProgress },
             { name: `${activity.title}` },
           ]}
         />

@@ -77,7 +77,7 @@ export const navConfig = [
     title: 'Aktivnosti',
     path: '#',
     children: [
-      { title: 'ALDA', path: paths.activitiesALDA },
+      { title: 'Tekuće', path: paths.activitiesInProgress },
       { title: 'Arhiva', path: paths.activitiesArchive },
     ],
   },

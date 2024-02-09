@@ -40,12 +40,12 @@ export const ProjectsSummariesView = ({ completedProjectSummaries, inProgressPro
   return (
     <>
       <Container>
-        {/* <Filters
+        <Filters
           sx={{
             mt: 5,
             mb: { xs: 5, md: 10 },
           }}
-        /> */}
+        />
         {
           completedProjectSummaries!.length > 0 ?
             <ProjectSummaryList projectSummaries={completedProjectSummaries!} loading={loading.value} />

@@ -12,5 +12,5 @@ export default async function ActivitiesPage() {
 
   const completedActivities: Activity[] = await activityServices().getCompletedActivities()
 
-  return <ActivitiesView completedActivities={completedActivities} inProgressActivities={[]} featuredActivities={[]} />;
+  return <ActivitiesView completedActivities={completedActivities} featuredActivities={[]} inProgressActivities={[]} />;
 }

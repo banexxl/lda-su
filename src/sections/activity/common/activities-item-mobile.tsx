@@ -41,7 +41,7 @@ export const ActivityItemMobile = ({ activity, onSiderbar }: Props) => {
           <TextMaxLine variant={onSiderbar ? 'subtitle2' : 'h6'}>{activity.title}</TextMaxLine>
         </Link>
 
-        <ActivityTimeBlock published={fDate(activity.publishedDate)} duration={activity.publishedDate.toString()} />
+        <ActivityTimeBlock published={fDate(activity.publishedDate)} />
       </Stack>
     </Stack>
   );

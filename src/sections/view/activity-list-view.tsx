@@ -12,6 +12,10 @@ import { ActivitySearchMobile } from '../activity/common/activities-search-mobil
 import { TrendingTopics } from '../activity/activities-list/trending-activities-list';
 import { Activity } from 'src/types/activity';
 import { Activities } from '../activity/activities-list/featured-activities';
+import { useResponsive } from 'src/hooks/use-responsive';
+import { useBoolean } from 'src/hooks/use-boolean';
+import { useEffect } from 'react';
+import { Box, Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -21,44 +25,49 @@ type ActivitiesListProps = {
   featuredActivities?: Activity[];
 }
 
-export const ActivitiesView = ({ inProgressActivities, completedActivities, featuredActivities }: ActivitiesListProps) => {
+export const ActivitiesView = ({ completedActivities, inProgressActivities, featuredActivities }: ActivitiesListProps) => {
+
+  const selectedActivites = completedActivities?.length! > 0 ? completedActivities
+    : inProgressActivities?.length! > 0 ? inProgressActivities
+      : featuredActivities?.length! > 0 ? featuredActivities : null
+
+  const mdUp = useResponsive('up', 'md');
+  const loading = useBoolean(true);
+
+  useEffect(() => {
+    const fakeLoading = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      loading.onFalse();
+    };
+    fakeLoading();
+  }, [loading]);
 
   return (
-    <>
-      <ActivitySearchMobile />
-      {
-        inProgressActivities!.length > 0 ?
-          <Activities activites={inProgressActivities!} />
-          :
-          completedActivities!.length > 0 ?
-            <Activities activites={completedActivities!} />
-            :
-            featuredActivities!.length > 0 ?
-              <Activities activites={featuredActivities!} />
-              :
-              null
-      }
+    <Box sx={{ display: 'grid', gridTemplateColumns: '1.7fr 0.8fr', gridTemplateRows: '1fr' }}>
 
+      <Activities activites={selectedActivites!} loading={loading.value} />
 
       <Container
         sx={{
           mt: { xs: 4, md: 10 },
+          ml: { xs: 4, md: 10 },
         }}
       >
         <Grid container spacing={{ md: 8 }}>
-          <Grid xs={12} md={8}>
-            {/* <Posts posts={_travelPosts} /> */}
-          </Grid>
+          {/* <Grid xs={12} md={8}>
+            <Posts posts={_travelPosts} />
+          </Grid> */}
 
           <Grid xs={12} md={4}>
-            {/* <ActivitySidebar
+            <ActivitySidebar
               categories={_categories}
-              recentPosts={{ list: _travelPosts.slice(-4) }}
-            /> */}
+              recentActivities={{ list: selectedActivites!.slice(-4) }}
+            />
           </Grid>
         </Grid>
       </Container>
 
-    </>
+
+    </Box>
   );
 }
