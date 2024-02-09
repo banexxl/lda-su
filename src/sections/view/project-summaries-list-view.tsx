@@ -13,6 +13,7 @@ import { Filters } from '../filters/filters';
 import { ProjectSummary } from 'src/types/projectSummary';
 import ProjectSummaryList from '../project-summaries-list/project-summary-list';
 import { Typography } from '@mui/material';
+import { useResponsive } from 'src/hooks/use-responsive';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,7 @@ type ProjectSummariesListProps = {
 
 export const ProjectsSummariesView = ({ completedProjectSummaries, inProgressProjectSummaries, featuredProjectSummaries }: ProjectSummariesListProps) => {
 
+  const mdUp = useResponsive('up', 'md');
   const loading = useBoolean(true);
 
   useEffect(() => {
@@ -52,7 +54,7 @@ export const ProjectsSummariesView = ({ completedProjectSummaries, inProgressPro
               : featuredProjectSummaries!.length > 0 ?
                 <ProjectSummaryList projectSummaries={featuredProjectSummaries!} loading={loading.value} />
                 :
-                <Typography variant="h2" sx={{ padding: '20px' }} paragraph>Trenutno nemamo aktivnih projekata</Typography>
+                <Typography variant="h2" sx={{ textAlign: 'center', marginTop: '150px', marginBottom: '450px', marginLeft: mdUp ? '150px' : '10px', fontSize: mdUp ? '3rem' : '1.5rem' }} paragraph>Trenutno nemamo aktivnih projekata</Typography>
         }
       </Container>
 

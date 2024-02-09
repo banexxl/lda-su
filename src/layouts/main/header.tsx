@@ -38,14 +38,14 @@ export const Header = ({ headerOnDark }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const renderContent = (
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: '40px' }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
-      <Box sx={{ lineHeight: 0, position: 'relative', mb: '60px', }}>
-        <Logo sx={{ borderRadius: '40px', }} />
+      <Box sx={{ position: 'relative', height: '100px' }}>
+        <Logo />
         <Link href="/" />
       </Box>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '40px', marginRight: '20px' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '20px' }}>
         {mdUp ? (
           <Stack flexGrow={1} alignItems="center" sx={{ height: 1, marginRight: '20px' }}>
             <NavBasicDesktop data={navConfig} />

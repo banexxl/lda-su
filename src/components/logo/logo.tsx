@@ -1,10 +1,10 @@
 import { memo } from 'react';
 
-import euLogo from 'public/eu.png'
+import ldaSuLogo from 'public/viber_slika_mala_200x.png'
 import Link from '@mui/material/Link';
 import { useTheme } from '@mui/material/styles';
 import Box, { BoxProps } from '@mui/material/Box';
-
+import Image from 'next/image'
 import { RouterLink } from 'src/routes/components';
 import { useResponsive } from 'src/hooks/use-responsive';
 
@@ -29,16 +29,16 @@ const Logo = ({ single = true, sx }: LogoProps) => {
     >
       <Box
         sx={{
-          backgroundImage: `url(${euLogo.src})`,
+          backgroundImage: `url(${ldaSuLogo.src})`,
           backgroundSize: 'cover',
           alignItems: 'center',
           justifyContent: 'center',
-          width: 50,
-          height: 50,
+          width: mdUp ? '150px' : '120px',
+          height: mdUp ? '90px' : '68px',
           cursor: 'pointer',
           display: 'inline-flex',
-          borderRadius: '10px',
-          marginTop: mdUp ? '0px' : '10px',
+          marginTop: mdUp ? '0px' : '20px',
+          borderRadius: '5px ',
           ...sx,
         }}
       />

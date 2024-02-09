@@ -50,13 +50,13 @@ export const About = () => {
 
 
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-          <Typography variant="body2" sx={{ color: 'text.primary' }}>
+          <Typography variant="h4" sx={{ color: 'text.primary' }}>
             ALDA – Evropska asocijacija za lokalnu demokratiju
-            <Typography sx={{ color: 'text.primary', textAlign: { xs: 'center', md: 'justify' }, }}>
-              Danas, 14 aktivnih Agencija za lokalnu demokratiju sa sedištem u zemljama Zapadnog Balkana i Južnog Kavkaza, deluju kao statutarni članovi ALDA – Evropske asocijacije za lokalnu demokratiju.
-              ALDA je osnovana 1999. godine na inicijativu Kongresa lokalnih i regionalnih vlasti Saveta Evrope, sa ciljem da koordiniše i podržava mrežu Agencija lokalne demokratije koja su osnovane u ranim 1990-tim godinama. Ona je krovna organizacija Agencija koje su lokalno registrovana udruženja koja deluju sa glavnom misijom unapređenja lokalne uprave i aktivne participacije građana u lokanim zajednicama.
-              ALDA je organizacija zasnovana na članstvu koja okuplja više od 180 članova (uključujući lokalne vlasti, asocijacije lokalnih vlasti i nevladine organizacije) iz više od 35 zemalja Evrope. ALDA finansira svoje programe od članarina i projekata podržanih od strane Evropske komisije, Saveta Evrope i drugih javnih i privatnih donatora.
-            </Typography>
+          </Typography>
+          <Typography sx={{ color: 'text.primary', textAlign: { xs: 'center', md: 'justify' }, }}>
+            Danas, 14 aktivnih Agencija za lokalnu demokratiju sa sedištem u zemljama Zapadnog Balkana i Južnog Kavkaza, deluju kao statutarni članovi ALDA – Evropske asocijacije za lokalnu demokratiju.
+            ALDA je osnovana 1999. godine na inicijativu Kongresa lokalnih i regionalnih vlasti Saveta Evrope, sa ciljem da koordiniše i podržava mrežu Agencija lokalne demokratije koja su osnovane u ranim 1990-tim godinama. Ona je krovna organizacija Agencija koje su lokalno registrovana udruženja koja deluju sa glavnom misijom unapređenja lokalne uprave i aktivne participacije građana u lokanim zajednicama.
+            ALDA je organizacija zasnovana na članstvu koja okuplja više od 180 članova (uključujući lokalne vlasti, asocijacije lokalnih vlasti i nevladine organizacije) iz više od 35 zemalja Evrope. ALDA finansira svoje programe od članarina i projekata podržanih od strane Evropske komisije, Saveta Evrope i drugih javnih i privatnih donatora.
           </Typography>
         </Box>
       </Stack>

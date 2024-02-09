@@ -58,11 +58,11 @@ export const navConfig = [
   { title: 'Naslovna', path: paths.home },
   {
     title: 'O nama', path: paths.aboutUs,
-    children: [
-      { title: 'Stanka', path: paths.stanka },
-      { title: 'Silvija', path: paths.silvija },
-      { title: 'Boris', path: paths.boris },
-    ],
+    // children: [
+    //   { title: 'Stanka', path: paths.stanka },
+    //   { title: 'Silvija', path: paths.silvija },
+    //   { title: 'Boris', path: paths.boris },
+    // ],
   },
   {
     title: 'Projekti',

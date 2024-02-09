@@ -72,11 +72,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
               </Typography>
               <br />
               <Typography variant="body1" component="h6" sx={{
-                flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary, ":first-letter": {
-                  textTransform: 'capitalize',
-                  fontWeight: 'bold',
-                  fontSize: '3rem'
-                }
+                flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
               }}>
                 {projectSummary.projectSummaryDescriptions[index]}
                 {

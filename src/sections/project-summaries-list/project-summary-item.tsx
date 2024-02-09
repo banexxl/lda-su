@@ -12,6 +12,7 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import { Backdrop, Modal } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
+import { fDate } from 'src/utils/format-time';
 ;
 
 // ----------------------------------------------------------------------
@@ -22,7 +23,6 @@ type Props = {
 
 export const ProjectSummaryItem = ({ projectSummary }: Props) => {
 
-  const { projectSummaryTitle, projectSummaryCoverURL } = projectSummary;
   const [open, setOpen] = useState(false);
   // const [favorite, setFavorite] = useState(favorited);
 
@@ -57,18 +57,7 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
             color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
           }}
         >
-          {/* {priceSale > 0 && (
-            <Box
-              sx={{
-                color: 'grey.500',
-                textDecoration: 'line-through',
-                mr: 0.5,
-              }}
-            >
-              {fCurrency(priceSale)}
-            </Box>
-          )}
-          {fCurrency(price)} */}
+
         </Stack>
 
         {/* <Checkbox
@@ -81,7 +70,7 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
         /> */}
       </Stack>
 
-      <Image alt={'cover image'} src={projectSummaryCoverURL} ratio="1/1" onClick={() => setOpen(true)} />
+      <Image alt={'cover image'} src={projectSummary.projectSummaryCoverURL} ratio="1/1" onClick={() => setOpen(true)} />
 
       <Stack spacing={0.5} sx={{ p: 2.5 }}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
@@ -90,7 +79,7 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
             sx={{
               cursor: 'pointer'
             }}>
-            {projectSummaryTitle}
+            {projectSummary.projectSummaryTitle}
           </Link>
         </Typography>
 
@@ -104,15 +93,14 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
       <Divider sx={{ borderStyle: 'dashed' }} />
 
       <Stack direction="row" alignItems="center" sx={{ p: 2.5 }}>
-        {/* <Stack
+        <Stack
           flexGrow={1}
           direction="row"
           alignItems="center"
           sx={{ typography: 'body2', color: 'text.disabled' }}
         >
-          <Iconify icon="carbon:time" width={16} sx={{ mr: 1 }} /> Start date: {moment(startDateTime).format('YYYY/MM/DD')}
-          <Iconify icon="carbon:time" width={16} sx={{ mr: 1 }} /> End date: {moment(endDateTime).format('YYYY/MM/DD')}
-        </Stack> */}
+          <Iconify icon="carbon:time" width={16} sx={{ mr: 1 }} /> Completed: {fDate(projectSummary.projectEndDateTime.toString())}
+        </Stack>
 
         <Stack spacing={0.5} direction="row" alignItems="center">
           <Iconify icon="carbon:star-filled" sx={{ color: 'warning.main' }} />
@@ -145,7 +133,7 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
             boxShadow: 24,
             p: 4,
           }}>
-            <Image alt={'cover image'} src={projectSummaryCoverURL} ratio="1/1" onClick={() => setOpen(false)} height={650} />
+            <Image alt={'cover image'} src={projectSummary.projectSummaryCoverURL} ratio="1/1" onClick={() => setOpen(false)} height={650} />
           </Box>
         </Modal>
       </Backdrop>

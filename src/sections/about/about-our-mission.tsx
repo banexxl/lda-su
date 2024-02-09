@@ -22,7 +22,7 @@ const VISIONS_TOP = [
 
 const VISIONS_BOT = [
   {
-    name: 'promovisanje',
+    name: 'Promovisanje',
     description: 'ljudskih i manjinskih prava u lokalnim zajednicama',
   },
   {

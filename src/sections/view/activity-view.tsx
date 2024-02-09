@@ -79,11 +79,7 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             <br />
             {[...Array(activity.descriptions.length)].map((_, index) => (
               <Typography key={index} variant="body1" component="h6" sx={{
-                flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary, ":first-letter": {
-                  textTransform: 'capitalize',
-                  fontWeight: 'bold',
-                  fontSize: '2rem'
-                }
+                flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
               }}>
                 {activity.descriptions[index]}
                 <br />

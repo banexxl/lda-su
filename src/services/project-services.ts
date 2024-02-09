@@ -26,7 +26,7 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('ProjectSummaries').find({}).toArray()
+               const data: any = await db.collection('ProjectSummaries').find({}).sort({ projectEndDateTime: -1 }).toArray()
                return data;
           } catch (error: any) {
                console.log({ message: error.message })
@@ -41,7 +41,7 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('ProjectSummaries').find({ 'status': 'in-progress' }).toArray()
+               const data: any = await db.collection('ProjectSummaries').find({ 'status': 'in-progress' }).sort({ projectEndDateTime: -1 }).toArray()
                return data;
           } catch (error: any) {
                console.log({ message: error.message })
@@ -56,7 +56,7 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('ProjectSummaries').find({ 'status': 'completed' }).toArray()
+               const data: any = await db.collection('ProjectSummaries').find({ 'status': 'completed' }).sort({ projectEndDateTime: -1 }).toArray()
                return data;
           } catch (error: any) {
                console.log({ message: error.message })
@@ -74,7 +74,7 @@ const projectsServices = () => {
                const data: any = await db.collection('ProjectSummaries').aggregate([
                     { $match: { status: 'completed' } },  // Filter documents where completed is true
                     { $sample: { size: 10 } }         // Randomly sample 10 documents
-               ]).toArray()
+               ]).sort({ projectEndDateTime: -1 }).toArray()
                return data;
           } catch (error: any) {
                console.log({ message: error.message })

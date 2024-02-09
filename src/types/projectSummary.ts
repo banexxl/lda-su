@@ -8,7 +8,6 @@ export type ProjectSummary = {
   locations: string[];
   projectStartDateTime: Date,
   projectEndDateTime: Date,
-  publishedDateTime: Date,
   organizers: string[],
   category: string;
   applicants: string[],
