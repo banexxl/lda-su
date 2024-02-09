@@ -86,7 +86,7 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
       <Stack spacing={0.5} sx={{ p: 2.5 }}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           <Link
-            href={`/pregled-projekta/${projectSummary.projectSummaryURL}`}
+            href={`/projekat/${projectSummary.projectSummaryURL}`}
             sx={{
               cursor: 'pointer'
             }}>

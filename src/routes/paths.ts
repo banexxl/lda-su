@@ -8,7 +8,7 @@ export const paths = {
   stanka: '/profil/stanka',
   silvija: '/profil/silvija',
   boris: '/profil/boris',
-  projectSummary: '/pregled-projekta',
+  projectSummary: '/projekat',
   contact: '/kontakt',
   pastProjectSummaries: '/projekti/zavrseni',
   inProgressProjectSummaries: '/projekti/u-toku',

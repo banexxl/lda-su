@@ -37,7 +37,7 @@ export async function generateStaticParams() {
 
 export default async function ProjectSummaryPage({ params }: any) {
 
-  const projectSummary: any = await getProjectSummary(params['pregled-projekta'])
+  const projectSummary: any = await getProjectSummary(params['projekat'])
 
   if (!projectSummary || projectSummary.length == 0) {
     // Handle the case where the project is undefined

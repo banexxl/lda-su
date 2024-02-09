@@ -22,15 +22,12 @@ const activityServices = () => {
      }
 
      const getActivityByLink = async (activityURL: string) => {
-          console.log('aktiviti servisi get by link', activityURL);
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
                const db = client.db('LDA_DB')
                let data: Activity[] = await db.collection('Activities').find({ activityURL: activityURL }).toArray()
-               console.log('data iz get aktivnost', data);
-
                return data[0]
           } catch (error: any) {
                console.log({ message: error.message })

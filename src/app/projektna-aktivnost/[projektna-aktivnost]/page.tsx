@@ -35,7 +35,8 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectPage({ params }: any) {
-  const project = await getProject('/' + Object.keys(params)[0] + '/' + params['projekat'])
+
+  const project = await getProject('/' + Object.keys(params)[0] + '/' + params['projektna-aktivnost'])
 
   if (!project) {
     // Handle the case where the project is undefined

@@ -121,8 +121,6 @@ const projectsServices = () => {
           try {
                const db = client.db('LDA_DB');
                const data: any = await db.collection('Projects').find({ 'status': 'in-progress' }).toArray()
-               console.log('in progress projects');
-
                return data;
           } catch (error: any) {
                console.log({ message: error.message })
