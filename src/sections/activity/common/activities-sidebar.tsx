@@ -126,23 +126,26 @@ export const ActivitySidebar = ({
           }}
         />
       )} */}
+      {
+        mdUp &&
+        <Stack
+          spacing={5}
+          sx={{
+            pt: { md: 5 },
+            pb: { xs: 8, md: 10 },
+            ...sx,
+          }}
+          {...other}
+        >
+          {renderCategories}
 
-      <Stack
-        spacing={5}
-        sx={{
-          pt: { md: 5 },
-          pb: { xs: 8, md: 10 },
-          ...sx,
-        }}
-        {...other}
-      >
-        {renderCategories}
+          {renderRecentPosts}
 
-        {renderRecentPosts}
+          {renderPopularTags}
 
-        {renderPopularTags}
+        </Stack>
+      }
 
-      </Stack>
     </>
   );
 }

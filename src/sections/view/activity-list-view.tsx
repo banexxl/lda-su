@@ -29,7 +29,7 @@ export const ActivitiesView = ({ completedActivities, inProgressActivities, feat
 
   const selectedActivites = completedActivities?.length! > 0 ? completedActivities
     : inProgressActivities?.length! > 0 ? inProgressActivities
-      : featuredActivities?.length! > 0 ? featuredActivities : null
+      : featuredActivities?.length! > 0 ? featuredActivities : []
 
   const mdUp = useResponsive('up', 'md');
   const loading = useBoolean(true);
@@ -43,30 +43,33 @@ export const ActivitiesView = ({ completedActivities, inProgressActivities, feat
   }, [loading]);
 
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: '1.7fr 0.8fr', gridTemplateRows: '1fr' }}>
+    <Box sx={{ display: 'grid', gridTemplateColumns: mdUp ? '1.7fr 0.8fr' : '1.3fr', gridTemplateRows: '2fr' }}>
 
       <Activities activites={selectedActivites!} loading={loading.value} />
 
-      <Container
-        sx={{
-          mt: { xs: 4, md: 10 },
-          ml: { xs: 4, md: 10 },
-        }}
-      >
-        <Grid container spacing={{ md: 8 }}>
-          {/* <Grid xs={12} md={8}>
+      {
+        mdUp &&
+        <Container
+          sx={{
+            mt: { xs: 4, md: 10 },
+            ml: { xs: 4, md: 10 },
+          }}
+        >
+          <Grid container spacing={{ md: 8 }}>
+            {/* <Grid xs={12} md={8}>
             <Posts posts={_travelPosts} />
           </Grid> */}
 
-          <Grid xs={12} md={4}>
-            <ActivitySidebar
-              categories={_categories}
-              recentActivities={{ list: selectedActivites!.slice(-4) }}
-            />
-          </Grid>
-        </Grid>
-      </Container>
+            <Grid xs={12} md={4}>
+              <ActivitySidebar
+                categories={_categories}
+                recentActivities={{ list: selectedActivites!.slice(-4) }}
+              />
+            </Grid>
 
+          </Grid>
+        </Container>
+      }
 
     </Box>
   );

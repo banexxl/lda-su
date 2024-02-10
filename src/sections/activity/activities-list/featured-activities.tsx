@@ -18,7 +18,7 @@ type Props = {
 export const Activities = ({ activites, loading }: Props) => {
 
   const [page, setPage] = useState(1);
-  const projectsPerPage = 8;
+  const projectsPerPage = 9;
 
   const handleChangePage = (event: any, value: any) => {
     setPage(value);
@@ -30,29 +30,29 @@ export const Activities = ({ activites, loading }: Props) => {
   return (
     <Container
       sx={{
-        pt: { xs: 0, md: 5 },
+        pt: { xs: 10, md: 5 },
         pb: 10,
         alignItems: 'center',
       }}
     >
       {
-        activites[0].status == 'completed' ?
+        activites[0]?.status == 'completed' ?
           <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
             Završene aktivnosti
           </Typography>
           :
-          activites[0].status == 'in-progress' ?
+          activites[0]?.status == 'in-progress' ?
             <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
               Aktivnosti u toku
             </Typography>
             :
-            activites[0].status == 'to-do' ?
+            activites[0]?.status == 'to-do' ?
               <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
                 Istaknute aktivnosti
               </Typography>
               :
               <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
-                Aktivnosti
+                Aktivnosti...
               </Typography>
       }
 
@@ -61,9 +61,13 @@ export const Activities = ({ activites, loading }: Props) => {
           gap: 3,
           display: 'grid',
           gridTemplateColumns: {
-            xs: 'repeat(2, 1fr)',
-            md: 'repeat(1, 1fr)',
+            xs: '1fr',
+            md: '1fr',
           },
+          gridTemplateRows: {
+            xs: '2fr',
+            md: '2fr'
+          }
         }}
       >
         <Box
@@ -71,7 +75,7 @@ export const Activities = ({ activites, loading }: Props) => {
             gap: 3,
             display: 'grid',
             gridTemplateColumns: {
-              xs: 'repeat(1, 1fr)',
+              xs: '1fr',
               sm: 'repeat(2, 1fr)',
               md: 'repeat(3, 1fr)',
             },
