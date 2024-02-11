@@ -54,7 +54,7 @@ export const ProjectsSummariesView = ({ completedProjectSummaries, inProgressPro
               : featuredProjectSummaries!.length > 0 ?
                 <ProjectSummaryList projectSummaries={featuredProjectSummaries!} loading={loading.value} />
                 :
-                <Typography variant="h2" sx={{ textAlign: 'center', marginTop: '150px', marginBottom: '450px', marginLeft: mdUp ? '150px' : '10px', fontSize: mdUp ? '3rem' : '1.5rem' }} paragraph>Trenutno nemamo aktivnih projekata</Typography>
+                <Typography variant="h2" sx={{ textAlign: 'center', marginTop: '150px', marginBottom: '450px', fontSize: mdUp ? '3rem' : '1.5rem' }} paragraph>Trenutno nemamo aktivnih projekata</Typography>
         }
       </Container>
 

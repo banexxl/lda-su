@@ -59,7 +59,7 @@ const ProjectSummaryList = ({ projectSummaries, loading }: ProjectSummaryListPro
         )}
       </Box>
 
-      <Box mt={4} display="flex" justifyContent="center">
+      <Box mt={4} display="flex" justifyContent="center" sx={{ marginBottom: '20px' }}>
         <Pagination
           count={Math.ceil(projectSummaries!.length / projectsPerPage)}
           page={page}
