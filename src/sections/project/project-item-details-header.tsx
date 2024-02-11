@@ -114,7 +114,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           {/* <Avatar src={tourGuide?.avatarUrl} sx={{ width: 24, height: 24 }} /> */}
 
           <Typography variant="body2" sx={{ color: 'text.secondary', mx: 0.5 }}>
-            Project title
+            Projekat
           </Typography>
 
           <Link variant="subtitle2" color={theme.palette.text.primary} href={project.projectSummaryURL} sx={{ cursor: 'pointer' }}>

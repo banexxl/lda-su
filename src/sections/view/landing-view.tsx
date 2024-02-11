@@ -76,7 +76,7 @@ export const LandingView = ({
 
       <LandingProjectSummariesFeatured projectSummaries={featuredProjectSummaries} />
 
-      <Activities activites={featuredActivities} />
+      <Activities activites={featuredActivities} loading={false} />
 
       {/* <Newsletter /> */}
     </Box>

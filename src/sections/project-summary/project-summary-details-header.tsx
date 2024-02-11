@@ -79,7 +79,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
                   projectSummary.projectSummarySubtitleURLs.length != 0 ?
                     projectSummary.projectSummarySubtitleURLs[index] ?
                       <Link href={projectSummary.projectSummarySubtitleURLs[index]} color={'primary.main'} underline='none' sx={{ marginBottom: '5px' }}>
-                        ...pročitaj ostatak teksta.
+                        pročitaj ostatak teksta.
                       </Link>
                       :
                       null
@@ -132,7 +132,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
           {/* <Avatar src={tourGuide?.avatarUrl} sx={{ width: 24, height: 24 }} /> */}
 
           <Typography variant="body2" sx={{ color: 'text.secondary', mx: 0.5 }}>
-            Project title
+            Projekat
           </Typography>
 
           <Typography variant="subtitle2" color={theme.palette.text.primary}>
