@@ -42,6 +42,7 @@ export const ActivitiesView = ({ completedActivities, inProgressActivities, feat
     fakeLoading();
   }, [loading]);
 
+
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: mdUp ? '1.7fr 0.8fr' : '1.3fr', gridTemplateRows: '2fr' }}>
 
