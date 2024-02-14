@@ -23,8 +23,8 @@ export default function ProfileView({ params }: any) {
                     padding: mdUp ? '20px' : '0px',
                     boxShadow: `5px 10px 20px ${theme.palette.primary.dark} inset`,
                     backgroundImage: `url(${backgroundURL.src})`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
+                    backgroundRepeat: 'repeat',
+                    // backgroundSize: 'cover',
                }}
           >
 

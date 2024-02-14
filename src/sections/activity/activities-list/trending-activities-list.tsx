@@ -57,8 +57,8 @@ export const TrendingTopics = () => {
   return (
     <Box sx={{
       backgroundImage: `url(${bgImage.src})`,
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
+      // backgroundSize: 'cover',
+      backgroundRepeat: 'repeat',
     }}>
 
       <Stack

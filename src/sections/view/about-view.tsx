@@ -16,8 +16,8 @@ export const AboutView = () => {
   return (
     <Box sx={{
       backgroundImage: `url(${bgImage2.src})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
+      backgroundRepeat: 'repeat',
+      // backgroundSize: 'cover',
     }}>
       <About />
 
