@@ -29,21 +29,21 @@ export const ContactInfo = () => {
       </Typography>
 
       <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Iconify icon="solar:city-bold-duotone" width={24} sx={{ color: 'primary.main' }} />
+        <Iconify icon="solar:city-bold-duotone" minWidth={24} sx={{ color: 'primary.main' }} />
         <Typography sx={{ color: 'text.secondary', ml: '10px' }}>
           24000 Subotica
         </Typography>
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Iconify icon="entypo:address" width={24} sx={{ color: 'primary.main' }} />
-        <Typography sx={{ color: 'text.secondary' }}>
+        <Iconify icon="entypo:address" minWidth={24} sx={{ color: 'primary.main' }} />
+        <Typography sx={{ color: 'text.secondary', marginLeft: '10px' }}>
           Trg Cara Jovana Nenada 15, I sprat, kancelarija 214
         </Typography>
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Iconify icon="carbon:email" width={24} sx={{ color: 'primary.main' }} />
+        <Iconify icon="carbon:email" minWidth={24} sx={{ color: 'primary.main' }} />
         <Link href={`mailto:ldasubotica@aldaintranet.org`}>
           <Typography sx={{ color: 'text.secondary', ml: '10px' }}>
             ldasubotica@aldaintranet.org
@@ -52,7 +52,7 @@ export const ContactInfo = () => {
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Iconify icon="carbon:phone" width={24} sx={{ color: 'primary.main' }} />
+        <Iconify icon="carbon:phone" minWidth={24} sx={{ color: 'primary.main' }} />
         <Link href={`tel:+38124554587`}>
           <Typography sx={{ color: 'text.secondary', ml: '10px' }}>
             +38124554587
