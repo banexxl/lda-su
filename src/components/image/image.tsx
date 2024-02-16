@@ -67,7 +67,7 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
         effect={disabledEffect ? undefined : effect}
         useIntersectionObserver={useIntersectionObserver}
         wrapperClassName={wrapperClassName || 'component-image-wrapper'}
-        placeholderSrc={disabledEffect ? '/assets/transparent.png' : '/public/viber_slika_srednja.png'}
+        placeholderSrc={'/assets/transparent.png'}
         sx={{
           width: '100%',
           borderRadius: '20px',

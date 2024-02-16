@@ -53,7 +53,7 @@ export const PartnerCarousel = () => {
 
       <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
         {partners.map((partner: any) => (
-          <PartnerItem key={partner._id} partner={partner} />
+          <PartnerItem key={partner.id} partner={partner} />
         ))}
       </Carousel>
 

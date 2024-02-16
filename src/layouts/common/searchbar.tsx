@@ -11,6 +11,8 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import Iconify from 'src/components/iconify';
 
 import { HEADER } from '../config-layout';
+import { useState } from 'react';
+import NotFoundPage from 'src/app/not-found';
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +44,47 @@ type SearchbarProps = {
 
 export const Searchbar = ({ sx }: SearchbarProps) => {
   const searchOpen = useBoolean();
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSearch = async (inputValue: string) => {
+
+    searchOpen.onFalse
+
+    try {
+      if (/\S/.test(inputValue)) {
+        await fetch('/api/search', {
+          method: 'POST',
+          body: JSON.stringify(inputValue),
+          headers: {
+            'Content-Type': 'application/text',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Cache-Control': 'no-store'
+          },
+        }).then((response: Response) => {
+          return !response.ok ?
+            <NotFoundPage />
+            :
+            window.location.href = '/kontakt'
+        }).then((data) => {
+          console.log(data);
+
+          // setSearchResults(data)
+          // setLoading(false)
+        }).catch((error) => {
+          console.log(error);
+        })
+      } else {
+        // setLoading(false)
+        // setSearchResults({ message: 'Navedeni termin nije pronadjen!', data: [] })
+      }
+
+    } catch (error) {
+      console.error('Error searching products:', error);
+    }
+
+  }
+
 
   return (
     <ClickAwayListener onClickAway={searchOpen.onFalse}>
@@ -63,8 +106,9 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
                 </InputAdornment>
               }
               sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
+              onInput={(e: any) => setInputValue(e.target.value)}
             />
-            <Button variant="contained" onClick={searchOpen.onFalse} sx={{ marginRight: '20px' }}>
+            <Button variant="contained" onClick={() => handleSearch(inputValue)} sx={{ marginRight: '20px' }}>
               Search
             </Button>
           </StyledSearchbar>

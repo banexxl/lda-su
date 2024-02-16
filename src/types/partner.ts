@@ -1,5 +1,5 @@
 export type Partner = {
-     _id: string;
+     id: string;
      name: string;
      src: string;
 }
