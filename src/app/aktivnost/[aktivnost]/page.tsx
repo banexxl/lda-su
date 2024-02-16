@@ -23,7 +23,6 @@ export async function generateStaticParams() {
         aktivnost: activity.activityURL.toString()
       }
     ))
-
   } catch (error) {
     console.error('Error fetching projects:', error);
     return [];
