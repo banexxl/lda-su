@@ -14,18 +14,13 @@ type ProjectSummaryPageProps = {
   }
 }
 
-const getProjectSummary = async (link: string) => {
-  const projectSummary = await projectsServices().getProjectSummaryByLink(link)
-  return projectSummary
-}
-
 export async function generateStaticParams() {
   try {
     const allProjectSummaries = await projectsServices().getAllProjectSummaries();
 
     return allProjectSummaries.map((projectSummary: ProjectSummary) => (
       {
-        link: projectSummary.projectSummaryURL.toString()
+        projekat: projectSummary.projectSummaryURL.toString()
       }
     ))
 
@@ -37,12 +32,12 @@ export async function generateStaticParams() {
 
 export default async function ProjectSummaryPage({ params }: any) {
 
-  const projectSummary: any = await getProjectSummary(params['projekat'])
+  const projectSummary: any = await projectsServices().getProjectSummaryByLink(params['projekat'])
 
   if (!projectSummary || projectSummary.length == 0) {
     // Handle the case where the project is undefined
     return <NotFoundView />
   }
 
-  return <ProjectSummaryView projectSummary={projectSummary[0]} />
+  return <ProjectSummaryView projectSummary={projectSummary} />
 }
