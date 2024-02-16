@@ -39,5 +39,5 @@ export default async function ProjectSummaryPage({ params }: any) {
     return <NotFoundView />
   }
 
-  return <ProjectSummaryView projectSummary={projectSummary} />
+  return <ProjectSummaryView key={projectSummary._id} projectSummary={projectSummary[0]} />
 }
