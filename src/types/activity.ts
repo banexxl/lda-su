@@ -10,7 +10,7 @@ export type Activity = {
   _id: string;
   activityURL: string;
   title: string;
-  galery: string[];
+  gallery: string[];
   coverURL: string;
   links: string[];
   publishedDate: Date;

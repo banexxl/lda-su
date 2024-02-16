@@ -64,7 +64,7 @@ export const ProjectView = ({ project }: ProjectProps) => {
           sx={{ mt: 3, mb: 5, color: theme.palette.text.primary }}
         />
 
-        <ProjectDetailsGallery galery={project.gallery} />
+        <ProjectDetailsGallery gallery={project.gallery} />
 
         {/* <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse"> */}
         {/* <Grid xs={12} md={5} lg={4}>

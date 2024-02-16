@@ -133,7 +133,7 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             <Typography variant="h3" component="h1" sx={{ flexGrow: 1, padding: { md: 1, lg: 2 }, color: theme.palette.text.primary }}>
               Galerija
             </Typography>
-            <ProjectDetailsGallery galery={activity.galery} />
+            <ProjectDetailsGallery gallery={activity.gallery} />
           </Grid>
 
         </Grid>

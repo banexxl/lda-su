@@ -9,12 +9,12 @@ import { Lightbox, useLightbox } from 'src/components/lightbox';
 // ----------------------------------------------------------------------
 
 type Props = {
-  galery: string[];
+  gallery: string[];
 };
 
-export const ProjectDetailsGallery = ({ galery }: Props) => {
+export const ProjectDetailsGallery = ({ gallery }: Props) => {
 
-  const slides = galery.map((slide) => ({
+  const slides = gallery.map((slide) => ({
     src: slide,
   }));
 
