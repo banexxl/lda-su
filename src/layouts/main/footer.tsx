@@ -127,7 +127,7 @@ export const Footer = () => {
                 <FacebookIcon sx={{ color: 'primary.main' }} />
               </Link>
 
-              <Link href='https://www.facebook.com/LocalDemocracyAgencySubotica' target='_blank'>
+              <Link href='https://www.linkedin.com/company/ldasubotica/about/' target='_blank'>
                 <LinkedInIcon sx={{ color: 'primary.main' }} />
               </Link>
             </Box>

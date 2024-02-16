@@ -9,32 +9,10 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import { _mock } from 'src/_mock';
 
 import Carousel, { useCarousel, CarouselArrows } from 'src/components/carousel';
+import { partners } from 'src/_mock/partners-data';
+import { PartnerItem } from './partner-item';
 
-import { TrendingTopicActivityItem } from './trending-activities';
-
-// ----------------------------------------------------------------------
-
-const CATEGORIES = [
-  'Marketing',
-  'Community',
-  'Tutorials',
-  'Business',
-  'Management',
-  'Sports',
-  'LDA Subotica',
-  'Design',
-];
-
-export const TOPICS = [...Array(8)].map((_, index) => ({
-  id: _mock.id(index),
-  cover: _mock.image.travel(index + 4),
-  totalPost: index + 10,
-  category: CATEGORIES[index],
-}));
-
-// ----------------------------------------------------------------------
-
-export const TrendingTopics = () => {
+export const PartnerCarousel = () => {
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
@@ -56,7 +34,7 @@ export const TrendingTopics = () => {
 
   return (
     <Box sx={{
-      backgroundImage: `url(${bgImage.src})`,
+      // backgroundImage: `url(${bgImage.src})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
     }}>
@@ -68,16 +46,16 @@ export const TrendingTopics = () => {
           mb: { xs: 8, md: 10 },
         }}
       >
-        <Typography variant="h3" sx={{ textAlign: 'center', mt: '20px', ml: '50px' }}>Trending Topics</Typography>
+        <Typography variant="h3" sx={{ textAlign: 'center', mt: '20px', ml: '50px' }}>Naši partneri</Typography>
 
         {mdUp && <CarouselArrows onNext={carousel.onNext} onPrev={carousel.onPrev} spacing={2} />}
       </Stack>
 
-      {/* <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
-        {TOPICS.map((topic) => (
-          <TrendingTopicActivityItem key={topic._id} project={topic} />
+      <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
+        {partners.map((partner: any) => (
+          <PartnerItem key={partner._id} partner={partner} />
         ))}
-      </Carousel> */}
+      </Carousel>
 
       {!mdUp && (
         <CarouselArrows

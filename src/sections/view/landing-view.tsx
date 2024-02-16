@@ -10,6 +10,7 @@ import { LandingProjectSummariesFeatured } from '../landing/landing-project-feat
 // import { LandingProjectsByCity } from '../landing/landing-project-by-city';
 import { ProjectSummary } from 'src/types/projectSummary';
 import { Activities } from '../activity/activities-list/featured-activities';
+import { PartnerCarousel } from '../partners/partners-list';
 
 
 // ----------------------------------------------------------------------
@@ -68,7 +69,9 @@ export const LandingView = ({
         </Container> */}
       </Box>
 
-      <LandingIntroduce activeProjectSummaries={activeProjectSummaries} allActivities={allActivities} completedActivities={completedActivities} featuredActivities={featuredActivities} featuredCompletedActivities={featuredCompletedActivities} inProgressActivities={inProgressActivities} trendingActivities={trendingActivities} />
+      <LandingIntroduce />
+
+      <PartnerCarousel />
 
       <LandingSummary />
 
