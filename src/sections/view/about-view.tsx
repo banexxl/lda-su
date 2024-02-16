@@ -7,8 +7,6 @@ import { About } from '../about/about';
 import { AboutOurVision } from '../about/about-our-mission';
 import { LandingActivity } from '../activity/activities-list/landing-activities';
 import { Box } from '@mui/system';
-
-import bgImage from "public/larger.png"
 import bgImage2 from "public/background-scaled-wpv_1024x.jpg"
 // ----------------------------------------------------------------------
 

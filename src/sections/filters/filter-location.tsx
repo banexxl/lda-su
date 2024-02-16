@@ -20,7 +20,7 @@ export const FilterLocation = () => {
           {...params.InputProps}
           inputProps={params.inputProps}
           fullWidth
-          placeholder="Where we go?"
+          placeholder="Filter po lokaciji"
           startAdornment={
             <InputAdornment position="start">
               <Iconify width={24} icon="carbon:location" sx={{ color: 'text.disabled', mr: 1 }} />

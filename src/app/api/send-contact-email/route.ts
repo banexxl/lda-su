@@ -1,0 +1,38 @@
+const nodemailer = require("nodemailer");
+
+export async function POST(request: Request, response: Response) {
+
+     console.log('sdsdsds', process.env.EMAIL_SERVER_HOST, process.env.EMAIL_SERVER_USER, process.env.EMAIL_SERVER_PASSWORD);
+
+     const transporter = nodemailer.createTransport({
+          host: process.env.EMAIL_SERVER_HOST,
+          port: 465,
+          secure: true, // true for 465, false for other ports
+          auth: {
+               user: process.env.EMAIL_SERVER_USER, // generated ethereal user
+               pass: process.env.EMAIL_SERVER_PASSWORD, // generated ethereal password
+          },
+          tls: {
+               rejectUnauthorized: false
+          }
+     });
+
+     const body = await request.json()
+     console.log(body);
+
+     try {
+          const res = await transporter.sendMail({
+               from: process.env.EMAIL_SERVER_USER,
+               to: 'damjanovic.branislav@gmail.com',
+               // to: 'ldasubotica@aldaintranet.org',
+               subject: body.subject,
+               text: `Poruka od ${body.fullName}:` + " " + body.message
+          })
+          console.log(res);
+
+          return Response.json(res)
+     } catch (err: any) {
+          return Response.json(err)
+     }
+
+};

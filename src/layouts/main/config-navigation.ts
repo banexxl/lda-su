@@ -85,4 +85,8 @@ export const navConfig = [
     title: 'Publikacije',
     path: paths.publications
   },
+  {
+    title: 'Kontakt',
+    path: paths.contact
+  },
 ];

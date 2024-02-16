@@ -23,7 +23,6 @@ type Props = {
 export const FilterTime = ({ departureDay, onChangeDepartureDay, sx }: Props) => {
   return (
     <MobileDatePicker
-      disabled
       value={departureDay}
       onChange={onChangeDepartureDay}
       slots={{

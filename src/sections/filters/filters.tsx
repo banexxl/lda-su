@@ -62,11 +62,11 @@ export const Filters = ({ sx, ...other }: StackProps) => {
 
       <Divider flexItem orientation="vertical" />
 
-      <FilterGuests
+      {/* <FilterGuests
         guests={guests}
         onDecreaseGuests={handleDecreaseGuests}
         onIncrementGuests={handleIncrementGuests}
-      />
+      /> */}
 
       <Button
         size="large"

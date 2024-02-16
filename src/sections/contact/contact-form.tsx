@@ -1,13 +1,12 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
-
+import Swal, { SweetAlertResult } from 'sweetalert2'
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import Image from 'src/components/image';
@@ -46,12 +45,46 @@ export const ContactForm = () => {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
+
     try {
       reset();
-    } catch (error) {
-      console.error(error);
+      await fetch('/api/send-contact-email', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify(data)
+      }).then((response: Response) => {
+        if (response.ok) {
+          Swal.fire({
+            title: 'Hvala Vam na kontaktu!',
+            text: 'Poruka poslata!',
+            icon: 'success',
+            confirmButtonText: '<i class="fa fa-thumbs-up"></i> OK!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            showCloseButton: true,
+          }).then((result: SweetAlertResult) => {
+            result.isConfirmed ?
+              window.location.href = '/'
+              : null
+          })
+        } else {
+          Swal.fire({
+            title: 'Eh!',
+            text: 'Poruka iz nekog razloga nije poslata!',
+            icon: 'error',
+            confirmButtonText: '<i class="fa fa-thumbs-up"></i> OK!',
+            confirmButtonAriaLabel: 'Thumbs down',
+            showCloseButton: true,
+          })
+        }
+      })
+    } catch (error: any) {
+      console.log(error)
     }
-  });
+  })
 
   return (
     <Container
@@ -68,21 +101,21 @@ export const ContactForm = () => {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Typography variant="h3">Drop Us A Line</Typography>
+          <Typography variant="h3">Budite slobodni nam pišete</Typography>
 
           <Typography sx={{ color: 'text.secondary' }}>
-            We normally respond within 2 business days
+            Očekujte odgovor u roku od dva radna dana
           </Typography>
         </Stack>
         <FormProvider methods={methods} onSubmit={onSubmit}>
           <Stack spacing={2.5} alignItems="flex-start">
-            <RHFTextField name="fullName" label="Full name" />
+            <RHFTextField name="fullName" label="Ime i prezime" />
 
             <RHFTextField name="email" label="Email" />
 
-            <RHFTextField name="subject" label="Subject" />
+            <RHFTextField name="subject" label="Tema poruke" />
 
-            <RHFTextField name="message" multiline rows={4} label="Message" sx={{ pb: 2.5 }} />
+            <RHFTextField name="message" multiline rows={4} label="Poruka" sx={{ pb: 2.5 }} />
 
             <LoadingButton
               size="large"
