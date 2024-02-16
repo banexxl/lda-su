@@ -15,11 +15,6 @@ type ActivityPageProps = {
   }
 }
 
-const getActivity = async (link: string) => {
-  const activity = await activityServices().getActivityByLink(link)
-  return activity
-}
-
 export async function generateStaticParams() {
   try {
     const allActivities = await activityServices().getAllActivities();
@@ -37,7 +32,7 @@ export async function generateStaticParams() {
 
 export default async function ActivityPage({ params }: any) {
 
-  const activity: any = await getActivity(params['aktivnost'])
+  const activity: any = await activityServices().getActivityByLink(params['aktivnost'])
 
   if (!activity) {
     // Handle the case where the activity is undefined

@@ -3,11 +3,13 @@ import { _mock } from './_mock';
 // ----------------------------------------------------------------------
 
 export const _categories = [
-  { label: 'Marketing', path: '' },
-  { label: 'Community', path: '' },
-  { label: 'Tutorials', path: '' },
-  { label: 'Business', path: '' },
-  { label: 'Management', path: '' },
+  { label: 'ALDA', path: '/aktivnosti/alda' },
+  { label: 'Dan Evrope', path: '/aktivnosti/dan-evrope' },
+  { label: 'EU Info point', path: '/aktivnosti/eu-info-point' },
+  { label: 'Evropski gradovi interkulturalnosti', path: '/aktivnosti/evropski-gradovi-interkulturalnosti' },
+  { label: 'Mladi', path: '/aktivnosti/mladi' },
+  { label: 'Volontiranje u inostranstvu', path: '/aktivnosti/mladi-volontiranje-u-inostranstvu' },
+  { label: 'Volontiranje u Subotici', path: '/aktivnosti/mladi-volontiranje-u-subotici' },
 ];
 
 // ----------------------------------------------------------------------

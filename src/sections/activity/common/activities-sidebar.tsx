@@ -63,7 +63,7 @@ export const ActivitySidebar = ({
   const renderCategories = categories && (
     <Stack spacing={1}>
       <Typography variant="h5" gutterBottom>
-        Categories
+        Kategorije
       </Typography>
 
       {categories.map((category) => (
@@ -71,14 +71,14 @@ export const ActivitySidebar = ({
           <Box
             sx={{
               mr: 2,
-              width: 6,
-              height: 6,
+              minWidth: 6,
+              minHeight: 6,
               borderRadius: '50%',
               bgcolor: 'primary.main',
             }}
           />
 
-          <Link variant="body2" href={category.path} >
+          <Link variant="body2" href={category.path} sx={{ whiteSpace: 'nowrap' }}>
             {category.label}
           </Link>
         </Stack>
@@ -88,7 +88,7 @@ export const ActivitySidebar = ({
 
   const renderRecentPosts = recentActivities && (
     <Stack spacing={3}>
-      <Typography variant="h5">Recent Posts</Typography>
+      <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>Nedavne aktivnosti</Typography>
 
       {recentActivities.list.map((activity) => (
         <ActivityItemMobile key={activity._id} activity={activity} onSiderbar />

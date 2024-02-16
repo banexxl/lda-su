@@ -55,6 +55,26 @@ const activityServices = () => {
           }
      }
 
+     const getActivitiesByCategory = async (category: string) => {
+
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          console.log(category);
+
+          try {
+               const db = client.db('LDA_DB')
+               let data: Activity[] = await db.collection('Activities').find({ 'category': category }).toArray()
+               console.log('aktivnosti po kategoriji', data.length);
+
+               return data
+          } catch (error: any) {
+               console.log({ message: error.message })
+               return []
+          }
+          finally {
+               await client.close();
+          }
+     }
+
      const getFeaturedCompletedActivities = async () => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
@@ -127,6 +147,7 @@ const activityServices = () => {
 
      return {
           getAllActivities,
+          getActivitiesByCategory,
           getActivityByLink,
           getCompletedActivities,
           getToDoActivities,
