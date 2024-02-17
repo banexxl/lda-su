@@ -6,21 +6,10 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import bgImage from "public/background-blue-gradient.jpg"
-import bgImage2 from "public/background-blue-gradient.png"
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useBoundingClientRect } from 'src/hooks/use-bounding-client-rect';
 import imageURL from "public/logo_main.jpg"
 import Image from 'src/components/image';
-import Iconify from 'src/components/iconify';
-import SvgColor from 'src/components/svg-color';
-import { ActivityPrevAndNext } from '../activity/common/activities-prev-and-next';
-import { LandingActivityItemCarousel } from '../activity/activities-list/landing-activities-item-carousel';
-import { ActivityList } from '../activity/activities-list/activities-list';
-import { TrendingTopicActivityItem } from '../activity/activities-list/trending-activities';
-import { TrendingTopics } from '../activity/activities-list/trending-activities-list';
-import { Project } from 'src/types/project';
-import { Activity } from 'src/types/activity';
-import { ProjectSummary } from 'src/types/projectSummary';
 
 export const LandingIntroduce = () => {
 
@@ -37,9 +26,9 @@ export const LandingIntroduce = () => {
       sx={{
         pt: { xs: 10, md: 15 },
         pb: { xs: 5, md: 10 },
-        backgroundImage: `url(${bgImage.src})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
+        // backgroundImage: `url(${bgImage.src})`,
+        // backgroundRepeat: 'no-repeat',
+        // backgroundSize: 'cover',
       }}
     >
       <Container ref={containerRef}>
