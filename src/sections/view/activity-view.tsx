@@ -130,7 +130,7 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             </Box>
             <Divider sx={{ mt: 8 }} />
             {/* <ActivityAuthor author={author} /> */}
-            <Typography variant="h3" component="h1" sx={{ flexGrow: 1, padding: { md: 1, lg: 2 }, color: theme.palette.text.primary }}>
+            <Typography variant="h3" component="h1" sx={{ flexGrow: 1, my: 2, color: theme.palette.text.primary }}>
               Galerija
             </Typography>
             <ProjectDetailsGallery gallery={activity.gallery} />

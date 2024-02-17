@@ -77,7 +77,7 @@ export const LandingProjectsByCity = ({ projects }: Props) => {
         }}
       >
         {projects.map((project: any) => (
-          <ProjectItem key={project._id} project={project} />
+          <ProjectItem key={Math.floor(Math.random() * 999)} project={project} />
         ))}
       </Box>
 

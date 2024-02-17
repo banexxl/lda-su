@@ -60,7 +60,7 @@ export const LandingActivity = ({ activities }: Props) => {
           >
             <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
               {activities.map((activity) => (
-                <LandingActivityItemCarousel key={activity._id} activity={activity} />
+                <LandingActivityItemCarousel key={Math.floor(Math.random() * 999)} activity={activity} />
               ))}
             </Carousel>
           </CarouselArrows>
@@ -79,7 +79,7 @@ export const LandingActivity = ({ activities }: Props) => {
 
           <Stack spacing={3}>
             {activities.slice(0, 3).map((activity) => (
-              <LandingActivityItem key={activity._id} activity={activity} />
+              <LandingActivityItem key={Math.floor(Math.random() * 999)} activity={activity} />
             ))}
           </Stack>
 

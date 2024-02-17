@@ -70,7 +70,7 @@ export const ProjectLandingHero = ({ projectSummaries }: Props) => {
           ref={carouselLarge.carouselRef}
         >
           {projectSummaries.map((projectSummary) => (
-            <CarouselItem key={projectSummary._id} projectSummary={projectSummary} />
+            <CarouselItem key={Math.floor(Math.random() * 999)} projectSummary={projectSummary} />
           ))}
         </Carousel>
       )}
@@ -95,7 +95,7 @@ export const ProjectLandingHero = ({ projectSummaries }: Props) => {
             >
               {projectSummaries.map((projectSummary, index) => (
                 <ThumbnailItem
-                  key={projectSummary._id}
+                  key={Math.floor(Math.random() * 999)}
                   projectSummary={projectSummary}
                   selected={carouselLarge.currentIndex === index}
                 />

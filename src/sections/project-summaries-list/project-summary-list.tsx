@@ -48,7 +48,7 @@ const ProjectSummaryList = ({ projectSummaries, loading }: ProjectSummaryListPro
 
         {(loading ? [...Array(8)] : paginatedProjects).map((projectSummary, index) =>
           projectSummary ? (
-            <Grid item xs={8} key={projectSummary._id}>
+            <Grid item xs={8} key={Math.floor(Math.random() * 999)}>
               <ProjectSummaryItem projectSummary={projectSummary} />
             </Grid>
           ) : (

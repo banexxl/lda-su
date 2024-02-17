@@ -70,7 +70,7 @@ export const LandingFavoriteDestinations = ({ projects }: Props) => {
         <Grid container xs={12} md={6} spacing={{ xs: 4, md: 3 }}>
           {projects.map((project, index) => (
             <Grid
-              key={project._id}
+              key={Math.floor(Math.random() * 999)}
               xs={12}
               sm={6}
               sx={{

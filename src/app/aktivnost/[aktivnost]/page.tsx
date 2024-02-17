@@ -38,5 +38,5 @@ export default async function ActivityPage({ params }: any) {
     return <NotFoundView />
   }
 
-  return <ActivityView key={activity._id} activity={activity} />
+  return <ActivityView key={Math.floor(Math.random() * 999)} activity={activity} />
 }

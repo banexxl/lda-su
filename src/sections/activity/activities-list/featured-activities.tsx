@@ -83,8 +83,8 @@ export const Activities = ({ activites, loading }: Props) => {
         >
           {(loading ? [...Array(8)] : paginatedProjects).map((activity, index) =>
             activity ? (
-              <Grid item xs={8} key={activity._id}>
-                <FeaturedActivityItem key={activity._id} activity={activity} />
+              <Grid item xs={8} key={Math.floor(Math.random() * 999)}>
+                <FeaturedActivityItem key={Math.floor(Math.random() * 999)} activity={activity} />
               </Grid>
             ) : (
               <Grid item xs={12} key={index}>

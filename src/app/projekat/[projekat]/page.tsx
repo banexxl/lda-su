@@ -39,5 +39,5 @@ export default async function ProjectSummaryPage({ params }: any) {
     return <NotFoundView />
   }
 
-  return <ProjectSummaryView key={projectSummary._id} projectSummary={projectSummary[0]} />
+  return <ProjectSummaryView key={Math.floor(Math.random() * 999)} projectSummary={projectSummary[0]} />
 }

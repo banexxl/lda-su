@@ -66,7 +66,7 @@ export const ProjectListSimilar = ({ projectSummary }: Props) => {
           }}
         >
           {projectSummary.map((projectSummary) => (
-            <ProjectSummaryItem key={projectSummary._id} projectSummary={projectSummary} />
+            <ProjectSummaryItem key={Math.floor(Math.random() * 999)} projectSummary={projectSummary} />
           ))}
         </Box>
 

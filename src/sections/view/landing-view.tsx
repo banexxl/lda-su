@@ -71,8 +71,6 @@ export const LandingView = ({
 
       <LandingIntroduce />
 
-      <PartnerCarousel />
-
       <LandingSummary />
 
       {/* LDA Subotica<LandingProjectsByCity projects={[]} /> */}
@@ -80,6 +78,8 @@ export const LandingView = ({
       <LandingProjectSummariesFeatured projectSummaries={featuredProjectSummaries} />
 
       <Activities activites={featuredActivities} loading={false} />
+
+      <PartnerCarousel />
 
       {/* <Newsletter /> */}
     </Box>

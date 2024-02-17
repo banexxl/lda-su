@@ -23,25 +23,6 @@ export const PartnerItem = ({ partner }: PartnerItemProps) => {
       sx={{ px: 1.5, cursor: 'pointer' }}
     >
       <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative' }}>
-        <Stack
-          spacing={1}
-          sx={{
-            py: 3,
-            width: 1,
-            zIndex: 9,
-            bottom: 0,
-            textAlign: 'center',
-            // position: 'absolute',
-            color: 'common.white',
-          }}
-        >
-          <Typography variant="h6" >{partner.name}</Typography>
-
-          {/* <Typography variant="body2" sx={{ opacity: 0.72 }}>
-            {topic.totalPost} posts
-          </Typography> */}
-        </Stack>
-
         <Image
           alt={partner.name}
           src={partner.src}
@@ -49,6 +30,7 @@ export const PartnerItem = ({ partner }: PartnerItemProps) => {
         // overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
         //   } 95%)`}
         />
+        <Typography variant="h6" sx={{ color: 'common.white', textAlign: 'center', mt: '10px' }}>{partner.name}</Typography>
       </Box>
     </Box>
   );
