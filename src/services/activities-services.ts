@@ -38,6 +38,8 @@ const activityServices = () => {
           }
      }
 
+
+
      const getCompletedActivities = async () => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)

@@ -160,7 +160,7 @@ const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
         </Typography>
 
         <Typography variant="h1" sx={{ maxWidth: 480 }}>
-          {projectSummary.projectSummaryTitle}
+          {projectSummary.title}
         </Typography>
 
         <Stack
@@ -245,7 +245,7 @@ const ThumbnailItem = ({ projectSummary, selected }: ThumbnailItemProps) => {
 
       <Stack spacing={0.5}>
         <TextMaxLine variant="h6" line={1}>
-          {projectSummary.projectSummaryTitle}
+          {projectSummary.title}
         </TextMaxLine>
       </Stack>
     </Stack>

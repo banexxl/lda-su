@@ -233,6 +233,33 @@ const projectsServices = () => {
           }
      }
 
+     const getSearchTermResults = async (searchTerm: string) => {
+
+          // const searchTermArray = searchTerm.split(" ")
+
+          const collections = ['Activities', 'Projects'];
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+
+          try {
+               const db = client.db('LDA_DB')
+               const searchResults = await Promise.all(collections.map(async collectionName => {
+                    const collection = db.collection(collectionName);
+
+                    // Perform search in the title field
+                    return collection.find({ title: { $regex: searchTerm, $options: 'i' } }).toArray();
+               }));
+               const combinedResults = searchResults.reduce((acc, curr) => acc.concat(curr), []);
+               console.log(combinedResults.length);
+
+               return combinedResults
+          } catch (error: any) {
+               return { message: error.message }
+          }
+          finally {
+               await client.close();
+          }
+     }
+
      const getProjectsByNameAndOrManufacturer = async (searchTerm: any) => {
 
           const searchTermArray = searchTerm.split(" ")
@@ -283,6 +310,7 @@ const projectsServices = () => {
      return {
           getAllPublications,
           getAllProjects,
+          getSearchTermResults,
           getCompletedProjectSummaries,
           getRandomCompletedProjectSummaries,
           getInProgressProjects,

@@ -2,7 +2,7 @@ import { ProjectStatus } from "./project";
 
 export type ProjectSummary = {
   _id: string,
-  projectSummaryTitle: string,
+  title: string,
   projectSummaryURL: string,
   gallery: string[];
   locations: string[];

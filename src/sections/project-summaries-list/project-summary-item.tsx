@@ -79,7 +79,7 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
             sx={{
               cursor: 'pointer'
             }}>
-            {projectSummary.projectSummaryTitle}
+            {projectSummary.title}
           </Link>
         </Typography>
 

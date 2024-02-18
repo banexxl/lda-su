@@ -56,7 +56,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
 
         <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
           <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
-            {projectSummary.projectSummaryTitle}
+            {projectSummary.title}
           </Typography>
           {[...Array(projectSummary.projectSummaryDescriptions.length)].map((_, index) => (
             <Box key={index} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
@@ -136,7 +136,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
           </Typography>
 
           <Typography variant="subtitle2" color={theme.palette.text.primary}>
-            {projectSummary.projectSummaryTitle}
+            {projectSummary.title}
           </Typography>
         </Stack>
       </Stack>

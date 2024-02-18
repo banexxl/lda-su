@@ -14,7 +14,6 @@ export async function POST(request: Request, response: Response) {
                rejectUnauthorized: false
           }
      });
-
      const body = await request.json()
 
      try {
@@ -27,7 +26,7 @@ export async function POST(request: Request, response: Response) {
           })
           console.log(res);
 
-          return Response.json(res)
+          return Response.json({ response: response.status, data: res })
      } catch (err: any) {
           return Response.json(err)
      }

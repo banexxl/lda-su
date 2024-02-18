@@ -58,7 +58,7 @@ export const ProjectSummaryView = ({ projectSummary }: ProjectSummaryProps) => {
           links={[
             { name: 'Home', href: '/' },
             { name: 'Projects', href: paths.pastProjectSummaries },
-            { name: projectSummary.projectSummaryTitle },
+            { name: projectSummary.title },
           ]}
           sx={{ mt: 3, mb: 5, color: theme.palette.text.primary }}
         />
