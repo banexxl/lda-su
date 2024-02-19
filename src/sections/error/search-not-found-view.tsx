@@ -26,7 +26,7 @@ export const SearchNotFoundView = () => {
 
         <m.div variants={varBounce().in}>
           <Typography sx={{ color: 'text.secondary' }}>
-            Nažalost, nismo pronašli nijedan predmet koji odgovara vašoj pretrazi. Molimo pokušajte ponovo!
+            Nažalost nismo pronašli nijednu aktivnost koja odgovara vašoj pretrazi. Molimo pokušajte ponovo!
           </Typography>
         </m.div>
 
