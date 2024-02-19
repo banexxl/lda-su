@@ -11,12 +11,12 @@ export const partners = [
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/Sekretarijat-za-sport-i-omladinu-3.jpg',
           url: 'https://sio.vojvodina.gov.rs/'
      },
-     {
-          id: 3,
-          name: 'Kancelarija za sardnju sa civilnim društvom',
-          src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/Kanc-za-saradnju-sa-civilnim-drustvom-7.jpg',
-          url: 'https://vodic.gradjanske.org/donator/kancelarija-za-saradnju-sa-civilnim-drustvom/'
-     },
+     // {
+     //      id: 3,
+     //      name: 'Kancelarija za sardnju sa civilnim društvom',
+     //      src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/Kanc-za-saradnju-sa-civilnim-drustvom-7.jpg',
+     //      url: 'https://vodic.gradjanske.org/donator/kancelarija-za-saradnju-sa-civilnim-drustvom/'
+     // },
      {
           id: 4,
           name: 'Grad Subotica',
@@ -29,12 +29,12 @@ export const partners = [
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/USAID-ISC-4.jpg',
           url: 'https://www.usaid.gov/'
      },
-     {
-          id: 6,
-          name: 'Sektorske organizacije civilnog društva',
-          src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/SEKO-8.jpg',
-          url: '/'
-     },
+     // {
+     //      id: 6,
+     //      name: 'Sektorske organizacije civilnog društva',
+     //      src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/SEKO-8.jpg',
+     //      url: '/'
+     // },
      {
           id: 7,
           name: 'EU',

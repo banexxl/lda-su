@@ -27,7 +27,7 @@ export const ProjectLandingHero = ({ projectSummaries }: Props) => {
   const mdUp = useResponsive('up', 'md');
 
   const carouselLarge = useCarousel({
-    speed: 500,
+    speed: 600,
     slidesToShow: 1,
     draggable: false,
     slidesToScroll: 1,

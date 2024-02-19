@@ -73,7 +73,7 @@ const projectsServices = () => {
                const db = client.db('LDA_DB');
                const data: any = await db.collection('ProjectSummaries').aggregate([
                     { $match: { status: 'completed' } },  // Filter documents where completed is true
-                    { $sample: { size: 10 } }         // Randomly sample 10 documents
+                    { $sample: { size: 4 } }         // Randomly sample 5 documents
                ]).sort({ projectEndDateTime: -1 }).toArray()
                return data;
           } catch (error: any) {

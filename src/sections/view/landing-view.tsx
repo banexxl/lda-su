@@ -11,6 +11,7 @@ import { LandingProjectSummariesFeatured } from '../landing/landing-project-feat
 import { ProjectSummary } from 'src/types/projectSummary';
 import { Activities } from '../activity/activities-list/featured-activities';
 import { PartnerCarousel } from '../partners/partners-list';
+import { AboutOurVision } from '../about/about-our-mission';
 
 
 // ----------------------------------------------------------------------
@@ -69,9 +70,11 @@ export const LandingView = ({
         </Container> */}
       </Box>
 
-      <LandingIntroduce />
+      <AboutOurVision />
+      {/* <LandingIntroduce /> */}
 
       <LandingSummary />
+
 
       {/* LDA Subotica<LandingProjectsByCity projects={[]} /> */}
 
