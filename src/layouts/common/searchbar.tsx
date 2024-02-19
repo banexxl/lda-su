@@ -61,16 +61,15 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
             'Cache-Control': 'no-store'
           },
-        }).then((response: Response) => {
-          return !response.ok ?
-            <NotFoundPage />
-            :
-            window.location.href = '/kontakt'
-        }).then((data) => {
-          console.log(data);
+        }).then(async (response) => {
 
-          // setSearchResults(data)
-          // setLoading(false)
+          const searchedData = await response.json()
+          console.log(searchedData);
+
+          return searchedData.data.length == 0 ?
+            window.location.href = '/pretraga/nema-rezultata'
+            :
+            window.localStorage.setItem('searchedData', JSON.stringify(searchedData))
         }).catch((error) => {
           console.log(error);
         })

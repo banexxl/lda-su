@@ -1,13 +1,16 @@
-import { MongoClient } from "mongodb";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import projectsServices from "src/services/project-services";
 
 
-export async function POST(request: Request, response: Response) {
+export async function POST(request: NextRequest, response: NextResponse) {
 
      const searchTerm = await request.json()
 
-     const searchResults = projectsServices().getSearchTermResults(searchTerm)
+     const searchResults = await projectsServices().getSearchTermResults(searchTerm)
 
-     return Response.json({ response: response.status, data: searchResults })
+     if (searchResults.length == 0) {
+          return new NextResponse(JSON.stringify({ success: false, message: 'No items found', data: [] }), { status: 404, headers: { 'content-type': 'application/json' } });
+     }
+
+     return Response.json({ data: searchResults })
 };

@@ -237,7 +237,7 @@ const projectsServices = () => {
 
           // const searchTermArray = searchTerm.split(" ")
 
-          const collections = ['Activities', 'Projects'];
+          const collections = ['Activities', 'Projects', 'ProjectSummaries'];
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
@@ -249,7 +249,6 @@ const projectsServices = () => {
                     return collection.find({ title: { $regex: searchTerm, $options: 'i' } }).toArray();
                }));
                const combinedResults = searchResults.reduce((acc, curr) => acc.concat(curr), []);
-               console.log(combinedResults.length);
 
                return combinedResults
           } catch (error: any) {
