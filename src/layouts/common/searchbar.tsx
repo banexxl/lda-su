@@ -13,6 +13,8 @@ import Iconify from 'src/components/iconify';
 import { HEADER } from '../config-layout';
 import { useState } from 'react';
 import NotFoundPage from 'src/app/not-found';
+import { setStorage } from 'src/hooks/use-local-storage';
+import { useRouter } from 'next/navigation';
 
 // ----------------------------------------------------------------------
 
@@ -45,7 +47,7 @@ type SearchbarProps = {
 export const Searchbar = ({ sx }: SearchbarProps) => {
   const searchOpen = useBoolean();
   const [inputValue, setInputValue] = useState('');
-
+  const router = useRouter()
   const handleSearch = async (inputValue: string) => {
 
     searchOpen.onFalse
@@ -67,9 +69,9 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
           console.log(searchedData);
 
           return searchedData.data.length == 0 ?
-            window.location.href = '/pretraga/nema-rezultata'
+            router.push('/pretraga/nema-rezultata')
             :
-            window.localStorage.setItem('searchedData', JSON.stringify(searchedData))
+            setStorage('searchedData', JSON.stringify(searchedData))
         }).catch((error) => {
           console.log(error);
         })

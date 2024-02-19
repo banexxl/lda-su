@@ -10,7 +10,6 @@ export const metadata = {
 
 export default async function SearchPage() {
 
-     const searchedData = localStorage.getItem('searchedData')
      const completedActivities: Activity[] = await activityServices().getCompletedActivities()
 
      return <ActivitiesView completedActivities={completedActivities} featuredActivities={[]} inProgressActivities={[]} />;
