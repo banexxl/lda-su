@@ -22,7 +22,7 @@ export const PartnerItem = ({ partner }: PartnerItemProps) => {
     <Box
       sx={{ px: 1.5, cursor: 'pointer' }}
     >
-      <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative' }}>
+      <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative', display: 'flex', flexDirection: 'column' }}>
         <Image
           alt={partner.name}
           src={partner.src}
