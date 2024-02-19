@@ -51,7 +51,7 @@ export const LandingSummary = () => {
           mb: { xs: 8, md: 10 },
         }}
       >
-        <Typography variant="h2">Projekte aktivnosti LDA Subotica su započete sad već davne 2002. godine</Typography>
+        <Typography variant="h2">Projekte aktivnosti LDA Subotica su započete sad već davne 1993. godine</Typography>
 
         <Typography sx={{ color: 'text.secondary' }}>
           Za ovaj period smo uspešno realizovali na desetine projekata, u više gradova širom Srbije
