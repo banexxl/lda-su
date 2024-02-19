@@ -11,62 +11,50 @@ export const partners = [
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/Sekretarijat-za-sport-i-omladinu-3.jpg',
           url: 'https://sio.vojvodina.gov.rs/'
      },
-     // {
-     //      id: 3,
-     //      name: 'Kancelarija za sardnju sa civilnim društvom',
-     //      src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/Kanc-za-saradnju-sa-civilnim-drustvom-7.jpg',
-     //      url: 'https://vodic.gradjanske.org/donator/kancelarija-za-saradnju-sa-civilnim-drustvom/'
-     // },
      {
-          id: 4,
+          id: 3,
           name: 'Grad Subotica',
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/logo-grad-lda-11.jpg',
           url: 'https://gradsubotica.co.rs/'
      },
      {
-          id: 5,
+          id: 4,
           name: 'USAID',
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/USAID-ISC-4.jpg',
           url: 'https://www.usaid.gov/'
      },
-     // {
-     //      id: 6,
-     //      name: 'Sektorske organizacije civilnog društva',
-     //      src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/SEKO-8.jpg',
-     //      url: '/'
-     // },
      {
-          id: 7,
+          id: 5,
           name: 'EU',
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/EU-logo-1.jpg',
           url: 'https://european-union.europa.eu/index_en'
      },
      {
-          id: 8,
+          id: 6,
           name: 'Wolverhampton',
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/Wolverhampton-5.jpg',
           url: 'https://www.wolverhampton.gov.uk/'
      },
      {
-          id: 9,
+          id: 7,
           name: 'EU Konvent',
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/EU-konvent-9.jpg',
           url: 'https://eukonvent.org/'
      },
      {
-          id: 10,
+          id: 8,
           name: 'Sekretarijat za lokalnu samoupravu',
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/Sekretarijat-za-lokalnu-samoupravu-2.jpg',
           url: 'https://region.vojvodina.gov.rs/'
      },
      {
-          id: 11,
+          id: 9,
           name: 'Ministarstvo za evropske integracije',
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/SEIO-6.jpg',
           url: 'https://www.mei.gov.rs/'
      },
      {
-          id: 12,
+          id: 10,
           name: 'Otvoreni parlament',
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/Otvoreni-parlament-10.jpg',
           url: 'https://otvoreniparlament.rs/'
