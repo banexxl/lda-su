@@ -7,7 +7,7 @@ import { ProjectSummary } from 'src/types/projectSummary';
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'LDA Subotica: Home',
+  title: 'LDA Subotica: Home'
 };
 
 export default async function LandingPage() {
