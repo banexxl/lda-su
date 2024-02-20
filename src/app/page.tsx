@@ -8,6 +8,9 @@ import { ProjectSummary } from 'src/types/projectSummary';
 
 export const metadata = {
   title: 'LDA Subotica: Home',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default async function LandingPage() {

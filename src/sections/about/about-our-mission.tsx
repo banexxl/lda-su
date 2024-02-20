@@ -91,6 +91,7 @@ export const AboutOurVision = () => {
                   sx={{
                     p: 4,
                     mt: 4,
+                    backgroundColor: theme.palette.primary.dark,
                     width: { md: 'calc(30%)' },
                     ...(firstVision && {
                       top: { md: 0 },
@@ -145,6 +146,7 @@ export const AboutOurVision = () => {
                   sx={{
                     p: 4,
                     mt: 4,
+                    backgroundColor: theme.palette.primary.dark,
                     width: { md: 'calc(30%)' },
                     ...(firstVision && {
                       top: { md: 0 },
