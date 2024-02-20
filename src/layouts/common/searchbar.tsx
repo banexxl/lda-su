@@ -124,7 +124,7 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
           <Iconify icon="carbon:search" />
         </IconButton>
 
-        <Slide direction="down" in={searchOpen.value} mountOnEnter unmountOnExit>
+        <Slide direction="down" in={searchOpen.value} mountOnEnter unmountOnExit timeout={{ appear: 500, enter: 500, exit: 1000 }}>
           <StyledSearchbar sx={{ display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '90vw', mt: '25px' }}>
               <Input
