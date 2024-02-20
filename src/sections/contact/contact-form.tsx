@@ -56,7 +56,9 @@ export const ContactForm = () => {
           'Access-Control-Allow-Origin': '*',
         },
         body: JSON.stringify(data)
-      }).then((response: Response) => {
+      }).then(async (response: Response) => {
+        console.log(await response.json());
+
         if (response.ok) {
           Swal.fire({
             title: 'Hvala Vam na kontaktu!',
@@ -67,7 +69,7 @@ export const ContactForm = () => {
             showCloseButton: true,
           }).then((result: SweetAlertResult) => {
             result.isConfirmed ?
-              window.location.href = '/'
+              window.location.href = '/kontakt'
               : null
           })
         } else {
