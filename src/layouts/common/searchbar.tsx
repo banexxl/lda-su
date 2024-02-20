@@ -21,13 +21,15 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { bgBlur } from 'src/theme/css';
+import { Project } from 'src/types/project';
+import Link from 'next/link';
 
 // ----------------------------------------------------------------------
 
 const StyledSearchbar = styled('div')(({ theme }) => ({
   top: 0,
   left: 0,
-  zIndex: 99,
+  //zIndex: 99,
   width: '100%',
   display: 'flex',
   position: 'absolute',
@@ -52,19 +54,24 @@ type SearchbarProps = {
 
 export const Searchbar = ({ sx }: SearchbarProps) => {
   const searchOpen = useBoolean();
+
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const [searchedData, setSearchedData] = useState([])
+  const [searchedData, setSearchedData] = useState<Project[]>([])
   const [openSearchExpander, setOpenSearchExpander] = useState(false)
   const offset = useOffSetTop();
   const theme = useTheme();
   const mdUp = useResponsive('up', 'md');
 
+  const handleClickAway = () => {
+    searchOpen.onFalse()
+    setOpenSearchExpander(false)
+  }
   const handleSearch = async (inputValue: string) => {
 
     setLoading(true)
-    searchOpen.onFalse
+    searchOpen.onFalse()
 
     try {
       if (/\S/.test(inputValue)) {
@@ -78,37 +85,40 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
             'Cache-Control': 'no-store'
           },
         }).then(async (response) => {
+          searchOpen.onFalse
+          const searchedData = await response.json()
+          setSearchedData(searchedData.data)
 
-          setSearchedData(await response.json())
           setLoading(false)
           searchOpen.onFalse
-          return searchedData.length == 0 ?
+          return searchedData.data.length == 0 ?
             router.push('/pretraga/nema-rezultata')
             :
             setOpenSearchExpander(true)
         }).catch((error) => {
           setLoading(false)
-          setOpenSearchExpander(false)
+          console.log(error);
+
+          // setOpenSearchExpander(false)
           searchOpen.onFalse
           console.log(error);
         })
       } else {
         setLoading(false)
         setOpenSearchExpander(false)
-        searchOpen.onFalse
+        searchOpen.onFalse()
       }
-
     } catch (error) {
       setLoading(false)
       setOpenSearchExpander(false)
-      searchOpen.onFalse
+      searchOpen.onFalse()
       console.error('Error searching products:', error);
     }
+    searchOpen.onFalse()
   }
 
-
   return (
-    <ClickAwayListener onClickAway={searchOpen.onFalse}>
+    <ClickAwayListener onClickAway={() => handleClickAway()}>
       <div>
         <IconButton aria-label="search" onClick={searchOpen.onTrue} sx={sx}>
           <Iconify icon="carbon:search" />
@@ -121,7 +131,7 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
                 autoFocus
                 fullWidth
                 disableUnderline
-                placeholder="Search…"
+                placeholder="Pretraga..."
                 startAdornment={
                   <InputAdornment position="start">
                     <Iconify icon="carbon:search" sx={{ color: 'text.disabled' }} />
@@ -135,7 +145,7 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
                 loadingPosition="center"
                 //loadingIndicator='Pretraga...'
                 variant="outlined"
-                onClick={() => handleSearch(inputValue)} sx={{ marginRight: '20px' }}
+                onClick={() => handleSearch(inputValue)} sx={{ marginRight: '20px', mt: '20px' }}
               >
                 Pretraga
               </LoadingButton>
@@ -144,15 +154,43 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
 
         </Slide>
 
-        <Slide direction="down" in={openSearchExpander} mountOnEnter unmountOnExit>
-          <StyledSearchbar sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '90vw', mt: '80px' }}>
-              <Typography>test</Typography>
-            </Box>
-          </StyledSearchbar>
-
+        <Slide direction="down" in={openSearchExpander} mountOnEnter unmountOnExit timeout={1000}>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            top: 0,
+            left: 0,
+            height: 'auto',
+            zIndex: 99,
+            width: '100%',
+            position: 'absolute',
+            alignItems: 'center',
+            // height: HEADER.H_MOBILE,
+            backdropFilter: 'blur(6px)',
+            WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
+            padding: theme.spacing(0, 3),
+            boxShadow: theme.customShadows.z8,
+            backgroundColor: `${alpha(theme.palette.background.default, 0.72)}`,
+            py: '10px'
+          }}>
+            <Typography sx={{ marginBottom: '5px' }}>Projekti/aktivnosti kao rezultat pretrage:</Typography>
+            {
+              searchedData.length > 0 ? (
+                (
+                  searchedData.map((searchItem: Project, index: number) => (
+                    <Box key={index} sx={{ marginBottom: '5px' }}>
+                      <Link key={index} href={searchItem.projectURL} style={{ textDecoration: 'none' }} onClick={() => setOpenSearchExpander(false)}>
+                        <Typography key={index} sx={{ textDecoration: 'none', color: theme.palette.primary.main }}>{searchItem.subTitle}</Typography>
+                      </Link>
+                    </Box>
+                  )))
+              ) : (
+                <Typography>Nema rezultata pretrage...</Typography>
+              )
+            }
+          </Box>
         </Slide>
-
       </div>
     </ClickAwayListener>
   );

@@ -192,21 +192,21 @@ const projectsServices = () => {
 
           // const searchTermArray = searchTerm.split(" ")
 
-          // const collections = ['Activities', 'Projects', 'ProjectSummaries'];
+          //const collections = ['Activities', 'Projects', 'ProjectSummaries']; mora samo projects jer url-ovi u activities i project summaries nemju 'prefix'
           const collections = ['Projects'];
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
                const db = client.db('LDA_DB')
-               const searchResults = await Promise.all(collections.map(async collectionName => {
-                    const collection = db.collection(collectionName);
+               // const searchResults = await Promise.all(collections.map(async collectionName => {
+               //      const collection = db.collection(collectionName);
 
-                    // Perform search in the title field
-                    return collection.find({ title: { $regex: searchTerm, $options: 'i' } }).toArray();
-               }));
-               const combinedResults = searchResults.reduce((acc, curr) => acc.concat(curr), []);
+               //      // Perform search in the title field
+               return await db.collection('Projects').find({ subTitle: { $regex: searchTerm, $options: 'i' } }).limit(5).toArray();
+               // }));
+               // const combinedResults = searchResults.reduce((acc, curr) => acc.concat(curr), []);
 
-               return combinedResults
+               // return combinedResults
           } catch (error: any) {
                return { message: error.message }
           }
