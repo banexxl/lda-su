@@ -12,7 +12,7 @@ const projectsServices = () => {
           try {
                const db = client.db('LDA_DB');
                const data: any = await db.collection('Publications').find({}).toArray()
-               return data[0].publications;
+               return data;
           } catch (error: any) {
                console.log({ message: error.message })
           } finally {

@@ -15,4 +15,14 @@ module.exports = {
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lda-su.s3.eu-central-1.amazonaws.com',
+        // port: '',
+        // pathname: '/account123/**',
+      },
+    ],
+  },
 };
