@@ -13,8 +13,8 @@ import bgImage2 from "public/background-scaled-wpv_1024x.jpg"
 export const AboutView = () => {
   return (
     <Box sx={{
-      backgroundImage: `url(${bgImage2.src})`,
-      backgroundRepeat: 'repeat',
+      // backgroundImage: `url(${bgImage2.src})`,
+      // backgroundRepeat: 'repeat',
       // backgroundSize: 'cover',
     }}>
       <About />
