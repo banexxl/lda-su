@@ -1,5 +1,6 @@
 import { PublicationsView } from "src/sections/view/publications-view";
 import projectsServices from "src/services/project-services";
+import { Publication } from "src/types/publication";
 
 export const metadata = {
      title: 'LDA-Subotica: Publications',
@@ -14,7 +15,7 @@ const getAllPublications = () => {
 
 export default async function ComingSoonPage() {
 
-     const publications: string[] = await getAllPublications()
+     const publications: Publication[] = await getAllPublications()
 
      return <PublicationsView publications={publications} />;
 }
