@@ -15,7 +15,7 @@ import { useState } from 'react';
 import NotFoundPage from 'src/app/not-found';
 import { getStorage, removeStorage, setStorage } from 'src/hooks/use-local-storage';
 import { useRouter } from 'next/navigation';
-import { Collapse, Paper, Typography } from '@mui/material';
+import { Collapse, Divider, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
@@ -29,7 +29,7 @@ import Link from 'next/link';
 const StyledSearchbar = styled('div')(({ theme }) => ({
   top: 0,
   left: 0,
-  //zIndex: 99,
+  zIndex: 99,
   width: '100%',
   display: 'flex',
   position: 'absolute',
@@ -145,7 +145,7 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
                 loadingPosition="center"
                 //loadingIndicator='Pretraga...'
                 variant="outlined"
-                onClick={() => handleSearch(inputValue)} sx={{ marginRight: '20px', mt: '20px' }}
+                onClick={() => handleSearch(inputValue)} sx={{ marginRight: '20px' }}
               >
                 Pretraga
               </LoadingButton>
@@ -181,7 +181,8 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
                   searchedData.map((searchItem: Project, index: number) => (
                     <Box key={index} sx={{ marginBottom: '5px' }}>
                       <Link key={index} href={searchItem.projectURL} style={{ textDecoration: 'none' }} onClick={() => setOpenSearchExpander(false)}>
-                        <Typography key={index} sx={{ textDecoration: 'none', color: theme.palette.primary.main }}>{searchItem.subTitle}</Typography>
+                        <Typography key={index} sx={{ textDecoration: 'none', color: theme.palette.primary.lighter, textAlign: 'center' }}>{searchItem.subTitle}</Typography>
+                        <Divider />
                       </Link>
                     </Box>
                   )))
