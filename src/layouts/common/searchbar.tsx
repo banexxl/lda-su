@@ -68,6 +68,7 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
     searchOpen.onFalse()
     setOpenSearchExpander(false)
   }
+
   const handleSearch = async (inputValue: string) => {
 
     setLoading(true)
@@ -125,33 +126,43 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
         </IconButton>
 
         <Slide direction="down" in={searchOpen.value} mountOnEnter unmountOnExit timeout={{ appear: 500, enter: 500, exit: 1000 }}>
-          <StyledSearchbar sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '90vw', mt: '25px' }}>
-              <Input
-                autoFocus
-                fullWidth
-                disableUnderline
-                placeholder="Pretraga..."
-                startAdornment={
-                  <InputAdornment position="start">
-                    <Iconify icon="carbon:search" sx={{ color: 'text.disabled' }} />
-                  </InputAdornment>
-                }
-                sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
-                onInput={(e: any) => setInputValue(e.target.value)}
-              />
-              <LoadingButton
-                loading={loading}
-                loadingPosition="center"
-                //loadingIndicator='Pretraga...'
-                variant="outlined"
-                onClick={() => handleSearch(inputValue)} sx={{ marginRight: '20px' }}
-              >
-                Pretraga
-              </LoadingButton>
-            </Box>
-          </StyledSearchbar>
 
+          <StyledSearchbar sx={{ display: 'flex', flexDirection: 'column' }}>
+            <form onSubmit={(e) => {
+              e.preventDefault(); // Prevent default form submission behavior
+              handleSearch(inputValue); // Handle search when Enter is pressed
+            }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '90vw', mt: '25px' }}>
+
+                <Input
+                  autoFocus
+                  fullWidth
+                  disableUnderline
+                  placeholder="Pretraga..."
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Iconify icon="carbon:search" sx={{ color: 'text.disabled' }} />
+                    </InputAdornment>
+                  }
+                  sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
+                  onInput={(e: any) => setInputValue(e.target.value)}
+                />
+
+                <LoadingButton
+                  type='submit'
+                  loading={loading}
+                  loadingPosition="center"
+                  //loadingIndicator='Pretraga...'
+                  variant="outlined"
+                  onClick={() => handleSearch(inputValue)} sx={{ marginRight: '20px' }}
+                >
+                  Pretraga
+                </LoadingButton>
+
+
+              </Box>
+            </form>
+          </StyledSearchbar>
         </Slide>
 
         <Slide direction="down" in={openSearchExpander} mountOnEnter unmountOnExit timeout={1000}>

@@ -24,6 +24,7 @@ export const AboutView = () => {
       {/* <LandingActivity posts={[]} /> */}
 
       {/* <Newsletter /> */}
+
     </Box>
   );
 }
