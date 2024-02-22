@@ -19,6 +19,7 @@ import Iconify from 'src/components/iconify';
 import { Project } from 'src/types/project';
 import { Divider, useTheme } from '@mui/material';
 import { SocialShare } from 'src/components/social-share/socials-share';
+import { fDate } from 'src/utils/format-time';
 
 
 // ----------------------------------------------------------------------
@@ -63,6 +64,9 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
             {project.subTitle}
           </Typography>
           <br />
+          <Typography variant="caption" sx={{ opacity: 0.72 }}>
+            Objavljeno: {fDate(project.published, 'dd/MM/yyyy')}
+          </Typography>
           <Divider />
           <br />
           {[...Array(project.paragraphs.length)].map((_, index) => (

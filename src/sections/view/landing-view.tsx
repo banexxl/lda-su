@@ -40,12 +40,14 @@ export const LandingView = ({
   trendingActivities }:
   LandingViewProps) => {
 
+  const projectSummariesForLandingHero = activeProjectSummaries.concat(featuredProjectSummaries)
+
   return (
     <Box>
 
       <Box sx={{ position: 'relative' }}>
 
-        <ProjectLandingHero projectSummaries={featuredProjectSummaries} />
+        <ProjectLandingHero projectSummaries={projectSummariesForLandingHero} />
 
         {/* <Container
           sx={{
