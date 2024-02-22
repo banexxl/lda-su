@@ -21,7 +21,7 @@ export const PublicationsView = ({ publications }: PublicationsViewProps) => {
                               <Grid item xs={6} md={3} key={index}>
                                    <ListItem sx={{ my: '5px' }}>
                                         <Link href={publication.publicationURL} target="_blank" rel="noopener">
-                                             <img src={publication.publicationImageURL} alt={"publication image"} width={200} height={200} />
+                                             <img src={publication.publicationImageURL} alt={"publication image"} width={180} height={200} style={{ borderRadius: '5px' }} />
                                              <Typography
                                                   sx={{
                                                        fontSize: '.8rem',

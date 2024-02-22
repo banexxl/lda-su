@@ -72,7 +72,6 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
   const handleSearch = async (inputValue: string) => {
 
     setLoading(true)
-    searchOpen.onFalse()
 
     try {
       if (/\S/.test(inputValue)) {
@@ -86,23 +85,17 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
             'Cache-Control': 'no-store'
           },
         }).then(async (response) => {
-          searchOpen.onFalse
           const searchedData = await response.json()
           setSearchedData(searchedData.data)
-
+          searchOpen.onFalse()
           setLoading(false)
-          searchOpen.onFalse
           return searchedData.data.length == 0 ?
             router.push('/pretraga/nema-rezultata')
             :
             setOpenSearchExpander(true)
         }).catch((error) => {
+          console.log(error);
           setLoading(false)
-          console.log(error);
-
-          // setOpenSearchExpander(false)
-          searchOpen.onFalse
-          console.log(error);
         })
       } else {
         setLoading(false)
@@ -115,7 +108,6 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
       searchOpen.onFalse()
       console.error('Error searching products:', error);
     }
-    searchOpen.onFalse()
   }
 
   return (
