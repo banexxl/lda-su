@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-export async function POST(request: Request, response: Response) {
+export async function POST(request: Request, response: any) {
 
      const transporter = nodemailer.createTransport({
           host: process.env.EMAIL_SERVER_HOST,
@@ -14,6 +14,7 @@ export async function POST(request: Request, response: Response) {
                rejectUnauthorized: true
           }
      });
+
      const body = await request.json()
 
      try {
@@ -24,8 +25,9 @@ export async function POST(request: Request, response: Response) {
                subject: body.subject,
                text: `Poruka od ${body.fullName}:` + " " + body.message
           })
+          console.log('aaaaaaaaaa', Response.json({ response: response.status }));
 
-          return Response.json({ response: response.status })
+          return response.status(200).json({ success: true });
      } catch (err: any) {
           return Response.json(err)
      }
