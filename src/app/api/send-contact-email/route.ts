@@ -11,7 +11,7 @@ export async function POST(request: Request, response: any) {
                pass: process.env.EMAIL_SERVER_PASSWORD, // generated ethereal password
           },
           tls: {
-               rejectUnauthorized: true
+               rejectUnauthorized: false
           }
      });
 
