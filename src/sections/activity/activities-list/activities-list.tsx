@@ -4,7 +4,7 @@ import Pagination, { paginationClasses } from '@mui/material/Pagination';
 import backgroundURL from "/public/larger.png"
 import { Activity } from 'src/types/activity';
 
-import { PostItem } from './activities-item';
+import { ActivityItem } from './activities-item';
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ export const ActivityList = ({ posts }: Props) => {
         }}
       >
         {posts.slice(0, 8).map((activity) => (
-          <PostItem key={Math.floor(Math.random() * 999)} activity={activity} />
+          <ActivityItem key={Math.floor(Math.random() * 999)} activity={activity} />
         ))}
       </Box>
 

@@ -28,7 +28,8 @@ export const PublicationsView = ({ publications }: PublicationsViewProps) => {
                                                        overflowWrap: 'break-word',
                                                        wordBreak: 'break-all',
                                                        maxWidth: '100%',
-                                                       textAlign: 'center'
+                                                       textAlign: 'center',
+                                                       color: theme.palette.text.primary
                                                   }}
                                              >
                                                   {publication.publicationTitle}

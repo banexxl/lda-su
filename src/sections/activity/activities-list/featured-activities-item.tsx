@@ -64,6 +64,7 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
               ...(largeActivity && {
                 typography: { xs: 'h6', md: 'h4' },
               }),
+              color: theme.palette.text.primary
             }}
           >
             {activity.title}
@@ -72,7 +73,7 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
 
         {largeActivity && <TextMaxLine sx={{ opacity: 0.48 }}>{activity.descriptions[0]}</TextMaxLine>}
 
-        <Stack direction="row" alignItems="center" sx={{ typography: 'body2', pt: 1.5, display: 'flex', justifyContent: 'space-between' }}>
+        <Stack direction="row" alignItems="center" sx={{ typography: 'body2', pt: 1.5, display: 'flex', justifyContent: 'space-between', color: theme.palette.primary.lighter }}>
           {/* <Avatar
             src={activity.author}
             sx={{

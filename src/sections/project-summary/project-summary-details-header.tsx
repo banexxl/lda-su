@@ -79,7 +79,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
                   projectSummary.projectSummarySubtitleURLs.length != 0 ?
                     projectSummary.projectSummarySubtitleURLs[index] ?
                       <Link href={projectSummary.projectSummarySubtitleURLs[index]} color={'primary.main'} underline='none' sx={{ marginBottom: '5px' }}>
-                        pročitaj ostatak teksta.
+                        ...pročitaj ostatak teksta.
                       </Link>
                       :
                       null

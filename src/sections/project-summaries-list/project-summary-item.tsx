@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
-import { Backdrop, Modal } from '@mui/material';
+import { Backdrop, Modal, useTheme } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
 import { fDate } from 'src/utils/format-time';
 ;
@@ -25,7 +25,7 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
 
   const [open, setOpen] = useState(false);
   // const [favorite, setFavorite] = useState(favorited);
-
+  const theme = useTheme()
   // const handleChangeFavorite = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
   //   setFavorite(event.target.checked);
   // }, []);
@@ -79,7 +79,9 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
             sx={{
               cursor: 'pointer'
             }}>
-            {projectSummary.title}
+            <Typography sx={{ color: theme.palette.text.primary }}>
+              {projectSummary.title}
+            </Typography>
           </Link>
         </Typography>
 

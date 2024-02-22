@@ -20,13 +20,13 @@ type Props = {
   activity: Activity;
 };
 
-export const PostItem = ({ activity }: Props) => {
+export const ActivityItem = ({ activity }: Props) => {
   return (
     <Stack spacing={2.5}>
       <Image src={activity.coverURL} alt={activity.title} ratio="1/1" sx={{ borderRadius: 2 }} />
 
       <Stack spacing={1}>
-        <ActivityTimeBlock published={fDate(activity.publishedDate)} duration={activity.publishedDate.toString()} />
+        {/* <ActivityTimeBlock published={fDate(activity.publishedDate)} duration={activity.publishedDate.toString()} /> */}
 
         <Link component={RouterLink} href={paths.alda.alda} >
           <TextMaxLine variant="h5" persistent>
