@@ -70,6 +70,7 @@
     "@types/lodash.isequal": "^4.5.7",
     "@types/lodash.merge": "^4.6.8",
     "@types/node": "^20.8.7",
+    "@types/nodemailer": "^6.4.14",
     "@types/nprogress": "^0.2.2",
     "@types/numeral": "^2.0.4",
     "@types/react": "^18.2.30",

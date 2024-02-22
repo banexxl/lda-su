@@ -1,10 +1,14 @@
-const nodemailer = require("nodemailer");
+import { NextApiRequest } from "next";
+import nodemailer from "nodemailer"
 
-export async function POST(request: Request, response: any) {
+export async function POST(request: Request) {
+
+     const requestData = await request.json()
+     console.log(requestData);
 
      const transporter = nodemailer.createTransport({
           host: process.env.EMAIL_SERVER_HOST,
-          port: 587,
+          port: 465,
           secure: false, // true for 465, false for other ports
           auth: {
                user: process.env.EMAIL_SERVER_USER, // generated ethereal user
@@ -15,21 +19,20 @@ export async function POST(request: Request, response: any) {
           }
      });
 
-     const body = await request.json()
+
 
      try {
           await transporter.sendMail({
                from: process.env.EMAIL_SERVER_USER,
                to: 'damjanovic.branislav@gmail.com',
                // to: 'ldasubotica@aldaintranet.org',
-               subject: body.subject,
-               text: `Poruka od ${body.fullName}:` + " " + body.message
+               subject: "sdsdsd",
+               text: `Poruka od sdsds`
           })
-          console.log('aaaaaaaaaa', Response.json({ response: response.status }));
 
-          return response.status(200).json({ success: true });
+          return new Response("Poruka poslata", { status: 200, statusText: 'OK' })
      } catch (err: any) {
-          return Response.json(err)
+          return new Response(JSON.stringify(err), { status: 500, statusText: 'Fail' })
      }
 
 };
