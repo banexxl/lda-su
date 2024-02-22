@@ -101,7 +101,7 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
           alignItems="center"
           sx={{ typography: 'body2', color: 'text.disabled' }}
         >
-          <Iconify icon="carbon:time" width={16} sx={{ mr: 1 }} /> Completed: {fDate(projectSummary.projectEndDateTime.toString())}
+          <Iconify icon="carbon:time" width={16} sx={{ mr: 1 }} />Započet: {fDate(projectSummary.projectStartDateTime.toString())}
         </Stack>
 
         <Stack spacing={0.5} direction="row" alignItems="center">
