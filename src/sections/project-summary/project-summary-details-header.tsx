@@ -95,9 +95,9 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
 
         </Box>
         <Stack direction="row" alignItems="center" flexShrink={0}>
-          <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
+          {/* <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
             <Iconify icon="carbon:share" sx={{ color: theme.palette.text.primary }} />
-          </IconButton>
+          </IconButton> */}
 
           {/* <Checkbox
             color="error"
