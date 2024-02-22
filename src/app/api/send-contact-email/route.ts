@@ -4,15 +4,15 @@ export async function POST(request: Request, response: Response) {
 
      const transporter = nodemailer.createTransport({
           host: process.env.EMAIL_SERVER_HOST,
-          port: 587,
-          secure: false, // true for 465, false for other ports
+          port: 465,
+          secure: true, // true for 465, false for other ports
           auth: {
                user: process.env.EMAIL_SERVER_USER, // generated ethereal user
                pass: process.env.EMAIL_SERVER_PASSWORD, // generated ethereal password
           },
-          // tls: {
-          //      rejectUnauthorized: false
-          // }
+          tls: {
+               rejectUnauthorized: true
+          }
      });
      const body = await request.json()
 
@@ -24,7 +24,6 @@ export async function POST(request: Request, response: Response) {
                subject: body.subject,
                text: `Poruka od ${body.fullName}:` + " " + body.message
           })
-          console.log('aaaaaaaaaaaa', res);
 
           return Response.json({ response: response.status, data: res })
      } catch (err: any) {
