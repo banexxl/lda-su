@@ -17,7 +17,7 @@ export async function POST(request: Request, response: Response) {
      const body = await request.json()
 
      try {
-          const res = await transporter.sendMail({
+          await transporter.sendMail({
                from: process.env.EMAIL_SERVER_USER,
                to: 'damjanovic.branislav@gmail.com',
                // to: 'ldasubotica@aldaintranet.org',
@@ -25,7 +25,7 @@ export async function POST(request: Request, response: Response) {
                text: `Poruka od ${body.fullName}:` + " " + body.message
           })
 
-          return Response.json({ response: response.status, data: res })
+          return Response.json({ response: response.status })
      } catch (err: any) {
           return Response.json(err)
      }
