@@ -1,10 +1,8 @@
-import { NextApiRequest } from "next";
 import nodemailer from "nodemailer"
 
 export async function POST(request: Request) {
 
      const requestData = await request.json()
-     console.log(requestData);
 
      const transporter = nodemailer.createTransport({
           host: process.env.EMAIL_SERVER_HOST,
@@ -19,15 +17,13 @@ export async function POST(request: Request) {
           }
      });
 
-
-
      try {
           await transporter.sendMail({
-               from: process.env.EMAIL_SERVER_USER,
+               from: process.env.EMAIL_SERVER_USER?.toString(),
                to: 'damjanovic.branislav@gmail.com',
                // to: 'ldasubotica@aldaintranet.org',
-               subject: "sdsdsd",
-               text: `Poruka od sdsds`
+               subject: requestData.subject,
+               text: `Poruka od ${requestData.fullName}:  ${requestData.message}`
           })
 
           return new Response("Poruka poslata", { status: 200, statusText: 'OK' })
