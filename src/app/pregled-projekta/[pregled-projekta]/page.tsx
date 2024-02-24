@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 
     return allProjectSummaries.map((projectSummary: ProjectSummary) => (
       {
-        projekat: projectSummary.projectSummaryURL.toString()
+        'pregled-projekta': projectSummary.projectSummaryURL.toString()
       }
     ))
 
@@ -32,7 +32,7 @@ export async function generateStaticParams() {
 
 export default async function ProjectSummaryPage({ params }: any) {
 
-  const projectSummary: any = await projectsServices().getProjectSummaryByLink(params['projekat'])
+  const projectSummary: any = await projectsServices().getProjectSummaryByLink(params['pregled-projekta'])
 
   if (!projectSummary || projectSummary.length == 0) {
     // Handle the case where the project is undefined

@@ -9,7 +9,6 @@ export const metadata = {
 };
 
 export default async function ActivitiesPage({ params }: any) {
-  console.log(params);
 
   const activitiesByCategory: Activity[] = await activityServices().getActivitiesByCategory(params['kategorija']);
 
