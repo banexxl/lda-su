@@ -121,7 +121,7 @@ export const Footer = () => {
         >
           <Stack direction="row" spacing={3} justifyContent="center">
             <Box>
-              <Typography variant="h6">Social</Typography>
+              <Typography variant="h6">Društvene mreže</Typography>
 
               <Link href='https://www.facebook.com/LocalDemocracyAgencySubotica' target='_blank' >
                 <FacebookIcon sx={{ color: 'primary.main' }} />
