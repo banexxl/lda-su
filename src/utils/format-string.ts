@@ -42,7 +42,7 @@ export const extractURLName = (url: string) => {
 
 export const extractNameFromUrl = (url: string) => {
   // Check if the URL contains "/projekat/"
-  if (url.includes('/projekat/')) {
+  if (url.includes('/pregled-projekta/')) {
     return url;
   }
 

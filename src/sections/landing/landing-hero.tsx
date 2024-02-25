@@ -181,7 +181,7 @@ const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
 
         </Stack>
 
-        <Button variant="contained" size="large" color="primary" href={'/projekat/' + projectSummary.projectSummaryURL}>
+        <Button variant="contained" size="large" color="primary" href={'/pregled-projekta/' + projectSummary.projectSummaryURL}>
           Pogledaj
         </Button>
       </Stack>
