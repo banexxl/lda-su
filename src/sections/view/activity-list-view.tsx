@@ -5,17 +5,13 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { _mock, _categories, _travelPosts } from 'src/_mock';
 
-// import { Newsletter } from '../newsletter';
 import { ActivitySidebar } from '../activity/common/activities-sidebar';
-import { ActivityList } from '../activity/activities-list/activities-list';
-import { ActivitySearchMobile } from '../activity/common/activities-search-mobile';
-import { TrendingTopics } from '../activity/activities-list/trending-activities-list';
 import { Activity } from 'src/types/activity';
 import { Activities } from '../activity/activities-list/featured-activities';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import Image from 'src/components/image';
 
 // ----------------------------------------------------------------------

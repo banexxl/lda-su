@@ -3,21 +3,15 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
-import { Markdown } from 'src/components/markdown';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import Image from 'src/components/image';
-import { ActivityTags } from '../activity/common/activities-tags';
-import { ActivitySidebar } from '../activity/common/activities-sidebar';
 import { ActivityHero } from '../activity/activities-list/activities-hero';
 import { SocialShare } from '../../components/social-share/socials-share';
-import { LatestActivities } from '../activity/activities-list/latest-activities';
 import { ProjectDetailsGallery } from '../project/project-item-details-gallery';
 import LinkIcon from '@mui/icons-material/Link';
 import { Divider, Link, List, ListItem, ListItemIcon, ListItemText, MenuItem, Popover, useTheme } from '@mui/material';
 import { Box } from '@mui/material';
 import { Activity } from 'src/types/activity';
 import { _socials } from 'src/_mock';
-import Iconify from 'src/components/iconify';
 import { useCallback, useState } from 'react';
 import { extractStringFromUrl } from 'src/utils/format-string';
 
@@ -112,7 +106,7 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             {/* <Markdown content={content} firstLetter /> */}
             <Divider sx={{ mt: 8 }} />
 
-            <SocialShare shareURL={'https://lda-subotica.org' + activity.activityURL} />
+            <SocialShare shareURL={'https://lda-subotica.org/aktivnost/' + activity.activityURL} />
 
             <Divider sx={{ mt: 8 }} />
             <Typography variant="h5" sx={{ color: theme.palette.text.primary, mt: '20px' }}>Linkovi</Typography>

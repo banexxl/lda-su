@@ -134,7 +134,7 @@ export const Footer = () => {
 
           </Stack>
           <Typography variant="caption" sx={{ color: 'text.primary' }}>
-            © 2023. All rights reserved, LDA Subotica
+            © 2024. All rights reserved, LDA Subotica
           </Typography>
         </Stack>
       </Container>

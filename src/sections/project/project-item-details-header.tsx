@@ -18,7 +18,6 @@ import Iconify from 'src/components/iconify';
 
 import { Project } from 'src/types/project';
 import { Divider, useTheme } from '@mui/material';
-import { SocialShare } from 'src/components/social-share/socials-share';
 import { fDate } from 'src/utils/format-time';
 
 

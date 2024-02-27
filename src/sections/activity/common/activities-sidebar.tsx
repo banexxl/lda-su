@@ -88,7 +88,7 @@ export const ActivitySidebar = ({
 
   const renderRecentPosts = recentActivities && (
     <Stack spacing={3}>
-      <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>Nedavne aktivnosti</Typography>
+      <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>Poslednje aktivnosti</Typography>
 
       {recentActivities.list.map((activity) => (
         <ActivityItemMobile key={Math.floor(Math.random() * 999)} activity={activity} onSiderbar />

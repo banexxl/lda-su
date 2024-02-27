@@ -32,47 +32,9 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
 
   return (
     <Card>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{
-          pt: 1.5,
-          pl: 2,
-          pr: 1.5,
-          top: 0,
-          width: 1,
-          zIndex: 9,
-          position: 'absolute',
-        }}
-      >
-        <Stack
-          spacing={0.5}
-          direction="row"
-          sx={{
-            px: 1,
-            borderRadius: 0.75,
-            typography: 'subtitle2',
-            bgcolor: 'text.primary',
-            color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
-          }}
-        >
-
-        </Stack>
-
-        {/* <Checkbox
-          color="error"
-          checked={favorite}
-          onChange={handleChangeFavorite}
-          icon={<Iconify icon="carbon:favorite" />}
-          checkedIcon={<Iconify icon="carbon:favorite-filled" />}
-          sx={{ color: 'common.white' }}
-        /> */}
-      </Stack>
-
       <Image alt={'cover image'} src={projectSummary.projectSummaryCoverURL} ratio="1/1" onClick={() => setOpen(true)} />
 
-      <Stack spacing={0.5} sx={{ p: 2.5 }}>
+      <Stack spacing={0.5} sx={{ p: 2.5, minHeight: '120px' }}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           <Link
             href={'/pregled-projekta/' + projectSummary.projectSummaryURL}

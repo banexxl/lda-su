@@ -78,7 +78,7 @@ export const ProjectView = ({ project }: ProjectProps) => {
 
           <ProjectDetailsSummary project={project} />
 
-          <SocialShare shareURL={'https://lda-subotica.org' + project.projectURL} />
+          <SocialShare shareURL={'https://lda-subotica.org/projektna-aktivnost' + project.projectURL} />
 
         </Grid>
         {/* </Grid> */}

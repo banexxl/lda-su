@@ -46,7 +46,7 @@ const activityServices = () => {
 
           try {
                const db = client.db('LDA_DB')
-               let data: Activity[] = await db.collection('Activities').find({ 'status': 'completed' }).toArray()
+               let data: Activity[] = await db.collection('Activities').find({ 'status': 'completed' }).sort({ publishedDate: 1 }).toArray()
                return data
           } catch (error: any) {
                console.log({ message: error.message })
