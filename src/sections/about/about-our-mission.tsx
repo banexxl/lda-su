@@ -109,7 +109,7 @@ export const AboutOurVision = () => {
                   <Typography
                     variant="h1"
                     component="h2"
-                    sx={{ color: 'text.disabled', opacity: 0.24, mb: 3 }}
+                    sx={{ color: theme.palette.text.primary, opacity: 0.24, mb: 3 }}
                   >
                     {`0${index + 1}`}
                   </Typography>
@@ -164,7 +164,7 @@ export const AboutOurVision = () => {
                   <Typography
                     variant="h1"
                     component="h2"
-                    sx={{ color: 'text.disabled', opacity: 0.24, mb: 3 }}
+                    sx={{ color: theme.palette.text.primary, opacity: 0.24, mb: 3 }}
                   >
                     {`0${index + 4}`}
                   </Typography>
