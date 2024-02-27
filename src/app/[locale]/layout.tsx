@@ -15,28 +15,21 @@ import { MainLayout } from 'src/layouts/main';
 // ----------------------------------------------------------------------
 
 // export const metadata = {
-//   title: 'Zone UI Kit',
+//   title: 'LDA Subotica',
 //   description:
-//     'The ZONE is built on top of MUI, a powerful library that provides flexible, customizable, and easy-to-use components.',
-//   keywords: 'react,material,kit,application,dashboard,admin,template',
-//   themeColor: '#000000',
-//   manifest: '/manifest.json',
-//   viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },
-//   icons: [
-//     { rel: 'icon', url: '/favicon/favicon.ico' },
-//     { rel: 'icon', type: 'image/png', sizes: '16x16', url: '/favicon/favicon-16x16.png' },
-//     { rel: 'icon', type: 'image/png', sizes: '32x32', url: '/favicon/favicon-32x32.png' },
-//     { rel: 'apple-touch-icon', sizes: '180x180', url: '/favicon/apple-touch-icon.png' },
-//   ],
+//     'LDA Subotica',
+//   keywords: 'LDA,Subotica',
+//   viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 }
 // };
 
 type Props = {
   children: React.ReactNode;
+  params: { locale: string };
 };
 
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({ children, params: { locale } }: Props) {
   return (
-    <html lang="en" className={primaryFont.className}>
+    <html lang={locale} className={primaryFont.className}>
       <body>
         <LocalizationProvider>
           <SettingsProvider

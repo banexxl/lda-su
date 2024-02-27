@@ -1,4 +1,9 @@
-module.exports = {
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin();
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   trailingSlash: true,
   modularizeImports: {
     '@mui/material': {
@@ -26,3 +31,5 @@ module.exports = {
     ],
   },
 };
+
+module.exports = withNextIntl(nextConfig)

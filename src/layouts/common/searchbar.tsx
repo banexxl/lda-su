@@ -12,7 +12,7 @@ import Iconify from 'src/components/iconify';
 
 import { HEADER } from '../config-layout';
 import { useState } from 'react';
-import NotFoundPage from 'src/app/not-found';
+import NotFoundPage from 'src/app/[locale]/not-found';
 import { getStorage, removeStorage, setStorage } from 'src/hooks/use-local-storage';
 import { useRouter } from 'next/navigation';
 import { Collapse, Divider, Paper, Typography } from '@mui/material';

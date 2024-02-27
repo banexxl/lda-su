@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server';
+import { locales } from 'src/middleware';
 import { LandingView } from 'src/sections/view/landing-view';
 import activityServices from 'src/services/activities-services';
 import projectsServices from 'src/services/project-services';
@@ -23,7 +25,10 @@ export default async function LandingPage() {
   const activeProjectSummaries: ProjectSummary[] = await projectsServices().getInProgressProjectSummaries()
   const featuredProjectSummaries: ProjectSummary[] = await projectsServices().getRandomCompletedProjectSummaries()
 
+  const t = await getTranslations('home');
+
   return <LandingView
+    buttonHero={t('buttonHero')}
     activeProjectSummaries={activeProjectSummaries}
     allActivities={allActivities}
     inProgressActivities={inProgressActivities}

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -14,15 +13,17 @@ import Carousel, { useCarousel, CarouselDots } from 'src/components/carousel';
 import { ProjectSummary } from 'src/types/projectSummary';
 import Iconify from 'src/components/iconify';
 import { fDate } from 'src/utils/format-time';
-;
+import { usePathname } from 'next/navigation'
+
 
 // ----------------------------------------------------------------------
 
 type Props = {
   projectSummaries: ProjectSummary[];
+  buttonHero: string
 };
 
-export const ProjectLandingHero = ({ projectSummaries }: Props) => {
+export const ProjectLandingHero = async ({ projectSummaries, buttonHero }: Props) => {
 
   const mdUp = useResponsive('up', 'md');
 
@@ -70,7 +71,7 @@ export const ProjectLandingHero = ({ projectSummaries }: Props) => {
           ref={carouselLarge.carouselRef}
         >
           {projectSummaries.map((projectSummary) => (
-            <CarouselItem key={Math.floor(Math.random() * 999)} projectSummary={projectSummary} />
+            <CarouselItem key={Math.floor(Math.random() * 999)} projectSummary={projectSummary} buttonHero={buttonHero} />
           ))}
         </Carousel>
       )}
@@ -112,9 +113,14 @@ export const ProjectLandingHero = ({ projectSummaries }: Props) => {
 
 type CarouselItemProps = {
   projectSummary: ProjectSummary;
+  buttonHero: string
 };
 
-const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
+const CarouselItem = ({ projectSummary, buttonHero }: CarouselItemProps) => {
+
+  const url = usePathname()
+  const urlSplitArray = url.split('/')
+  const locale = urlSplitArray[1]
 
   const theme = useTheme();
 
@@ -181,8 +187,8 @@ const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
 
         </Stack>
 
-        <Button variant="contained" size="large" color="primary" href={'/pregled-projekta/' + projectSummary.projectSummaryURL}>
-          Pogledaj
+        <Button variant="contained" size="large" color="primary" href={`${locale}` + '/pregled-projekta/' + projectSummary.projectSummaryURL}>
+          {buttonHero}
         </Button>
       </Stack>
 
