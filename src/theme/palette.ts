@@ -122,9 +122,9 @@ export const palette = (mode: 'light' | 'dark') => {
     ...base,
     mode: 'light',
     text: {
-      primary: grey[300],
-      secondary: grey[600],
-      disabled: grey[500],
+      primary: primary.light,
+      secondary: primary.lighter,
+      disabled: primary.dark
     },
     background: {
       paper: '#FFFFFF',
@@ -141,7 +141,7 @@ export const palette = (mode: 'light' | 'dark') => {
     ...base,
     mode: 'dark',
     text: {
-      primary: '#FFFFFF',
+      primary: grey[300],
       secondary: grey[500],
       disabled: grey[600],
     },

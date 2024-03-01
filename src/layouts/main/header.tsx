@@ -22,7 +22,7 @@ import { navConfig } from './config-navigation';
 import { HeaderShadow } from '../common/header-shadow';
 import NavBasicDesktop from './nav-basic/desktop/nav-basic-desktop';
 import NavBasicMobile from './nav-basic/mobile/nav-basic-mobile';
-// import { SettingsButton } from '../common/settings-button';
+import { SettingsButton } from '../common/settings-button';
 // import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
@@ -54,8 +54,9 @@ export const Header = ({ headerOnDark }: Props) => {
           <Box sx={{ flexGrow: 1 }} />
         )}
 
-        <Box>
+        <Box sx={{ display: 'flex' }}>
           <Searchbar />
+          <SettingsButton />
         </Box>
 
         {!mdUp && <NavBasicMobile data={navConfig} />}

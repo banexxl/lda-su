@@ -56,16 +56,16 @@ export const SettingsDrawer = () => {
     />
   );
 
-  const renderDirection = (
-    <BaseOptions
-      title="Direction"
-      selected={settings.themeDirection === 'rtl'}
-      onClick={() =>
-        settings.onUpdate('themeDirection', settings.themeDirection === 'rtl' ? 'ltr' : 'rtl')
-      }
-      icons={['carbon:align-horizontal-right', 'carbon:align-horizontal-left']}
-    />
-  );
+  // const renderDirection = (
+  //   <BaseOptions
+  //     title="Direction"
+  //     selected={settings.themeDirection === 'rtl'}
+  //     onClick={() =>
+  //       settings.onUpdate('themeDirection', settings.themeDirection === 'rtl' ? 'ltr' : 'rtl')
+  //     }
+  //     icons={['carbon:align-horizontal-right', 'carbon:align-horizontal-left']}
+  //   />
+  // );
 
   const renderPresets = (
     <PresetsOptions
@@ -95,7 +95,7 @@ export const SettingsDrawer = () => {
         <Box sx={{ pb: 10 }}>
           {renderMode}
 
-          {renderDirection}
+          {/* {renderDirection} */}
 
           {renderPresets}
         </Box>

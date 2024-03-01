@@ -1,8 +1,6 @@
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 
-import { HeaderSimple } from '../common/header-simple';
-
 // ----------------------------------------------------------------------
 
 type Props = {
