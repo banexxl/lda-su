@@ -1,6 +1,10 @@
 {
   "home": {
     "title": "LDA Subotica",
-    "buttonHero": "View project"
+    "buttonHero": "View project",
+    "ourMission": "Our mission",
+    "ourMission1": "The Center for Local Democracy LDA Subotica was established in 1993 under the auspices of the Council of Europe based on an agreement with the City of Subotica as a local non-governmental organization whose main task was to promote local democracy and human rights in multicultural communities in the former Yugoslavia, which was then devastated by war.",
+    "ourMission2": "Today, LDA Subotica is registered as a local association, a member of the European Association for Local Democracy - ALDA, whose main mission is to promote democratic governance at the local level, encourage active citizen participation, and bring the EU accession process closer to citizens in local communities in Serbia and the Autonomous Province of Vojvodina.",
+    "ourMission3": "Our core programs are focused on capacity building, raising awareness, and advocacy activities aimed at decision-makers at the local level, civil society organizations, and citizens (with a special focus on youth). Education for democratic active citizenship, promoting intercultural dialogue, regional cooperation, cross-sector partnerships for local sustainable development are the main types of our activities, including networking at the regional and European levels."
   }
 }

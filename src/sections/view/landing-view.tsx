@@ -27,12 +27,20 @@ type LandingViewProps = {
   featuredCompletedActivities: Activity[],
   trendingActivities: Activity[],
   buttonHero: string,
+  ourMission: string,
+  ourMission1: string,
+  ourMission2: string,
+  ourMission3: string,
 }
 
 
 
 export const LandingView = ({
   buttonHero,
+  ourMission,
+  ourMission1,
+  ourMission2,
+  ourMission3,
   activeProjectSummaries,
   featuredProjectSummaries,
   allActivities,
@@ -75,7 +83,7 @@ export const LandingView = ({
         </Container> */}
       </Box>
 
-      <AboutOurVision />
+      <AboutOurVision ourMission={ourMission} ourMission1={ourMission1} ourMission2={ourMission2} ourMission3={ourMission3} />
       {/* <LandingIntroduce /> */}
 
       <LandingSummary />

@@ -8,9 +8,13 @@ import { AboutOurVision } from '../about/about-our-mission';
 import { LandingActivity } from '../activity/activities-list/landing-activities';
 import { Box } from '@mui/system';
 import bgImage2 from "public/background-scaled-wpv_1024x.jpg"
+import { useTranslations } from 'next-intl';
 // ----------------------------------------------------------------------
 
 export const AboutView = () => {
+
+  const t = useTranslations('home');
+
   return (
     <Box sx={{
       // backgroundImage: `url(${bgImage2.src})`,

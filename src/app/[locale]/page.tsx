@@ -5,6 +5,7 @@ import activityServices from 'src/services/activities-services';
 import projectsServices from 'src/services/project-services';
 import { Activity } from 'src/types/activity';
 import { ProjectSummary } from 'src/types/projectSummary';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +16,13 @@ export const metadata = {
   },
 };
 
-export default async function LandingPage() {
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function LandingPage({ params: { locale } }: any) {
+
+  unstable_setRequestLocale(locale);
 
   const allActivities: Activity[] = await activityServices().getAllActivities()
   const completedActivities: Activity[] = await activityServices().getCompletedActivities()
@@ -29,6 +36,10 @@ export default async function LandingPage() {
 
   return <LandingView
     buttonHero={t('buttonHero')}
+    ourMission={t('ourMission')}
+    ourMission1={t('ourMission1')}
+    ourMission2={t('ourMission2')}
+    ourMission3={t('ourMission3')}
     activeProjectSummaries={activeProjectSummaries}
     allActivities={allActivities}
     inProgressActivities={inProgressActivities}

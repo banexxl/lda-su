@@ -11,6 +11,7 @@ import { ProgressBar } from 'src/components/progress-bar';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
 import { MainLayout } from 'src/layouts/main';
+import { NextIntlClientProvider, useLocale } from 'next-intl';
 
 // ----------------------------------------------------------------------
 
@@ -24,14 +25,16 @@ import { MainLayout } from 'src/layouts/main';
 
 type Props = {
   children: React.ReactNode;
-  params: { locale: string };
 };
 
-export default function RootLayout({ children, params: { locale } }: Props) {
+export default function RootLayout({ children }: Props) {
+
+  const locale = useLocale();
+
   return (
-    <html lang={locale} className={primaryFont.className}>
+    <html className={primaryFont.className}>
       <body>
-        <LocalizationProvider>
+        <NextIntlClientProvider locale={locale}>
           <SettingsProvider
             defaultSettings={{
               themeMode: 'dark', // 'light' | 'dark'
@@ -47,7 +50,7 @@ export default function RootLayout({ children, params: { locale } }: Props) {
               </MotionLazy>
             </ThemeProvider>
           </SettingsProvider>
-        </LocalizationProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

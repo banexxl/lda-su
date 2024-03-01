@@ -1,5 +1,4 @@
 import { AboutView } from 'src/sections/view/about-view';
-
 // ----------------------------------------------------------------------
 
 export const metadata = {
