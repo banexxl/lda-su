@@ -177,13 +177,13 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
             backgroundColor: `${alpha(theme.palette.background.default, 0.72)}`,
             py: '10px'
           }}>
-            <Typography sx={{ marginBottom: '5px' }}>Projekti/aktivnosti kao rezultat pretrage:</Typography>
+            <Typography sx={{ marginBottom: '5px' }}>Projekte aktivnosti kao rezultat pretrage:</Typography>
             {
               searchedData.length > 0 ? (
                 (
                   searchedData.map((searchItem: Project, index: number) => (
                     <Box key={index} sx={{ marginBottom: '5px' }}>
-                      <Link key={index} href={searchItem.projectURL} style={{ textDecoration: 'none' }} onClick={() => setOpenSearchExpander(false)}>
+                      <Link key={index} href={'/projektna-aktivnost/' + searchItem.projectURL} style={{ textDecoration: 'none' }} onClick={() => setOpenSearchExpander(false)}>
                         <Typography key={index} sx={{ textDecoration: 'none', color: theme.palette.primary.lighter, textAlign: 'center' }}>{searchItem.subTitle}</Typography>
                         <Divider />
                       </Link>
