@@ -2,13 +2,14 @@ import { forwardRef } from 'react';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import ListItemButton from '@mui/material/ListItemButton';
 
 import { RouterLink } from 'src/routes/components';
 
 import Iconify from 'src/components/iconify';
 import { NavItemProps, NavItemStateProps } from '../types';
+import { useSettingsContext } from 'src/settings';
 
 // ----------------------------------------------------------------------
 
@@ -16,6 +17,8 @@ import { NavItemProps, NavItemStateProps } from '../types';
 const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
   ({ title, path, icon, depth, open, active, hasChild, externalLink, ...other }, ref) => {
     const subItem = depth !== 1;
+    const settings = useSettingsContext();
+    const theme = useTheme();
 
     const renderContent = (
       <StyledNavItem
@@ -57,7 +60,7 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
       );
 
     return (
-      <Link component={RouterLink} href={path} color='whitesmoke' underline="none">
+      <Link component={RouterLink} href={path} color={settings.themeMode == 'dark' ? theme.palette.text.primary : theme.palette.primary.main} underline="none">
         {renderContent}
       </Link>
     );
