@@ -1,5 +1,5 @@
 import { Project } from "src/types/project"
-import { MongoClient } from "mongodb"
+import { MongoClient, WithId } from "mongodb"
 import { ObjectId } from "mongodb"
 import { ProjectSummary } from "src/types/projectSummary";
 
@@ -100,15 +100,15 @@ const projectsServices = () => {
      }
 
      const getAllProjects = async () => {
-
           const client = await MongoClient.connect(process.env.MONGODB_URI!);
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('Projects').find({}).toArray()
+               const data: WithId<Project>[] = await db.collection<Project>('Projects').find({}).toArray();
                return data;
           } catch (error: any) {
-               console.log({ message: error.message })
+               console.log({ message: error.message });
+               throw error; // Rethrow the error to handle it upstream
           } finally {
                await client.close();
           }

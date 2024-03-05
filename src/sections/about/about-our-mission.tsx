@@ -34,13 +34,13 @@ const VISIONS_BOT = [
 
 // ----------------------------------------------------------------------
 
-type AboutOurMissionComponentProps = {
-  ourMission: string,
-  ourMission1: string,
-  ourMission2: string,
-  ourMission3: string
-}
-export const AboutOurVision = ({ ourMission, ourMission1, ourMission2, ourMission3 }: AboutOurMissionComponentProps) => {
+// type AboutOurMissionComponentProps = {
+//   ourMission: string,
+//   ourMission1: string,
+//   ourMission2: string,
+//   ourMission3: string
+// }
+export const AboutOurVision = () => {
   const theme = useTheme()
 
   return (
@@ -59,7 +59,7 @@ export const AboutOurVision = ({ ourMission, ourMission1, ourMission2, ourMissio
           textAlign: { xs: 'center', md: 'justify' },
         }}
       >
-        <Typography variant="h2">{ourMission}</Typography>
+        {/* <Typography variant="h2">{ourMission}</Typography>
 
         <Typography sx={{ color: 'text.secondary' }}>
           {ourMission1}
@@ -69,7 +69,7 @@ export const AboutOurVision = ({ ourMission, ourMission1, ourMission2, ourMissio
         </Typography>
         <Typography sx={{ color: 'text.secondary' }}>
           {ourMission3}
-        </Typography>
+        </Typography> */}
       </Stack>
 
       <Box

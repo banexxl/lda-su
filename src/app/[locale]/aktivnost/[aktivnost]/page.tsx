@@ -1,3 +1,4 @@
+import { locales } from 'src/middleware';
 import { NotFoundView } from 'src/sections/error/not-found-view';
 import { ActivityView } from 'src/sections/view/activity-view';
 import activityServices from 'src/services/activities-services';
@@ -11,14 +12,15 @@ export const metadata = {
 
 type ActivityPageProps = {
   params: {
-    activityURL: string
+    aktivnost: string
   }
 }
 
 export async function generateStaticParams() {
+
   try {
     const allActivities = await activityServices().getAllActivities();
-    return allActivities!.map((activity: Activity) => (
+    allActivities!.map((activity: Activity) => (
       {
         aktivnost: activity.activityURL.toString()
       }

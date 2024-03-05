@@ -10,7 +10,7 @@ export const metadata = {
 
 type ProjectSummaryPageProps = {
   params: {
-    projectSummaryURL: string
+    'pregled-projekta': string
   }
 }
 
@@ -30,7 +30,7 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function ProjectSummaryPage({ params }: any) {
+export default async function ProjectSummaryPage({ params }: ProjectSummaryPageProps) {
 
   const projectSummary: any = await projectsServices().getProjectSummaryByLink(params['pregled-projekta'])
 

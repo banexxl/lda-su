@@ -12,7 +12,7 @@ import { ProjectSummary } from 'src/types/projectSummary';
 import { Activities } from '../activity/activities-list/featured-activities';
 import { PartnerCarousel } from '../partners/partners-list';
 import { AboutOurVision } from '../about/about-our-mission';
-import { TranslationValues } from 'next-intl';
+import { TranslationValues, useTranslations } from 'next-intl';
 
 
 // ----------------------------------------------------------------------
@@ -26,21 +26,11 @@ type LandingViewProps = {
   featuredActivities: Activity[],
   featuredCompletedActivities: Activity[],
   trendingActivities: Activity[],
-  buttonHero: string,
-  ourMission: string,
-  ourMission1: string,
-  ourMission2: string,
-  ourMission3: string,
 }
 
 
 
 export const LandingView = ({
-  buttonHero,
-  ourMission,
-  ourMission1,
-  ourMission2,
-  ourMission3,
   activeProjectSummaries,
   featuredProjectSummaries,
   allActivities,
@@ -58,7 +48,7 @@ export const LandingView = ({
 
       <Box sx={{ position: 'relative' }}>
 
-        <ProjectLandingHero projectSummaries={projectSummariesForLandingHero} buttonHero={buttonHero} />
+        <ProjectLandingHero projectSummaries={projectSummariesForLandingHero} />
 
         {/* <Container
           sx={{
@@ -83,7 +73,7 @@ export const LandingView = ({
         </Container> */}
       </Box>
 
-      <AboutOurVision ourMission={ourMission} ourMission1={ourMission1} ourMission2={ourMission2} ourMission3={ourMission3} />
+      <AboutOurVision />
       {/* <LandingIntroduce /> */}
 
       <LandingSummary />

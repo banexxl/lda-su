@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -14,16 +16,16 @@ import { ProjectSummary } from 'src/types/projectSummary';
 import Iconify from 'src/components/iconify';
 import { fDate } from 'src/utils/format-time';
 import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl';
 
 
 // ----------------------------------------------------------------------
 
 type Props = {
   projectSummaries: ProjectSummary[];
-  buttonHero: string
 };
 
-export const ProjectLandingHero = async ({ projectSummaries, buttonHero }: Props) => {
+export const ProjectLandingHero = async ({ projectSummaries }: Props) => {
 
   const mdUp = useResponsive('up', 'md');
 
@@ -71,7 +73,7 @@ export const ProjectLandingHero = async ({ projectSummaries, buttonHero }: Props
           ref={carouselLarge.carouselRef}
         >
           {projectSummaries.map((projectSummary) => (
-            <CarouselItem key={Math.floor(Math.random() * 999)} projectSummary={projectSummary} buttonHero={buttonHero} />
+            <CarouselItem key={Math.floor(Math.random() * 999)} projectSummary={projectSummary} />
           ))}
         </Carousel>
       )}
@@ -113,15 +115,14 @@ export const ProjectLandingHero = async ({ projectSummaries, buttonHero }: Props
 
 type CarouselItemProps = {
   projectSummary: ProjectSummary;
-  buttonHero: string
 };
 
-const CarouselItem = ({ projectSummary, buttonHero }: CarouselItemProps) => {
+const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
 
   const url = usePathname()
   const urlSplitArray = url.split('/')
   const locale = urlSplitArray[1]
-
+  const t = useTranslations('home')
   const theme = useTheme();
 
   const renderOverlay = (
@@ -188,7 +189,7 @@ const CarouselItem = ({ projectSummary, buttonHero }: CarouselItemProps) => {
         </Stack>
 
         <Button variant="contained" size="large" color="primary" href={`${locale}` + '/pregled-projekta/' + projectSummary.projectSummaryURL}>
-          {buttonHero}
+          {t('buttonHero')}
         </Button>
       </Stack>
 

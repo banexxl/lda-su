@@ -1,8 +1,10 @@
+import { ObjectId } from "mongodb";
+
 type ProjectType = 'economy' | 'democracy' | 'eu-integrations' | 'cultural-heritage' | 'interethnic-dialogue' | 'migrations' | 'youth' | 'other'
 export type ProjectStatus = 'completed' | 'in-progress'
 
 export type Project = {
-  _id: string;
+  _id: ObjectId;
   projectSummaryURL: string;
   projectURL: string;
   links: string[];
