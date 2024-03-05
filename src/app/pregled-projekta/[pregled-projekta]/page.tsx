@@ -22,11 +22,10 @@ export async function generateStaticParams() {
       {
         'pregled-projekta': projectSummary.projectSummaryURL.toString()
       }
-    ))
-
+    ));
   } catch (error) {
     console.error('Error fetching project summaries:', error);
-    return null;
+    return [];
   }
 }
 

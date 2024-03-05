@@ -14,6 +14,7 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import { Divider, Link, useTheme } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
 import { fDate } from 'src/utils/format-time';
+import { RouterLink } from 'src/routes/components';
 
 // ----------------------------------------------------------------------
 
@@ -78,7 +79,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
                 {
                   projectSummary.projectSummarySubtitleURLs.length != 0 ?
                     projectSummary.projectSummarySubtitleURLs[index] ?
-                      <Link href={projectSummary.projectSummarySubtitleURLs[index]} color={'primary.main'} underline='none' sx={{ marginBottom: '5px' }}>
+                      <Link component={RouterLink} href={projectSummary.projectSummarySubtitleURLs[index]} color={'primary.main'} underline='none' sx={{ marginBottom: '5px' }}>
                         ...pročitaj ostatak teksta.
                       </Link>
                       :

@@ -1,5 +1,5 @@
 import { Project } from "src/types/project"
-import { MongoClient } from "mongodb"
+import { MongoClient, WithId } from "mongodb"
 import { ObjectId } from "mongodb"
 import { ProjectSummary } from "src/types/projectSummary";
 
@@ -21,19 +21,19 @@ const projectsServices = () => {
      };
 
      const getAllProjectSummaries = async () => {
-
-          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+          const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI!);
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('ProjectSummaries').find({}).sort({ projectEndDateTime: -1 }).toArray()
+               const data: WithId<ProjectSummary>[] = await db.collection<ProjectSummary>('ProjectSummaries').find({}).sort({ projectEndDateTime: -1 }).toArray();
                return data;
           } catch (error: any) {
-               console.log({ message: error.message })
+               console.log({ message: error.message });
+               return [];
           } finally {
                await client.close();
           }
-     }
+     };
 
      const getInProgressProjectSummaries = async () => {
 

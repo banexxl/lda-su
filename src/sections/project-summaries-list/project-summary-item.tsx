@@ -2,18 +2,17 @@ import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
-import Checkbox from '@mui/material/Checkbox';
+import { RouterLink } from 'src/routes/components';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
-import { Backdrop, Modal, useTheme } from '@mui/material';
+import { Backdrop, Link, Modal, useTheme } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
 import { fDate } from 'src/utils/format-time';
-;
+
 
 // ----------------------------------------------------------------------
 
@@ -36,11 +35,8 @@ export const ProjectSummaryItem = ({ projectSummary }: Props) => {
 
       <Stack spacing={0.5} sx={{ p: 2.5, minHeight: '120px' }}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          <Link
-            href={'/pregled-projekta/' + projectSummary.projectSummaryURL}
-            sx={{
-              cursor: 'pointer'
-            }}>
+          <Link component={RouterLink} href={'/pregled-projekta/' + projectSummary.projectSummaryURL} style={{ cursor: 'pointer' }}
+          >
             <Typography sx={{ color: theme.palette.text.primary }}>
               {projectSummary.title}
             </Typography>

@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb"
+import { MongoClient, WithId } from "mongodb"
 import { ObjectId } from "mongodb"
 import { Activity } from "src/types/activity"
 
@@ -6,11 +6,11 @@ const activityServices = () => {
 
      const getAllActivities = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
                const db = client.db('LDA_DB')
-               let data: Activity[] = await db.collection('Activities').find({}).toArray()
+               let data: WithId<Activity>[] = await db.collection<Activity>('Activities').find({}).toArray()
                return data
           } catch (error: any) {
                console.log({ message: error.message })
