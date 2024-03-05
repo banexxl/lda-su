@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
 
 import Image from 'src/components/image';
+import { useSettingsContext } from 'src/components/settings';
 import { Partner } from 'src/types/partner';
 import { Project } from 'src/types/project';
 // import { varHover, varTranHover } from 'src/components/animate';
@@ -17,6 +18,7 @@ type PartnerItemProps = {
 export const PartnerItem = ({ partner }: PartnerItemProps) => {
 
   const theme = useTheme();
+  const settings = useSettingsContext()
 
   return (
     <Box
@@ -30,7 +32,7 @@ export const PartnerItem = ({ partner }: PartnerItemProps) => {
         // overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
         //   } 95%)`}
         />
-        <Typography variant="h6" sx={{ color: 'common.white', textAlign: 'center', mt: '10px' }}>{partner.name}</Typography>
+        <Typography variant="h6" sx={{ color: settings.themeMode == 'dark' ? theme.palette.text.primary : theme.palette.primary.main, textAlign: 'center', mt: '10px' }}>{partner.name}</Typography>
       </Box>
     </Box>
   );

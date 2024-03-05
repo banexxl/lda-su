@@ -10,7 +10,7 @@ export const metadata = {
 
 type ProjectPageProps = {
   params: {
-    projectURL: string
+    'projektna-aktivnost': string
   }
 }
 
@@ -29,7 +29,7 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function ProjectPage({ params }: any) {
+export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const project = await projectsServices().getProjectByLink(params['projektna-aktivnost'])
 

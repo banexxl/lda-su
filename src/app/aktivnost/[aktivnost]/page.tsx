@@ -11,7 +11,7 @@ export const metadata = {
 
 type ActivityPageProps = {
   params: {
-    activityURL: string
+    aktivnost: string
   }
 }
 
@@ -29,7 +29,7 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function ActivityPage({ params }: any) {
+export default async function ActivityPage({ params }: ActivityPageProps) {
 
   const activity: any = await activityServices().getActivityByLink(params['aktivnost'])
 
