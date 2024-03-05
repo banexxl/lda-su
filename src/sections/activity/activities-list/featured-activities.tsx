@@ -98,6 +98,7 @@ export const Activities = ({ activites, loading }: Props) => {
             count={Math.ceil(activites!.length / projectsPerPage)}
             page={page}
             onChange={handleChangePage}
+            color='primary'
           />
         </Box>
       </Box>

@@ -64,6 +64,7 @@ const ProjectSummaryList = ({ projectSummaries, loading }: ProjectSummaryListPro
           count={Math.ceil(projectSummaries!.length / projectsPerPage)}
           page={page}
           onChange={handleChangePage}
+          color='primary'
         />
       </Box>
     </>
