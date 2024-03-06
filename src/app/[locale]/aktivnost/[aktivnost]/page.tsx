@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 
   try {
     const allActivities = await activityServices().getAllActivities();
-    allActivities!.map((activity: Activity) => (
+    return allActivities!.map((activity: Activity) => (
       {
         aktivnost: activity.activityURL.toString()
       }

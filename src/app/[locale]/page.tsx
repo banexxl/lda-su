@@ -1,4 +1,3 @@
-import { getTranslations } from 'next-intl/server';
 import { locales } from 'src/middleware';
 import { LandingView } from 'src/sections/view/landing-view';
 import activityServices from 'src/services/activities-services';
@@ -17,12 +16,31 @@ export const metadata = {
 
 export async function generateStaticParams() {
 
-  const allProjects = projectsServices().getAllProjects()
-  const allProjectSummaries = projectsServices().getAllProjectSummaries()
-  const allActivities = activityServices().getAllActivities()
+  const allProjects: Project[] = await projectsServices().getAllProjects()
+  const allProjectSummaries: ProjectSummary[] = await projectsServices().getAllProjectSummaries()
+  const allActivities: Activity[] = await activityServices().getAllActivities()
 
-  const allProjectURLs = (await allProjects).map((project: Project) => project.projectURL)
-  return locales.map((locale) => ({ locale }));
+  const params: any[] = [];
+
+  for (const locale of locales) {
+
+    allActivities.forEach((activity: Activity) => {
+      params.push({ locale, aktivnost: activity.activityURL });
+    });
+
+    allProjects.forEach((project: Project) => {
+      params.push({ locale, 'projektna-aktivnost': project.projectURL });
+    });
+
+    allProjectSummaries.forEach((projectSummary: ProjectSummary) => {
+      params.push({ locale, 'pregled-projekta': projectSummary.projectSummaryURL });
+    }
+    )
+  }
+
+  console.log(params)
+  // Return the parameters
+  return params;
 }
 
 export default async function LandingPage({ params: { locale } }: any) {
@@ -34,8 +52,6 @@ export default async function LandingPage({ params: { locale } }: any) {
   const trendingActivities: Activity[] = await activityServices().getFeaturedCompletedActivities()
   const activeProjectSummaries: ProjectSummary[] = await projectsServices().getInProgressProjectSummaries()
   const featuredProjectSummaries: ProjectSummary[] = await projectsServices().getRandomCompletedProjectSummaries()
-
-  const t = await getTranslations('home');
 
   return <LandingView
     activeProjectSummaries={activeProjectSummaries}
