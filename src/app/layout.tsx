@@ -1,4 +1,3 @@
-import { NextIntlClientProvider, useMessages } from 'next-intl';
 import 'src/global.css';
 
 export const metadata = {
@@ -14,12 +13,5 @@ type Props = {
 };
 
 export default function RootLayout({ children }: Props) {
-
-  const messages = useMessages();
-
-  return (
-    <NextIntlClientProvider messages={messages}>
-      {children}
-    </NextIntlClientProvider>
-  )
+  return children
 }

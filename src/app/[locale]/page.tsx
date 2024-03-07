@@ -1,6 +1,3 @@
-import { useTranslations } from 'next-intl';
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
-import createMiddleware, { locales } from 'src/middleware';
 import { LandingView } from 'src/sections/view/landing-view';
 import activityServices from 'src/services/activities-services';
 import projectsServices from 'src/services/project-services';
@@ -24,28 +21,25 @@ export async function generateStaticParams() {
 
   const params: any[] = [];
 
-  for (const locale of locales) {
+  allActivities.forEach((activity: Activity) => {
+    params.push({ aktivnost: activity.activityURL });
+  });
 
-    allActivities.forEach((activity: Activity) => {
-      params.push({ locale, aktivnost: activity.activityURL });
-    });
+  allProjects.forEach((project: Project) => {
+    params.push({ 'projektna-aktivnost': project.projectURL });
+  });
 
-    allProjects.forEach((project: Project) => {
-      params.push({ locale, 'projektna-aktivnost': project.projectURL });
-    });
-
-    allProjectSummaries.forEach((projectSummary: ProjectSummary) => {
-      params.push({ locale, 'pregled-projekta': projectSummary.projectSummaryURL });
-    }
-    )
+  allProjectSummaries.forEach((projectSummary: ProjectSummary) => {
+    params.push({ 'pregled-projekta': projectSummary.projectSummaryURL });
   }
+  )
 
   return params;
 }
 
-export default async function LandingPage({ params: { locale } }: any) {
+export default async function LandingPage() {
 
-  unstable_setRequestLocale(locale);
+  // const t = await getTranslations('home');
 
   const allActivities: Activity[] = await activityServices().getAllActivities()
   const completedActivities: Activity[] = await activityServices().getCompletedActivities()
@@ -55,14 +49,17 @@ export default async function LandingPage({ params: { locale } }: any) {
   const activeProjectSummaries: ProjectSummary[] = await projectsServices().getInProgressProjectSummaries()
   const featuredProjectSummaries: ProjectSummary[] = await projectsServices().getRandomCompletedProjectSummaries()
 
-  return <LandingView
-    activeProjectSummaries={activeProjectSummaries}
-    allActivities={allActivities}
-    inProgressActivities={inProgressActivities}
-    completedActivities={completedActivities}
-    featuredActivities={trendingActivities}
-    featuredCompletedActivities={featuredCompletedActivities}
-    trendingActivities={trendingActivities}
-    featuredProjectSummaries={featuredProjectSummaries}
-  />;
+  return (
+
+    <LandingView
+      activeProjectSummaries={activeProjectSummaries}
+      allActivities={allActivities}
+      inProgressActivities={inProgressActivities}
+      completedActivities={completedActivities}
+      featuredActivities={trendingActivities}
+      featuredCompletedActivities={featuredCompletedActivities}
+      trendingActivities={trendingActivities}
+      featuredProjectSummaries={featuredProjectSummaries}
+    />
+  )
 } 
