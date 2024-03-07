@@ -1,4 +1,6 @@
-import { locales } from 'src/middleware';
+import { useTranslations } from 'next-intl';
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
+import createMiddleware, { locales } from 'src/middleware';
 import { LandingView } from 'src/sections/view/landing-view';
 import activityServices from 'src/services/activities-services';
 import projectsServices from 'src/services/project-services';
@@ -38,12 +40,12 @@ export async function generateStaticParams() {
     )
   }
 
-  console.log(params)
-  // Return the parameters
   return params;
 }
 
 export default async function LandingPage({ params: { locale } }: any) {
+
+  unstable_setRequestLocale(locale);
 
   const allActivities: Activity[] = await activityServices().getAllActivities()
   const completedActivities: Activity[] = await activityServices().getCompletedActivities()

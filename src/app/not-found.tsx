@@ -11,7 +11,6 @@ export const metadata = {
 export function generateStaticParams() {
   return locales.map((locale) => locale);
 }
-
 export default function NotFoundPage({ params: { locale } }: any) {
 
   unstable_setRequestLocale(locale);
