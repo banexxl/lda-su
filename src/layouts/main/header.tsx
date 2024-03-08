@@ -22,6 +22,7 @@ import { navConfig } from './config-navigation';
 import { HeaderShadow } from '../common/header-shadow';
 import NavBasicDesktop from './nav-basic/desktop/nav-basic-desktop';
 import NavBasicMobile from './nav-basic/mobile/nav-basic-mobile';
+import { FlagSwitcher } from 'src/components/flag-switcher/flag-switcher';
 // import { SettingsButton } from '../common/settings-button';
 // import Iconify from 'src/components/iconify';
 
@@ -55,7 +56,7 @@ export const Header = ({ headerOnDark }: Props) => {
         )}
 
         <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100px' }}>
-          <Flag code={'688'} style={{ height: '20px', width: '20px', borderRadius: '2px' }} />
+          <FlagSwitcher />
           <Searchbar />
         </Box>
 
