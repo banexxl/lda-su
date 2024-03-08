@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
 import { paths } from 'src/routes/paths';
-
+import Flag from 'react-world-flags'
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
 
@@ -54,7 +54,8 @@ export const Header = ({ headerOnDark }: Props) => {
           <Box sx={{ flexGrow: 1 }} />
         )}
 
-        <Box>
+        <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100px' }}>
+          <Flag code={'688'} style={{ height: '20px', width: '20px', borderRadius: '2px' }} />
           <Searchbar />
         </Box>
 
