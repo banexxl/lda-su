@@ -62,11 +62,11 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
           {[...Array(projectSummary.projectSummaryDescriptions.length)].map((_, index) => (
             <Box key={index} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
               <br />
+              <Divider />
+              <br />
               <Typography sx={{ color: theme.palette.text.disabled }}>
                 {fDate(projectSummary.projectSummaryDateTime[index], 'dd/MM/yyyy')}
               </Typography>
-              <br />
-              <Divider />
               <br />
               <Typography sx={{ color: theme.palette.text.disabled, fontSize: '1.3rem' }}>
                 {projectSummary.projectSummarySubtitles[index]}
