@@ -1,5 +1,6 @@
 "use client"
 import 'src/global.css';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // ----------------------------------------------------------------------
 
@@ -50,7 +51,10 @@ export default function RootLayout({ children }: Props) {
               <MotionLazy>
                 <ProgressBar />
                 <SettingsDrawer />
-                <MainLayout>{children}</MainLayout>
+                <MainLayout>
+                  {children}
+                  <SpeedInsights />
+                </MainLayout>
               </MotionLazy>
             </ThemeProvider>
           </SettingsProvider>
