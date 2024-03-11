@@ -27,6 +27,33 @@ export const Activities = ({ activites, loading }: Props) => {
   const startIndex = (page - 1) * projectsPerPage;
   const paginatedProjects = activites!.slice(startIndex, startIndex + projectsPerPage);
 
+  const activitiesMultipleStatusCheck = (activites: Activity[]) => {
+    let completed = false;
+    let inProgress = false;
+    let toDo = false;
+
+    activites.forEach(activity => {
+      if (activity.status == 'completed') {
+        completed = true;
+      } else if (activity.status == 'in-progress') {
+        inProgress = true;
+      } else if (activity.status == 'to-do') {
+        toDo = true;
+      }
+    });
+
+    if (completed && inProgress) {
+      return true
+    } else if (inProgress && toDo) {
+      return true
+    } else if (toDo && completed) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+
   return (
     <Container
       sx={{
@@ -36,24 +63,29 @@ export const Activities = ({ activites, loading }: Props) => {
       }}
     >
       {
-        activites[0]?.status == 'completed' ?
+        activitiesMultipleStatusCheck(activites) == true ?
           <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
-            Završene aktivnosti
+            Sve aktivnosti
           </Typography>
           :
-          activites[0]?.status == 'in-progress' ?
+          activites[0]?.status == 'completed' ?
             <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
-              Aktivnosti u toku
+              Završene aktivnosti
             </Typography>
             :
-            activites[0]?.status == 'to-do' ?
+            activites[0]?.status == 'in-progress' ?
               <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
-                Istaknute aktivnosti
+                Aktivnosti u toku
               </Typography>
               :
-              <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
-                Aktivnosti...
-              </Typography>
+              activites[0]?.status == 'to-do' ?
+                <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
+                  Buduće aktivnosti
+                </Typography>
+                :
+                <Typography variant='h3' sx={{ display: 'flex', mb: '20px', justifyContent: 'center' }}>
+                  Trenutno nemamo aktivnosti
+                </Typography>
       }
 
       <Box
