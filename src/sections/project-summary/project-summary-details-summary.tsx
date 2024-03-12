@@ -45,7 +45,17 @@ export const ProjectSummaryDetailsSummary = ({ projectSummary }: Props) => {
           <OverviewItem icon="carbon:location" label="Lokacije" text={projectSummary.locations.join(', ')} />
           <OverviewItem icon="carbon:mobile" label="Telefon" text={'+38124554587'} />
           <OverviewItem icon="carbon:time" label="Datum početka" text={fDate(projectSummary.projectStartDateTime, 'dd/MM/yyyy')} />
-          <OverviewItem icon="carbon:collapse-categories" label="Kategorija" text={projectSummary.category} />
+          <OverviewItem icon="carbon:collapse-categories" label="Kategorija" text={
+            projectSummary.category == 'youth' ? 'Mladi' :
+              projectSummary.category == 'cultural-heritage' ? 'Kulturno nasleđe' :
+                projectSummary.category == 'democracy' ? 'Demokratija' :
+                  projectSummary.category == 'economy' ? 'Ekonomija' :
+                    projectSummary.category == 'eu-integrations' ? 'EU integracije' :
+                      projectSummary.category == 'interethnic-dialogue' ? 'Interetnički dijalog' :
+                        projectSummary.category == 'migrations' ? 'Migracije' :
+                          projectSummary.category == 'other' ? 'Ostalo' : '/'
+          }
+          />
           <OverviewItem icon="carbon:user-multiple" label="Aplikanti" text={projectSummary.applicants.join(', ')} />
           <OverviewItem icon="carbon:money" label="Donatori" text={projectSummary.donators.join(', ')} />
         </Box>

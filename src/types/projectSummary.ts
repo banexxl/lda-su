@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { ProjectStatus } from "./project";
+import { ProjectStatus, ProjectType } from "./project";
 
 export type ProjectSummary = {
   _id: ObjectId,
@@ -10,7 +10,7 @@ export type ProjectSummary = {
   projectStartDateTime: Date,
   projectEndDateTime: Date,
   organizers: string[],
-  category: string;
+  category: ProjectType;
   applicants: string[],
   donators: string[];
   publications: string[];
