@@ -47,11 +47,11 @@ export const ProjectSummaryDetailsSummary = ({ projectSummary }: Props) => {
           <OverviewItem icon="carbon:time" label="Datum početka" text={fDate(projectSummary.projectStartDateTime, 'dd/MM/yyyy')} />
           <OverviewItem icon="carbon:collapse-categories" label="Kategorija" text={
             projectSummary.category == 'youth' ? 'Mladi' :
-              projectSummary.category == 'cultural-heritage' ? 'Kulturno nasleđe' :
+              projectSummary.category == 'culture' ? 'Kultura' :
                 projectSummary.category == 'democracy' ? 'Demokratija' :
                   projectSummary.category == 'economy' ? 'Ekonomija' :
                     projectSummary.category == 'eu-integrations' ? 'EU integracije' :
-                      projectSummary.category == 'interethnic-dialogue' ? 'Interetnički dijalog' :
+                      projectSummary.category == 'intercultural-dialogue' ? 'Interkulturalni dijalog' :
                         projectSummary.category == 'migrations' ? 'Migracije' :
                           projectSummary.category == 'other' ? 'Ostalo' : '/'
           }
