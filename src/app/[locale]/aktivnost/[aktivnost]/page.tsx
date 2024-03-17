@@ -12,19 +12,25 @@ export const metadata = {
 
 type ActivityPageProps = {
   params: {
-    aktivnost: string
+    aktivnost: string,
+    locale: string
   }
 }
 
 export async function generateStaticParams() {
-
   try {
     const allActivities = await activityServices().getAllActivities();
-    return allActivities!.map((activity: Activity) => (
-      {
-        aktivnost: activity.activityURL.toString()
-      }
-    ))
+
+    const paths = locales.flatMap(locale =>
+      allActivities!.map((activity: Activity) => ({
+        params: {
+          locale,
+          aktivnost: activity.activityURL.toString(),
+        },
+      }))
+    );
+
+    return paths;
   } catch (error) {
     console.error('Error fetching projects:', error);
     return [];
@@ -32,6 +38,8 @@ export async function generateStaticParams() {
 }
 
 export default async function ActivityPage({ params }: any) {
+
+  console.log('paramsaaaa', params);
 
   const activity: any = await activityServices().getActivityByLink(params['aktivnost'])
 

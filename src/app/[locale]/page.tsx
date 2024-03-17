@@ -1,3 +1,4 @@
+import { locales } from 'src/middleware';
 import { LandingView } from 'src/sections/view/landing-view';
 import activityServices from 'src/services/activities-services';
 import projectsServices from 'src/services/project-services';
@@ -14,31 +15,11 @@ export const metadata = {
 };
 
 export async function generateStaticParams() {
-
-  const allProjects: Project[] = await projectsServices().getAllProjects()
-  const allProjectSummaries: ProjectSummary[] = await projectsServices().getAllProjectSummaries()
-  const allActivities: Activity[] = await activityServices().getAllActivities()
-
-  const params: any[] = [];
-
-  allActivities.forEach((activity: Activity) => {
-    params.push({ aktivnost: activity.activityURL });
-  });
-
-  allProjects.forEach((project: Project) => {
-    params.push({ 'projektna-aktivnost': project.projectURL });
-  });
-
-  allProjectSummaries.forEach((projectSummary: ProjectSummary) => {
-    params.push({ 'pregled-projekta': projectSummary.projectSummaryURL });
-  }
-  )
-
-  return params;
+  return locales.map((locale) => ({ locale }));
 }
 
-export default async function LandingPage() {
-
+export default async function LandingPage({ params }: any) {
+  const locale = params['locale']
   // const t = await getTranslations('home');
 
   const allActivities: Activity[] = await activityServices().getAllActivities()
@@ -50,7 +31,6 @@ export default async function LandingPage() {
   const featuredProjectSummaries: ProjectSummary[] = await projectsServices().getRandomCompletedProjectSummaries()
 
   return (
-
     <LandingView
       activeProjectSummaries={activeProjectSummaries}
       allActivities={allActivities}

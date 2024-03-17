@@ -1,6 +1,7 @@
 import { NotFoundView } from 'src/sections/error/not-found-view';
 import { ProjectSummaryView } from 'src/sections/view/project-summary-view';
 import projectsServices from 'src/services/project-services';
+import projectsServices_en from 'src/services/project-services_en';
 import { ProjectSummary } from 'src/types/projectSummary';
 // ----------------------------------------------------------------------
 
@@ -16,17 +17,21 @@ type ProjectSummaryPageProps = {
 
 export async function generateStaticParams() {
   try {
-    const allProjectSummaries = await projectsServices().getAllProjectSummaries();
+    const enProjectSummaries = await projectsServices_en().getAllProjectSummaries();
+    const srProjectSummaries = await projectsServices().getAllProjectSummaries();
+    const getAllProjectSummaries = enProjectSummaries.concat(srProjectSummaries);
 
-    return allProjectSummaries.map((projectSummary: ProjectSummary) => (
+    const paths = getAllProjectSummaries.map((projectSummary: ProjectSummary) => (
       {
+        locale: projectSummary.locale.toString(),
         'pregled-projekta': projectSummary.projectSummaryURL.toString()
       }
     ))
 
+    return paths
   } catch (error) {
     console.error('Error fetching project summaries:', error);
-    return null;
+    return [];
   }
 }
 

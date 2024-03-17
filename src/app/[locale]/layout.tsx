@@ -31,23 +31,25 @@ export default function RootLayout({ children, params: { locale } }: Props) {
   return (
     <html lang={locale} className={primaryFont.className}>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages} timeZone='Europe/Belgrade'>
-          <SettingsProvider
-            defaultSettings={{
-              themeMode: 'dark', // 'light' | 'dark'
-              themeDirection: 'ltr', //  'rtl' | 'ltr'
-              themeColorPresets: 'default', // 'default' | 'preset01' | 'preset02' | 'preset03' | 'preset04' | 'preset05'
-            }}
-          >
-            <ThemeProvider>
-              <MotionLazy>
-                <ProgressBar />
-                <SettingsDrawer />
-                <MainLayout>{children}</MainLayout>
-              </MotionLazy>
-            </ThemeProvider>
-          </SettingsProvider>
-        </NextIntlClientProvider>
+        <LocalizationProvider>
+          <NextIntlClientProvider locale={locale} messages={messages} timeZone='Europe/Belgrade'>
+            <SettingsProvider
+              defaultSettings={{
+                themeMode: 'dark', // 'light' | 'dark'
+                themeDirection: 'ltr', //  'rtl' | 'ltr'
+                themeColorPresets: 'default', // 'default' | 'preset01' | 'preset02' | 'preset03' | 'preset04' | 'preset05'
+              }}
+            >
+              <ThemeProvider>
+                <MotionLazy>
+                  <ProgressBar />
+                  <SettingsDrawer />
+                  <MainLayout>{children}</MainLayout>
+                </MotionLazy>
+              </ThemeProvider>
+            </SettingsProvider>
+          </NextIntlClientProvider>
+        </LocalizationProvider>
       </body>
     </html >
   );

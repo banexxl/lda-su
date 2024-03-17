@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import { locales } from 'src/middleware';
 // ----------------------------------------------------------------------
 
 export const metadata = {
@@ -7,6 +8,8 @@ export const metadata = {
     icon: '/favicon.ico',
   },
 };
+
+
 
 export default async function RootPage() {
   redirect('/sr')

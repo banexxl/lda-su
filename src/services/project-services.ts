@@ -20,7 +20,7 @@ const projectsServices = () => {
           }
      };
 
-     const getAllProjectSummaries = async () => {
+     const getAllProjectSummaries = async (): Promise<ProjectSummary[]> => {
 
           const client = await MongoClient.connect(process.env.MONGODB_URI!);
 
@@ -33,6 +33,8 @@ const projectsServices = () => {
           } finally {
                await client.close();
           }
+
+          return []; // Add a return statement at the end of the function
      }
 
      const getInProgressProjectSummaries = async () => {
