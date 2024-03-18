@@ -188,7 +188,7 @@ const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
 
         </Stack>
 
-        <Button variant="contained" size="large" color="primary" href={`${locale}` + '/pregled-projekta/' + projectSummary.projectSummaryURL}>
+        <Button variant="contained" size="large" color="primary" href={projectSummary.locale + '/pregled-projekta/' + projectSummary.projectSummaryURL}>
           {t('buttonHero')}
         </Button>
       </Stack>

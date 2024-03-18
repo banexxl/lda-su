@@ -77,7 +77,7 @@ export const ProjectSummaryView = ({ projectSummary }: ProjectSummaryProps) => {
 
             <ProjectSummaryDetailsSummary projectSummary={projectSummary} />
 
-            <SocialShare shareURL={'https://lda-subotica.org' + projectSummary.projectSummaryURL} />
+            <SocialShare shareURL={'https://lda-subotica.org' + projectSummary.locale + projectSummary.projectSummaryURL} />
           </Grid>
         </Grid>
       </Container>
