@@ -22,7 +22,6 @@ export async function generateStaticParams() {
         'projektna-aktivnost': project.projectURL.toString()
       }
     ))
-
   } catch (error) {
     console.error('Error fetching projects:', error);
     return null;
