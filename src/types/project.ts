@@ -14,11 +14,17 @@ export type Project = {
   gallery: string[];
   locations: string[];
   published: Date;
+  dateFrom: Date;
+  dateTo: Date;
   // favorited: boolean;
   // favoritedNumber: number;
   organizers: string[];
+  subOrganizers: string[];
   applicants: string[];
   donators: string[];
   publications: string[];
-  status: ProjectStatus
+  status: ProjectStatus;
+  showProjectDetails: boolean;
+  listTitle: string;
+  list: string[];
 };

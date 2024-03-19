@@ -17,7 +17,7 @@ import { _socials } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 
 import { Project } from 'src/types/project';
-import { Divider, useTheme } from '@mui/material';
+import { Divider, List, ListItem, ListItemIcon, ListItemText, useTheme } from '@mui/material';
 import { fDate } from 'src/utils/format-time';
 
 
@@ -67,6 +67,60 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
             Objavljeno: {fDate(project.published, 'dd/MM/yyyy')}
           </Typography>
           <Divider />
+          {project.showProjectDetails ?
+            <Box>
+              <br />
+              <Typography>
+                NAZIV PROJEKTA: {project.subTitle}
+              </Typography>
+              <Typography>
+                NOSILAC PROJEKTA: {project.applicants.join(', ')}
+              </Typography>
+              <Typography>
+                PARTNERI: {project.organizers.join(', ')}
+              </Typography>
+              <Typography>
+                DONATOR: {project.donators.join(', ')}
+              </Typography>
+              {project.dateFrom != undefined && project.subOrganizers.length > 0 ?
+                <Box>
+                  <Typography>
+                    PERIOD IMPLEMENTACIJE: {fDate(project.dateFrom, 'dd/MM/yyyy')} - {fDate(project.dateTo, 'dd/MM/yyyy')}
+                  </Typography>
+                  <Typography>
+                    PRIDRUŽENI PARTNERI: {project.subOrganizers.join(', ')}
+                  </Typography>
+                </Box>
+                : null
+              }
+            </Box>
+            : null
+          }
+          <br />
+          {
+            project.list.length > 0 && (
+              <List dense sx={{
+                flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
+              }}>
+                <Typography>
+                  {project.listTitle}
+                </Typography>
+                {project.list.map((item, index) => (
+                  <ListItem disablePadding key={index}>
+                    {/* Your custom icon component or MUI's built-in icons */}
+                    <ListItemIcon>
+                      <Typography variant="body2" color="textSecondary">
+                        {index + 1}.
+                      </Typography>
+
+                    </ListItemIcon>
+                    {/* Text content for the list item */}
+                    <ListItemText primary={item} />
+                  </ListItem>
+                ))}
+              </List>
+            )
+          }
           <br />
           {[...Array(project.paragraphs.length)].map((_, index) => (
             <Typography key={index} variant="body1" component="h6" sx={{
