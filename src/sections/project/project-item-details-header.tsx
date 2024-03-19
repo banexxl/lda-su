@@ -106,16 +106,13 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
                   {project.listTitle}
                 </Typography>
                 {project.list.map((item, index) => (
-                  <ListItem disablePadding key={index}>
-                    {/* Your custom icon component or MUI's built-in icons */}
-                    <ListItemIcon>
+                  <ListItem disablePadding key={index} style={{ display: 'flex', alignItems: 'flex-start' }}>
+                    <ListItemIcon style={{ display: 'flex', alignItems: 'flex-start' }}>
                       <Typography variant="body2" color="textSecondary">
                         {index + 1}.
                       </Typography>
-
                     </ListItemIcon>
-                    {/* Text content for the list item */}
-                    <ListItemText primary={item} />
+                    <ListItemText primary={item} style={{ display: 'flex', alignItems: 'flex-start' }} />
                   </ListItem>
                 ))}
               </List>
