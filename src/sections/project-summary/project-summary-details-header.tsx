@@ -65,7 +65,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
               <Divider />
               <br />
               <Typography sx={{ color: theme.palette.text.disabled }}>
-                {fDate(projectSummary.projectSummaryDateTime[index], 'dd/MM/yyyy')}
+                {fDate(projectSummary.projectSummaryDateTime[index], 'YYYY/MM/DD')}
               </Typography>
               <br />
               <Typography sx={{ color: theme.palette.text.disabled, fontSize: '1.3rem' }}>

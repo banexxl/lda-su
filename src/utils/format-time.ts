@@ -1,29 +1,27 @@
-import { format, getTime, formatDistanceToNow } from 'date-fns';
-
-// ----------------------------------------------------------------------
+import moment from 'moment';
+import 'moment-timezone';
 
 type InputValue = Date | string | number | null;
 
-export const fDate = (date: InputValue, newFormat?: string) => {
-  const fm = newFormat || 'dd MMM yyyy';
+// Set Belgrade timezone
+const belgradeTimezone = 'Europe/Belgrade';
 
-  return date ? format(new Date(date), fm) : '';
+export const fDate = (date: InputValue, newFormat?: string) => {
+  const fm = newFormat || 'YYYY/MM/DD';
+
+  return date ? moment(date).utcOffset(belgradeTimezone).format(fm) : '';
 }
 
 export const fDateTime = (date: InputValue, newFormat?: string) => {
-  const fm = newFormat || 'dd MMM yyyy p';
+  const fm = newFormat || 'YYYY/MM/DD HH:mm:ss';
 
-  return date ? format(new Date(date), fm) : '';
+  return date ? moment(date).utcOffset(belgradeTimezone).format(fm) : '';
 }
 
 export const fTimestamp = (date: InputValue) => {
-  return date ? getTime(new Date(date)) : '';
+  return date ? moment(date).utcOffset(belgradeTimezone).valueOf() : '';
 }
 
 export const fToNow = (date: InputValue) => {
-  return date
-    ? formatDistanceToNow(new Date(date), {
-      addSuffix: true,
-    })
-    : '';
+  return date ? moment(date).utcOffset(belgradeTimezone).fromNow() : '';
 }
