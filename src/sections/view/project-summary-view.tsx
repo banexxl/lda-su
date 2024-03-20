@@ -56,8 +56,8 @@ export const ProjectSummaryView = ({ projectSummary }: ProjectSummaryProps) => {
 
         <CustomBreadcrumbs
           links={[
-            { name: 'Home', href: '/' },
-            { name: 'Projects', href: paths.pastProjectSummaries },
+            { name: 'Naslovna', href: '/' },
+            { name: 'Projekti', href: paths.pastProjectSummaries },
             { name: projectSummary.title },
           ]}
           sx={{ mt: 3, mb: 5, color: theme.palette.text.primary }}

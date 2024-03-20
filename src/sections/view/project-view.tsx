@@ -57,8 +57,8 @@ export const ProjectView = ({ project }: ProjectProps) => {
       <Container sx={{ overflow: 'hidden', color: theme.palette.text.primary }}>
         <CustomBreadcrumbs
           links={[
-            { name: 'Home', href: '/' },
-            { name: 'Projects', href: paths.pastProjectSummaries },
+            { name: 'Naslovna', href: '/' },
+            { name: 'Projekti', href: paths.pastProjectSummaries },
             { name: project.title },
           ]}
           sx={{ mt: 3, mb: 5, color: theme.palette.text.primary }}
