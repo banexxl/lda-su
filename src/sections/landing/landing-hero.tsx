@@ -171,7 +171,7 @@ const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
         >
           <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
             <Iconify icon="carbon:time" width={24} sx={{ mr: 1, color: 'primary.main' }} />
-            {fDate(projectSummary.projectStartDateTime, 'YYYY/MM/DD')}
+            {fDate(projectSummary.projectStartDateTime, 'yyyy/MM/dd')}
           </Stack>
 
           {/* <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>

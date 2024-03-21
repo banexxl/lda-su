@@ -65,11 +65,11 @@ export const ActivityHero = ({ activity }: Props) => {
               }}
             >
               {/* <Typography variant="body2" sx={{ opacity: 0.72 }}>
-                {fDate(activity.fromDate, 'YYYY/MM/DD p')}
+                {fDate(activity.fromDate, 'yyyy/MM/dd p')}
               </Typography>
 
               <Typography variant="body2" sx={{ opacity: 0.72 }}>
-                {fDate(activity.toDate, 'YYYY/MM/DD p')}
+                {fDate(activity.toDate, 'yyyy/MM/dd p')}
               </Typography> */}
 
               <Typography variant="h2" component="h1">
@@ -77,7 +77,7 @@ export const ActivityHero = ({ activity }: Props) => {
               </Typography>
 
               <Typography variant="caption" sx={{ opacity: 0.72 }}>
-                Objavljeno: {fDate(activity.publishedDate, 'YYYY/MM/DD')}
+                Objavljeno: {fDate(activity.publishedDate, 'yyyy/MM/dd')}
               </Typography>
 
               <Stack direction="row">

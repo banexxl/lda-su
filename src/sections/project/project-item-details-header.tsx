@@ -64,7 +64,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           </Typography>
           <br />
           <Typography variant="caption" sx={{ opacity: 0.72 }}>
-            Objavljeno: {fDate(project.published, 'YYYY/MM/DD')}
+            Objavljeno: {fDate(project.published, 'yyyy/MM/dd')}
           </Typography>
           <Divider />
           {project.showProjectDetails ?
@@ -85,7 +85,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
               {project.dateFrom != undefined && project.subOrganizers.length > 0 ?
                 <Box>
                   <Typography>
-                    PERIOD IMPLEMENTACIJE: {fDate(project.dateFrom, 'YYYY/MM/DD')} - {fDate(project.dateTo, 'YYYY/MM/DD')}
+                    PERIOD IMPLEMENTACIJE: {fDate(project.dateFrom, 'yyyy/MM/dd')} - {fDate(project.dateTo, 'yyyy/MM/dd')}
                   </Typography>
                   <Typography>
                     PRIDRUŽENI PARTNERI: {project.subOrganizers.join(', ')}
