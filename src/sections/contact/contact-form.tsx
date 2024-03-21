@@ -88,6 +88,12 @@ export const ContactForm = () => {
     }
   })
 
+  // const onSubmit = handleSubmit(async (data: any) => {
+  //   return new Promise<void>((resolve) => {
+  //     setTimeout(() => resolve(), 3000);
+  //   })
+  // })
+
   return (
     <Container
       sx={{
@@ -123,13 +129,13 @@ export const ContactForm = () => {
               size="large"
               type="submit"
               variant="contained"
-
+              color='primary'
               loading={isSubmitting}
               sx={{
                 alignSelf: { xs: 'center', md: 'unset' },
               }}
             >
-              Send
+              Pošalji poruku
             </LoadingButton>
           </Stack>
         </FormProvider>
