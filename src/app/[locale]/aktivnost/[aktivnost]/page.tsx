@@ -19,7 +19,10 @@ type ActivityPageProps = {
 
 export async function generateStaticParams() {
   try {
-    const allActivities = await activityServices().getAllActivities();
+    const allActivities_en = await activityServices().getAllActivities();
+    const allActivities_sr = await activityServices().getAllActivities();
+
+    const allActivities = allActivities_en.concat(allActivities_sr);
 
     const paths = locales.flatMap(locale =>
       allActivities!.map((activity: Activity) => ({
@@ -39,14 +42,18 @@ export async function generateStaticParams() {
 
 export default async function ActivityPage({ params }: any) {
 
-  console.log('paramsaaaa', params);
+  const activity_en: any = await activityServices().getActivityByLink(params['aktivnost'])
+  const activity_sr: any = await activityServices().getActivityByLink(params['aktivnost'])
 
-  const activity: any = await activityServices().getActivityByLink(params['aktivnost'])
-
-  if (!activity) {
+  if (!activity_en || !activity_sr) {
     // Handle the case where the activity is undefined
     return <NotFoundView />
   }
 
-  return <ActivityView key={Math.floor(Math.random() * 999)} activity={activity} />
+  {
+    return params.locale === 'en' ?
+      <ActivityView key={Math.floor(Math.random() * 999)} activity={activity_en} />
+      :
+      <ActivityView key={Math.floor(Math.random() * 999)} activity={activity_sr} />
+  }
 }

@@ -52,7 +52,11 @@ export const ProjectSummaryView = ({ projectSummary }: ProjectSummaryProps) => {
 
   return (
     <>
-      <Container sx={{ overflow: 'hidden', color: theme.palette.text.primary }}>
+      <Container sx={{
+        // overflow: 'hidden',
+        color: theme.palette.text.primary,
+        marginTop: 15,
+      }}>
 
         <CustomBreadcrumbs
           links={[

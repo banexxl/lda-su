@@ -29,7 +29,11 @@ export const FeaturedActivityItem = ({ activity, largeActivity }: Props) => {
   const theme = useTheme();
 
   return (
-    <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative' }}>
+    <Box sx={{
+      borderRadius: 2,
+      overflow: 'hidden',
+      position: 'relative'
+    }}>
       <Image
         src={activity.coverURL}
         alt={activity.title}

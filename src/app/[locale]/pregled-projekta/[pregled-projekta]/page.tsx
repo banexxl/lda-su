@@ -11,6 +11,7 @@ export const metadata = {
 
 type ProjectSummaryPageProps = {
   params: {
+    locale: string
     'pregled-projekta': string
   }
 }
@@ -36,13 +37,21 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectSummaryPage({ params }: ProjectSummaryPageProps) {
+  console.log('params:', params);
 
-  const projectSummary: any = await projectsServices().getProjectSummaryByLink(params['pregled-projekta'])
+  const projectSummary_sr: any = await projectsServices().getProjectSummaryByLink(params['pregled-projekta'])
+  const projectSummary_en: any = await projectsServices_en().getProjectSummaryByLink(params['pregled-projekta'])
 
-  if (!projectSummary || projectSummary.length == 0) {
+  if (!projectSummary_sr || projectSummary_sr.length == 0 || !projectSummary_en || projectSummary_en.length == 0) {
     // Handle the case where the project is undefined
     return <NotFoundView />
   }
 
-  return <ProjectSummaryView key={Math.floor(Math.random() * 999)} projectSummary={projectSummary[0]} />
+  {
+    return params.locale === 'en' ?
+      <ProjectSummaryView key={Math.floor(Math.random() * 999)} projectSummary={projectSummary_en[0]} />
+      :
+      <ProjectSummaryView key={Math.floor(Math.random() * 999)} projectSummary={projectSummary_sr[0]} />
+  }
+
 }
