@@ -1,5 +1,5 @@
 import { ActivitiesView } from 'src/sections/view/activity-list-view';
-import activityServices from 'src/services/activities-services';
+import { activityServices } from 'src/services/activities-services';
 import { Activity } from 'src/types/activity';
 
 // ----------------------------------------------------------------------

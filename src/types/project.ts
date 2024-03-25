@@ -6,6 +6,7 @@ export type ProjectStatus = 'completed' | 'in-progress'
 export type Project = {
   _id: ObjectId;
   projectSummaryURL: string;
+  locale: string;
   projectURL: string;
   links: string[];
   title: string;

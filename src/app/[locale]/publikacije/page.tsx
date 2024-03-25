@@ -1,5 +1,5 @@
 import { PublicationsView } from "src/sections/view/publications-view";
-import projectsServices from "src/services/project-services";
+import { projectsServices } from "src/services/project-services";
 import { Publication } from "src/types/publication";
 
 export const metadata = {

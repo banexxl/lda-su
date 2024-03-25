@@ -1,7 +1,7 @@
 import { NotFoundView } from 'src/sections/error/not-found-view';
 import { ProjectSummaryView } from 'src/sections/view/project-summary-view';
-import projectsServices from 'src/services/project-services';
-import projectsServices_en from 'src/services/project-services_en';
+import { projectsServices } from 'src/services/project-services';
+import { projectsServices_en } from 'src/services/project-services_en';
 import { ProjectSummary } from 'src/types/projectSummary';
 // ----------------------------------------------------------------------
 
@@ -37,7 +37,6 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectSummaryPage({ params }: ProjectSummaryPageProps) {
-  console.log('params:', params);
 
   const projectSummary_sr: any = await projectsServices().getProjectSummaryByLink(params['pregled-projekta'])
   const projectSummary_en: any = await projectsServices_en().getProjectSummaryByLink(params['pregled-projekta'])
@@ -49,9 +48,9 @@ export default async function ProjectSummaryPage({ params }: ProjectSummaryPageP
 
   {
     return params.locale === 'en' ?
-      <ProjectSummaryView key={Math.floor(Math.random() * 999)} projectSummary={projectSummary_en[0]} />
+      <ProjectSummaryView key={Math.floor(Math.random() * 9999)} projectSummary={projectSummary_en[0]} />
       :
-      <ProjectSummaryView key={Math.floor(Math.random() * 999)} projectSummary={projectSummary_sr[0]} />
+      <ProjectSummaryView key={Math.floor(Math.random() * 9999)} projectSummary={projectSummary_sr[0]} />
   }
 
 }

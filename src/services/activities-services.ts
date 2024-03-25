@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb"
 import { ObjectId } from "mongodb"
 import { Activity } from "src/types/activity"
 
-const activityServices = () => {
+export const activityServices = () => {
 
      const getAllActivities = async () => {
 
@@ -158,5 +158,3 @@ const activityServices = () => {
           getActivityByTitle,
      }
 }
-
-export default activityServices

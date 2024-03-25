@@ -1,7 +1,7 @@
 import { locales } from 'src/middleware';
 import { LandingView } from 'src/sections/view/landing-view';
-import activityServices from 'src/services/activities-services';
-import projectsServices from 'src/services/project-services';
+import { activityServices } from 'src/services/activities-services';
+import { projectsServices } from 'src/services/project-services';
 import { Activity } from 'src/types/activity';
 import { Project } from 'src/types/project';
 import { ProjectSummary } from 'src/types/projectSummary';
@@ -14,12 +14,18 @@ export const metadata = {
   },
 };
 
+type LandingViewProps = {
+  params: {
+    locale: string
+  }
+}
+
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export default async function LandingPage({ params }: any) {
-  const locale = params['locale']
+export default async function LandingPage({ params }: LandingViewProps) {
+
   // const t = await getTranslations('home');
 
   const allActivities: Activity[] = await activityServices().getAllActivities()
@@ -40,6 +46,6 @@ export default async function LandingPage({ params }: any) {
       featuredCompletedActivities={featuredCompletedActivities}
       trendingActivities={trendingActivities}
       featuredProjectSummaries={featuredProjectSummaries}
-    />
+      locale={params.locale} />
   )
 } 

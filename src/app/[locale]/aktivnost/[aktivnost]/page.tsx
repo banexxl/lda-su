@@ -1,7 +1,8 @@
 import { locales } from 'src/middleware';
 import { NotFoundView } from 'src/sections/error/not-found-view';
 import { ActivityView } from 'src/sections/view/activity-view';
-import activityServices from 'src/services/activities-services';
+import { activityServices } from 'src/services/activities-services';
+import { activityServices_en } from 'src/services/activities-services_en';
 import { Activity } from 'src/types/activity';
 
 // ----------------------------------------------------------------------
@@ -19,7 +20,7 @@ type ActivityPageProps = {
 
 export async function generateStaticParams() {
   try {
-    const allActivities_en = await activityServices().getAllActivities();
+    const allActivities_en = await activityServices_en().getAllActivities();
     const allActivities_sr = await activityServices().getAllActivities();
 
     const allActivities = allActivities_en.concat(allActivities_sr);
@@ -52,8 +53,8 @@ export default async function ActivityPage({ params }: any) {
 
   {
     return params.locale === 'en' ?
-      <ActivityView key={Math.floor(Math.random() * 999)} activity={activity_en} />
+      <ActivityView key={Math.floor(Math.random() * 9999)} activity={activity_en} />
       :
-      <ActivityView key={Math.floor(Math.random() * 999)} activity={activity_sr} />
+      <ActivityView key={Math.floor(Math.random() * 9999)} activity={activity_sr} />
   }
 }

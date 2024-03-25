@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb"
 import { ObjectId } from "mongodb"
 import { ProjectSummary } from "src/types/projectSummary";
 
-const projectsServices_en = () => {
+export const projectsServices_en = () => {
 
      const getAllPublications = async () => {
 
@@ -229,5 +229,3 @@ const projectsServices_en = () => {
           getInProgressProjectSummaries
      }
 }
-
-export default projectsServices_en

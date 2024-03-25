@@ -47,6 +47,8 @@ export const Header = ({ headerOnDark }: Props) => {
         <Link href="/" />
       </Box>
 
+      <Searchbar />
+
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '20px' }}>
         {mdUp ? (
           <Stack flexGrow={1} alignItems="center" sx={{ height: 1, marginRight: '20px' }}>
@@ -56,9 +58,9 @@ export const Header = ({ headerOnDark }: Props) => {
           <Box sx={{ flexGrow: 1 }} />
         )}
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100px' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '150px' }}>
           <FlagSwitcher />
-          <Searchbar />
+
           <ThemeSwitchToggle />
         </Box>
 

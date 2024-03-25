@@ -17,15 +17,17 @@ import Iconify from 'src/components/iconify';
 import { fDate } from 'src/utils/format-time';
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 
 // ----------------------------------------------------------------------
 
 type Props = {
   projectSummaries: ProjectSummary[];
+  locale: string;
 };
 
-export const ProjectLandingHero = async ({ projectSummaries }: Props) => {
+export const ProjectLandingHero = async ({ projectSummaries, locale }: Props) => {
 
   const mdUp = useResponsive('up', 'md');
 
@@ -73,7 +75,7 @@ export const ProjectLandingHero = async ({ projectSummaries }: Props) => {
           ref={carouselLarge.carouselRef}
         >
           {projectSummaries.map((projectSummary) => (
-            <CarouselItem key={Math.floor(Math.random() * 999)} projectSummary={projectSummary} />
+            <CarouselItem key={Math.floor(Math.random() * 999)} projectSummary={projectSummary} locale={locale} />
           ))}
         </Carousel>
       )}
@@ -115,13 +117,14 @@ export const ProjectLandingHero = async ({ projectSummaries }: Props) => {
 
 type CarouselItemProps = {
   projectSummary: ProjectSummary;
+  locale: string;
 };
 
-const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
+const CarouselItem = ({ projectSummary, locale }: CarouselItemProps) => {
 
-  const url = usePathname()
-  const urlSplitArray = url.split('/')
-  const locale = urlSplitArray[1]
+  // const url = usePathname()
+  // const urlSplitArray = url.split('/')
+  // const locale = urlSplitArray[1]
   const t = useTranslations('home')
   const theme = useTheme();
 
@@ -188,8 +191,10 @@ const CarouselItem = ({ projectSummary }: CarouselItemProps) => {
 
         </Stack>
 
-        <Button variant="contained" size="large" color="primary" href={projectSummary.locale + '/pregled-projekta/' + projectSummary.projectSummaryURL}>
-          {t('buttonHero')}
+        <Button variant="contained" size="large" color="primary">
+          <Link href={'http://localhost:3000/' + locale + '/pregled-projekta/' + projectSummary.projectSummaryURL} style={{ textDecoration: 'none', color: theme.palette.secondary.contrastText }}>
+            {t('buttonHero')}
+          </Link>
         </Button>
       </Stack>
 

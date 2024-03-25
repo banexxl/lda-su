@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import projectsServices from "src/services/project-services";
+import { projectsServices } from "src/services/project-services";
 
 
 export async function POST(request: NextRequest, response: NextResponse) {

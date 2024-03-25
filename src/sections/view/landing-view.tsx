@@ -26,6 +26,7 @@ type LandingViewProps = {
   featuredActivities: Activity[],
   featuredCompletedActivities: Activity[],
   trendingActivities: Activity[],
+  locale: string
 }
 
 
@@ -38,8 +39,9 @@ export const LandingView = ({
   featuredActivities,
   featuredCompletedActivities,
   inProgressActivities,
-  trendingActivities }:
-  LandingViewProps) => {
+  trendingActivities,
+  locale
+}: LandingViewProps) => {
 
   const projectSummariesForLandingHero = activeProjectSummaries.concat(featuredProjectSummaries)
 
@@ -48,7 +50,7 @@ export const LandingView = ({
 
       <Box sx={{ position: 'relative' }}>
 
-        <ProjectLandingHero projectSummaries={projectSummariesForLandingHero} />
+        <ProjectLandingHero projectSummaries={projectSummariesForLandingHero} locale={locale} />
 
         {/* <Container
           sx={{
