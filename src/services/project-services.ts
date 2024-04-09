@@ -7,7 +7,7 @@ const projectsServices = () => {
 
      const getAllPublications = async () => {
 
-          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+          const client = await MongoClient.connect(process.env.MONGODB_URI_DEV!);
 
           try {
                const db = client.db('LDA_DB');
@@ -21,7 +21,7 @@ const projectsServices = () => {
      };
 
      const getAllProjectSummaries = async () => {
-          const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI!);
+          const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI_DEV!);
 
           try {
                const db = client.db('LDA_DB');
@@ -37,7 +37,7 @@ const projectsServices = () => {
 
      const getInProgressProjectSummaries = async () => {
 
-          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+          const client = await MongoClient.connect(process.env.MONGODB_URI_DEV!);
 
           try {
                const db = client.db('LDA_DB');
@@ -52,7 +52,7 @@ const projectsServices = () => {
 
      const getCompletedProjectSummaries = async () => {
 
-          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+          const client = await MongoClient.connect(process.env.MONGODB_URI_DEV!);
 
           try {
                const db = client.db('LDA_DB');
@@ -67,7 +67,7 @@ const projectsServices = () => {
 
      const getRandomCompletedProjectSummaries = async () => {
 
-          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+          const client = await MongoClient.connect(process.env.MONGODB_URI_DEV!);
 
           try {
                const db = client.db('LDA_DB');
@@ -85,7 +85,7 @@ const projectsServices = () => {
 
      const getProjectSummaryByLink = async (link: string) => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -101,7 +101,7 @@ const projectsServices = () => {
 
      const getAllProjects = async () => {
 
-          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+          const client = await MongoClient.connect(process.env.MONGODB_URI_DEV!);
 
           try {
                const db = client.db('LDA_DB');
@@ -116,7 +116,7 @@ const projectsServices = () => {
 
      const getInProgressProjects = async () => {
 
-          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+          const client = await MongoClient.connect(process.env.MONGODB_URI_DEV!);
 
           try {
                const db = client.db('LDA_DB');
@@ -131,7 +131,7 @@ const projectsServices = () => {
 
      const getAllProjectLinks = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -147,7 +147,7 @@ const projectsServices = () => {
 
      const getProjectByLink = async (projectURL: string) => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -163,7 +163,7 @@ const projectsServices = () => {
 
      const getRandomProjects = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -194,7 +194,7 @@ const projectsServices = () => {
 
           //const collections = ['Activities', 'Projects', 'ProjectSummaries']; mora samo projects jer url-ovi u activities i project summaries nemju 'prefix'
           const collections = ['Projects'];
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')

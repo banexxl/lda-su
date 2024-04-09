@@ -6,7 +6,7 @@ const projectsServices = () => {
 
      const getAllProjects = async () => {
 
-          const client = await MongoClient.connect(process.env.MONGODB_URI!);
+          const client = await MongoClient.connect(process.env.MONGODB_URI_DEV!);
 
           try {
                const db = client.db('LDA_DB');
@@ -21,7 +21,7 @@ const projectsServices = () => {
 
      const getAllProjectLinks = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -36,7 +36,7 @@ const projectsServices = () => {
      }
 
      const getProjectByLink = async (link: string) => {
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -52,7 +52,7 @@ const projectsServices = () => {
 
      const getRandomProjects = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -79,7 +79,7 @@ const projectsServices = () => {
 
      const getRandomHerbalabProjects = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -105,7 +105,7 @@ const projectsServices = () => {
 
      const getAllMainCategories = async () => {
 
-          const client = new MongoClient(process.env.MONGODB_URI!);
+          const client = new MongoClient(process.env.MONGODB_URI_DEV!);
 
           try {
                await client.connect();
@@ -122,7 +122,7 @@ const projectsServices = () => {
 
      const getAllLogos = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -137,7 +137,7 @@ const projectsServices = () => {
      }
 
      const getProductById = async (_id: any) => {
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
           try {
                const db = client.db('LDA_DB')
                let product: Project = await db.collection('Projects').findOne({ _id: new ObjectId(_id) })
@@ -152,7 +152,7 @@ const projectsServices = () => {
 
      const getProjectsByManufacturer = async (manufacturer: string) => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
           try {
                const db = client.db('LDA_DB')
                let products: Project[] = await db.collection('Projects')
@@ -173,7 +173,7 @@ const projectsServices = () => {
 
           const searchTermArray = searchTerm.split(" ")
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
           try {
                const db = client.db('LDA_DB')
                let products: Project[] = await db.collection('Projects')
@@ -197,7 +197,7 @@ const projectsServices = () => {
      }
 
      const getProjectsByDiscount = async () => {
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
           try {
                const db = client.db('LDA_DB')
                let products: Project[] = await db.collection('Projects')
@@ -216,7 +216,7 @@ const projectsServices = () => {
 
      const getLimitedProjectsByMainCategory = async (mainCategory: string, loadedParts: number) => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -236,7 +236,7 @@ const projectsServices = () => {
 
      const getProjectsByMainCategoryMidCategory = async (mainCategory: string, midCategory: string, loadedParts: any) => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
           try {
                const db = client.db('LDA_DB')
                let products: Project[] = await db.collection('Projects').
@@ -255,7 +255,7 @@ const projectsServices = () => {
 
      const getProjectsByMainCategoryMidCategorySubCategory = async (mainCategory: string, midCategory: string, subCategory: string, loadedParts: any) => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -274,7 +274,7 @@ const projectsServices = () => {
      }
 
      const getAllManufacturers = async () => {
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                await client.connect();

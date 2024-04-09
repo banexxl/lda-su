@@ -6,7 +6,7 @@ const activityServices = () => {
 
      const getAllActivities = async () => {
 
-          const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -23,7 +23,7 @@ const activityServices = () => {
 
      const getActivityByLink = async (activityURL: string) => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -42,7 +42,7 @@ const activityServices = () => {
 
      const getCompletedActivities = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -59,7 +59,7 @@ const activityServices = () => {
 
      const getActivitiesByCategory = async (category: string) => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -76,7 +76,7 @@ const activityServices = () => {
 
      const getFeaturedCompletedActivities = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -93,7 +93,7 @@ const activityServices = () => {
 
      const getInProgressActivities = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -110,7 +110,7 @@ const activityServices = () => {
 
      const getToDoActivities = async () => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
@@ -127,7 +127,7 @@ const activityServices = () => {
 
      const getActivityByTitle = async (link: string) => {
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
+          const client: any = await MongoClient.connect(process.env.MONGODB_URI_DEV!)
 
           try {
                const db = client.db('LDA_DB')
