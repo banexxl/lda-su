@@ -5,6 +5,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 
 import Iconify from 'src/components/iconify';
+import { log } from 'console';
 
 // ----------------------------------------------------------------------
 
@@ -21,6 +22,7 @@ type Props = {
 // ----------------------------------------------------------------------
 
 export const FilterTime = ({ departureDay, onChangeDepartureDay, sx }: Props) => {
+  console.log('FilterTime', departureDay, onChangeDepartureDay, sx)
   return (
     <MobileDatePicker
       value={departureDay}

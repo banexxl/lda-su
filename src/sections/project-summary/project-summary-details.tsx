@@ -14,6 +14,7 @@ import { useRouter } from 'src/routes/hooks';
 import { fCurrency } from 'src/utils/format-number';
 import { FilterTime } from '../filters/filter-time';
 import { ProjectSummary } from 'src/types/projectSummary';
+import { fDate } from 'src/utils/format-time';
 
 // ----------------------------------------------------------------------
 
@@ -72,7 +73,7 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
 
             <FilterTime
               sx={{ color: theme.palette.text.primary }}
-              departureDay={projectSummary.projectStartDateTime}
+              departureDay={new Date(fDate(projectSummary.projectStartDateTime, 'yyyy/MM/dd'))}
               onChangeDepartureDay={() => { }}
             />
           </Box>
@@ -89,7 +90,7 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
 
             <FilterTime
               sx={{ color: theme.palette.text.primary }}
-              departureDay={projectSummary.projectEndDateTime}
+              departureDay={new Date(fDate(projectSummary.projectEndDateTime, 'yyyy/MM/dd'))}
               onChangeDepartureDay={() => { }}
             />
           </Box>
