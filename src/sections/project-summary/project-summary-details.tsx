@@ -73,7 +73,7 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
 
             <FilterTime
               sx={{ color: theme.palette.text.primary }}
-              departureDay={new Date(fDate(projectSummary.projectStartDateTime, 'dd/MM/yyyy'))}
+              departureDay={projectSummary.projectStartDateTime}
               onChangeDepartureDay={() => { }}
             />
           </Box>
@@ -90,7 +90,7 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
 
             <FilterTime
               sx={{ color: theme.palette.text.primary }}
-              departureDay={new Date(fDate(projectSummary.projectEndDateTime, 'yyyy/MM/dd'))}
+              departureDay={projectSummary.projectEndDateTime}
               onChangeDepartureDay={() => { }}
             />
           </Box>

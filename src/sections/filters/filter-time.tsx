@@ -5,6 +5,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 
 import Iconify from 'src/components/iconify';
+import { fDate } from 'src/utils/format-time';
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +25,7 @@ export const FilterTime = ({ departureDay, onChangeDepartureDay, sx }: Props) =>
   return (
     <MobileDatePicker
       value={departureDay}
+      format='dd.MM.yyyy'
       onChange={onChangeDepartureDay}
       slots={{
         textField: ({
@@ -57,6 +59,7 @@ export const FilterTime = ({ departureDay, onChangeDepartureDay, sx }: Props) =>
           />
         ),
       }}
+      disabled
       {...sx}
     />
   );

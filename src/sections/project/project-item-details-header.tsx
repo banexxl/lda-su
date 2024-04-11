@@ -19,6 +19,7 @@ import Iconify from 'src/components/iconify';
 import { Project } from 'src/types/project';
 import { Divider, List, ListItem, ListItemIcon, ListItemText, useTheme } from '@mui/material';
 import { fDate } from 'src/utils/format-time';
+import moment from 'moment';
 
 
 // ----------------------------------------------------------------------
@@ -85,7 +86,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
               {project.dateFrom != undefined && project.subOrganizers.length > 0 ?
                 <Box>
                   <Typography>
-                    PERIOD IMPLEMENTACIJE: {fDate(project.dateFrom, 'dd/MM/yyyy')} - {fDate(project.dateTo, 'dd/MM/yyyy')}
+                    PERIOD IMPLEMENTACIJE: {moment(project.dateFrom).format('DD/MM/yyyy')} - {moment(project.dateTo).format('DD/MM/yyyy')}
                   </Typography>
                   <Typography>
                     PRIDRUŽENI PARTNERI: {project.subOrganizers.join(', ')}
