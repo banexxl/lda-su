@@ -25,7 +25,7 @@ export const FilterTime = ({ departureDay, onChangeDepartureDay, sx }: Props) =>
   return (
     <MobileDatePicker
       value={departureDay}
-      format='dd.MM.yyyy'
+      format='dd.MM.yyyy.'
       onChange={onChangeDepartureDay}
       slots={{
         textField: ({
