@@ -101,7 +101,7 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
             Organizatori
           </Typography>
           <Typography sx={{ color: theme.palette.text.primary, marginBottom: '30px' }}>
-            {projectSummary.organizers.join(', ')}
+            {projectSummary.applicants.join(', ') + ', ' + projectSummary.organizers.join(', ')}
           </Typography>
         </Stack>
 

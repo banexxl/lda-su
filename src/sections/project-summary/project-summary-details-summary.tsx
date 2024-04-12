@@ -41,7 +41,7 @@ export const ProjectSummaryDetailsSummary = ({ projectSummary }: Props) => {
           }}
         >
           <OverviewItem icon="carbon:calendar" label="Trajanje projekta" text={`${fDate(projectSummary.projectStartDateTime, 'dd/MM/yyyy')} - ${fDate(projectSummary.projectEndDateTime, 'dd/MM/yyyy')}`} />
-          <OverviewItem icon="carbon:user" label="Organizatori" text={projectSummary.organizers.join(', ')} />
+          <OverviewItem icon="carbon:user" label="Organizatori" text={projectSummary.applicants.join(', ') + ', ' + projectSummary.organizers.join(', ')} />
           <OverviewItem icon="carbon:location" label="Lokacije" text={projectSummary.locations.join(', ')} />
           <OverviewItem icon="carbon:mobile" label="Telefon" text={'+38124554587'} />
           <OverviewItem icon="carbon:time" label="Datum početka" text={fDate(projectSummary.projectStartDateTime, 'dd/MM/yyyy')} />
