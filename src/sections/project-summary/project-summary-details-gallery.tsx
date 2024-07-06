@@ -33,8 +33,12 @@ export const ProjectSummaryDetailsGallery = ({ gallery }: Props) => {
           mb: { xs: 5, md: 10 },
         }}
       >
-        <PhotoItem photo={slides[0].src} onOpenLightbox={() => lightbox.onOpen(slides[0].src)} />
-
+        {
+          slides.length > 0 ?
+            <PhotoItem photo={slides[0].src} onOpenLightbox={() => lightbox.onOpen(slides[0].src)} />
+            :
+            null
+        }
         <Box
           sx={{
             gap: 1,
