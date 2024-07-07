@@ -85,7 +85,7 @@ export const ProjectSummaryDetailsSummary = ({ projectSummary }: Props) => {
             <ListItem key={index}>
               <PictureAsPdfIcon sx={{ mr: '5px' }} />
               <Link href={publicationUrl} target="_blank" rel="noopener">
-                {extractStringFromUrl(publicationUrl)}
+                {decodeURIComponent(extractStringFromUrl(publicationUrl))}
               </Link>
             </ListItem>
           ))}

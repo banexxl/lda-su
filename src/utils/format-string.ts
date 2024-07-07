@@ -24,7 +24,7 @@ export const extractStringFromUrl = (inputValue: string) => {
   } else if (pptMatch && pptMatch[1]) {
     return pptMatch[1]; // Found a match for DOCX
   } else {
-    return null; // No match found for PDF or DOCX
+    return ''; // No match found for PDF or DOCX
   }
 };
 
