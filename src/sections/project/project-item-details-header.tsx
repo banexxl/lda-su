@@ -3,14 +3,14 @@ import { useState, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
-import Popover from '@mui/material/Popover';
-import Checkbox from '@mui/material/Checkbox';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
+// import Avatar from '@mui/material/Avatar';
+// import Popover from '@mui/material/Popover';
+// import Checkbox from '@mui/material/Checkbox';
+// import MenuItem from '@mui/material/MenuItem';
+// import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import { fShortenNumber } from 'src/utils/format-number';
+// import { fShortenNumber } from 'src/utils/format-number';
 
 import { _socials } from 'src/_mock';
 
@@ -71,18 +71,18 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           {project.showProjectDetails ?
             <Box>
               <br />
-              <Typography>
-                NAZIV PROJEKTA: {project.subTitle}
-              </Typography>
-              <Typography>
-                NOSILAC PROJEKTA: {project.applicants.join(', ')}
-              </Typography>
-              <Typography>
-                PARTNERI: {project.organizers.join(', ')}
-              </Typography>
-              <Typography>
-                DONATOR: {project.donators.join(', ')}
-              </Typography>
+              <Typography sx={{ fontWeight: 'bold' }}>
+                NAZIV PROJEKTA:
+              </Typography> {project.subTitle}
+              <Typography sx={{ fontWeight: 'bold' }}>
+                NOSILAC PROJEKTA:
+              </Typography>{project.applicants.join(', ')}
+              <Typography sx={{ fontWeight: 'bold' }}>
+                PARTNERI:
+              </Typography >{project.organizers.join(', ')}
+              <Typography sx={{ fontWeight: 'bold' }}>
+                DONATOR:
+              </Typography>{project.donators.join(', ')}
               {project.dateFrom != undefined && project.subOrganizers.length > 0 ?
                 <Box>
                   <Typography>
@@ -99,7 +99,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
           }
           <br />
           {
-            project.list.length > 0 && (
+            project.list.length > 0 && !project.showListOnBottom && (
               <List dense sx={{
                 flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
               }}>
@@ -129,7 +129,28 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
               <br />
             </Typography>
           ))}
-
+          <br />
+          {
+            project.list.length > 0 && project.showListOnBottom && (
+              <List dense sx={{
+                flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
+              }}>
+                <Typography>
+                  {project.listTitle}
+                </Typography>
+                {project.list.map((item, index) => (
+                  <ListItem disablePadding key={index} style={{ display: 'flex', alignItems: 'flex-start' }}>
+                    <ListItemIcon style={{ display: 'flex', alignItems: 'flex-start' }}>
+                      <Typography variant="body2" color="textSecondary">
+                        {index + 1}.
+                      </Typography>
+                    </ListItemIcon>
+                    <ListItemText primary={item} style={{ display: 'flex', alignItems: 'flex-start' }} />
+                  </ListItem>
+                ))}
+              </List>
+            )
+          }
         </Box>
         <Stack direction="row" alignItems="center" flexShrink={0}>
           {/* <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>

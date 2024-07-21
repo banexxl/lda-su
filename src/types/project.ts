@@ -25,6 +25,8 @@ export type Project = {
   publications: string[];
   status: ProjectStatus;
   showProjectDetails: boolean;
+  showList: boolean;
+  showListOnBottom: boolean;
   listTitle: string;
   list: string[];
 };
