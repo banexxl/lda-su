@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import { alpha, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import { _socials } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 import { EmailShareButton, FacebookShareButton, LinkedinShareButton, TwitterShareButton, ViberShareButton } from 'next-share';
