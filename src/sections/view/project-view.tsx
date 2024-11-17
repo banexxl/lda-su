@@ -1,25 +1,19 @@
 'use client';
 
 import { useEffect } from 'react';
-
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import { alpha, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { paths } from 'src/routes/paths';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { _tours, _socials } from 'src/_mock';
 
-import Iconify from 'src/components/iconify';
 import { SplashScreen } from 'src/components/loading-screen';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { FaViber } from "react-icons/fa";
 // import { Newsletter } from '../newsletter';
 import { ProjectListSimilar } from '../project-summaries-list/project-summary-list-similar';
 import { ProjectDetailsHeader } from '../project/project-item-details-header';
@@ -27,8 +21,10 @@ import { ProjectDetailsSummary } from '../project/project-item-details-summary';
 import { ProjectDetailsGallery } from '../project/project-item-details-gallery';
 // import { ProjectDetails } from '../project/project-item-details';
 import { Project } from 'src/types/project';
-import { EmailIcon, EmailShareButton, FacebookIcon, FacebookShareButton, LinkedinShareButton, TwitterShareButton, ViberIcon, ViberShareButton } from 'next-share';
 import { SocialShare } from 'src/components/social-share/socials-share';
+import { Box } from '@mui/material';
+import ReactPlayer from 'react-player';
+import { isVideoUrl } from 'src/utils/is-url-video';
 
 // ----------------------------------------------------------------------
 
@@ -86,7 +82,23 @@ export const ProjectView = ({ project }: ProjectProps) => {
 
       <Divider sx={{ my: 10 }} />
 
-
+      {
+        project.gallery.some(isVideoUrl) ? (
+          <Box sx={{ m: 10 }}>
+            <Typography variant="h4" sx={{ mb: 5, color: theme.palette.text.primary }}>
+              Video projekta
+            </Typography>
+            <ReactPlayer
+              url={project.gallery.find(isVideoUrl) as string}
+              light={true}
+              volume={1}
+              playing={true}  // Auto-play the video
+              muted={true}    // Mute the video to comply with browser policies
+              controls={true} // Optional: Show video controls
+            />
+          </Box>
+        ) : null
+      }
 
       {/* <ProjectListSimilar projects={pojects.slice(-4)} /> */}
 

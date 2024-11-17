@@ -14,6 +14,8 @@ import { Activity } from 'src/types/activity';
 import { _socials } from 'src/_mock';
 import { useCallback, useState } from 'react';
 import { extractStringFromUrl } from 'src/utils/format-string';
+import { isVideoUrl } from 'src/utils/is-url-video';
+import ReactPlayer from 'react-player';
 
 // ----------------------------------------------------------------------
 
@@ -128,6 +130,24 @@ export const ActivityView = ({ activity }: ActivityProps) => {
               Galerija
             </Typography>
             <ProjectDetailsGallery gallery={activity.gallery} />
+            <Divider sx={{ mt: 8 }} />
+            {
+              activity.gallery.some(isVideoUrl) ? (
+                <Box sx={{ m: 10 }}>
+                  <Typography variant="h4" sx={{ mb: 5, color: theme.palette.text.primary }}>
+                    Video projekta
+                  </Typography>
+                  <ReactPlayer
+                    url={activity.gallery.find(isVideoUrl) as string}
+                    light={true}
+                    volume={1}
+                    playing={true}  // Auto-play the video
+                    muted={true}    // Mute the video to comply with browser policies
+                    controls={true} // Optional: Show video controls
+                  />
+                </Box>
+              ) : null
+            }
           </Grid>
 
         </Grid>
