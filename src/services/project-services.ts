@@ -11,7 +11,7 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('Publications').find({}).toArray()
+               const data: any = await db.collection('Publications').find({}).sort({ publicationUploadedDateTime: -1 }).toArray()
                return data;
           } catch (error: any) {
                console.log({ message: error.message })
