@@ -150,6 +150,9 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             {
               activity.gallery.some(isVideoUrl) ? (
                 <Box sx={{ m: 10 }}>
+                  <Typography variant="h4" sx={{ mb: 5, color: theme.palette.text.primary }}>
+                    Video aktivnosti
+                  </Typography>
                   <Box sx={{ mb: 5, boxShadow: `5px 10px 20px ${theme.palette.primary.dark}` }} >
                     <ReactPlayer
                       url={activity.gallery.find(isVideoUrl) as string}
