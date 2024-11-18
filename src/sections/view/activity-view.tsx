@@ -125,6 +125,22 @@ export const ActivityView = ({ activity }: ActivityProps) => {
               </List>
             </Box>
             <Divider sx={{ mt: 8 }} />
+            <Typography variant="h5" sx={{ color: theme.palette.text.primary, mt: '20px' }}>
+              Publikacije
+            </Typography>
+            <Box sx={{ display: 'flex', gap: '20px' }}>
+              <List>
+                {activity.publications?.map((publication, index) => (
+                  <ListItem key={index}>
+                    <LinkIcon sx={{ mr: '5px' }} />
+                    <Link href={publication} target="_blank" rel="noopener">
+                      {decodeURIComponent(extractStringFromUrl(publication))}
+                    </Link>
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+            <Divider sx={{ mt: 8 }} />
             {/* <ActivityAuthor author={author} /> */}
             <Typography variant="h3" component="h1" sx={{ flexGrow: 1, my: 2, color: theme.palette.text.primary }}>
               Galerija
@@ -134,20 +150,21 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             {
               activity.gallery.some(isVideoUrl) ? (
                 <Box sx={{ m: 10 }}>
-                  <Typography variant="h4" sx={{ mb: 5, color: theme.palette.text.primary }}>
-                    Video projekta
-                  </Typography>
-                  <ReactPlayer
-                    url={activity.gallery.find(isVideoUrl) as string}
-                    light={true}
-                    volume={1}
-                    playing={true}  // Auto-play the video
-                    muted={true}    // Mute the video to comply with browser policies
-                    controls={true} // Optional: Show video controls
-                  />
+                  <Box sx={{ mb: 5, boxShadow: `5px 10px 20px ${theme.palette.primary.dark}` }} >
+                    <ReactPlayer
+                      url={activity.gallery.find(isVideoUrl) as string}
+                      light={true}
+                      volume={1}
+                      playing={true}  // Auto-play the video
+                      muted={true}    // Mute the video to comply with browser policies
+                      controls={true} // Optional: Show video controls
+                      width={'100%'}
+                    />
+                  </Box>
                 </Box>
               ) : null
             }
+
           </Grid>
 
         </Grid>

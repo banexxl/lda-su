@@ -88,14 +88,17 @@ export const ProjectView = ({ project }: ProjectProps) => {
             <Typography variant="h4" sx={{ mb: 5, color: theme.palette.text.primary }}>
               Video projekta
             </Typography>
-            <ReactPlayer
-              url={project.gallery.find(isVideoUrl) as string}
-              light={true}
-              volume={1}
-              playing={true}  // Auto-play the video
-              muted={true}    // Mute the video to comply with browser policies
-              controls={true} // Optional: Show video controls
-            />
+            <Box sx={{ mb: 5, boxShadow: `5px 10px 20px ${theme.palette.primary.dark}` }} >
+              <ReactPlayer
+                url={project.gallery.find(isVideoUrl) as string}
+                light={true}
+                volume={1}
+                playing={true}  // Auto-play the video
+                muted={true}    // Mute the video to comply with browser policies
+                controls={true} // Optional: Show video controls
+                width={'100%'}
+              />
+            </Box>
           </Box>
         ) : null
       }

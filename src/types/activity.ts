@@ -22,4 +22,5 @@ export type Activity = {
   status: ActivityStatusProps;
   list: string[];
   listTitle: string;
+  publications?: string[];
 };
