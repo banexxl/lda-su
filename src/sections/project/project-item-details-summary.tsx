@@ -9,7 +9,7 @@ import Iconify, { IconifyProps } from 'src/components/iconify';
 
 import { Project } from 'src/types/project';
 import { Link, List, ListItem, useTheme } from '@mui/material';
-import { extractStringFromUrl, extractURLName } from 'src/utils/format-string';
+import { extractDocumentName, extractStringFromUrl, extractURLName } from 'src/utils/format-string';
 
 // ----------------------------------------------------------------------
 
@@ -68,7 +68,7 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
             <ListItem key={index}>
               <LinkIcon sx={{ mr: '5px' }} />
               <Link href={link} target="_blank" rel="noopener">
-                {extractURLName(link)}
+                {(extractDocumentName(link))}
               </Link>
             </ListItem>
           ))}

@@ -61,3 +61,13 @@ export const extractNameFromUrl = (url: string) => {
   // Return an empty string if no match is found
   return '';
 };
+
+export const extractDocumentName = (link: string): string => {
+  const targetString = "https://lda-su.s3.eu-central-1.amazonaws.com/";
+  if (link.includes(targetString)) {
+    const parts = link.split("/");
+    const fileName = parts[parts.length - 1];
+    return fileName || "Unnamed Document";
+  }
+  return extractURLName(link);
+};
