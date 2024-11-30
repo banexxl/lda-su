@@ -12,6 +12,7 @@ import { ProgressBar } from 'src/components/progress-bar';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
 import { MainLayout } from 'src/layouts/main';
+import { Analytics } from '@mui/icons-material';
 
 // ----------------------------------------------------------------------
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className={primaryFont.className}>
       <body>
+        <Analytics />
         <LocalizationProvider>
           <SettingsProvider
             defaultSettings={{

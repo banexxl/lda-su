@@ -31,6 +31,7 @@
     "@mui/material": "^5.15.0",
     "@mui/system": "^5.14.14",
     "@mui/x-date-pickers": "^6.16.2",
+    "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.6.7",
     "date-fns": "^2.30.0",
