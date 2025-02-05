@@ -10,8 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { _socials } from 'src/_mock';
 import Iconify from 'src/components/iconify';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import { Divider, Link, useTheme } from '@mui/material';
+import ExpandIcon from '@mui/icons-material/Expand';
+import { Accordion, AccordionDetails, AccordionSummary, Divider, Link, useTheme } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
 import { fDate } from 'src/utils/format-time';
 import { RouterLink } from 'src/routes/components';
@@ -41,10 +41,24 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
     setOpen(null);
   }, []);
 
-  // const handleChangeFavorite = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setFavorite(event.target.checked);
-  // }, []);
+  const currentYear = new Date().getFullYear();
 
+  // Group projects by year
+  const groupedProjects = Object.entries(
+    projectSummary.projectSummaryDescriptions.reduce((acc: { [key: string]: any[] }, desc, index) => {
+      const year = new Date(projectSummary.projectSummaryDateTime[index]).getFullYear();
+
+      if (!projectSummary.projectSummarySubtitles.includes("Opis")) {
+        if (!acc[year]) acc[year] = [];
+        acc[year].push(index);
+      }
+      return acc;
+    }, {})
+  ).sort(([a], [b]) => Number(b) - Number(a)); // Sort years in descending order
+
+  // Determine which year to expand
+  const availableYears = groupedProjects.map(([year]) => Number(year));
+  const defaultExpandedYear = availableYears.includes(currentYear) ? currentYear : availableYears[0]; // Expand current year if available, otherwise the most recent year
   return (
     <>
       <Stack
@@ -55,44 +69,53 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
         }}
       >
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
-          <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify', mb: '50px' }}>
+          <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary, mb: '50px' }}>
             {projectSummary.title}
           </Typography>
-          {[...Array(projectSummary.projectSummaryDescriptions.length)].map((_, index) => (
-            <Box key={index} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
-              <br />
-              <Divider />
-              <br />
-              <Typography sx={{ color: theme.palette.text.disabled }}>
-                {fDate(projectSummary.projectSummaryDateTime[index], 'yyyy/MM/dd')}
-              </Typography>
-              <br />
-              <Typography sx={{ color: theme.palette.text.disabled, fontSize: '1.3rem' }}>
-                {projectSummary.projectSummarySubtitles[index]}
-              </Typography>
-              <br />
-              <Typography variant="body1" component="h6" sx={{
-                flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
-              }}>
-                {projectSummary.projectSummaryDescriptions[index]}
-                {
-                  projectSummary.projectSummarySubtitleURLs.length != 0 ?
-                    projectSummary.projectSummarySubtitleURLs[index] ?
-                      <Link component={RouterLink} href={projectSummary.projectSummarySubtitleURLs[index]} color={'primary.main'} underline='none' sx={{ marginBottom: '5px' }}>
-                        ...pročitaj ostatak teksta.
-                      </Link>
-                      :
-                      null
-                    :
-                    null
-                }
-              </Typography>
 
-              <br />
-            </Box>
+          {groupedProjects.map(([year, indices]: [string, any[]]) => (
+            <Accordion key={year} defaultExpanded={Number(year) === defaultExpandedYear}>
+              <AccordionSummary expandIcon={<ExpandIcon />}>
+                <Typography
+                  variant="h4"
+                  onMouseOver={(e) => (e.currentTarget.style.textShadow = "0 0 10px #fff")}
+                  onMouseOut={(e) => (e.currentTarget.style.textShadow = "none")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Projekte aktivnosti iz {year}. godine
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {indices.map((index: any) => (
+                  <Box key={index} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
+                    <br />
+                    <Divider />
+                    <br />
+                    <Typography sx={{ color: theme.palette.text.disabled }}>
+                      {fDate(projectSummary.projectSummaryDateTime[index], 'yyyy/MM/dd')}
+                    </Typography>
+                    <br />
+                    <Typography sx={{ color: theme.palette.text.disabled, fontSize: '1.3rem' }}>
+                      {projectSummary.projectSummarySubtitles[index]}
+                    </Typography>
+                    <br />
+                    <Typography variant="body1" component="h6" sx={{
+                      flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
+                    }}>
+                      {projectSummary.projectSummaryDescriptions[index]}
+                      {projectSummary.projectSummarySubtitleURLs[index] && (
+                        <Link component={RouterLink} href={projectSummary.projectSummarySubtitleURLs[index]} color={'primary.main'} underline='none' sx={{ marginBottom: '5px' }}>
+                          ...pročitaj ostatak teksta.
+                        </Link>
+                      )}
+                    </Typography>
+                    <br />
+                  </Box>
+                ))}
+              </AccordionDetails>
+            </Accordion>
           ))}
-
 
         </Box>
         <Stack direction="row" alignItems="center" flexShrink={0}>
