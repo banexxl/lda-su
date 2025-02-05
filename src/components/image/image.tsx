@@ -72,7 +72,7 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
           width: '100%',
           borderRadius: '20px',
           height: 1,
-          objectFit: 'cover',
+          objectFit: 'contain',
           verticalAlign: 'bottom',
           ...(!!ratio && {
             top: 0,
