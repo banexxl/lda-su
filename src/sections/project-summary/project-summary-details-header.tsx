@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { _socials } from 'src/_mock';
 import Iconify from 'src/components/iconify';
-import ExpandIcon from '@mui/icons-material/Expand';
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import { Accordion, AccordionDetails, AccordionSummary, Divider, Link, useTheme } from '@mui/material';
 import { ProjectSummary } from 'src/types/projectSummary';
 import { fDate } from 'src/utils/format-time';
@@ -41,6 +41,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
     setOpen(null);
   }, []);
 
+  // Get current year
   const currentYear = new Date().getFullYear();
 
   // Group projects by year
@@ -48,17 +49,21 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
     projectSummary.projectSummaryDescriptions.reduce((acc: { [key: string]: any[] }, desc, index) => {
       const year = new Date(projectSummary.projectSummaryDateTime[index]).getFullYear();
 
-      if (!projectSummary.projectSummarySubtitles.includes("Opis")) {
-        if (!acc[year]) acc[year] = [];
-        acc[year].push(index);
-      }
+      if (!acc[year]) acc[year] = [];
+      acc[year].push(index);
+
       return acc;
     }, {})
   ).sort(([a], [b]) => Number(b) - Number(a)); // Sort years in descending order
 
-  // Determine which year to expand
+  // Extract available years
   const availableYears = groupedProjects.map(([year]) => Number(year));
-  const defaultExpandedYear = availableYears.includes(currentYear) ? currentYear : availableYears[0]; // Expand current year if available, otherwise the most recent year
+
+  // Determine the default expanded year
+  const defaultExpandedYear =
+    availableYears.find((year) => year < currentYear);
+
+
   return (
     <>
       <Stack
@@ -76,14 +81,14 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
 
           {groupedProjects.map(([year, indices]: [string, any[]]) => (
             <Accordion key={year} defaultExpanded={Number(year) === defaultExpandedYear}>
-              <AccordionSummary expandIcon={<ExpandIcon />}>
+              <AccordionSummary expandIcon={<ExpandCircleDownIcon />}>
                 <Typography
                   variant="h4"
                   onMouseOver={(e) => (e.currentTarget.style.textShadow = "0 0 10px #fff")}
                   onMouseOut={(e) => (e.currentTarget.style.textShadow = "none")}
                   style={{ cursor: "pointer" }}
                 >
-                  Projekte aktivnosti iz {year}. godine
+                  Projektne aktivnosti iz {year}. godine
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
