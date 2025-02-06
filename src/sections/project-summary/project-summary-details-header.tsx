@@ -28,15 +28,6 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
 
   const [open, setOpen] = useState<HTMLElement | null>(null);
 
-  const extractURLName = (url: string) => {
-    const parts = url.split('/');
-    return parts[parts.length - 1]; // Get the last part (file name)
-  };
-
-  const handleOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
-    setOpen(event.currentTarget);
-  }, []);
-
   const handleClose = useCallback(() => {
     setOpen(null);
   }, []);
@@ -54,7 +45,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
 
       return acc;
     }, {})
-  ).sort(([a], [b]) => Number(b) - Number(a)); // Sort years in descending order
+  ).sort(([a], [b]) => Number(a) - Number(b)); // Sort years in descending order
 
   // Extract available years
   const availableYears = groupedProjects.map(([year]) => Number(year));
@@ -79,7 +70,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
             {projectSummary.title}
           </Typography>
 
-          {groupedProjects.map(([year, indices]: [string, any[]]) => (
+          {groupedProjects.map(([year, projects]: [string, any[]]) => (
             <Accordion key={year} defaultExpanded={Number(year) === defaultExpandedYear}>
               <AccordionSummary expandIcon={<ExpandCircleDownIcon />}>
                 <Typography
@@ -92,7 +83,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                {indices.map((index: any) => (
+                {projects.map((index: any) => (
                   <Box key={index} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
                     <br />
                     <Divider />
