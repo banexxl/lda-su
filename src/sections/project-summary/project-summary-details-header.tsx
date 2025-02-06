@@ -88,7 +88,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
                   onMouseOut={(e) => (e.currentTarget.style.textShadow = "none")}
                   style={{ cursor: "pointer" }}
                 >
-                  Projektne aktivnosti iz {year}. godine
+                  Projektne aktivnosti iz {year}.
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
