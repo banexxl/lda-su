@@ -2,7 +2,7 @@ export const partners = [
      {
           id: 1,
           name: 'ALDA',
-          src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/alda-logo-resized2.jpg',
+          src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/alda-logo-resized.png',
           url: 'https://www.alda-europe.eu/'
      },
 

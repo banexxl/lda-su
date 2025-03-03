@@ -19,26 +19,15 @@ export const PartnerItem = ({ partner }: PartnerItemProps) => {
 
   return (
     <Box
-      sx={{ px: 1.5, cursor: 'pointer' }}
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', }}
     >
-      <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative', display: 'flex', flexDirection: 'column', width: 300, height: 200 }}>
+      <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative', display: 'flex', flexDirection: 'column', width: 300 }}>
         <Image
           alt={partner.name}
           src={partner.src}
-          // ratio="4/3"
-          // height={200}
-          // width={300}
-          sx={{
-            objectFit: 'cover',
-            // width: '100%',
-            // height: '100%',
-            ml: "15%"
-          }}
-        // overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
-        //   } 95%)`}
         />
-        <Typography variant="h6" sx={{ color: settings.themeMode == 'dark' ? theme.palette.text.primary : theme.palette.primary.main, textAlign: 'center', mt: '10px' }}>{partner.name}</Typography>
       </Box>
+      <Typography variant="h6" sx={{ color: settings.themeMode == 'dark' ? theme.palette.text.primary : theme.palette.primary.main, textAlign: 'center', mt: '10px' }}>{partner.name}</Typography>
     </Box>
   );
 }
