@@ -5,6 +5,7 @@ export const partners = [
           src: 'https://lda-su.s3.eu-central-1.amazonaws.com/2015/08/alda-logo.jpg',
           url: 'https://www.alda-europe.eu/'
      },
+  
      {
           id: 2,
           name: 'Sekretarijat za omladinu i sport',
