@@ -124,7 +124,7 @@ export const ActivityView = ({ activity }: ActivityProps) => {
                 ))}
               </List>
             </Box>
-            <Divider sx={{ mt: 8 }} />
+            {/* <Divider sx={{ mt: 8 }} />
             <Typography variant="h5" sx={{ color: theme.palette.text.primary, mt: '20px' }}>
               Publikacije
             </Typography>
@@ -139,7 +139,7 @@ export const ActivityView = ({ activity }: ActivityProps) => {
                   </ListItem>
                 ))}
               </List>
-            </Box>
+            </Box> */}
             <Divider sx={{ mt: 8 }} />
             {/* <ActivityAuthor author={author} /> */}
             <Typography variant="h3" component="h1" sx={{ flexGrow: 1, my: 2, color: theme.palette.text.primary }}>
