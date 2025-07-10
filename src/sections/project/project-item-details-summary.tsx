@@ -6,7 +6,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import { fDate } from 'src/utils/format-time';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import Iconify, { IconifyProps } from 'src/components/iconify';
-
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { Project } from 'src/types/project';
 import { Link, List, ListItem, useTheme } from '@mui/material';
 import { extractDocumentName, extractStringFromUrl, extractURLName } from 'src/utils/format-string';
@@ -80,7 +80,11 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
         <List>
           {project.publications.map((publicationUrl, index) => (
             <ListItem key={index}>
-              <PictureAsPdfIcon sx={{ mr: '5px' }} />
+              {publicationUrl.endsWith('.pdf') ? (
+                <PictureAsPdfIcon sx={{ mr: '5px' }} />
+              ) : (
+                <TextSnippetIcon sx={{ mr: '5px' }} />
+              )}
               <Link href={publicationUrl} target="_blank" rel="noopener">
                 {decodeURIComponent(extractStringFromUrl(publicationUrl))}
               </Link>
