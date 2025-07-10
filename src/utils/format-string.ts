@@ -9,11 +9,15 @@ export const extractStringFromUrl = (inputValue: string) => {
   const docxRegex = /\/([^\/]+)\.docx$/;
   const docRegex = /\/([^\/]+)\.doc$/;
   const pptRegex = /\/([^\/]+)\.ppt$/;
+  const xlsRegex = /\/([^\/]+)\.xls$/;
+  const xlsxRegex = /\/([^\/]+)\.xlsx$/;
 
   const pdfMatch = inputValue.match(pdfRegex);
   const docxMatch = inputValue.match(docxRegex);
   const docMatch = inputValue.match(docRegex);
   const pptMatch = inputValue.match(pptRegex);
+  const xlsMatch = inputValue.match(xlsRegex);
+  const xlsxMatch = inputValue.match(xlsxRegex);
 
   if (pdfMatch && pdfMatch[1]) {
     return pdfMatch[1]; // Found a match for PDF
@@ -23,6 +27,10 @@ export const extractStringFromUrl = (inputValue: string) => {
     return docMatch[1]; // Found a match for DOCX
   } else if (pptMatch && pptMatch[1]) {
     return pptMatch[1]; // Found a match for DOCX
+  } else if (xlsMatch && xlsMatch[1]) {
+    return xlsMatch[1]; // Found a match for XLSX
+  } else if (xlsxMatch && xlsxMatch[1]) {
+    return xlsxMatch[1]; // Found a match for XLSX
   } else {
     return ''; // No match found for PDF or DOCX
   }
