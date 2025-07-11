@@ -146,7 +146,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
                 <Typography variant="caption" sx={{ opacity: 0.72 }}>
                   Published: {fDate(project.published, 'yyyy/MM/dd')}
                 </Typography>
-                <Divider />
+                <Divider sx={{ mt: 3, mb: 3 }} />
                 {[...Array(project.paragraphs_eng.length)].map((_, index) => (
                   <Typography key={index} variant="body1" component="h6" sx={{
                     flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
