@@ -51,9 +51,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
   const availableYears = groupedProjects.map(([year]) => Number(year));
 
   // Determine the default expanded year
-  const defaultExpandedYear =
-    availableYears.find((year) => year < currentYear);
-
+  const defaultExpandedYear = availableYears.find((year) => year <= currentYear);
 
   return (
     <>

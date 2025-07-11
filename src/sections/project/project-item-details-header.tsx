@@ -1,13 +1,6 @@
-import { useState, useCallback } from 'react';
-
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-// import Avatar from '@mui/material/Avatar';
-// import Popover from '@mui/material/Popover';
-// import Checkbox from '@mui/material/Checkbox';
-// import MenuItem from '@mui/material/MenuItem';
-// import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
 // import { fShortenNumber } from 'src/utils/format-number';
@@ -31,20 +24,6 @@ type Props = {
 export const ProjectDetailsHeader = ({ project }: Props) => {
 
   const theme = useTheme()
-
-  const [open, setOpen] = useState<HTMLElement | null>(null);
-
-  const handleOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
-    setOpen(event.currentTarget);
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setOpen(null);
-  }, []);
-
-  // const handleChangeFavorite = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setFavorite(event.target.checked);
-  // }, []);
 
   return (
     <>
