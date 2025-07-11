@@ -9,6 +9,10 @@ export type Project = {
   title: string;
   subTitle: string,
   paragraphs: string[];
+  hasTranslation: boolean;
+  title_eng: string;
+  subTitle_eng: string,
+  paragraphs_eng: string[];
   category: ProjectType;
   //coverUrl: string;
   gallery: string[];

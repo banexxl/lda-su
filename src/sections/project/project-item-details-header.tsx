@@ -130,6 +130,32 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
               </List>
             )
           }
+
+          {
+            project.hasTranslation && (
+              <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
+                <Divider />
+                <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
+                  {project.title_eng}
+                </Typography>
+                <br />
+                <Typography sx={{ color: theme.palette.text.disabled }}>
+                  {project.subTitle_eng}
+                </Typography>
+                <Divider />
+                {[...Array(project.paragraphs_eng.length)].map((_, index) => (
+                  <Typography key={index} variant="body1" component="h6" sx={{
+                    flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
+                  }}>
+                    {project.paragraphs_eng[index]}
+                    <br />
+                    <br />
+                  </Typography>
+                ))}
+                <Divider />
+              </Box>
+            )
+          }
         </Box>
         <Stack direction="row" alignItems="center" flexShrink={0}>
           {/* <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
@@ -176,9 +202,9 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
             {project.subTitle}
           </Link>
         </Stack>
+
+
       </Stack>
-
-
     </>
   );
 }
