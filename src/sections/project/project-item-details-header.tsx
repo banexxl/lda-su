@@ -142,6 +142,10 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
                 <Typography sx={{ color: theme.palette.text.disabled }}>
                   {project.subTitle_eng}
                 </Typography>
+                <br />
+                <Typography variant="caption" sx={{ opacity: 0.72 }}>
+                  Published: {fDate(project.published, 'yyyy/MM/dd')}
+                </Typography>
                 <Divider />
                 {[...Array(project.paragraphs_eng.length)].map((_, index) => (
                   <Typography key={index} variant="body1" component="h6" sx={{
