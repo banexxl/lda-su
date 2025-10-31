@@ -1,9 +1,3 @@
-import numeral from 'numeral';
-
-// ----------------------------------------------------------------------
-
-type InputValue = string | number | null;
-
 export const extractStringFromUrl = (inputValue: string) => {
   const pdfRegex = /\/([^\/]+)\.pdf$/;
   const docxRegex = /\/([^\/]+)\.docx$/;
