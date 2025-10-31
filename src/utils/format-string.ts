@@ -11,6 +11,7 @@ export const extractStringFromUrl = (inputValue: string) => {
   const pptRegex = /\/([^\/]+)\.ppt$/;
   const xlsRegex = /\/([^\/]+)\.xls$/;
   const xlsxRegex = /\/([^\/]+)\.xlsx$/;
+  const httpsRegex = /https:\/\/([^\/]+)/;
 
   const pdfMatch = inputValue.match(pdfRegex);
   const docxMatch = inputValue.match(docxRegex);
@@ -18,6 +19,7 @@ export const extractStringFromUrl = (inputValue: string) => {
   const pptMatch = inputValue.match(pptRegex);
   const xlsMatch = inputValue.match(xlsRegex);
   const xlsxMatch = inputValue.match(xlsxRegex);
+  const httpsMatch = inputValue.match(httpsRegex);
 
   if (pdfMatch && pdfMatch[1]) {
     return pdfMatch[1]; // Found a match for PDF
@@ -31,6 +33,8 @@ export const extractStringFromUrl = (inputValue: string) => {
     return xlsMatch[1]; // Found a match for XLSX
   } else if (xlsxMatch && xlsxMatch[1]) {
     return xlsxMatch[1]; // Found a match for XLSX
+  } else if (httpsMatch && httpsMatch[1]) {
+    return httpsMatch[1]; // Found a match for HTTPS
   } else {
     return ''; // No match found for PDF or DOCX
   }
