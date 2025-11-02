@@ -8,7 +8,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
      const searchResults = await projectsServices().getSearchTermResults(searchTerm)
 
-     if (searchResults.length == 0) {
+     if (Array.isArray(searchResults) && searchResults.length === 0) {
           return new NextResponse(JSON.stringify({ success: false, message: 'No items found', data: [] }), { status: 404, headers: { 'content-type': 'application/json' } });
      }
 

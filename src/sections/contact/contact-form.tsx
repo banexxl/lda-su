@@ -57,8 +57,6 @@ export const ContactForm = () => {
         },
         body: JSON.stringify(data)
       }).then(async (response: Response) => {
-        console.log(await response.json());
-
         if (response.ok) {
           Swal.fire({
             title: 'Hvala Vam na kontaktu!',

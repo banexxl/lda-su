@@ -1,6 +1,6 @@
 import { MongoClient, WithId } from "mongodb"
-import { ObjectId } from "mongodb"
 import { Activity } from "src/types/activity"
+import { withStringId } from "src/utils/plain-object-creator"
 
 const activityServices = () => {
 
@@ -11,7 +11,7 @@ const activityServices = () => {
           try {
                const db = client.db('LDA_DB')
                let data: WithId<Activity>[] = await db.collection<Activity>('Activities').find({}).toArray()
-               return data
+               return data.map((d) => withStringId(d));
           } catch (error: any) {
                console.log({ message: error.message })
                return []
@@ -28,7 +28,7 @@ const activityServices = () => {
           try {
                const db = client.db('LDA_DB')
                let data: Activity[] = await db.collection('Activities').find({ activityURL: activityURL }).toArray()
-               return data[0]
+               return data[0] ? withStringId(data[0]) : undefined
           } catch (error: any) {
                console.log({ message: error.message })
                return {}
@@ -38,8 +38,6 @@ const activityServices = () => {
           }
      }
 
-
-
      const getCompletedActivities = async () => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
@@ -47,7 +45,7 @@ const activityServices = () => {
           try {
                const db = client.db('LDA_DB')
                let data: Activity[] = await db.collection('Activities').find({ 'status': 'completed' }).sort({ publishedDate: 1 }).toArray()
-               return data
+               return data.map((d) => withStringId(d))
           } catch (error: any) {
                console.log({ message: error.message })
                return []
@@ -64,7 +62,7 @@ const activityServices = () => {
           try {
                const db = client.db('LDA_DB')
                let data: Activity[] = await db.collection('Activities').find({ 'category': category }).sort({ publishedDate: 1 }).toArray()
-               return data
+               return data.map((d) => withStringId(d))
           } catch (error: any) {
                console.log({ message: error.message })
                return []
@@ -81,7 +79,7 @@ const activityServices = () => {
           try {
                const db = client.db('LDA_DB')
                let data: Activity[] = await db.collection('Activities').find({ 'status': 'completed' }).limit(6).toArray()
-               return data
+               return data.map((d) => withStringId(d))
           } catch (error: any) {
                console.log({ message: error.message })
                return []
@@ -98,7 +96,7 @@ const activityServices = () => {
           try {
                const db = client.db('LDA_DB')
                let data: Activity[] = await db.collection('Activities').find({ 'status': 'in-progress' }).toArray()
-               return data
+               return data.map((d) => withStringId(d))
           } catch (error: any) {
                console.log({ message: error.message })
                return []
@@ -115,7 +113,7 @@ const activityServices = () => {
           try {
                const db = client.db('LDA_DB')
                let data: Activity[] = await db.collection('Activities').find({ 'status': 'to-do' }).toArray()
-               return data
+               return data.map((d) => withStringId(d))
           } catch (error: any) {
                console.log({ message: error.message })
                return []
@@ -132,7 +130,7 @@ const activityServices = () => {
           try {
                const db = client.db('LDA_DB')
                let data: Activity[] = await db.collection('Activities').find({ 'link': `${link}` }).toArray()
-               return data
+               return data.map((d) => withStringId(d))
           } catch (error: any) {
                console.log({ message: error.message })
                return []

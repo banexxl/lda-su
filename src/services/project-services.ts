@@ -1,6 +1,4 @@
-import { Project } from "src/types/project"
 import { MongoClient, WithId } from "mongodb"
-import { ObjectId } from "mongodb"
 import { ProjectSummary } from "src/types/projectSummary";
 
 const projectsServices = () => {
@@ -14,7 +12,7 @@ const projectsServices = () => {
                const data: any = await db.collection('Publications').find({}).sort({ publicationUploadedDateTime: -1 }).toArray()
                return data;
           } catch (error: any) {
-               console.log({ message: error.message })
+               return []
           } finally {
                await client.close();
           }
@@ -25,11 +23,14 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: WithId<ProjectSummary>[] = await db.collection<ProjectSummary>('ProjectSummaries').find({}).sort({ projectEndDateTime: -1 }).toArray();
-               return data;
+               const data: WithId<ProjectSummary>[] = await db
+                    .collection<ProjectSummary>('ProjectSummaries')
+                    .find({})
+                    .sort({ projectEndDateTime: -1 })
+                    .toArray();
+               return data
           } catch (error: any) {
-               console.log({ message: error.message });
-               return [];
+               return []
           } finally {
                await client.close();
           }
@@ -41,10 +42,14 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('ProjectSummaries').find({ 'status': 'in-progress' }).sort({ projectEndDateTime: -1 }).toArray()
-               return data;
+               const data: any[] = await db
+                    .collection('ProjectSummaries')
+                    .find({ 'status': 'in-progress' })
+                    .sort({ projectEndDateTime: -1 })
+                    .toArray();
+               return data
           } catch (error: any) {
-               console.log({ message: error.message })
+               return []
           } finally {
                await client.close();
           }
@@ -56,10 +61,14 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('ProjectSummaries').find({ 'status': 'completed' }).sort({ projectEndDateTime: -1 }).toArray()
-               return data;
+               const data: any[] = await db
+                    .collection('ProjectSummaries')
+                    .find({ 'status': 'completed' })
+                    .sort({ projectEndDateTime: -1 })
+                    .toArray();
+               return data
           } catch (error: any) {
-               console.log({ message: error.message })
+               return []
           } finally {
                await client.close();
           }
@@ -71,13 +80,17 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('ProjectSummaries').aggregate([
-                    { $match: { status: 'completed' } },  // Filter documents where completed is true
-                    { $sample: { size: 5 } }         // Randomly sample 5 documents
-               ]).sort({ projectEndDateTime: -1 }).toArray()
-               return data;
+               const data: any[] = await db
+                    .collection('ProjectSummaries')
+                    .aggregate([
+                         { $match: { status: 'completed' } },
+                         { $sample: { size: 5 } }
+                    ])
+                    .sort({ projectEndDateTime: -1 })
+                    .toArray();
+               return data
           } catch (error: any) {
-               console.log({ message: error.message })
+               return []
           } finally {
                await client.close();
           }
@@ -89,10 +102,13 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB')
-               let data: ProjectSummary = await db.collection('ProjectSummaries').find({ 'projectSummaryURL': link }).toArray()
-               return data
+               const data: any[] = await db
+                    .collection('ProjectSummaries')
+                    .find({ 'projectSummaryURL': link })
+                    .toArray();
+               return data.length > 0 ? data[0] : [];
           } catch (error: any) {
-               console.log({ message: error.message })
+               return { message: error.message }
           }
           finally {
                await client.close();
@@ -105,10 +121,10 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('Projects').find({}).toArray()
-               return data;
+               const data: any[] = await db.collection('Projects').find({}).toArray();
+               return data
           } catch (error: any) {
-               console.log({ message: error.message })
+               return []
           } finally {
                await client.close();
           }
@@ -120,10 +136,10 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB');
-               const data: any = await db.collection('Projects').find({ 'status': 'in-progress' }).toArray()
-               return data;
+               const data: any[] = await db.collection('Projects').find({ 'status': 'in-progress' }).toArray();
+               return data
           } catch (error: any) {
-               console.log({ message: error.message })
+               return []
           } finally {
                await client.close();
           }
@@ -135,10 +151,10 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB')
-               let data: Project[] = await db.collection('Projects').distinct('projectURL')
-               return data
+               const data: string[] = await (db as any).collection('Projects').distinct('projectURL');
+               return data;
           } catch (error: any) {
-               console.log({ message: error.message })
+               return []
           }
           finally {
                await client.close();
@@ -151,10 +167,10 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB')
-               let data: Project[] = await db.collection('Projects').find({ 'projectURL': projectURL }).toArray()
-               return data[0]
+               const data: any[] = await db.collection('Projects').find({ 'projectURL': projectURL }).toArray();
+               return data.length > 0 ? data[0] : [];
           } catch (error: any) {
-               console.log({ message: error.message })
+               return { message: error.message }
           }
           finally {
                await client.close();
@@ -167,18 +183,11 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB')
-               // Get one random document from the mycoll collection.
-               //db.mycoll.aggregate([{ $sample: { size: 1 } }])
-               // Get one random document matching {a: 10} from the mycoll collection.
-               // db.mycoll.aggregate([
-               //      { $match: { a: 10 } },
-               //      { $sample: { size: 1 } }
-               // ])
-               let data: Project[] = await db.collection('Projects')
+               const data: any[] = await db.collection('Projects')
                     .aggregate([
-                         // { $match: { mainCategory: 'apoteka' } },
-                         { $sample: { size: 10 } }])
-                    .toArray()
+                         { $sample: { size: 10 } }
+                    ])
+                    .toArray();
                return data
           } catch (error: any) {
                return { message: error.message }
@@ -190,23 +199,16 @@ const projectsServices = () => {
 
      const getSearchTermResults = async (searchTerm: string) => {
 
-          // const searchTermArray = searchTerm.split(" ")
-
-          //const collections = ['Activities', 'Projects', 'ProjectSummaries']; mora samo projects jer url-ovi u activities i project summaries nemju 'prefix'
-          const collections = ['Projects'];
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
           try {
                const db = client.db('LDA_DB')
-               // const searchResults = await Promise.all(collections.map(async collectionName => {
-               //      const collection = db.collection(collectionName);
-
-               //      // Perform search in the title field
-               return await db.collection('Projects').find({ subTitle: { $regex: searchTerm, $options: 'i' } }).limit(5).toArray();
-               // }));
-               // const combinedResults = searchResults.reduce((acc, curr) => acc.concat(curr), []);
-
-               // return combinedResults
+               const data: any[] = await db
+                    .collection('Projects')
+                    .find({ subTitle: { $regex: searchTerm, $options: 'i' } })
+                    .limit(5)
+                    .toArray();
+               return data.length > 0 ? data : [];
           } catch (error: any) {
                return { message: error.message }
           }

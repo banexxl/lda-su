@@ -23,4 +23,5 @@ export type Activity = {
   list: string[];
   listTitle: string;
   publications?: string[];
+  quillEditorData: string;
 };

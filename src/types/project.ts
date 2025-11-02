@@ -33,4 +33,5 @@ export type Project = {
   showListOnBottom: boolean;
   listTitle: string;
   list: string[];
+  quillEditorData: string;
 };
