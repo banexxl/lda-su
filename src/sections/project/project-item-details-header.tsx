@@ -2,18 +2,15 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
-// import { fShortenNumber } from 'src/utils/format-number';
-
 import { _socials } from 'src/_mock';
-
 import Iconify from 'src/components/iconify';
-
 import { Project } from 'src/types/project';
 import { Divider, List, ListItem, ListItemIcon, ListItemText, useTheme } from '@mui/material';
 import { fDate } from 'src/utils/format-time';
 import moment from 'moment';
-import { t } from 'src/utils/html-to-text';
+import { normalizeQuillHtml } from 'src/utils/html-to-text';
+import { useMemo } from 'react';
+import DOMPurify from 'dompurify';
 
 
 // ----------------------------------------------------------------------
@@ -26,6 +23,18 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
 
   const theme = useTheme()
 
+  const safeHtml = useMemo(() => {
+    const normalized = normalizeQuillHtml(project.quillEditorData ?? '');
+    // allow harmless formatting attributes Quill uses
+    return DOMPurify.sanitize(normalized, {
+      USE_PROFILES: { html: true },
+      ALLOWED_ATTR: [
+        'class', 'style', 'href', 'target', 'rel', 'alt', 'title',
+        'src', 'width', 'height', 'dir', 'spellcheck'
+      ],
+    });
+  }, [project.quillEditorData]);
+
   return (
     <>
       <Stack
@@ -37,9 +46,12 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
       >
         {
           project.quillEditorData !== '' ?
-            <Typography sx={{ color: theme.palette.text.primary, whiteSpace: 'pre-line' }}>
-              {t(project.quillEditorData)}
-            </Typography>
+            <Box
+              className="quill-content"
+              sx={{ color: theme.palette.text.primary }}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: safeHtml }}
+            />
             :
             <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'justify' }}>
               <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
