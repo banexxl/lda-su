@@ -1,20 +1,15 @@
-import { useState, useCallback } from 'react';
-
+import { useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import { alpha, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
-
-import { fCurrency } from 'src/utils/format-number';
 import { FilterTime } from '../filters/filter-time';
 import { ProjectSummary } from 'src/types/projectSummary';
-import { fDate } from 'src/utils/format-time';
 
 // ----------------------------------------------------------------------
 
@@ -28,34 +23,9 @@ declare global {
   }
 }
 
-const ShareOnFacebook = () => {
-  const handleShare = () => {
-    // Open Facebook share dialog
-    window.FB.ui({
-      method: 'share',
-      href: 'https://www.your-website.com/page-to-share', // Replace with the URL of the page you want to share
-    }, (response: any) => {
-      if (response && !response.error_message) {
-        console.log('Post shared successfully!');
-      } else {
-        console.error('Failed to share post:', response.error_message);
-      }
-    });
-  };
-
-  return (
-    <button onClick={handleShare}>Share on Facebook</button>
-  );
-};
-
 export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
 
   const theme = useTheme()
-  const router = useRouter();
-
-  const handleClickReserve = useCallback(() => {
-    router.push(paths.alda.alda);
-  }, [router]);
 
   return (
     <Card sx={{ p: 3 }}>

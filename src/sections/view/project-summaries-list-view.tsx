@@ -8,8 +8,6 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import { _tours } from 'src/_mock';
 
-// import { Newsletter } from '../newsletter';
-import { Filters } from '../filters/filters';
 import { ProjectSummary } from 'src/types/projectSummary';
 import ProjectSummaryList from '../project-summaries-list/project-summary-list';
 import { Typography } from '@mui/material';

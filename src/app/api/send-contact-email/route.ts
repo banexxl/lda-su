@@ -19,7 +19,6 @@ export async function POST(request: Request) {
                subject: `Poruka od ${requestData.fullName}, email adresa: ${requestData.email}, sa LDA Subotica sajta`,
                html: requestData.message
           });
-          console.log(data, error);
 
           if (data && !error) {
                return new Response(JSON.stringify({ status: 200, statusText: 'Poruka poslata!' }));

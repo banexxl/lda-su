@@ -94,7 +94,6 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
             :
             setOpenSearchExpander(true)
         }).catch((error) => {
-          console.log(error);
           setLoading(false)
         })
       } else {
