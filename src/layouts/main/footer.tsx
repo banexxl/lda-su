@@ -1,14 +1,9 @@
-import Masonry from '@mui/lab/Masonry';
 import Divider from '@mui/material/Divider';
 import Collapse from '@mui/material/Collapse';
-import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import { alpha, styled, useTheme } from '@mui/material/styles';
-import Stack, { StackProps } from '@mui/material/Stack';
-import InputAdornment from '@mui/material/InputAdornment';
-import Button, { buttonClasses } from '@mui/material/Button';
+import { useTheme } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { usePathname } from 'src/routes/hooks';
@@ -18,29 +13,12 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import { _socials } from 'src/_mock';
 import footerImage from 'public/eu-lda-h-1000x450.jpg'
-import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 
-import { NavSubListProps } from './nav-basic/types';
-import { aldaLinks, navConfig, europaLinks, suboticaLinks } from './config-navigation';
+import { aldaLinks, europaLinks, suboticaLinks } from './config-navigation';
 import { Box } from '@mui/system';
-import Icon from 'src/assets/illustrations/pattern/icon';
-import { Grid, Link } from '@mui/material';
+import { Link } from '@mui/material';
 
-// ----------------------------------------------------------------------
-
-// const StyledAppStoreButton = styled(Button)(({ theme }) => ({
-//   flexShrink: 0,
-//   padding: '5px 12px',
-//   color: theme.palette.common.white,
-//   border: `solid 1px ${alpha(theme.palette.common.black, 0.24)}`,
-//   background: `linear-gradient(180deg, ${theme.palette.grey[900]} 0%, ${theme.palette.common.black} 100%)`,
-//   [`& .${buttonClasses.startIcon}`]: {
-//     marginLeft: 0,
-//   },
-// }));
-
-// ----------------------------------------------------------------------
 export const Footer = () => {
 
 
