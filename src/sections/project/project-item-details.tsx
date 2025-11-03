@@ -27,11 +27,6 @@ declare global {
 export const ProjectDetails = ({ project }: Props) => {
 
   const theme = useTheme()
-  const router = useRouter();
-
-  const handleClickReserve = useCallback(() => {
-    router.push(paths.alda.alda);
-  }, [router]);
 
   return (
     <Card sx={{ p: 3 }}>
