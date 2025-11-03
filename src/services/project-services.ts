@@ -102,13 +102,11 @@ const projectsServices = () => {
 
           try {
                const db = client.db('LDA_DB')
-               const data: any[] = await db
-                    .collection('ProjectSummaries')
-                    .find({ 'projectSummaryURL': link })
-                    .toArray();
-               return data.length > 0 ? data[0] : [];
+               let data: ProjectSummary = await db.collection('ProjectSummaries').find({ 'projectSummaryURL': link }).toArray()
+               return data
           } catch (error: any) {
-               return { message: error.message }
+               console.log({ message: error.message })
+               return []
           }
           finally {
                await client.close();

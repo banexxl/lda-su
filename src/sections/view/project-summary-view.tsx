@@ -2,27 +2,18 @@
 
 import { useEffect } from 'react';
 
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import { alpha, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { paths } from 'src/routes/paths';
-
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { _tours, _socials } from 'src/_mock';
-
-import Iconify from 'src/components/iconify';
 import { SplashScreen } from 'src/components/loading-screen';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { FaViber } from "react-icons/fa";
 import { ProjectSummaryDetailsGallery } from '../project-summary/project-summary-details-gallery';
 import { ProjectSummaryDetails } from '../project-summary/project-summary-details';
-import { EmailIcon, EmailShareButton, FacebookIcon, FacebookShareButton, LinkedinShareButton, TwitterShareButton, ViberIcon, ViberShareButton } from 'next-share';
 import { ProjectSummary } from 'src/types/projectSummary';
 import { ProjectSummaryDetailsHeader } from '../project-summary/project-summary-details-header';
 import { ProjectSummaryDetailsSummary } from '../project-summary/project-summary-details-summary';
