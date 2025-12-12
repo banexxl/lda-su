@@ -11,6 +11,7 @@ import Logo from 'src/components/logo';
 import { useBoolean } from 'src/hooks/use-boolean';
 import Iconify from 'src/components/iconify';
 import NavBasicMobile from './nav-basic/mobile/nav-basic-mobile';
+import { Toaster } from 'react-hot-toast';
 
 // ----------------------------------------------------------------------
 
@@ -71,7 +72,7 @@ export const MainLayout = ({ children }: Props) => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>
       <Header headerOnDark={actionPage(pathsOnDark)} />
-
+      <Toaster />
       <Box
         component="main"
         sx={{
@@ -86,9 +87,11 @@ export const MainLayout = ({ children }: Props) => {
         <Drawer
           open={mobileOpen.value}
           onClose={mobileOpen.onFalse}
-          PaperProps={{
-            sx: {
-              width: 260,
+          slotProps={{
+            paper: {
+              sx: {
+                width: 260,
+              },
             },
           }}
         >
@@ -103,11 +106,11 @@ export const MainLayout = ({ children }: Props) => {
             }}
           />
         </Drawer>
+
         {children}
       </Box>
-
       <Footer />
-    </Box>
+    </Box >
   );
 }
 
