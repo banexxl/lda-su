@@ -7,5 +7,8 @@ export const metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactView />;
+
+  const mapApiKey = process.env.NEXT_PUBLIC_MAP_API!
+
+  return <ContactView mapApiKey={mapApiKey} />;
 }

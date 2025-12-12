@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
 
 // ----------------------------------------------------------------------
 
-export const ContactForm = () => {
+export const ContactForm = (props: { mapApiKey: string }) => {
   type ContactFormValues = {
     fullName: string;
     email: string;
@@ -139,7 +139,7 @@ export const ContactForm = () => {
             </Button>
           </Stack>
         </form>
-        <ContactMap mapApiKey={process.env.NEXT_PUBLIC_MAP_API!} />
+        <ContactMap mapApiKey={props.mapApiKey} />
       </Box>
     </Container>
   );

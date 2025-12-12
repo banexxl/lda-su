@@ -7,13 +7,13 @@ import { Box } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-export const ContactView = () => {
+export const ContactView = (props: { mapApiKey: string }) => {
   return (
     <Box >
 
       <ContactInfo />
 
-      <ContactForm />
+      <ContactForm mapApiKey={props.mapApiKey} />
 
       {/* <Newsletter /> */}
 
