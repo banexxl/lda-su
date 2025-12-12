@@ -1,5 +1,5 @@
 'use client';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
@@ -68,24 +68,56 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             />
           </Box> */}
 
-          <Grid xs={12} md={8}>
+          <Grid size={{ xs: 12, md: 8 }}>
             <Typography variant="h3" component="h1" sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.primary }}>
               {activity.title}
             </Typography>
             <br />
-            {[...Array(activity.descriptions.length)].map((_, index) => (
-              <Typography key={index} variant="body1" component="h6" sx={{
-                flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
-              }}>
-                {activity.descriptions[index]}
+            {Array.isArray(activity.descriptions) && activity.descriptions.length > 0 ? (
+              activity.descriptions.map((description, index) => (
+                <Typography
+                  key={index}
+                  variant="body1"
+                  component="h6"
+                  sx={{
+                    flexGrow: 1,
+                    pr: { md: 10 },
+                    textAlign: 'justify',
+                    color: theme.palette.text.primary,
+                  }}
+                >
+                  {description}
+                  <br />
+                  <br />
+                </Typography>
+              ))
+            ) : typeof activity.descriptions === 'string' && activity.descriptions.length > 0 ? (
+              <Typography
+                variant="body1"
+                component="h6"
+                sx={{
+                  flexGrow: 1,
+                  pr: { md: 10 },
+                  textAlign: 'justify',
+                  color: theme.palette.text.primary,
+                }}
+              >
+                {activity.descriptions}
                 <br />
                 <br />
               </Typography>
-            ))}
+            ) : (
+              <Typography
+                variant="body2"
+                sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.secondary }}
+              >
+                Trenutno nema opisa za ovu aktivnost.
+              </Typography>
+            )}
             <Typography>
               {activity.listTitle}
             </Typography>
-            {activity.list.length > 0 && (
+            {activity.list && activity.list.length > 0 ? (
               <List dense sx={{
                 flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
               }}>
@@ -103,6 +135,13 @@ export const ActivityView = ({ activity }: ActivityProps) => {
                   </ListItem>
                 ))}
               </List>
+            ) : (
+              <Typography
+                variant="body2"
+                sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.secondary }}
+              >
+                Trenutno nema stavki za ovu aktivnost.
+              </Typography>
             )}
 
             {/* <Markdown content={content} firstLetter /> */}
@@ -113,16 +152,22 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             <Divider sx={{ mt: 8 }} />
             <Typography variant="h5" sx={{ color: theme.palette.text.primary, mt: '20px' }}>Linkovi</Typography>
             <Box sx={{ display: 'flex', gap: '20px' }}>
-              <List>
-                {activity.links.map((link, index) => (
-                  <ListItem key={index}>
-                    <LinkIcon sx={{ mr: '5px' }} />
-                    <Link href={link} target="_blank" rel="noopener">
-                      {extractStringFromUrl(link)}
-                    </Link>
-                  </ListItem>
-                ))}
-              </List>
+              {activity.links && activity.links.length > 0 ? (
+                <List>
+                  {activity.links.map((link, index) => (
+                    <ListItem key={index}>
+                      <LinkIcon sx={{ mr: '5px' }} />
+                      <Link href={link} target="_blank" rel="noopener">
+                        {extractStringFromUrl(link)}
+                      </Link>
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <Typography sx={{ color: theme.palette.text.secondary }}>
+                  Trenutno nema linkova za ovu aktivnost.
+                </Typography>
+              )}
             </Box>
             {/* <Divider sx={{ mt: 8 }} />
             <Typography variant="h5" sx={{ color: theme.palette.text.primary, mt: '20px' }}>
@@ -147,26 +192,24 @@ export const ActivityView = ({ activity }: ActivityProps) => {
             </Typography>
             <ProjectDetailsGallery gallery={activity.gallery} />
             <Divider sx={{ mt: 8 }} />
-            {
-              activity.gallery.some(isVideoUrl) ? (
-                <Box sx={{ m: 10 }}>
-                  <Typography variant="h4" sx={{ mb: 5, color: theme.palette.text.primary }}>
-                    Video aktivnosti
-                  </Typography>
-                  <Box sx={{ mb: 5, boxShadow: `5px 10px 20px ${theme.palette.primary.dark}` }} >
-                    <ReactPlayer
-                      url={activity.gallery.find(isVideoUrl) as string}
-                      light={true}
-                      volume={1}
-                      playing={true}  // Auto-play the video
-                      muted={true}    // Mute the video to comply with browser policies
-                      controls={true} // Optional: Show video controls
-                      width={'100%'}
-                    />
-                  </Box>
+            {activity.gallery?.some(isVideoUrl) ? (
+              <Box sx={{ m: 10 }}>
+                <Typography variant="h4" sx={{ mb: 5, color: theme.palette.text.primary }}>
+                  Video aktivnosti
+                </Typography>
+                <Box sx={{ mb: 5, boxShadow: `5px 10px 20px ${theme.palette.primary.dark}` }}>
+                  <ReactPlayer
+                    url={activity.gallery.find(isVideoUrl) as string}
+                    light
+                    volume={1}
+                    playing
+                    muted
+                    controls
+                    width="100%"
+                  />
                 </Box>
-              ) : null
-            }
+              </Box>
+            ) : null}
 
           </Grid>
 

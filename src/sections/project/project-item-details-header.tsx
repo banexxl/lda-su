@@ -74,20 +74,20 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
                   </Typography> {project.subTitle}
                   <Typography sx={{ fontWeight: 'bold' }}>
                     NOSILAC PROJEKTA:
-                  </Typography>{project.applicants.join(', ')}
+                  </Typography>{(project.applicants ?? []).join(', ')}
                   <Typography sx={{ fontWeight: 'bold' }}>
                     PARTNERI:
-                  </Typography >{project.organizers.join(', ')}
+                  </Typography >{(project.organizers ?? []).join(', ')}
                   <Typography sx={{ fontWeight: 'bold' }}>
                     DONATOR:
-                  </Typography>{project.donators.join(', ')}
-                  {project.dateFrom != undefined && project.subOrganizers.length > 0 ?
+                  </Typography>{(project.donators ?? []).join(', ')}
+                  {project.dateFrom != undefined && (project.subOrganizers?.length ?? 0) > 0 ?
                     <Box>
                       <Typography>
                         PERIOD IMPLEMENTACIJE: {moment(project.dateFrom).format('DD/MM/yyyy')} - {moment(project.dateTo).format('DD/MM/yyyy')}
                       </Typography>
                       <Typography>
-                        PRIDRUŽENI PARTNERI: {project.subOrganizers.join(', ')}
+                        PRIDRUŽENI PARTNERI: {(project.subOrganizers ?? []).join(', ')}
                       </Typography>
                     </Box>
                     : null
@@ -118,11 +118,19 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
                 )
               }
               <br />
-              {[...Array(project.paragraphs.length)].map((_, index) => (
-                <Typography key={index} variant="body1" component="h6" sx={{
-                  flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
-                }}>
-                  {project.paragraphs[index]}
+              {(project.paragraphs ?? []).map((paragraph, index) => (
+                <Typography
+                  key={index}
+                  variant="body1"
+                  component="h6"
+                  sx={{
+                    flexGrow: 1,
+                    pr: { md: 10 },
+                    textAlign: 'justify',
+                    color: theme.palette.text.primary,
+                  }}
+                >
+                  {paragraph}
                   <br />
                   <br />
                 </Typography>
@@ -166,11 +174,19 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
                       Published: {fDate(project.published, 'yyyy/MM/dd')}
                     </Typography>
                     <Divider sx={{ mt: 3, mb: 3 }} />
-                    {[...Array(project.paragraphs_eng.length)].map((_, index) => (
-                      <Typography key={index} variant="body1" component="h6" sx={{
-                        flexGrow: 1, pr: { md: 10 }, textAlign: 'justify', color: theme.palette.text.primary
-                      }}>
-                        {project.paragraphs_eng[index]}
+                    {(project.paragraphs_eng ?? []).map((paragraph, index) => (
+                      <Typography
+                        key={index}
+                        variant="body1"
+                        component="h6"
+                        sx={{
+                          flexGrow: 1,
+                          pr: { md: 10 },
+                          textAlign: 'justify',
+                          color: theme.palette.text.primary,
+                        }}
+                      >
+                        {paragraph}
                         <br />
                         <br />
                       </Typography>
@@ -190,7 +206,7 @@ export const ProjectDetailsHeader = ({ project }: Props) => {
 
         <Stack direction="row" alignItems="center" sx={{ typography: 'body2', color: theme.palette.text.primary }}>
           <Iconify icon="carbon:location" sx={{ mr: 0.5, color: theme.palette.text.primary }} />
-          {project.locations.join(', ')}
+          {(project.locations ?? []).join(', ')}
         </Stack>
 
         <Stack direction="row" alignItems="center">

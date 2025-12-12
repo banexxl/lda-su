@@ -9,9 +9,9 @@ export const metadata = {
 };
 
 type ProjectSummaryPageProps = {
-  params: {
-    'pregled-projekta': string
-  }
+  params: Promise<{
+    'pregled-projekta': string;
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -30,8 +30,9 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectSummaryPage({ params }: ProjectSummaryPageProps) {
+  const { 'pregled-projekta': pregledProjekta } = await params;
 
-  const projectSummary: any = await projectsServices().getProjectSummaryByLink(params['pregled-projekta'])
+  const projectSummary: any = await projectsServices().getProjectSummaryByLink(pregledProjekta)
 
   if (!projectSummary || projectSummary.length == 0) {
     // Handle the case where the project is undefined

@@ -1,18 +1,8 @@
 // ----------------------------------------------------------------------
 
-type EaseType =
-  | 'linear'
-  | 'easeIn'
-  | 'easeOut'
-  | 'easeInOut'
-  | 'circIn'
-  | 'circOut'
-  | 'circInOut'
-  | 'backIn'
-  | 'backOut'
-  | 'backInOut'
-  | 'anticipate'
-  | number[];
+import type { Easing } from 'framer-motion';
+
+type EaseType = Easing | Easing[];
 
 export type VariantsType = {
   distance?: number;

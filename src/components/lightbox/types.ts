@@ -2,7 +2,8 @@ import { LightboxExternalProps } from 'yet-another-react-lightbox';
 
 // ----------------------------------------------------------------------
 
-export interface LightBoxProps extends LightboxExternalProps {
+export interface LightBoxProps extends Omit<LightboxExternalProps, 'slides'> {
+  slides: LightboxExternalProps['slides'];
   disabledZoom?: boolean;
   disabledVideo?: boolean;
   disabledTotal?: boolean;

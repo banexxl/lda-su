@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -42,7 +42,7 @@ export const Newsletter = () => {
     >
       <Container>
         <Grid container spacing={3} justifyContent="flex-end">
-          <Grid xs={12} md={5}>
+          <Grid size={{ xs: 12, md: 6, lg: 5 }}>
             <Stack
               spacing={3}
               sx={{

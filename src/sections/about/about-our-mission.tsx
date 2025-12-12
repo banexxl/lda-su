@@ -1,7 +1,7 @@
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Image from 'src/components/image';
 import { Box, useTheme } from '@mui/material';
@@ -74,7 +74,7 @@ export const AboutOurVision = () => {
         }}
       >
         <Typography variant="h2">Naši ciljevi</Typography>
-        <Grid xs={12} md={6} lg={6}>
+        <Grid size={{ xs: 6, md: 6, lg: 6 }}>
           <Stack alignItems={{ md: 'flex-end' }} sx={{ position: 'relative' }}>
             {VISIONS_TOP.map((vision, index) => {
               const { name, description } = vision;
@@ -125,11 +125,11 @@ export const AboutOurVision = () => {
           </Stack>
         </Grid>
 
-        <Grid xs={12} md={6} lg={5}>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
           <Image alt="vision" src="/assets/illustrations/illustration_vision.svg" />
         </Grid>
 
-        <Grid xs={4} md={6} lg={6}>
+        <Grid size={{ xs: 4, md: 6, lg: 6 }}>
           <Stack alignItems={{ md: 'flex-end' }} sx={{ position: 'relative' }}>
             {VISIONS_BOT.map((vision, index) => {
               const { name, description } = vision;

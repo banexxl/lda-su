@@ -1,14 +1,14 @@
-'use client';
+// 'use client';
 
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider as MuiLocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+// import { LocalizationProvider as MuiLocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-// ----------------------------------------------------------------------
+// // ----------------------------------------------------------------------
 
-type Props = {
-  children: React.ReactNode;
-};
+// type Props = {
+//   children: React.ReactNode;
+// };
 
-export const LocalizationProvider = ({ children }: Props) => {
-  return <MuiLocalizationProvider dateAdapter={AdapterDateFns}>{children}</MuiLocalizationProvider>;
-}
+// export const LocalizationProvider = ({ children }: Props) => {
+//   return <MuiLocalizationProvider dateAdapter={AdapterDateFns}>{children}</MuiLocalizationProvider>;
+// }

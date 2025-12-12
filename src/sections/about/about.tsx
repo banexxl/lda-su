@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { fShortenNumber } from 'src/utils/format-number';
@@ -63,7 +63,7 @@ export const About = () => {
 
       <Grid container spacing={3}>
         {(smUp ? imageURLs : imageURLs.slice(0, 1)).map((img, index) => (
-          <Grid key={img} xs={12} sm={6} md={index === 0 ? 6 : 2}>
+          <Grid key={img} size={{ xs: 12, sm: 6, md: index === 0 ? 6 : 2 }}>
             <Image alt={img} src={img} sx={{ height: 350, borderRadius: 2, width: 1 }} />
           </Grid>
         ))}

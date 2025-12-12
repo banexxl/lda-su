@@ -8,6 +8,8 @@ import { IconifyProps } from './types';
 // ----------------------------------------------------------------------
 
 interface Props extends BoxProps {
+  width?: number | string;
+  sx?: BoxProps['sx'];
   icon: IconifyProps;
 }
 

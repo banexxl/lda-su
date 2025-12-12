@@ -17,7 +17,6 @@ import { getStorage, removeStorage, setStorage } from 'src/hooks/use-local-stora
 import { useRouter } from 'next/navigation';
 import { Collapse, Divider, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import LoadingButton from '@mui/lab/LoadingButton';
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { bgBlur } from 'src/theme/css';
@@ -139,16 +138,14 @@ export const Searchbar = ({ sx }: SearchbarProps) => {
                   onInput={(e: any) => setInputValue(e.target.value)}
                 />
 
-                <LoadingButton
+                <Button
                   type='submit'
-                  loading={loading}
-                  loadingPosition="center"
-                  //loadingIndicator='Pretraga...'
+                  disabled={loading}
                   variant="outlined"
                   onClick={() => handleSearch(inputValue)} sx={{ marginRight: '20px' }}
                 >
                   Pretraga
-                </LoadingButton>
+                </Button>
 
 
               </Box>

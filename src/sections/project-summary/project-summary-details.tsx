@@ -1,14 +1,9 @@
-import { useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import { alpha, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
-import { FilterTime } from '../filters/filter-time';
 import { ProjectSummary } from 'src/types/projectSummary';
 
 // ----------------------------------------------------------------------
@@ -40,12 +35,9 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
               bgcolor: (theme) => alpha(theme.palette.grey[500], 0.08),
             }}
           >
-
-            <FilterTime
-              sx={{ color: theme.palette.text.primary }}
-              departureDay={projectSummary.projectStartDateTime}
-              onChangeDepartureDay={() => { }}
-            />
+            <Typography sx={{ color: theme.palette.text.primary }}>
+              {new Date(projectSummary.projectStartDateTime).toLocaleDateString()}
+            </Typography>
           </Box>
 
           <Typography variant="body2" sx={{ color: 'text.disabled' }}>Kraj projekta</Typography>
@@ -57,12 +49,9 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
               bgcolor: (theme) => alpha(theme.palette.grey[500], 0.08),
             }}
           >
-
-            <FilterTime
-              sx={{ color: theme.palette.text.primary }}
-              departureDay={projectSummary.projectEndDateTime}
-              onChangeDepartureDay={() => { }}
-            />
+            <Typography sx={{ color: theme.palette.text.primary }}>
+              {new Date(projectSummary.projectEndDateTime).toLocaleDateString()}
+            </Typography>
           </Box>
         </Stack>
         <Divider />
@@ -76,17 +65,6 @@ export const ProjectSummaryDetails = ({ projectSummary }: Props) => {
                 projectSummary.applicants.join(', ') + ', ' + projectSummary.organizers.join(', ')}
           </Typography>
         </Stack>
-
-        {/* <Stack sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-            {projectSummary.publishedDateTime.toString()}
-          </Typography>
-          <FilterTime
-            sx={{ color: theme.palette.text.primary }}
-            departureDay={projectSummary.publishedDateTime}
-            onChangeDepartureDay={() => { }}
-          />
-        </Stack> */}
       </Stack>
 
       <Divider />

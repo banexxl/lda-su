@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 
@@ -63,11 +63,11 @@ export const ProjectView = ({ project }: ProjectProps) => {
         <ProjectDetailsGallery gallery={project.gallery} />
 
         {/* <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse"> */}
-        {/* <Grid xs={12} md={5} lg={4}>
+        {/* <Grid size={{ xs: 12, md: 5, lg: 4 }}>
             <ProjectDetails project={project} />
           </Grid> */}
 
-        <Grid xs={12} md={7} lg={8}>
+        <Grid size={{ xs: 12, md: 7, lg: 8 }}>
           <ProjectDetailsHeader project={project} />
 
           <Divider sx={{ my: 5 }} />
@@ -82,26 +82,24 @@ export const ProjectView = ({ project }: ProjectProps) => {
 
       <Divider sx={{ my: 10 }} />
 
-      {
-        project.gallery.some(isVideoUrl) ? (
-          <Box sx={{ m: 10 }}>
-            <Typography variant="h4" sx={{ mb: 5, color: theme.palette.text.primary }}>
-              Video projekta
-            </Typography>
-            <Box sx={{ mb: 5, boxShadow: `5px 10px 20px ${theme.palette.primary.dark}` }} >
-              <ReactPlayer
-                url={project.gallery.find(isVideoUrl) as string}
-                light={true}
-                volume={1}
-                playing={true}  // Auto-play the video
-                muted={true}    // Mute the video to comply with browser policies
-                controls={true} // Optional: Show video controls
-                width={'100%'}
-              />
-            </Box>
+      {project.gallery?.some(isVideoUrl) ? (
+        <Box sx={{ m: 10 }}>
+          <Typography variant="h4" sx={{ mb: 5, color: theme.palette.text.primary }}>
+            Video projekta
+          </Typography>
+          <Box sx={{ mb: 5, boxShadow: `5px 10px 20px ${theme.palette.primary.dark}` }}>
+            <ReactPlayer
+              url={project.gallery.find(isVideoUrl) as string}
+              light
+              volume={1}
+              playing
+              muted
+              controls
+              width="100%"
+            />
           </Box>
-        ) : null
-      }
+        </Box>
+      ) : null}
 
       {/* <ProjectListSimilar projects={pojects.slice(-4)} /> */}
 

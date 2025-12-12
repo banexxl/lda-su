@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Loader } from "@googlemaps/js-api-loader"
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material';
+import { useTheme } from '@mui/system';
 
 export type ContactPageProps = {
      mapApiKey: string

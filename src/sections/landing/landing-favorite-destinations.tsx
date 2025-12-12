@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
@@ -41,7 +41,7 @@ export const LandingFavoriteDestinations = ({ projects }: Props) => {
         alignItems={{ md: 'center' }}
         justifyContent={{ md: 'space-between' }}
       >
-        <Grid xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <Typography variant="h2">Our Favorite Destinations</Typography>
 
           <Typography sx={{ my: 3, color: 'text.secondary' }}>
@@ -67,12 +67,11 @@ export const LandingFavoriteDestinations = ({ projects }: Props) => {
           </Stack>
         </Grid>
 
-        <Grid container xs={12} md={6} spacing={{ xs: 4, md: 3 }}>
+        <Grid container size={{ xs: 12, md: 6 }} spacing={{ xs: 4, md: 3 }}>
           {projects.map((project, index) => (
             <Grid
               key={Math.floor(Math.random() * 999)}
-              xs={12}
-              sm={6}
+              size={{ xs: 12, md: 6 }}
               sx={{
                 ...(index === 1 && {
                   display: { md: 'inline-flex' },

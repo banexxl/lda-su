@@ -77,6 +77,15 @@ export const Lightbox = ({
 
 // ----------------------------------------------------------------------
 
+type PluginOptions = {
+  disabledZoom?: boolean;
+  disabledVideo?: boolean;
+  disabledCaptions?: boolean;
+  disabledSlideshow?: boolean;
+  disabledThumbnails?: boolean;
+  disabledFullscreen?: boolean;
+};
+
 export const getPlugins = ({
   disabledZoom,
   disabledVideo,
@@ -84,7 +93,7 @@ export const getPlugins = ({
   disabledSlideshow,
   disabledThumbnails,
   disabledFullscreen,
-}: LightBoxProps) => {
+}: PluginOptions) => {
   let plugins = [Captions, Fullscreen, Slideshow, Thumbnails, Video, Zoom];
 
   if (disabledThumbnails) {

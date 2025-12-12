@@ -1,7 +1,7 @@
 'use client';
 
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 
 import { _mock, _categories, _travelPosts } from 'src/_mock';
 
@@ -58,11 +58,11 @@ export const ActivitiesView = ({ completedActivities, inProgressActivities, feat
           }}
         >
           <Grid container spacing={{ md: 8 }}>
-            {/* <Grid xs={12} md={8}>
+            {/* <Grid size={{xs:12, md:8}}>
             <Posts posts={_travelPosts} />
           </Grid> */}
 
-            <Grid xs={12} md={4}>
+            <Grid size={{ xs: 12, md: 4 }}>
               <ActivitySidebar
                 categories={_categories}
                 recentActivities={{ list: selectedActivites!.slice(-4) }}

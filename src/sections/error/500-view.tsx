@@ -19,7 +19,7 @@ export const Error500View = () => {
     <CompactLayout>
       <MotionContainer>
         <m.div variants={varBounce().in}>
-          <Typography variant="h3" paragraph>
+          <Typography variant="h3">
             500 Internal Server Error
           </Typography>
         </m.div>

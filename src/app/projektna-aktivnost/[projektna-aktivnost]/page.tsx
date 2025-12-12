@@ -9,9 +9,9 @@ export const metadata = {
 };
 
 type ProjectPageProps = {
-  params: {
-    'projektna-aktivnost': string
-  }
+  params: Promise<{
+    'projektna-aktivnost': string;
+  }>;
 }
 
 export async function generateStaticParams(): Promise<{ 'projektna-aktivnost': string }[]> {
@@ -29,9 +29,9 @@ export async function generateStaticParams(): Promise<{ 'projektna-aktivnost': s
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { 'projektna-aktivnost': projektnaAktivnost } = await params;
 
-  const project: Project | null = await projectsServices().getProjectByLink(params['projektna-aktivnost'])
-  console.log('project', project);
+  const project: Project | null = await projectsServices().getProjectByLink(projektnaAktivnost)
 
   if (!project) {
     // Handle the case where the project is undefined

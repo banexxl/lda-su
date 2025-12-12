@@ -37,10 +37,20 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
           }}
         >
           {/* <OverviewItem icon="carbon:calendar" label="Trajanje projekta" text={`${fDate(project.startDateTime, 'yyyy/MM/dd')} - ${fDate(project.endDateTime, 'yyyy/MM/dd')}`} /> */}
-          <OverviewItem icon="carbon:user" label="Organizatori" text={
-            project.organizers.length === 0 ? project.applicants.join(', ') :
-              project.applicants.join(', ') + ', ' + project.organizers.join(', ')} />
-          <OverviewItem icon="carbon:location" label="Lokacije" text={project.locations.join(', ')} />
+          <OverviewItem
+            icon="carbon:user"
+            label="Organizatori"
+            text={
+              (project.organizers?.length ?? 0) === 0
+                ? (project.applicants ?? []).join(', ')
+                : `${(project.applicants ?? []).join(', ')}, ${(project.organizers ?? []).join(', ')}`
+            }
+          />
+          <OverviewItem
+            icon="carbon:location"
+            label="Lokacije"
+            text={(project.locations ?? []).join(', ')}
+          />
           <OverviewItem icon="carbon:mobile" label="Telefon" text={'+38124554587'} />
           {/* <OverviewItem icon="carbon:time" label="Datum početka" text={fDate(project.startDateTime, 'yyyy/MM/dd')} /> */}
           <OverviewItem icon="carbon:collapse-categories" label="Kategorija" text={
@@ -54,42 +64,62 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
                           project.category == 'other' ? 'Ostalo' : '/'
           }
           />
-          <OverviewItem icon="carbon:user-multiple" label="Aplikanti" text={project.applicants.join(', ')} />
-          <OverviewItem icon="carbon:money" label="Donatori" text={project.donators.join(', ')} />
+          <OverviewItem
+            icon="carbon:user-multiple"
+            label="Aplikanti"
+            text={(project.applicants ?? []).join(', ')}
+          />
+          <OverviewItem
+            icon="carbon:money"
+            label="Donatori"
+            text={(project.donators ?? []).join(', ')}
+          />
         </Box>
       </Stack>
 
       <Divider />
       <Typography variant="h5" sx={{ color: theme.palette.text.primary }}>Linkovi</Typography>
       <Box sx={{ display: 'flex', gap: '20px' }}>
-        <List>
-          {project.links.map((link, index) => (
-            <ListItem key={index}>
-              <LinkIcon sx={{ mr: '5px' }} />
-              <Link href={link} target="_blank" rel="noopener">
-                {(extractDocumentName(link))}
-              </Link>
-            </ListItem>
-          ))}
-        </List>
+        {(project.links && project.links.length > 0) ? (
+          <List>
+            {project.links.map((link, index) => (
+              <ListItem key={index}>
+                <LinkIcon sx={{ mr: '5px' }} />
+                <Link href={link} target="_blank" rel="noopener">
+                  {extractDocumentName(link)}
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <Typography sx={{ color: theme.palette.text.secondary }}>
+            Trenutno nema linkova za ovaj projekat.
+          </Typography>
+        )}
       </Box>
       <Divider sx={{ mb: '30px' }} />
       <Typography variant="h5" sx={{ color: theme.palette.text.primary }}>Publikacije</Typography>
       <Box sx={{ display: 'flex', gap: '20px' }}>
-        <List>
-          {project.publications.map((publicationUrl, index) => (
-            <ListItem key={index}>
-              {publicationUrl.endsWith('.pdf') ? (
-                <PictureAsPdfIcon sx={{ mr: '5px' }} />
-              ) : (
-                <TextSnippetIcon sx={{ mr: '5px' }} />
-              )}
-              <Link href={publicationUrl} target="_blank" rel="noopener">
-                {decodeURIComponent(extractStringFromUrl(publicationUrl))}
-              </Link>
-            </ListItem>
-          ))}
-        </List>
+        {(project.publications && project.publications.length > 0) ? (
+          <List>
+            {project.publications.map((publicationUrl, index) => (
+              <ListItem key={index}>
+                {publicationUrl.endsWith('.pdf') ? (
+                  <PictureAsPdfIcon sx={{ mr: '5px' }} />
+                ) : (
+                  <TextSnippetIcon sx={{ mr: '5px' }} />
+                )}
+                <Link href={publicationUrl} target="_blank" rel="noopener">
+                  {decodeURIComponent(extractStringFromUrl(publicationUrl))}
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <Typography sx={{ color: theme.palette.text.secondary }}>
+            Trenutno nema publikacija za ovaj projekat.
+          </Typography>
+        )}
       </Box>
       <Divider sx={{ mb: '30px' }} />
     </Stack >

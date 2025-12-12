@@ -9,14 +9,13 @@ import { Lightbox, useLightbox } from 'src/components/lightbox';
 // ----------------------------------------------------------------------
 
 type Props = {
-  gallery: string[];
+  gallery?: string[];
 };
 
 export const ProjectDetailsGallery = ({ gallery }: Props) => {
-
-  const slides = gallery.map((slide) => ({
-    src: slide,
-  }));
+  const slides = Array.isArray(gallery)
+    ? gallery.map((slide) => ({ src: slide }))
+    : [];
 
   const lightbox = useLightbox(slides);
 

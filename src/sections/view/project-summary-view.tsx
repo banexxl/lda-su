@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 import { paths } from 'src/routes/paths';
 import { useBoolean } from 'src/hooks/use-boolean';
 
@@ -57,11 +57,11 @@ export const ProjectSummaryView = ({ projectSummary }: ProjectSummaryProps) => {
         <ProjectSummaryDetailsGallery gallery={projectSummary.gallery} />
 
         <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse">
-          <Grid xs={12} md={5} lg={4}>
+          <Grid size={{ xs: 12, md: 5, lg: 4 }}>
             <ProjectSummaryDetails projectSummary={projectSummary} />
           </Grid>
 
-          <Grid xs={12} md={7} lg={8}>
+          <Grid size={{ xs: 12, md: 7, lg: 8 }}>
             <ProjectSummaryDetailsHeader projectSummary={projectSummary} />
 
             <Divider sx={{ my: 5 }} />

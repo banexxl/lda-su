@@ -11,7 +11,9 @@ import { useTypography } from './use-typography';
 // eslint-disable-next-line react/display-name
 const TextMaxLine = forwardRef<HTMLAnchorElement, TextMaxLineProps>(
   ({ asLink, variant = 'body1', line = 2, persistent = false, children, sx, ...other }, ref) => {
-    const { lineHeight } = useTypography(variant);
+    // Ensure variant is not "inherit" for useTypography
+    const safeVariant = variant === 'inherit' ? 'body1' : variant;
+    const { lineHeight } = useTypography(safeVariant);
 
     const styles = {
       overflow: 'hidden',

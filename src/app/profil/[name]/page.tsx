@@ -9,11 +9,12 @@ export const metadata = {
 };
 
 type ProfilePageParams = {
-     params: {
-          name: string
-     }
+     params: Promise<{
+          name: string;
+     }>;
 }
 
-export default function ProfilePage({ params }: ProfilePageParams) {
-     return <ProfileView params={params} />;
+export default async function ProfilePage({ params }: ProfilePageParams) {
+     const resolvedParams = await params;
+     return <ProfileView params={resolvedParams} />;
 }

@@ -9,7 +9,7 @@ export const card = (theme: Theme) => {
         root: {
           position: 'relative',
           boxShadow: `10px 10px 10px 3px ${theme.palette.primary.main}`,
-          borderRadius: theme.shape.borderRadius * 2,
+          borderRadius: Number(theme.shape.borderRadius) * 2,
           zIndex: 0, // Fix Safari overflow: hidden with border radius
         },
       },

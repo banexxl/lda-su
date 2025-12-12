@@ -1,6 +1,6 @@
 import { LinkProps } from '@mui/material/Link';
-import { TypographyProps } from '@mui/material/Typography';
-import { Variant } from '@mui/material/styles/createTypography';
+import { TypographyProps, TypographyPropsVariantOverrides } from '@mui/material/Typography';
+import { OverridableStringUnion } from '@mui/types';
 
 // ----------------------------------------------------------------------
 
@@ -11,5 +11,8 @@ export interface TextMaxLineProps extends IProps {
   asLink?: boolean;
   persistent?: boolean;
   children: React.ReactNode;
-  variant?: Variant;
+  variant?: OverridableStringUnion<
+    'inherit' | 'button' | 'caption' | 'overline' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',
+    TypographyPropsVariantOverrides
+  >;
 }

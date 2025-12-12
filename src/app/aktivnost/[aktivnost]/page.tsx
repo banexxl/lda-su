@@ -10,9 +10,9 @@ export const metadata = {
 };
 
 type ActivityPageProps = {
-  params: {
-    aktivnost: string
-  }
+  params: Promise<{
+    aktivnost: string;
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -30,8 +30,9 @@ export async function generateStaticParams() {
 }
 
 export default async function ActivityPage({ params }: ActivityPageProps) {
+  const { aktivnost } = await params;
 
-  const activity: any = await activityServices().getActivityByLink(params['aktivnost'])
+  const activity: any = await activityServices().getActivityByLink(aktivnost);
 
   if (!activity) {
     // Handle the case where the activity is undefined

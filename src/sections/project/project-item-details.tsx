@@ -1,15 +1,11 @@
-import { useCallback } from 'react';
-
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
-
-import { FilterTime } from '../filters/filter-time';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Project } from 'src/types/project';
 
 // ----------------------------------------------------------------------
@@ -47,11 +43,19 @@ export const ProjectDetails = ({ project }: Props) => {
           <Typography variant="body2" sx={{ color: 'text.disabled' }}>
             Objavljeno
           </Typography>
-          <FilterTime
-            sx={{ color: theme.palette.text.primary }}
-            departureDay={project.published}
-            onChangeDepartureDay={() => { }}
-          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label={null}
+              value={new Date(project.published)}
+              readOnly
+              slotProps={{
+                textField: {
+                  fullWidth: true,
+                  sx: { color: theme.palette.text.primary },
+                },
+              }}
+            />
+          </LocalizationProvider>
         </Stack>
       </Stack>
 

@@ -1,6 +1,6 @@
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
@@ -30,7 +30,7 @@ export const AuthIllustrationLayout = ({ children }: Props) => {
       >
         <Grid container columnSpacing={{ md: 5 }} justifyContent="space-between">
           {mdUp && (
-            <Grid xs={12} md={7}>
+            <Grid size={{ xs: 7, md: 6, lg: 7 }}>
               <Image
                 visibleByDefault
                 disabledEffect
@@ -40,7 +40,7 @@ export const AuthIllustrationLayout = ({ children }: Props) => {
             </Grid>
           )}
 
-          <Grid xs={12} md={5} lg={4}>
+          <Grid size={{ xs: 12, md: 5, lg: 4 }}>
             <Stack
               spacing={4}
               sx={{

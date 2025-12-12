@@ -1,5 +1,12 @@
 import { useTheme } from '@mui/material/styles';
-import { Variant } from '@mui/material/styles/createTypography';
+
+import { TypographyPropsVariantOverrides } from '@mui/material/Typography';
+import { OverridableStringUnion } from '@mui/types';
+
+type Variant = OverridableStringUnion<
+  'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'caption' | 'button' | 'overline',
+  TypographyPropsVariantOverrides
+>;
 
 import { useWidth } from 'src/hooks/use-responsive';
 
@@ -25,9 +32,9 @@ export const useTypography = (variant: Variant) => {
     variant === 'h6';
 
   const getFont: any =
-    hasResponsive && theme.typography[variant][key]
-      ? theme.typography[variant][key]
-      : theme.typography[variant];
+    hasResponsive && (theme.typography as any)[variant][key]
+      ? (theme.typography as any)[variant][key]
+      : (theme.typography as any)[variant];
 
   const fontSize = remToPx(getFont.fontSize);
 

@@ -10,7 +10,7 @@ export const skeleton = (theme: Theme) => {
           backgroundColor: theme.palette.background.neutral,
         },
         rounded: {
-          borderRadius: theme.shape.borderRadius * 2,
+          borderRadius: Number(theme.shape.borderRadius) * 2,
         },
       },
     },

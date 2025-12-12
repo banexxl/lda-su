@@ -44,7 +44,6 @@ import { cssBaseline } from './components/css-baseline';
 import { buttonGroup } from './components/button-group';
 import { autocomplete } from './components/autocomplete';
 import { toggleButton } from './components/toggle-button';
-import { loadingButton } from './components/loading-button';
 
 // ----------------------------------------------------------------------
 
@@ -93,7 +92,6 @@ export const componentsOverrides = (theme: Theme) => {
     cssBaseline(theme),
     autocomplete(theme),
     toggleButton(theme),
-    loadingButton(theme)
   );
 
   return components;

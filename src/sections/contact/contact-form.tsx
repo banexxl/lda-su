@@ -1,23 +1,25 @@
+"use client";
+
 import * as Yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
-import LoadingButton from '@mui/lab/LoadingButton';
-import Swal, { SweetAlertResult } from 'sweetalert2'
-import { useResponsive } from 'src/hooks/use-responsive';
-
-import Image from 'src/components/image';
-import { FormProvider, RHFTextField } from 'src/components/hook-form';
+import Button from '@mui/material/Button';
+import { useFormik } from 'formik';
+import TextField from '@mui/material/TextField';
 import { ContactMap } from './contact-map';
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
+import toast from 'react-hot-toast';
 
 // ----------------------------------------------------------------------
 
 export const ContactForm = () => {
-  const mdUp = useResponsive('up', 'md');
+  type ContactFormValues = {
+    fullName: string;
+    email: string;
+    subject: string;
+    message: string;
+  };
 
   const ContactSchema = Yup.object().shape({
     fullName: Yup.string().required('Full name is required'),
@@ -26,71 +28,38 @@ export const ContactForm = () => {
     message: Yup.string().required('Message is required'),
   });
 
-  const defaultValues = {
-    fullName: '',
-    subject: '',
-    email: '',
-    message: '',
-  };
+  const formik = useFormik<ContactFormValues>({
+    initialValues: {
+      fullName: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
+    validationSchema: ContactSchema,
+    onSubmit: async (values: ContactFormValues) => {
+      try {
+        const response = await fetch('/api/send-contact-email', {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        });
 
-  const methods = useForm({
-    resolver: yupResolver(ContactSchema),
-    defaultValues,
-  });
-
-  const {
-    reset,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
-
-  const onSubmit = handleSubmit(async (data) => {
-
-    try {
-      reset();
-      await fetch('/api/send-contact-email', {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-        body: JSON.stringify(data)
-      }).then(async (response: Response) => {
         if (response.ok) {
-          Swal.fire({
-            title: 'Hvala Vam na kontaktu!',
-            text: 'Poruka poslata!',
-            icon: 'success',
-            confirmButtonText: '<i class="fa fa-thumbs-up"></i> OK!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            showCloseButton: true,
-          }).then((result: SweetAlertResult) => {
-            result.isConfirmed ?
-              window.location.href = '/kontakt'
-              : null
-          })
+          formik.resetForm();
+          toast.success('Poruka poslata! Hvala Vam na kontaktu!');
         } else {
-          Swal.fire({
-            title: 'Eh!',
-            text: 'Poruka iz nekog razloga nije poslata!',
-            icon: 'error',
-            confirmButtonText: '<i class="fa fa-thumbs-up"></i> OK!',
-            confirmButtonAriaLabel: 'Thumbs down',
-            showCloseButton: true,
-          })
+          toast.error('Poruka iz nekog razloga nije poslata!');
         }
-      })
-    } catch (error: any) {
-      console.log(error)
-    }
-  })
-
-  // const onSubmit = handleSubmit(async (data: any) => {
-  //   return new Promise<void>((resolve) => {
-  //     setTimeout(() => resolve(), 3000);
-  //   })
-  // })
+      } catch (error: any) {
+        toast.error('Došlo je do greške prilikom slanja poruke.');
+      } finally {
+        formik.setSubmitting(false);
+      }
+    },
+  });
 
   return (
     <Container
@@ -98,7 +67,6 @@ export const ContactForm = () => {
         py: { xs: 5, md: 15 },
       }}
     >
-
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <Stack
           spacing={2}
@@ -108,37 +76,71 @@ export const ContactForm = () => {
           }}
         >
           <Typography variant="h3">Budite slobodni nam pišete</Typography>
-
           <Typography sx={{ color: 'text.secondary' }}>
             Očekujte odgovor u roku od dva radna dana
           </Typography>
         </Stack>
-        <FormProvider methods={methods} onSubmit={onSubmit}>
+        <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
           <Stack spacing={2.5} alignItems="flex-start">
-            <RHFTextField name="fullName" label="Ime i prezime" />
+            <TextField
+              name="fullName"
+              label="Ime i prezime"
+              value={formik.values.fullName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.fullName && Boolean(formik.errors.fullName)}
+              helperText={formik.touched.fullName && formik.errors.fullName}
+            />
 
-            <RHFTextField name="email" label="Email" />
+            <TextField
+              name="email"
+              label="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+            />
 
-            <RHFTextField name="subject" label="Tema poruke" />
+            <TextField
+              name="subject"
+              label="Tema poruke"
+              value={formik.values.subject}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.subject && Boolean(formik.errors.subject)}
+              helperText={formik.touched.subject && formik.errors.subject}
+            />
 
-            <RHFTextField name="message" multiline rows={4} label="Poruka" sx={{ pb: 2.5 }} />
+            <TextField
+              name="message"
+              multiline
+              rows={4}
+              label="Poruka"
+              sx={{ pb: 2.5 }}
+              value={formik.values.message}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.message && Boolean(formik.errors.message)}
+              helperText={formik.touched.message && formik.errors.message}
+            />
 
-            <LoadingButton
+            <Button
               size="large"
               type="submit"
               variant="contained"
               color='primary'
-              loading={isSubmitting}
+              disabled={formik.isSubmitting}
               sx={{
                 alignSelf: { xs: 'center', md: 'unset' },
               }}
             >
               Pošalji poruku
-            </LoadingButton>
+            </Button>
           </Stack>
-        </FormProvider>
+        </form>
         <ContactMap mapApiKey={process.env.NEXT_PUBLIC_MAP_API!} />
       </Box>
-    </Container >
+    </Container>
   );
 }
