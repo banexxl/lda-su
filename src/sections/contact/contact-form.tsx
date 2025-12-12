@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 import { useFormik } from 'formik';
 import TextField from '@mui/material/TextField';
 import { ContactMap } from './contact-map';
@@ -81,62 +82,75 @@ export const ContactForm = (props: { mapApiKey: string }) => {
           </Typography>
         </Stack>
         <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-          <Stack spacing={2.5} alignItems="flex-start">
-            <TextField
-              name="fullName"
-              label="Ime i prezime"
-              value={formik.values.fullName}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.fullName && Boolean(formik.errors.fullName)}
-              helperText={formik.touched.fullName && formik.errors.fullName}
-            />
+          <Stack spacing={2.5} alignItems="flex-start" sx={{ width: '100%' }}>
+            <Grid container spacing={2} sx={{ width: '100%' }}>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <TextField
+                  fullWidth
+                  name="fullName"
+                  label="Ime i prezime"
+                  value={formik.values.fullName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.fullName && Boolean(formik.errors.fullName)}
+                  helperText={formik.touched.fullName && formik.errors.fullName}
+                />
+              </Grid>
 
-            <TextField
-              name="email"
-              label="Email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-            />
+              <Grid size={{ xs: 12, md: 6 }}>
+                <TextField
+                  fullWidth
+                  name="email"
+                  label="Email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                />
+              </Grid>
 
-            <TextField
-              name="subject"
-              label="Tema poruke"
-              value={formik.values.subject}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.subject && Boolean(formik.errors.subject)}
-              helperText={formik.touched.subject && formik.errors.subject}
-            />
+              <Grid size={{ xs: 12 }}>
+                <TextField
+                  fullWidth
+                  name="subject"
+                  label="Tema poruke"
+                  value={formik.values.subject}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.subject && Boolean(formik.errors.subject)}
+                  helperText={formik.touched.subject && formik.errors.subject}
+                />
+              </Grid>
 
-            <TextField
-              name="message"
-              multiline
-              rows={4}
-              label="Poruka"
-              sx={{ pb: 2.5 }}
-              value={formik.values.message}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.message && Boolean(formik.errors.message)}
-              helperText={formik.touched.message && formik.errors.message}
-            />
+              <Grid size={{ xs: 12 }}>
+                <TextField
+                  fullWidth
+                  name="message"
+                  multiline
+                  rows={4}
+                  label="Poruka"
+                  sx={{ pb: 2.5 }}
+                  value={formik.values.message}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.message && Boolean(formik.errors.message)}
+                  helperText={formik.touched.message && formik.errors.message}
+                />
+              </Grid>
 
-            <Button
-              size="large"
-              type="submit"
-              variant="contained"
-              color='primary'
-              disabled={formik.isSubmitting}
-              sx={{
-                alignSelf: { xs: 'center', md: 'unset' },
-              }}
-            >
-              Pošalji poruku
-            </Button>
+              <Grid size={{ xs: 12 }} sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                <Button
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                  color='primary'
+                  disabled={formik.isSubmitting}
+                >
+                  Pošalji poruku
+                </Button>
+              </Grid>
+            </Grid>
           </Stack>
         </form>
         <ContactMap mapApiKey={props.mapApiKey} />
