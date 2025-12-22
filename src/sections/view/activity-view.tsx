@@ -140,7 +140,6 @@ export const ActivityView = ({ activity }: ActivityProps) => {
                 variant="body2"
                 sx={{ flexGrow: 1, pr: { md: 10 }, color: theme.palette.text.secondary }}
               >
-                Trenutno nema stavki za ovu aktivnost.
               </Typography>
             )}
 
