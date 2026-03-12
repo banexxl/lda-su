@@ -12,7 +12,7 @@ type PublicationsViewProps = {
 export const PublicationsView = ({ publications }: PublicationsViewProps) => {
      const theme = useTheme();
      const [page, setPage] = useState(1);
-     const itemsPerPage = 10;
+     const itemsPerPage = theme.breakpoints.up('md') ? 8 : 10;
 
      const totalPublications = publications ? publications.length : 0;
      const pageCount = Math.ceil(totalPublications / itemsPerPage);
