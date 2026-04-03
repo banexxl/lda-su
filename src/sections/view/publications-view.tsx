@@ -11,6 +11,7 @@ type PublicationsViewProps = {
 
 export const PublicationsView = ({ publications }: PublicationsViewProps) => {
      const theme = useTheme();
+
      const [page, setPage] = useState(1);
      const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
      const itemsPerPage = isMdUp ? 8 : 10;
