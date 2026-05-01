@@ -1,9 +1,26 @@
 // import nodemailer from "nodemailer";
+import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { rateLimiter } from 'src/utils/rate-limiter';
 
 const resend = new Resend(process.env.EMAIL_RESEND_API);
 
 export async function POST(request: Request) {
+
+     const ip =
+          request.headers.get("x-forwarded-for")?.split(",")[0] ??
+          "127.0.0.1";
+
+     // 2. Apply rate limit
+     const { success, remaining, limit } = await rateLimiter.limit(ip);
+     console.log({ ip, success, remaining, limit });
+     if (!success) {
+          return NextResponse.json(
+               { message: "Too many requests" },
+               { status: 429 }
+          );
+     }
+
      const requestData = await request.json();
 
      try {

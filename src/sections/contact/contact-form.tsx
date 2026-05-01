@@ -48,11 +48,17 @@ export const ContactForm = (props: { mapApiKey: string }) => {
           body: JSON.stringify(values),
         });
 
+        const result = await response.json();
+
         if (response.ok) {
           formik.resetForm();
           toast.success('Poruka poslata! Hvala Vam na kontaktu!');
         } else {
-          toast.error('Poruka iz nekog razloga nije poslata!');
+          if (response.status === 429) {
+            toast.error('Previše zahteva. Sačekajte malo pa pokušajte ponovo.');
+          } else {
+            toast.error(result.message || result.statusText || 'Poruka iz nekog razloga nije poslata!');
+          }
         }
       } catch (error: any) {
         toast.error('Došlo je do greške prilikom slanja poruke.');
