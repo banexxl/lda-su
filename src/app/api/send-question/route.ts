@@ -38,7 +38,7 @@ export async function POST(request: Request) {
           };
 
           const { data, error } = await resend.emails.send({
-               from: 'LDA Subotica - Pitanja <ldasubotica@aldaintranet.org>',
+               from: 'LDA Subotica - Kontakt forma <onboarding@resend.dev>',
                to: 'ldasubotica@aldaintranet.org',
                subject: `Novo pitanje sa sajta od ${requestData.fullName}`,
                html: `
