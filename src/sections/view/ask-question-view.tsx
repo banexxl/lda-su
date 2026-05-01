@@ -51,6 +51,7 @@ export const AskQuestionView = ({ initialQuestions }: AskQuestionViewProps) => {
      const [questions, setQuestions] = useState(initialQuestions);
      const [page, setPage] = useState(1);
      const [questionFilter, setQuestionFilter] = useState('');
+     const [answerFilter, setAnswerFilter] = useState<'all' | 'answered' | 'unanswered'>('all');
      const [sortDirection, setSortDirection] = useState<'desc' | 'asc'>('desc');
      const itemsPerPage = 3;
 
@@ -103,6 +104,16 @@ export const AskQuestionView = ({ initialQuestions }: AskQuestionViewProps) => {
      const normalizedQuestionFilter = questionFilter.trim().toLowerCase();
 
      const filteredQuestions = questions.filter((item) => {
+          const hasAnswer = Boolean(item.answer && item.answer.trim());
+
+          if (answerFilter === 'answered' && !hasAnswer) {
+               return false;
+          }
+
+          if (answerFilter === 'unanswered' && hasAnswer) {
+               return false;
+          }
+
           if (!normalizedQuestionFilter) {
                return true;
           }
@@ -129,6 +140,11 @@ export const AskQuestionView = ({ initialQuestions }: AskQuestionViewProps) => {
 
      const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
           setSortDirection(event.target.value as 'desc' | 'asc');
+          setPage(1);
+     };
+
+     const handleAnswerFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+          setAnswerFilter(event.target.value as 'all' | 'answered' | 'unanswered');
           setPage(1);
      };
 
@@ -245,7 +261,7 @@ export const AskQuestionView = ({ initialQuestions }: AskQuestionViewProps) => {
                                    </Box>
 
                                    <Grid container spacing={2}>
-                                        <Grid size={{ xs: 12, md: 7 }}>
+                                        <Grid size={{ xs: 12, md: 4 }}>
                                              <TextField
                                                   fullWidth
                                                   label="Filtriraj po pitanju"
@@ -255,7 +271,21 @@ export const AskQuestionView = ({ initialQuestions }: AskQuestionViewProps) => {
                                              />
                                         </Grid>
 
-                                        <Grid size={{ xs: 12, md: 5 }}>
+                                        <Grid size={{ xs: 12, md: 4 }}>
+                                             <TextField
+                                                  select
+                                                  fullWidth
+                                                  label="Status odgovora"
+                                                  value={answerFilter}
+                                                  onChange={handleAnswerFilterChange}
+                                             >
+                                                  <MenuItem value="all">Sva pitanja</MenuItem>
+                                                  <MenuItem value="answered">Odgovorena</MenuItem>
+                                                  <MenuItem value="unanswered">Neodgovorena</MenuItem>
+                                             </TextField>
+                                        </Grid>
+
+                                        <Grid size={{ xs: 12, md: 4 }}>
                                              <TextField
                                                   select
                                                   fullWidth
