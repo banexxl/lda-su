@@ -39,8 +39,8 @@ export async function POST(request: Request) {
           };
 
           const { data, error } = await resend.emails.send({
-               from: 'onboarding@resend.dev',
-               to: 'ldasubotica@aldaintranet.org',
+               from: 'LDA Subotica <ldasubotica@aldaintranet.org>',
+               to: 'damjanovic.branislav@gmail.com',
                subject: `Novo pitanje sa sajta od ${requestData.fullName}`,
                html: `
                     <p><strong>Ime i prezime:</strong> ${requestData.fullName}</p>
