@@ -39,8 +39,8 @@ export async function POST(request: Request) {
           };
 
           const { data, error } = await resend.emails.send({
-               from: 'LDA Subotica <ldasubotica@aldaintranet.org>',
-               to: 'damjanovic.branislav@gmail.com',
+               from: 'LDA Subotica - Pitanja <ldasubotica@aldaintranet.org>',
+               to: 'ldasubotica@aldaintranet.org',
                subject: `Novo pitanje sa sajta od ${requestData.fullName}`,
                html: `
                     <p><strong>Ime i prezime:</strong> ${requestData.fullName}</p>
@@ -61,6 +61,7 @@ export async function POST(request: Request) {
           });
 
           if (!data || error) {
+               console.error('Email sending error:', error);
                throw new Error('Email sending failed.');
           }
 

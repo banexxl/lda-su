@@ -14,7 +14,7 @@ export async function POST(request: Request) {
 
           // Send email -->> data and error are { id: '1d16d6d2-d6f0-4c36-ac5d-75f15e9db6b0' } null
           const { data, error } = await resend.emails.send({
-               from: 'onboarding@resend.dev',
+               from: 'LDA Subotica - Kontakt forma <ldasubotica@aldaintranet.org>',
                to: 'ldasubotica@aldaintranet.org',
                subject: `Poruka od ${requestData.fullName}, email adresa: ${requestData.email}, sa LDA Subotica sajta`,
                html: requestData.message
