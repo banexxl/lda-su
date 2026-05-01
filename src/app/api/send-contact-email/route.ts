@@ -13,7 +13,6 @@ export async function POST(request: Request) {
 
      // 2. Apply rate limit
      const { success, remaining, limit } = await rateLimiter.limit(ip);
-     console.log({ ip, success, remaining, limit });
      if (!success) {
           return NextResponse.json(
                { message: "Too many requests" },
