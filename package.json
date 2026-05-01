@@ -26,6 +26,8 @@
     "@mui/material": "^7.3.6",
     "@mui/system": "^7.3.6",
     "@mui/x-date-pickers": "^8.22.0",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.37.0",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.13.5",
