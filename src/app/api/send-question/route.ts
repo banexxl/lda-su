@@ -47,6 +47,16 @@ export async function POST(request: Request) {
                     <p><strong>Email:</strong> ${requestData.email}</p>
                     <p><strong>Pitanje:</strong></p>
                     <p>${requestData.question}</p>
+                    <p style="margin-top: 24px;">
+                         <a
+                              href="https://lda-dashboard.vercel.app/questions"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style="display: inline-block; padding: 12px 20px; background-color: #111827; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600;"
+                         >
+                              Otvori pitanja u dashboard-u
+                         </a>
+                    </p>
                `,
           });
 
