@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import questionAnswerServices from 'src/services/question-answer-services';
-import { QuestionAnswer } from 'src/types/question-answer';
 import { rateLimiter } from 'src/utils/rate-limiter';
 
 const resend = new Resend(process.env.EMAIL_RESEND_API);
@@ -14,6 +13,7 @@ export async function POST(request: Request) {
 
      // 2. Apply rate limit
      const { success, remaining, limit } = await rateLimiter.limit(ip);
+     console.log(`Rate limit status for IP ${ip}: ${remaining}/${limit} remaining requests.`);
      if (!success) {
           return NextResponse.json(
                { message: "Too many requests" },
@@ -22,20 +22,18 @@ export async function POST(request: Request) {
      }
 
      const requestData = await request.json();
+     const questionService = questionAnswerServices();
 
      try {
           if (!requestData.fullName || !requestData.email || !requestData.question) {
                throw new Error('Missing required fields.');
           }
 
-          const questionDocument: Omit<QuestionAnswer, '_id'> = {
+          const questionDocument = questionService.buildQuestionDocument({
                fullName: requestData.fullName,
                email: requestData.email,
                question: requestData.question,
-               answer: '',
-               questionDateTime: new Date(),
-               answerDateTime: null,
-          };
+          });
 
           const { data, error } = await resend.emails.send({
                from: 'LDA Subotica - Q&A <onboarding@resend.dev>',
@@ -64,19 +62,20 @@ export async function POST(request: Request) {
                throw new Error('Email sending failed.');
           }
 
-          const createdQuestion = await questionAnswerServices().createQuestion(questionDocument);
+          const createdQuestion = await questionService.createQuestion({
+               fullName: requestData.fullName,
+               email: requestData.email,
+               question: requestData.question,
+          });
 
-          if (!createdQuestion.acknowledged || !createdQuestion.insertedId) {
+          if (!createdQuestion.acknowledged || !createdQuestion.insertedId || !createdQuestion.question) {
                throw new Error('Question save failed.');
           }
 
           return Response.json({
                status: 200,
                statusText: 'Pitanje poslato!',
-               question: {
-                    ...questionDocument,
-                    _id: createdQuestion.insertedId,
-               },
+               question: createdQuestion.question,
           });
      } catch (error: any) {
           console.error('Error:', error.message);

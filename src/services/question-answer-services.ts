@@ -2,7 +2,19 @@ import { MongoClient, WithId } from "mongodb";
 import { QuestionAnswer } from "src/types/question-answer";
 import { withStringId } from "src/utils/plain-object-creator";
 
+type CreateQuestionInput = Pick<QuestionAnswer, 'fullName' | 'email' | 'question'>;
+
 const questionAnswerServices = () => {
+
+     const buildQuestionDocument = ({ fullName, email, question }: CreateQuestionInput): Omit<QuestionAnswer, '_id'> => ({
+          fullName,
+          email,
+          question,
+          answer: '',
+          archived: 0,
+          questionDateTime: new Date(),
+          answerDateTime: null,
+     });
 
      const getAllQuestionsAndAnswers = async () => {
           const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI!);
@@ -11,7 +23,7 @@ const questionAnswerServices = () => {
                const db = client.db('LDA_DB');
                const data: WithId<QuestionAnswer>[] = await db
                     .collection<QuestionAnswer>('Q&A')
-                    .find({})
+                    .find({ archived: 0 })
                     .sort({ questionDateTime: -1 })
                     .toArray();
 
@@ -24,22 +36,28 @@ const questionAnswerServices = () => {
           }
      };
 
-     const createQuestion = async (payload: Omit<QuestionAnswer, '_id'>) => {
+     const createQuestion = async (input: CreateQuestionInput) => {
           const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI!);
+          const questionDocument = buildQuestionDocument(input);
 
           try {
                const db = client.db('LDA_DB');
-               const result = await db.collection<Omit<QuestionAnswer, '_id'>>('Q&A').insertOne(payload);
+               const result = await db.collection<Omit<QuestionAnswer, '_id'>>('Q&A').insertOne(questionDocument);
 
                return {
                     acknowledged: result.acknowledged,
                     insertedId: result.insertedId.toString(),
+                    question: {
+                         ...questionDocument,
+                         _id: result.insertedId.toString(),
+                    },
                };
           } catch (error: any) {
                console.log({ message: error.message });
                return {
                     acknowledged: false,
                     insertedId: undefined,
+                    question: undefined,
                };
           } finally {
                await client.close();
@@ -47,6 +65,7 @@ const questionAnswerServices = () => {
      };
 
      return {
+          buildQuestionDocument,
           createQuestion,
           getAllQuestionsAndAnswers,
      };
