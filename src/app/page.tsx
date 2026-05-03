@@ -1,4 +1,5 @@
 import { LandingView } from 'src/sections/view/landing-view';
+import { generateSeoMetadata } from 'src/lib/seo';
 import activityServices from 'src/services/activities-services';
 import projectsServices from 'src/services/project-services';
 import { Activity } from 'src/types/activity';
@@ -6,12 +7,12 @@ import { ProjectSummary } from 'src/types/projectSummary';
 
 // ----------------------------------------------------------------------
 
-export const metadata = {
-  title: 'LDA Subotica: Home',
-  icons: {
-    icon: '/favicon.ico',
-  },
-};
+export const metadata = generateSeoMetadata({
+  title: 'Home',
+  description: 'LDA Subotica predstavlja aktuelne projekte, aktivnosti, publikacije i inicijative za lokalnu demokratiju i razvoj zajednice.',
+  path: '/',
+  keywords: ['home', 'projekti', 'aktivnosti'],
+});
 
 export default async function LandingPage() {
 

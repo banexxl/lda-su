@@ -1,10 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { profilesData } from 'src/_mock/profile-data';
-import { siteConfig } from 'src/utils/seo';
+import { getAbsoluteUrl, seoConfig } from 'src/lib/seo';
 import activityServices from 'src/services/activities-services';
 import projectsServices from 'src/services/project-services';
-
-const toAbsoluteUrl = (path: string) => new URL(path, siteConfig.siteUrl).toString();
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
      const [activities, projects, projectSummaries] = await Promise.all([
@@ -13,53 +11,55 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           projectsServices().getAllProjectSummaries(),
      ]);
 
+     const lastModified = new Date();
+
      const staticRoutes: MetadataRoute.Sitemap = [
-          { url: toAbsoluteUrl('/'), lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
-          { url: toAbsoluteUrl('/o-nama'), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-          { url: toAbsoluteUrl('/kontakt'), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-          { url: toAbsoluteUrl('/postavi-pitanje'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
-          { url: toAbsoluteUrl('/publikacije'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.75 },
-          { url: toAbsoluteUrl('/podrska'), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-          { url: toAbsoluteUrl('/projekti/u-toku'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.75 },
-          { url: toAbsoluteUrl('/projekti/zavrseni'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.75 },
-          { url: toAbsoluteUrl('/aktivnosti/u-toku'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.75 },
-          { url: toAbsoluteUrl('/aktivnosti/arhiva'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.75 },
-          { url: toAbsoluteUrl('/pretraga'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.6 },
+          { url: getAbsoluteUrl('/'), lastModified, changeFrequency: 'weekly', priority: 1 },
+          { url: getAbsoluteUrl('/o-nama'), lastModified, changeFrequency: 'monthly', priority: 0.8 },
+          { url: getAbsoluteUrl('/kontakt'), lastModified, changeFrequency: 'monthly', priority: 0.8 },
+          { url: getAbsoluteUrl('/postavi-pitanje'), lastModified, changeFrequency: 'weekly', priority: 0.8 },
+          { url: getAbsoluteUrl('/publikacije'), lastModified, changeFrequency: 'weekly', priority: 0.75 },
+          { url: getAbsoluteUrl('/podrska'), lastModified, changeFrequency: 'monthly', priority: 0.7 },
+          { url: getAbsoluteUrl('/projekti/u-toku'), lastModified, changeFrequency: 'weekly', priority: 0.75 },
+          { url: getAbsoluteUrl('/projekti/zavrseni'), lastModified, changeFrequency: 'weekly', priority: 0.75 },
+          { url: getAbsoluteUrl('/aktivnosti/u-toku'), lastModified, changeFrequency: 'weekly', priority: 0.75 },
+          { url: getAbsoluteUrl('/aktivnosti/arhiva'), lastModified, changeFrequency: 'weekly', priority: 0.75 },
+          { url: getAbsoluteUrl('/pretraga'), lastModified, changeFrequency: 'weekly', priority: 0.6 },
      ];
 
      const categoryRoutes: MetadataRoute.Sitemap = Array.from(new Set((activities ?? []).map((activity) => activity.category)))
           .filter(Boolean)
           .map((category) => ({
-               url: toAbsoluteUrl(`/aktivnosti/${category}`),
-               lastModified: new Date(),
+               url: getAbsoluteUrl(`/aktivnosti/${category}`),
+               lastModified,
                changeFrequency: 'weekly',
                priority: 0.7,
           }));
 
      const activityRoutes: MetadataRoute.Sitemap = (activities ?? []).map((activity) => ({
-          url: toAbsoluteUrl(`/aktivnost/${activity.activityURL}`),
+          url: getAbsoluteUrl(`/aktivnost/${activity.activityURL}`),
           lastModified: activity.publishedDate ? new Date(activity.publishedDate) : new Date(),
           changeFrequency: 'monthly',
           priority: 0.7,
      }));
 
      const projectRoutes: MetadataRoute.Sitemap = (projects ?? []).map((project) => ({
-          url: toAbsoluteUrl(`/projektna-aktivnost/${project.projectURL}`),
+          url: getAbsoluteUrl(`/projektna-aktivnost/${project.projectURL}`),
           lastModified: project.published ? new Date(project.published) : new Date(),
           changeFrequency: 'monthly',
           priority: 0.7,
      }));
 
      const projectSummaryRoutes: MetadataRoute.Sitemap = (projectSummaries ?? []).map((projectSummary) => ({
-          url: toAbsoluteUrl(`/pregled-projekta/${projectSummary.projectSummaryURL}`),
+          url: getAbsoluteUrl(`/pregled-projekta/${projectSummary.projectSummaryURL}`),
           lastModified: projectSummary.projectEndDateTime ? new Date(projectSummary.projectEndDateTime) : new Date(),
           changeFrequency: 'monthly',
           priority: 0.7,
      }));
 
      const profileRoutes: MetadataRoute.Sitemap = profilesData.map((profile) => ({
-          url: toAbsoluteUrl(`/profil/${profile.id}`),
-          lastModified: new Date(),
+          url: getAbsoluteUrl(`/profil/${profile.id}`),
+          lastModified,
           changeFrequency: 'monthly',
           priority: 0.65,
      }));
