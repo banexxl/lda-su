@@ -18,6 +18,7 @@
     "noImplicitThis": true,
     "esModuleInterop": true,
     "isolatedModules": true,
+    "noUncheckedSideEffectImports": false,
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
