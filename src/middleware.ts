@@ -11,7 +11,7 @@ export function middleware(_req: NextRequest) {
 export const config = {
   matcher: [
     // Skip Next.js internals and any file with an extension (e.g., .ico, .png, .js)
-    '/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\..*).*)',
+    '/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)',
   ],
 };
 
