@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-
+import 'src/global.css';
 // ----------------------------------------------------------------------
 
 import { defaultMetadata } from 'src/lib/seo';
