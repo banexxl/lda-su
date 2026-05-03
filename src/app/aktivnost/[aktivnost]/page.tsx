@@ -14,7 +14,7 @@ type ActivityPageProps = {
 
 export async function generateMetadata({ params }: ActivityPageProps) {
   const { aktivnost } = await params;
-  const activity = await activityServices().getActivityByLink(aktivnost);
+  const activity: Activity | undefined = await activityServices().getActivityByLink(aktivnost);
 
   if (!activity) {
     return generateSeoMetadata({
@@ -58,7 +58,7 @@ export async function generateStaticParams() {
 export default async function ActivityPage({ params }: ActivityPageProps) {
   const { aktivnost } = await params;
 
-  const activity: any = await activityServices().getActivityByLink(aktivnost);
+  const activity: Activity | undefined = await activityServices().getActivityByLink(aktivnost);
 
   if (!activity) {
     // Handle the case where the activity is undefined

@@ -4,6 +4,8 @@ import { withStringId } from "src/utils/plain-object-creator"
 
 const activityServices = () => {
 
+     type ActivityWithStringId = Activity & { _id: string };
+
      const getAllActivities = async () => {
 
           const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI!)
@@ -21,7 +23,7 @@ const activityServices = () => {
           }
      }
 
-     const getActivityByLink = async (activityURL: string) => {
+     const getActivityByLink = async (activityURL: string): Promise<ActivityWithStringId | undefined> => {
 
           const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
 
@@ -31,7 +33,7 @@ const activityServices = () => {
                return data[0] ? withStringId(data[0]) : undefined
           } catch (error: any) {
                console.log({ message: error.message })
-               return {}
+               return undefined
           }
           finally {
                await client.close();
