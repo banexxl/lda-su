@@ -5,8 +5,6 @@ import Typography from '@mui/material/Typography';
 import LinkIcon from '@mui/icons-material/Link';
 import { fDate } from 'src/utils/format-time';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import { TOUR_SERVICE_OPTIONS } from 'src/_mock';
-
 import Iconify, { IconifyProps } from 'src/components/iconify';
 
 import { Link, List, ListItem, useTheme } from '@mui/material';

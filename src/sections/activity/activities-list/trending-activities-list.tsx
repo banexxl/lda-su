@@ -6,33 +6,7 @@ import Typography from '@mui/material/Typography';
 import bgImage from "public/background-scaled-wpv_1024x.jpg"
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _mock } from 'src/_mock';
-
-import Carousel, { useCarousel, CarouselArrows } from 'src/components/carousel';
-
-import { TrendingTopicActivityItem } from './trending-activities';
-
-// ----------------------------------------------------------------------
-
-const CATEGORIES = [
-  'Marketing',
-  'Community',
-  'Tutorials',
-  'Business',
-  'Management',
-  'Sports',
-  'LDA Subotica',
-  'Design',
-];
-
-export const TOPICS = [...Array(8)].map((_, index) => ({
-  id: _mock.id(index),
-  cover: _mock.image.travel(index + 4),
-  totalPost: index + 10,
-  category: CATEGORIES[index],
-}));
-
-// ----------------------------------------------------------------------
+import { useCarousel, CarouselArrows } from 'src/components/carousel';
 
 export const TrendingTopics = () => {
   const theme = useTheme();

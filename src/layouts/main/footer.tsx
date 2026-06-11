@@ -11,7 +11,6 @@ import { RouterLink } from 'src/routes/components';
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _socials } from 'src/_mock';
 import footerImage from 'public/eu-lda-h-1000x450.jpg'
 import Iconify from 'src/components/iconify';
 

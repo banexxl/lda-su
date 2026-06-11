@@ -14,8 +14,6 @@ import { RouterLink } from 'src/routes/components';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _mock } from 'src/_mock';
-
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
@@ -41,7 +39,7 @@ export const Nav = ({ open, onClose }: Props) => {
     >
       <Stack spacing={2} sx={{ p: 3, pb: 2 }}>
         <Stack spacing={2} direction="row" alignItems="center">
-          <Avatar src={_mock.image.avatar(0)} sx={{ width: 64, height: 64 }} />
+          {/* <Avatar src={_mock.image.avatar(0)} sx={{ width: 64, height: 64 }} /> */}
           <Stack
             direction="row"
             alignItems="center"

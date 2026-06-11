@@ -1,15 +1,12 @@
 "use client"
 import { Box, Typography, useTheme } from "@mui/material";
 import backgroundURL from "../../../public/background-scaled-wpv_1024x.jpg"
-import { profilesData } from "src/_mock/profile-data";
 import { useResponsive } from "src/hooks/use-responsive";
 
 export default function ProfileView({ params }: any) {
 
      const mdUp = useResponsive('up', 'md');
      const theme = useTheme()
-
-     const profileToRender = profilesData.find(user => user.id === params.name);
 
      return (
           <Box
@@ -45,13 +42,12 @@ export default function ProfileView({ params }: any) {
                                         width: mdUp ? '33%' : '100%',
                                         height: '300px',
                                         boxShadow: `10px 5px 5px ${theme.palette.primary.dark}`,
-                                        backgroundImage: `url(${profileToRender?.imageURL})`,
                                         backgroundSize: 'cover',
                                         backgroundPosition: 'center',
                                    }}
                               />
 
-                              <Box sx={{ flex: '1' }}>
+                              {/* <Box sx={{ flex: '1' }}>
                                    <Typography variant="h4" sx={{ marginBottom: '10px', color: theme.palette.primary.main }}>
                                         Ime: <span style={{ color: theme.palette.text.primary, fontSize: mdUp ? '1.5rem' : '1rem' }}>{profileToRender!.name}</span>
                                    </Typography>
@@ -64,16 +60,16 @@ export default function ProfileView({ params }: any) {
                                    <Typography variant="h4" sx={{ marginBottom: '10px', color: theme.palette.primary.main }}>
                                         Location: <span style={{ color: theme.palette.text.primary, fontSize: mdUp ? '1.5rem' : '1rem' }}>{profileToRender!.location}</span>
                                    </Typography>
-                              </Box>
+                              </Box> */}
                          </Box>
 
                          <Box >
                               <Typography variant="h4" sx={{ marginBottom: '10px', color: theme.palette.primary.main }}>
                                    Biografija:
                               </Typography>
-                              <Typography sx={{ marginBottom: '10px', color: theme.palette.text.primary, textAlign: 'justify', fontSize: mdUp ? '1rem' : '.9re' }}>
+                              {/* <Typography sx={{ marginBottom: '10px', color: theme.palette.text.primary, textAlign: 'justify', fontSize: mdUp ? '1rem' : '.9re' }}>
                                    {profileToRender!.bio}
-                              </Typography>
+                              </Typography> */}
                          </Box>
                     </Box>
                </Box>

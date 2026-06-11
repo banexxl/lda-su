@@ -6,8 +6,6 @@ import Container from '@mui/material/Container';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { _tours } from 'src/_mock';
-
 import { ProjectSummary } from 'src/types/projectSummary';
 import ProjectSummaryList from '../project-summaries-list/project-summary-list';
 import { Typography } from '@mui/material';

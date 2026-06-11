@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next';
-import { profilesData } from 'src/_mock/profile-data';
 import { getAbsoluteUrl, seoConfig } from 'src/lib/seo';
 import activityServices from 'src/services/activities-services';
 import projectsServices from 'src/services/project-services';
@@ -57,19 +56,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           priority: 0.7,
      }));
 
-     const profileRoutes: MetadataRoute.Sitemap = profilesData.map((profile) => ({
-          url: getAbsoluteUrl(`/profil/${profile.id}`),
-          lastModified,
-          changeFrequency: 'monthly',
-          priority: 0.65,
-     }));
-
      return [
           ...staticRoutes,
           ...categoryRoutes,
           ...activityRoutes,
           ...projectRoutes,
           ...projectSummaryRoutes,
-          ...profileRoutes,
      ];
 }

@@ -2,9 +2,6 @@
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-
-import { _mock, _categories, _travelPosts } from 'src/_mock';
-
 import { ActivitySidebar } from '../activity/common/activities-sidebar';
 import { Activity } from 'src/types/activity';
 import { Activities } from '../activity/activities-list/featured-activities';
@@ -49,30 +46,6 @@ export const ActivitiesView = ({ completedActivities, inProgressActivities, feat
         sx={{ gridRow: '1', gridColumn: '1 / span 2', maxHeight: '300px', display: mdUp ? 'block' : 'none' }}
       />
       <Activities activites={selectedActivites!} loading={loading.value} />
-      {
-        mdUp &&
-        <Container
-          sx={{
-            mt: { xs: 4, md: 10 },
-            ml: { xs: 4, md: 10 },
-          }}
-        >
-          <Grid container spacing={{ md: 8 }}>
-            {/* <Grid size={{xs:12, md:8}}>
-            <Posts posts={_travelPosts} />
-          </Grid> */}
-
-            <Grid size={{ xs: 12, md: 4 }}>
-              <ActivitySidebar
-                categories={_categories}
-                recentActivities={{ list: selectedActivites!.slice(-4) }}
-              />
-            </Grid>
-
-          </Grid>
-        </Container>
-      }
-
     </Box>
   );
 }

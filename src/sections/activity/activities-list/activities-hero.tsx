@@ -8,7 +8,6 @@ import { alpha, useTheme } from '@mui/material/styles';
 
 import { fDate } from 'src/utils/format-time';
 
-import { _socials } from 'src/_mock';
 import { bgGradient } from 'src/theme/css';
 
 import Iconify from 'src/components/iconify';
@@ -80,7 +79,7 @@ export const ActivityHero = ({ activity }: Props) => {
                 Objavljeno: {fDate(activity.publishedDate, 'yyyy/MM/dd')}
               </Typography>
 
-              <Stack direction="row">
+              {/* <Stack direction="row">
                 <Popover
                   open={!!open}
                   onClose={handleClose}
@@ -102,7 +101,7 @@ export const ActivityHero = ({ activity }: Props) => {
                     </MenuItem>
                   ))}
                 </Popover>
-              </Stack>
+              </Stack> */}
             </Stack>
           </Grid>
         </Grid>

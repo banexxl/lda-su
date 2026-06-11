@@ -10,8 +10,6 @@ import { paths } from 'src/routes/paths';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { _tours, _socials } from 'src/_mock';
-
 import { SplashScreen } from 'src/components/loading-screen';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 // import { Newsletter } from '../newsletter';

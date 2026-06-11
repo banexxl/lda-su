@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { _socials } from 'src/_mock';
+
 import Iconify from 'src/components/iconify';
 import { Project } from 'src/types/project';
 import { Divider, List, ListItem, ListItemIcon, ListItemText, useTheme } from '@mui/material';

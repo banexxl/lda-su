@@ -1,5 +1,3 @@
-import { Typography } from '@mui/material';
-import { profilesData } from 'src/_mock/profile-data';
 import ProfileView from 'src/sections/view/profile-view';
 
 // ----------------------------------------------------------------------

@@ -10,7 +10,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 import { useCountdown } from 'src/hooks/use-countdown';
 
-import { _socials } from 'src/_mock';
+
 
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
@@ -71,13 +71,13 @@ export const ComingSoonView = () => {
         sx={{ my: 5 }}
       />
 
-      <Stack direction="row" justifyContent="center">
+      {/* <Stack direction="row" justifyContent="center">
         {_socials.map((social) => (
           <IconButton key={social.value}>
             <Iconify icon={social.icon} sx={{ color: social.color }} />
           </IconButton>
         ))}
-      </Stack>
+      </Stack> */}
     </>
   );
 }

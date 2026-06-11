@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { _socials } from 'src/_mock';
+
 import Iconify from 'src/components/iconify';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import { Accordion, AccordionDetails, AccordionSummary, Divider, Link, useTheme } from '@mui/material';
@@ -159,7 +159,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
         </Stack>
       </Stack>
 
-      <Popover
+      {/* <Popover
         open={!!open}
         onClose={handleClose}
         anchorEl={open}
@@ -179,7 +179,7 @@ export const ProjectSummaryDetailsHeader = ({ projectSummary }: Props) => {
             </Typography>
           </MenuItem>
         ))}
-      </Popover>
+      </Popover> */}
     </>
   );
 }

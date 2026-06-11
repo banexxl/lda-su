@@ -11,7 +11,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import { Divider, Link, List, ListItem, ListItemIcon, ListItemText, MenuItem, Popover, useTheme } from '@mui/material';
 import { Box } from '@mui/material';
 import { Activity } from 'src/types/activity';
-import { _socials } from 'src/_mock';
+
 import { useCallback, useState } from 'react';
 import { extractStringFromUrl } from 'src/utils/format-string';
 import { isVideoUrl } from 'src/utils/is-url-video';

@@ -3,8 +3,6 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 
-import { _offices } from 'src/_mock';
-
 import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
