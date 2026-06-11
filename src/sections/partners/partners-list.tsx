@@ -6,6 +6,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import Carousel, { useCarousel, CarouselArrows } from 'src/components/carousel';
 import { PartnerItem } from './partner-item';
 import Link from 'next/link';
+import { partners } from 'src/assets/data/partners';
 
 export const PartnerCarousel = () => {
   const theme = useTheme();
@@ -36,6 +37,14 @@ export const PartnerCarousel = () => {
     }}>
 
       <Typography variant="h3" sx={{ textAlign: 'center', my: '20px' }}>Naši partneri</Typography>
+
+      <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
+        {partners.map((partner: any) => (
+          <Link key={Math.floor(Math.random() * 999)} href={partner.url} target="_blank" rel="noopener">
+            <PartnerItem partner={partner} />
+          </Link>
+        ))}
+      </Carousel>
 
       <CarouselArrows sx={{ ml: '50%', transform: 'translateX(-50%)', mt: '20px' }} onNext={carousel.onNext} onPrev={carousel.onPrev} spacing={2} />
 
