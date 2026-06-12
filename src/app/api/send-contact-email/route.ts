@@ -1,49 +1,83 @@
-// import nodemailer from "nodemailer";
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { rateLimiter } from 'src/utils/rate-limiter';
 
-const resend = new Resend(process.env.EMAIL_RESEND_API);
+const transporter = nodemailer.createTransport({
+     host: process.env.EMAIL_SERVER_HOST,
+     port: Number(process.env.EMAIL_SERVER_PORT),
+     secure: true,
+     auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+     },
+});
 
 export async function POST(request: Request) {
-
      const ip =
-          request.headers.get("x-forwarded-for")?.split(",")[0] ??
-          "127.0.0.1";
+          request.headers.get('x-forwarded-for')?.split(',')[0] ??
+          '127.0.0.1';
 
-     // 2. Apply rate limit
-     const { success, remaining, limit } = await rateLimiter.limit(ip);
+     const { success } = await rateLimiter.limit(ip);
+
      if (!success) {
           return NextResponse.json(
-               { message: "Too many requests" },
+               { message: 'Too many requests' },
                { status: 429 }
           );
      }
 
-     const requestData = await request.json();
-
      try {
-          // Validate input
-          if (!requestData.fullName || !requestData.email || !requestData.message || !requestData.subject) {
-               throw new Error("Missing required fields.");
+          const requestData = await request.json();
+
+          if (
+               !requestData.fullName ||
+               !requestData.email ||
+               !requestData.message ||
+               !requestData.subject
+          ) {
+               throw new Error('Missing required fields.');
           }
 
-          // Send email -->> data and error are { id: '1d16d6d2-d6f0-4c36-ac5d-75f15e9db6b0' } null
-          const { data, error } = await resend.emails.send({
-               from: 'LDA Subotica - Kontakt forma <onboarding@resend.dev>',
+          const info = await transporter.sendMail({
+               from: `"LDA Subotica Kontakt Forma" <${process.env.EMAIL_FROM}>`,
                to: 'ldasubotica@aldaintranet.org',
+               replyTo: requestData.email,
                subject: `Poruka od ${requestData.fullName}, email adresa: ${requestData.email}, sa LDA Subotica sajta`,
-               html: requestData.message
+               html: `
+                    <h3>Nova poruka sa kontakt forme</h3>
+
+                    <p><strong>Ime i prezime:</strong> ${requestData.fullName}</p>
+                    <p><strong>Email:</strong> ${requestData.email}</p>
+                    <p><strong>Naslov:</strong> ${requestData.subject}</p>
+
+                    <hr />
+
+                    ${requestData.message}
+               `,
           });
-          console.log('Resend response:', { data, error });
-          if (data && !error) {
-               return Response.json({ status: 200, statusText: 'Poruka poslata!' }, { status: 200 });
-          } else {
-               throw new Error("Email sending failed.");
-          }
+
+          console.log('Email sent:', info.messageId);
+
+          return Response.json(
+               {
+                    status: 200,
+                    statusText: 'Poruka poslata!',
+               },
+               {
+                    status: 200,
+               }
+          );
      } catch (err: any) {
-          // Proper error handling
-          console.error("Error:", err.message);
-          return Response.json({ status: 500, statusText: 'Poruka nije poslata!' }, { status: 500 });
+          console.error('Error:', err);
+
+          return Response.json(
+               {
+                    status: 500,
+                    statusText: 'Poruka nije poslata!',
+               },
+               {
+                    status: 500,
+               }
+          );
      }
 }
