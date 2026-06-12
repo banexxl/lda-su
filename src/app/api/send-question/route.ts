@@ -50,7 +50,7 @@ export async function POST(request: Request) {
           });
 
           await transporter.sendMail({
-               from: process.env.EMAIL_FROM,
+               from: `"LDA Subotica Upitnik" <${process.env.EMAIL_FROM}>`,
                to: 'ldasubotica@aldaintranet.org',
                replyTo: requestData.email,
                subject: `Novo pitanje sa sajta od ${requestData.fullName}`,
