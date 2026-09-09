@@ -1,8 +1,7 @@
-import { ObjectId } from "mongodb";
 import { ProjectStatus, ProjectType } from "./project";
 
 export type ProjectSummary = {
-  _id: ObjectId,
+  _id: string,
   title: string,
   projectSummaryURL: string,
   gallery: string[];

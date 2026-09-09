@@ -43,12 +43,6 @@ export async function POST(request: Request) {
                throw new Error('Missing required fields.');
           }
 
-          const questionDocument = questionService.buildQuestionDocument({
-               fullName: requestData.fullName,
-               email: requestData.email,
-               question: requestData.question,
-          });
-
           await transporter.sendMail({
                from: `"LDA Subotica Upitnik" <${process.env.EMAIL_FROM}>`,
                to: 'ldasubotica@aldaintranet.org',

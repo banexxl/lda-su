@@ -1,158 +1,123 @@
-import { MongoClient, WithId } from "mongodb"
+import { supabase } from "src/lib/supabase"
 import { Activity } from "src/types/activity"
-import { withStringId } from "src/utils/plain-object-creator"
+
+type ActivityWithStringId = Activity & { _id: string };
+
+const mapActivity = (row: any): ActivityWithStringId => ({
+     _id: row.id,
+     activityURL: row.activity_url,
+     title: row.title,
+     gallery: row.gallery ?? [],
+     coverURL: row.cover_url,
+     links: row.links ?? [],
+     publishedDate: row.published_date,
+     category: row.category,
+     favorited: row.favorited,
+     favoritedNumber: row.favorited_number ?? 0,
+     descriptions: row.descriptions ?? [],
+     author: row.author,
+     status: row.status,
+     list: row.list ?? [],
+     listTitle: row.list_title,
+     quillEditorData: row.quill_editor_data,
+})
 
 const activityServices = () => {
 
-     type ActivityWithStringId = Activity & { _id: string };
-
      const getAllActivities = async () => {
+          const { data, error } = await supabase
+               .from('activities')
+               .select('*')
+               .eq('locale', 'sr')
 
-          const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               const db = client.db('LDA_DB')
-               let data: WithId<Activity>[] = await db.collection<Activity>('Activities').find({}).toArray()
-               return data.map((d) => withStringId(d));
-          } catch (error: any) {
+          if (error) {
                console.log({ message: error.message })
                return []
           }
-          finally {
-               await client.close();
-          }
+          return (data ?? []).map(mapActivity)
      }
 
      const getActivityByLink = async (activityURL: string): Promise<ActivityWithStringId | undefined> => {
+          const { data, error } = await supabase
+               .from('activities')
+               .select('*')
+               .eq('locale', 'sr')
+               .eq('activity_url', activityURL)
+               .maybeSingle()
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               const db = client.db('LDA_DB')
-               let data: Activity[] = await db.collection('Activities').find({ activityURL: activityURL }).toArray()
-               return data[0] ? withStringId(data[0]) : undefined
-          } catch (error: any) {
-               console.log({ message: error.message })
+          if (error || !data) {
+               if (error) console.log({ message: error.message })
                return undefined
           }
-          finally {
-               await client.close();
-          }
+          return mapActivity(data)
      }
 
      const getCompletedActivities = async () => {
+          const { data, error } = await supabase
+               .from('activities')
+               .select('*')
+               .eq('locale', 'sr')
+               .eq('status', 'completed')
+               .order('published_date', { ascending: true })
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               const db = client.db('LDA_DB')
-               let data: Activity[] = await db.collection('Activities').find({ 'status': 'completed' }).sort({ publishedDate: 1 }).toArray()
-               return data.map((d) => withStringId(d))
-          } catch (error: any) {
+          if (error) {
                console.log({ message: error.message })
                return []
           }
-          finally {
-               await client.close();
-          }
+          return (data ?? []).map(mapActivity)
      }
 
      const getActivitiesByCategory = async (category: string) => {
+          const { data, error } = await supabase
+               .from('activities')
+               .select('*')
+               .eq('locale', 'sr')
+               .eq('category', category)
+               .order('published_date', { ascending: true })
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               const db = client.db('LDA_DB')
-               let data: Activity[] = await db.collection('Activities').find({ 'category': category }).sort({ publishedDate: 1 }).toArray()
-               return data.map((d) => withStringId(d))
-          } catch (error: any) {
+          if (error) {
                console.log({ message: error.message })
                return []
           }
-          finally {
-               await client.close();
-          }
+          return (data ?? []).map(mapActivity)
      }
 
      const getFeaturedCompletedActivities = async () => {
+          const { data, error } = await supabase
+               .from('activities')
+               .select('*')
+               .eq('locale', 'sr')
+               .eq('status', 'completed')
+               .limit(6)
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               const db = client.db('LDA_DB')
-               let data: Activity[] = await db.collection('Activities').find({ 'status': 'completed' }).limit(6).toArray()
-               return data.map((d) => withStringId(d))
-          } catch (error: any) {
+          if (error) {
                console.log({ message: error.message })
                return []
           }
-          finally {
-               await client.close();
-          }
+          return (data ?? []).map(mapActivity)
      }
 
      const getInProgressActivities = async () => {
+          const { data, error } = await supabase
+               .from('activities')
+               .select('*')
+               .eq('locale', 'sr')
+               .eq('status', 'in-progress')
 
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               const db = client.db('LDA_DB')
-               let data: Activity[] = await db.collection('Activities').find({ 'status': 'in-progress' }).toArray()
-               return data.map((d) => withStringId(d))
-          } catch (error: any) {
+          if (error) {
                console.log({ message: error.message })
                return []
           }
-          finally {
-               await client.close();
-          }
+          return (data ?? []).map(mapActivity)
      }
-
-     const getToDoActivities = async () => {
-
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               const db = client.db('LDA_DB')
-               let data: Activity[] = await db.collection('Activities').find({ 'status': 'to-do' }).toArray()
-               return data.map((d) => withStringId(d))
-          } catch (error: any) {
-               console.log({ message: error.message })
-               return []
-          }
-          finally {
-               await client.close();
-          }
-     }
-
-     const getActivityByTitle = async (link: string) => {
-
-          const client: any = await MongoClient.connect(process.env.MONGODB_URI!)
-
-          try {
-               const db = client.db('LDA_DB')
-               let data: Activity[] = await db.collection('Activities').find({ 'link': `${link}` }).toArray()
-               return data.map((d) => withStringId(d))
-          } catch (error: any) {
-               console.log({ message: error.message })
-               return []
-          }
-          finally {
-               await client.close();
-          }
-     }
-
-
 
      return {
           getAllActivities,
           getActivitiesByCategory,
           getActivityByLink,
           getCompletedActivities,
-          getToDoActivities,
           getInProgressActivities,
           getFeaturedCompletedActivities,
-          getActivityByTitle,
      }
 }
 

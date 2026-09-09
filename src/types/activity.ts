@@ -17,7 +17,7 @@ export type Activity = {
   category: string;
   favorited: boolean;
   favoritedNumber: number;
-  descriptions: string;
+  descriptions: string[];
   author: string;
   status: ActivityStatusProps;
   list: string[];

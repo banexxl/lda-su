@@ -32,12 +32,12 @@ export async function generateStaticParams() {
 export default async function ProjectSummaryPage({ params }: ProjectSummaryPageProps) {
   const { 'pregled-projekta': pregledProjekta } = await params;
 
-  const projectSummary: any = await projectsServices().getProjectSummaryByLink(pregledProjekta)
+  const projectSummary = await projectsServices().getProjectSummaryByLink(pregledProjekta)
 
-  if (!projectSummary || projectSummary.length == 0) {
+  if (!projectSummary) {
     // Handle the case where the project is undefined
     return <NotFoundView />
   }
 
-  return <ProjectSummaryView key={Math.floor(Math.random() * 999)} projectSummary={projectSummary[0]} />
+  return <ProjectSummaryView key={Math.floor(Math.random() * 999)} projectSummary={projectSummary} />
 }

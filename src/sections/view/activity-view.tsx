@@ -91,21 +91,6 @@ export const ActivityView = ({ activity }: ActivityProps) => {
                   <br />
                 </Typography>
               ))
-            ) : typeof activity.descriptions === 'string' && activity.descriptions.length > 0 ? (
-              <Typography
-                variant="body1"
-                component="h6"
-                sx={{
-                  flexGrow: 1,
-                  pr: { md: 10 },
-                  textAlign: 'justify',
-                  color: theme.palette.text.primary,
-                }}
-              >
-                {activity.descriptions}
-                <br />
-                <br />
-              </Typography>
             ) : (
               <Typography
                 variant="body2"

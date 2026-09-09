@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ActivityPageProps) {
 
   return generateSeoMetadata({
     title: activity.title,
-    description: activity.descriptions,
+    description: activity.descriptions?.[0] ?? '',
     path: `/aktivnost/${aktivnost}`,
     keywords: [activity.category, activity.author].filter(Boolean),
     openGraph: {

@@ -1,71 +1,81 @@
-import { MongoClient, WithId } from "mongodb";
+import { supabaseAdmin } from "src/lib/supabase-admin";
 import { QuestionAnswer } from "src/types/question-answer";
-import { withStringId } from "src/utils/plain-object-creator";
 
 type CreateQuestionInput = Pick<QuestionAnswer, 'fullName' | 'email' | 'question'>;
 
 const questionAnswerServices = () => {
 
-     const buildQuestionDocument = ({ fullName, email, question }: CreateQuestionInput): Omit<QuestionAnswer, '_id'> => ({
-          fullName,
-          email,
-          question,
-          answer: '',
-          archived: 0,
-          questionDateTime: new Date(),
-          answerDateTime: null,
-     });
+     // Public list only ever shows answered, non-archived questions, and never the
+     // submitter's name/email — this table has no public read policy, everything here
+     // runs server-side with the service-role key.
+     const getAllQuestionsAndAnswers = async (): Promise<QuestionAnswer[]> => {
+          const { data, error } = await supabaseAdmin
+               .from('questions')
+               .select('id, question, answer, question_date_time, answer_date_time, archived')
+               .eq('archived', false)
+               .neq('answer', '')
+               .order('question_date_time', { ascending: false });
 
-     const getAllQuestionsAndAnswers = async () => {
-          const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI!);
-
-          try {
-               const db = client.db('LDA_DB');
-               const data: WithId<QuestionAnswer>[] = await db
-                    .collection<QuestionAnswer>('Q&A')
-                    .find({ archived: 0 })
-                    .sort({ questionDateTime: -1 })
-                    .toArray();
-
-               return data.map((item) => withStringId(item));
-          } catch (error: any) {
+          if (error) {
                console.log({ message: error.message });
                return [];
-          } finally {
-               await client.close();
           }
+
+          return (data ?? []).map((row) => ({
+               _id: row.id,
+               fullName: '',
+               email: '',
+               question: row.question,
+               answer: row.answer,
+               archived: row.archived,
+               questionDateTime: row.question_date_time,
+               answerDateTime: row.answer_date_time,
+          }));
      };
 
      const createQuestion = async (input: CreateQuestionInput) => {
-          const client: MongoClient = await MongoClient.connect(process.env.MONGODB_URI!);
-          const questionDocument = buildQuestionDocument(input);
+          const { data, error } = await supabaseAdmin
+               .from('questions')
+               .insert({
+                    full_name: input.fullName,
+                    email: input.email,
+                    question: input.question,
+                    answer: '',
+                    archived: false,
+                    question_date_time: new Date().toISOString(),
+                    answer_date_time: null,
+               })
+               .select()
+               .single();
 
-          try {
-               const db = client.db('LDA_DB');
-               const result = await db.collection<Omit<QuestionAnswer, '_id'>>('Q&A').insertOne(questionDocument);
-
-               return {
-                    acknowledged: result.acknowledged,
-                    insertedId: result.insertedId.toString(),
-                    question: {
-                         ...questionDocument,
-                         _id: result.insertedId.toString(),
-                    },
-               };
-          } catch (error: any) {
-               console.log({ message: error.message });
+          if (error || !data) {
+               console.log({ message: error?.message });
                return {
                     acknowledged: false,
                     insertedId: undefined,
                     question: undefined,
                };
-          } finally {
-               await client.close();
           }
+
+          const question: QuestionAnswer = {
+               _id: data.id,
+               fullName: data.full_name,
+               email: data.email,
+               question: data.question,
+               answer: data.answer,
+               archived: data.archived,
+               questionDateTime: data.question_date_time,
+               answerDateTime: data.answer_date_time,
+          };
+
+          return {
+               acknowledged: true,
+               insertedId: data.id as string,
+               question,
+          };
      };
 
      return {
-          buildQuestionDocument,
           createQuestion,
           getAllQuestionsAndAnswers,
      };

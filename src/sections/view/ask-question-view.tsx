@@ -256,7 +256,7 @@ export const AskQuestionView = ({ initialQuestions }: AskQuestionViewProps) => {
                                              Pitanja i odgovori
                                         </Typography>
                                         <Typography color="text.secondary">
-                                             Najnovija pitanja su prikazana prva. Ako odgovor još nije dodat, pitanje ostaje vidljivo dok ne bude obrađeno.
+                                             Prikazana su samo odgovorena pitanja, najnovija prva.
                                         </Typography>
                                    </Box>
 
@@ -317,9 +317,11 @@ export const AskQuestionView = ({ initialQuestions }: AskQuestionViewProps) => {
                                                   >
                                                        <Stack spacing={1.5}>
                                                             <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, flexWrap: 'wrap' }}>
-                                                                 <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                                                                      {item.fullName}
-                                                                 </Typography>
+                                                                 {item.fullName && (
+                                                                      <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                                                                           {item.fullName}
+                                                                      </Typography>
+                                                                 )}
                                                                  {questionDate && (
                                                                       <Typography variant="body2" color="text.secondary">
                                                                            Postavljeno: {questionDate}
@@ -327,9 +329,11 @@ export const AskQuestionView = ({ initialQuestions }: AskQuestionViewProps) => {
                                                                  )}
                                                             </Box>
 
-                                                            <Typography variant="body2" color="text.secondary">
-                                                                 {item.email}
-                                                            </Typography>
+                                                            {item.email && (
+                                                                 <Typography variant="body2" color="text.secondary">
+                                                                      {item.email}
+                                                                 </Typography>
+                                                            )}
 
                                                             <Box>
                                                                  <Typography variant="overline" color="text.secondary">
