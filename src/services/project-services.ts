@@ -10,9 +10,29 @@ const mapPublication = (row: any): Publication => ({
      publicationImageURL: row.publication_image_url,
 });
 
+const MAX_ENTRY_DESCRIPTION_LENGTH = 300;
+
+const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '');
+
+const getEntryDescription = (entry: any): string => {
+     const firstParagraph = entry.paragraphs?.[0];
+     if (firstParagraph) {
+          return firstParagraph;
+     }
+
+     if (entry.quill_editor_data) {
+          const text = stripHtml(entry.quill_editor_data).trim();
+          return text.length > MAX_ENTRY_DESCRIPTION_LENGTH
+               ? `${text.slice(0, MAX_ENTRY_DESCRIPTION_LENGTH)}...`
+               : text;
+     }
+
+     return '';
+};
+
 const mapProjectSummary = (row: any): ProjectSummary => {
-     const entries = [...(row.project_summary_entries ?? [])].sort(
-          (a: any, b: any) => a.sort_order - b.sort_order
+     const entries = [...(row.project_activities ?? [])].sort(
+          (a: any, b: any) => new Date(a.published).getTime() - new Date(b.published).getTime()
      );
 
      return {
@@ -30,10 +50,10 @@ const mapProjectSummary = (row: any): ProjectSummary => {
           publications: row.publications ?? [],
           links: row.links ?? [],
           projectSummaryCoverURL: row.project_summary_cover_url,
-          projectSummaryDescriptions: entries.map((e) => e.description),
-          projectSummarySubtitles: entries.map((e) => e.subtitle),
-          projectSummarySubtitleURLs: entries.map((e) => e.subtitle_url),
-          projectSummaryDateTime: entries.map((e) => e.entry_date_time),
+          projectSummaryDescriptions: entries.map(getEntryDescription),
+          projectSummarySubtitles: entries.map((e) => e.title),
+          projectSummarySubtitleURLs: entries.map((e) => `/projektna-aktivnost/${e.project_url}`),
+          projectSummaryDateTime: entries.map((e) => e.published),
           status: row.status,
      };
 };
@@ -96,8 +116,9 @@ const projectsServices = () => {
      const getAllProjectSummaries = async () => {
           const { data, error } = await supabase
                .from('project_summaries')
-               .select('*, project_summary_entries(*)')
+               .select('*, project_activities(*)')
                .eq('locale', 'sr')
+               .eq('project_activities.locale', 'sr')
                .order('project_end_date_time', { ascending: false });
 
           if (error) {
@@ -109,8 +130,9 @@ const projectsServices = () => {
      const getInProgressProjectSummaries = async () => {
           const { data, error } = await supabase
                .from('project_summaries')
-               .select('*, project_summary_entries(*)')
+               .select('*, project_activities(*)')
                .eq('locale', 'sr')
+               .eq('project_activities.locale', 'sr')
                .eq('status', 'in-progress')
                .order('project_end_date_time', { ascending: false });
 
@@ -123,8 +145,9 @@ const projectsServices = () => {
      const getCompletedProjectSummaries = async () => {
           const { data, error } = await supabase
                .from('project_summaries')
-               .select('*, project_summary_entries(*)')
+               .select('*, project_activities(*)')
                .eq('locale', 'sr')
+               .eq('project_activities.locale', 'sr')
                .eq('status', 'completed')
                .order('project_end_date_time', { ascending: false });
 
@@ -137,8 +160,9 @@ const projectsServices = () => {
      const getRandomCompletedProjectSummaries = async () => {
           const { data, error } = await supabase
                .from('project_summaries')
-               .select('*, project_summary_entries(*)')
+               .select('*, project_activities(*)')
                .eq('locale', 'sr')
+               .eq('project_activities.locale', 'sr')
                .eq('status', 'completed');
 
           if (error) {
@@ -150,8 +174,9 @@ const projectsServices = () => {
      const getProjectSummaryByLink = async (link: string): Promise<ProjectSummary | undefined> => {
           const { data, error } = await supabase
                .from('project_summaries')
-               .select('*, project_summary_entries(*)')
+               .select('*, project_activities(*)')
                .eq('locale', 'sr')
+               .eq('project_activities.locale', 'sr')
                .eq('project_summary_url', link)
                .maybeSingle();
 
