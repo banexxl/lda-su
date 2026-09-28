@@ -12,6 +12,14 @@ import { extractDocumentName, extractStringFromUrl, extractURLName } from 'src/u
 
 // ----------------------------------------------------------------------
 
+const joinList = (items?: string[] | null) =>
+  (items ?? [])
+    .map((item) => item?.trim())
+    .filter(Boolean)
+    .join(', ');
+
+// ----------------------------------------------------------------------
+
 type Props = {
   project: Project;
 };
@@ -40,16 +48,12 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
           <OverviewItem
             icon="carbon:user"
             label="Organizatori"
-            text={
-              (project.organizers?.length ?? 0) === 0
-                ? (project.organizers ?? []).join(', ')
-                : ''
-            }
+            text={joinList(project.organizers)}
           />
           <OverviewItem
             icon="carbon:location"
             label="Lokacije"
-            text={(project.locations ?? []).join(', ')}
+            text={joinList(project.locations)}
           />
           <OverviewItem icon="carbon:mobile" label="Telefon" text={'+38124554587'} />
           {/* <OverviewItem icon="carbon:time" label="Datum početka" text={fDate(project.startDateTime, 'yyyy/MM/dd')} /> */}
@@ -67,12 +71,12 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
           <OverviewItem
             icon="carbon:user-multiple"
             label="Aplikanti"
-            text={(project.applicants ?? []).join(', ')}
+            text={joinList(project.applicants)}
           />
           <OverviewItem
             icon="carbon:money"
             label="Donatori"
-            text={(project.donators ?? []).join(', ')}
+            text={joinList(project.donators)}
           />
         </Box>
       </Stack>
