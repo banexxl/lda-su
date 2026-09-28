@@ -12,12 +12,9 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import { SplashScreen } from 'src/components/loading-screen';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-// import { Newsletter } from '../newsletter';
-import { ProjectListSimilar } from '../project-summaries-list/project-summary-list-similar';
 import { ProjectDetailsHeader } from '../project/project-item-details-header';
 import { ProjectDetailsSummary } from '../project/project-item-details-summary';
 import { ProjectDetailsGallery } from '../project/project-item-details-gallery';
-// import { ProjectDetails } from '../project/project-item-details';
 import { Project } from 'src/types/project';
 import { SocialShare } from 'src/components/social-share/socials-share';
 import { Box } from '@mui/material';
@@ -59,11 +56,6 @@ export const ProjectView = ({ project }: ProjectProps) => {
         />
 
         <ProjectDetailsGallery gallery={project.gallery} />
-
-        {/* <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse"> */}
-        {/* <Grid size={{ xs: 12, md: 5, lg: 4 }}>
-            <ProjectDetails project={project} />
-          </Grid> */}
 
         <Grid size={{ xs: 12, md: 7, lg: 8 }}>
           <ProjectDetailsHeader project={project} />

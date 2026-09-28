@@ -42,8 +42,8 @@ export const ProjectDetailsSummary = ({ project }: Props) => {
             label="Organizatori"
             text={
               (project.organizers?.length ?? 0) === 0
-                ? (project.applicants ?? []).join(', ')
-                : `${(project.applicants ?? []).join(', ')}, ${(project.organizers ?? []).join(', ')}`
+                ? (project.organizers ?? []).join(', ')
+                : ''
             }
           />
           <OverviewItem
