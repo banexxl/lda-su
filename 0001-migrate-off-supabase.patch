@@ -1,0 +1,1995 @@
+From 791ecdc9bc3570c9a7764d86c76744ea968b453a Mon Sep 17 00:00:00 2001
+From: banexxl <damjanovic.branislav@gmail.com>
+Date: Tue, 29 Sep 2026 20:28:35 +0000
+Subject: [PATCH] Migrate off Supabase + Upstash to self-hosted Postgres +
+ Redis
+
+Data layer: replace @supabase/supabase-js with Prisma against the shared
+self-hosted `lda` Postgres. Public reads run via asAnon, questions via asService
+(src/lib/db/*). Service mappers and return shapes are unchanged; relation fields
+in the schema are named to match the existing PostgREST embed names.
+
+Rate limiting: replace @upstash/ratelimit with an ioredis sliding-window limiter
+on the platform Redis (src/utils/rate-limiter.ts), same limit(id) interface,
+fails open if Redis is unreachable.
+
+Deploy: add standalone Dockerfile (build-time DB via BuildKit secret, for the
+prerendered activity/project pages) + docker-entrypoint.sh + .dockerignore and a
+Forgejo deploy workflow. next.config media host -> s3.mrbigs.cloud, output standalone.
+Point the question-notification email link at the new dashboard host.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_019t1K8jwrAW6dwxWqxJK4hf
+---
+ .dockerignore                            |   8 +
+ .forgejo/workflows/deploy.yml            |  56 ++
+ .gitignore                               |   1 +
+ Dockerfile                               |  46 ++
+ docker-entrypoint.sh                     |  19 +
+ next.config.js                           |  10 +-
+ package-lock.json                        | 646 ++++++++++++++++++-----
+ package.json                             |   8 +-
+ prisma/schema.prisma                     | 125 +++++
+ src/app/api/send-question/route.ts       |   2 +-
+ src/lib/db/prisma.ts                     |  23 +
+ src/lib/db/rls.ts                        |  37 ++
+ src/lib/db/serialize.ts                  |  30 ++
+ src/lib/supabase-admin.ts                |   8 -
+ src/lib/supabase.ts                      |   6 -
+ src/services/activities-services.ts      | 100 ++--
+ src/services/project-services.ts         | 159 +++---
+ src/services/question-answer-services.ts |  75 +--
+ src/utils/rate-limiter.ts                |  74 ++-
+ 19 files changed, 1081 insertions(+), 352 deletions(-)
+ create mode 100644 .dockerignore
+ create mode 100644 .forgejo/workflows/deploy.yml
+ create mode 100644 Dockerfile
+ create mode 100644 docker-entrypoint.sh
+ create mode 100644 prisma/schema.prisma
+ create mode 100644 src/lib/db/prisma.ts
+ create mode 100644 src/lib/db/rls.ts
+ create mode 100644 src/lib/db/serialize.ts
+ delete mode 100644 src/lib/supabase-admin.ts
+ delete mode 100644 src/lib/supabase.ts
+
+diff --git a/.dockerignore b/.dockerignore
+new file mode 100644
+index 0000000..dc993ee
+--- /dev/null
++++ b/.dockerignore
+@@ -0,0 +1,8 @@
++.git
++.next
++node_modules
++.env
++.env.*
++!.env.example
++*.log
++tsconfig.tsbuildinfo
+diff --git a/.forgejo/workflows/deploy.yml b/.forgejo/workflows/deploy.yml
+new file mode 100644
+index 0000000..dc0663d
+--- /dev/null
++++ b/.forgejo/workflows/deploy.yml
+@@ -0,0 +1,56 @@
++name: Deploy lda-su
++
++# Every push to main rebuilds and restarts the container on the home server
++# (same approach as dar-pharmacy-shop). Runs on the self-hosted runner (label
++# xxl), which has the host's docker socket, ~/projects and ~/platform mounted at
++# their real paths, and an SSH key for Forgejo (host alias forgejo-lan).
++
++on:
++  push:
++    branches: [main]
++  workflow_dispatch:
++
++concurrency:
++  group: deploy-lda-su
++  cancel-in-progress: false
++
++jobs:
++  deploy:
++    runs-on: [xxl]
++
++    steps:
++      - name: Update source
++        run: |
++          set -eu
++          cd /home/banexxl/projects/lda-su
++          git config --global --add safe.directory "$PWD"
++
++          # Deploy exactly what was pushed: the server checkout follows main.
++          # (Untracked/ignored files such as .env are left alone.)
++          git fetch forgejo-lan:MrBigsOrg/lda-su.git main
++          git checkout -f -B main FETCH_HEAD
++          git reset --hard FETCH_HEAD
++          git log --oneline -1
++
++          # The runner is root; give the working copy back to banexxl so
++          # normal git use on the server keeps working.
++          chown -R 1000:1000 .git
++          git ls-files -z | xargs -0 -r chown -h 1000:1000
++
++      - name: Build and restart container
++        run: |
++          set -eu
++          cd /home/banexxl/platform
++          # --no-deps: never touch postgres/redis/minio from an app deploy.
++          docker compose up -d --no-deps --build lda-su
++
++      - name: Health check
++        run: |
++          set -eu
++          for i in $(seq 1 30); do
++            if docker exec lda-su wget -q -O /dev/null http://127.0.0.1:3000/; then
++              echo "lda-su is up"; exit 0
++            fi
++            sleep 2
++          done
++          echo "lda-su did not come up"; docker logs --tail 50 lda-su; exit 1
+diff --git a/.gitignore b/.gitignore
+index 44300dc..b889b43 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -22,6 +22,7 @@ build
+ .env.development.local
+ .env.test.local
+ .env.production.local
++.env.pre-migration.bak
+ 
+ # misc
+ .DS_Store
+diff --git a/Dockerfile b/Dockerfile
+new file mode 100644
+index 0000000..ed26065
+--- /dev/null
++++ b/Dockerfile
+@@ -0,0 +1,46 @@
++# syntax=docker/dockerfile:1
++
++FROM node:24-alpine AS builder
++
++WORKDIR /app
++
++COPY package*.json ./
++COPY prisma ./prisma
++RUN npm ci
++
++COPY . .
++
++# NEXT_PUBLIC_* values are inlined into the client bundle at build time.
++ARG NEXT_PUBLIC_MAP_API
++ARG NEXT_PUBLIC_SITE_URL
++ENV NEXT_PUBLIC_MAP_API=$NEXT_PUBLIC_MAP_API \
++    NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
++
++# `next build` prerenders the activity/project pages + sitemap from Postgres, so
++# the build needs a real connection. It comes in as a BuildKit secret (host
++# network, Postgres on 127.0.0.1) and is never written to a layer.
++ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder"
++RUN npx prisma generate
++RUN --mount=type=secret,id=DATABASE_URL,required=true \
++    DATABASE_URL="$(cat /run/secrets/DATABASE_URL)" npx next build
++
++FROM node:24-alpine
++
++WORKDIR /app
++
++ENV NODE_ENV=production \
++    PORT=3000 \
++    HOSTNAME=0.0.0.0
++
++COPY --from=builder --chown=node:node /app/.next/standalone ./
++COPY --from=builder --chown=node:node /app/.next/static ./.next/static
++COPY --from=builder --chown=node:node /app/public ./public
++COPY --from=builder --chown=node:node /app/prisma ./prisma
++COPY --chmod=755 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
++
++USER node
++
++EXPOSE 3000
++
++ENTRYPOINT ["docker-entrypoint.sh"]
++CMD ["node", "server.js"]
+diff --git a/docker-entrypoint.sh b/docker-entrypoint.sh
+new file mode 100644
+index 0000000..666d4a4
+--- /dev/null
++++ b/docker-entrypoint.sh
+@@ -0,0 +1,19 @@
++#!/bin/sh
++# Docker secrets arrive as files in /run/secrets; each file is exported as an
++# environment variable of the same name (e.g. /run/secrets/DATABASE_URL), so
++# the app keeps reading process.env as usual and secrets never sit in the
++# image, the compose file or `docker inspect`.
++set -eu
++
++if [ -d /run/secrets ]; then
++     for f in /run/secrets/*; do
++          [ -f "$f" ] || continue
++          name=$(basename "$f")
++          case "$name" in
++               *[!A-Z0-9_]*) continue ;; # only ENV_VAR-shaped names
++          esac
++          export "$name=$(cat "$f")"
++     done
++fi
++
++exec "$@"
+diff --git a/next.config.js b/next.config.js
+index 9b15e83..5188499 100644
+--- a/next.config.js
++++ b/next.config.js
+@@ -1,5 +1,7 @@
+ module.exports = {
+   trailingSlash: true,
++  // Self-contained server bundle for the Docker image (Phase 3 deploy).
++  output: 'standalone',
+   modularizeImports: {
+     '@mui/material': {
+       transform: '@mui/material/{{member}}',
+@@ -15,10 +17,14 @@ module.exports = {
+   images: {
+     remotePatterns: [
+       {
++        // Self-hosted MinIO (media bucket lda-media) served via Caddy.
++        protocol: 'https',
++        hostname: 's3.mrbigs.cloud',
++      },
++      {
++        // Legacy AWS S3 bucket — still serves partner logos & some hardcoded assets.
+         protocol: 'https',
+         hostname: 'lda-su.s3.eu-central-1.amazonaws.com',
+-        // port: '',
+-        // pathname: '/account123/**',
+       },
+     ],
+   },
+diff --git a/package-lock.json b/package-lock.json
+index b8b9952..68415cc 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -7,6 +7,7 @@
+     "": {
+       "name": "lda-su",
+       "version": "2.3.0",
++      "hasInstallScript": true,
+       "dependencies": {
+         "@googlemaps/js-api-loader": "^1.16.2",
+         "@iconify/react": "^6.0.2",
+@@ -14,9 +15,7 @@
+         "@mui/material": "^7.3.6",
+         "@mui/system": "^7.3.6",
+         "@mui/x-date-pickers": "^8.22.0",
+-        "@supabase/supabase-js": "^2.58.0",
+-        "@upstash/ratelimit": "^2.0.8",
+-        "@upstash/redis": "^1.37.0",
++        "@prisma/client": "^6.19.3",
+         "@vercel/analytics": "^1.4.1",
+         "@vercel/speed-insights": "^1.0.10",
+         "date-fns": "^2.30.0",
+@@ -25,6 +24,7 @@
+         "formik": "^2.4.9",
+         "framer-motion": "^12.23.26",
+         "google-map-react": "^2.2.1",
++        "ioredis": "^5.4.1",
+         "lodash.isequal": "^4.5.0",
+         "lodash.merge": "^4.6.2",
+         "moment": "^2.29.4",
+@@ -70,6 +70,7 @@
+         "@typescript-eslint/eslint-plugin": "^6.15.0",
+         "@typescript-eslint/parser": "^6.15.0",
+         "prettier": "^3.0.3",
++        "prisma": "^6.19.3",
+         "typescript": "^5.2.2"
+       }
+     },
+@@ -3287,6 +3288,12 @@
+         "url": "https://opencollective.com/libvips"
+       }
+     },
++    "node_modules/@ioredis/commands": {
++      "version": "1.10.0",
++      "resolved": "https://registry.npmjs.org/@ioredis/commands/-/commands-1.10.0.tgz",
++      "integrity": "sha512-UmeW7z4LfctwoQ5wkhVzgq8tXkreED2xZGpX+Bg+zA+WJFZCT6c062AfCK/Dfk81xZnnwdhJCUMkitihRaoC2Q==",
++      "license": "MIT"
++    },
+     "node_modules/@isaacs/cliui": {
+       "version": "8.0.2",
+       "resolved": "https://registry.npmjs.org/@isaacs/cliui/-/cliui-8.0.2.tgz",
+@@ -3936,6 +3943,91 @@
+         "url": "https://opencollective.com/popperjs"
+       }
+     },
++    "node_modules/@prisma/client": {
++      "version": "6.19.3",
++      "resolved": "https://registry.npmjs.org/@prisma/client/-/client-6.19.3.tgz",
++      "integrity": "sha512-mKq3jQFhjvko5LTJFHGilsuQs+W+T3Gm451NzuTDGQxwCzwXHYnIu2zGkRoW+Exq3Rob7yp2MfzSrdIiZVhrBg==",
++      "hasInstallScript": true,
++      "license": "Apache-2.0",
++      "engines": {
++        "node": ">=18.18"
++      },
++      "peerDependencies": {
++        "prisma": "*",
++        "typescript": ">=5.1.0"
++      },
++      "peerDependenciesMeta": {
++        "prisma": {
++          "optional": true
++        },
++        "typescript": {
++          "optional": true
++        }
++      }
++    },
++    "node_modules/@prisma/config": {
++      "version": "6.19.3",
++      "resolved": "https://registry.npmjs.org/@prisma/config/-/config-6.19.3.tgz",
++      "integrity": "sha512-CBPT44BjlQxEt8kiMEauji2WHTDoVBOKl7UlewXmUgBPnr/oPRZC3psci5chJnYmH0ivEIog2OU9PGWoki3DLQ==",
++      "devOptional": true,
++      "license": "Apache-2.0",
++      "dependencies": {
++        "c12": "3.1.0",
++        "deepmerge-ts": "7.1.5",
++        "effect": "3.21.0",
++        "empathic": "2.0.0"
++      }
++    },
++    "node_modules/@prisma/debug": {
++      "version": "6.19.3",
++      "resolved": "https://registry.npmjs.org/@prisma/debug/-/debug-6.19.3.tgz",
++      "integrity": "sha512-ljkJ+SgpXNktLG0Q/n4JGYCkKf0f8oYLyjImS2I8e2q2WCfdRRtWER062ZV/ixaNP2M2VKlWXVJiGzZaUgbKZw==",
++      "devOptional": true,
++      "license": "Apache-2.0"
++    },
++    "node_modules/@prisma/engines": {
++      "version": "6.19.3",
++      "resolved": "https://registry.npmjs.org/@prisma/engines/-/engines-6.19.3.tgz",
++      "integrity": "sha512-RSYxtlYFl5pJ8ZePgMv0lZ9IzVCOdTPOegrs2qcbAEFrBI1G33h6wyC9kjQvo0DnYEhEVY0X4LsuFHXLKQk88g==",
++      "devOptional": true,
++      "hasInstallScript": true,
++      "license": "Apache-2.0",
++      "dependencies": {
++        "@prisma/debug": "6.19.3",
++        "@prisma/engines-version": "7.1.1-3.c2990dca591cba766e3b7ef5d9e8a84796e47ab7",
++        "@prisma/fetch-engine": "6.19.3",
++        "@prisma/get-platform": "6.19.3"
++      }
++    },
++    "node_modules/@prisma/engines-version": {
++      "version": "7.1.1-3.c2990dca591cba766e3b7ef5d9e8a84796e47ab7",
++      "resolved": "https://registry.npmjs.org/@prisma/engines-version/-/engines-version-7.1.1-3.c2990dca591cba766e3b7ef5d9e8a84796e47ab7.tgz",
++      "integrity": "sha512-03bgb1VD5gvuumNf+7fVGBzfpJPjmqV423l/WxsWk2cNQ42JD0/SsFBPhN6z8iAvdHs07/7ei77SKu7aZfq8bA==",
++      "devOptional": true,
++      "license": "Apache-2.0"
++    },
++    "node_modules/@prisma/fetch-engine": {
++      "version": "6.19.3",
++      "resolved": "https://registry.npmjs.org/@prisma/fetch-engine/-/fetch-engine-6.19.3.tgz",
++      "integrity": "sha512-tKtl/qco9Nt7LU5iKhpultD8O4vMCZcU2CHjNTnRrL1QvSUr5W/GcyFPjNL87GtRrwBc7ubXXD9xy4EvLvt8JA==",
++      "devOptional": true,
++      "license": "Apache-2.0",
++      "dependencies": {
++        "@prisma/debug": "6.19.3",
++        "@prisma/engines-version": "7.1.1-3.c2990dca591cba766e3b7ef5d9e8a84796e47ab7",
++        "@prisma/get-platform": "6.19.3"
++      }
++    },
++    "node_modules/@prisma/get-platform": {
++      "version": "6.19.3",
++      "resolved": "https://registry.npmjs.org/@prisma/get-platform/-/get-platform-6.19.3.tgz",
++      "integrity": "sha512-xFj1VcJ1N3MKooOQAGO0W5tsd0W2QzIvW7DD7c/8H14Zmp4jseeWAITm+w2LLoLrlhoHdPPh0NMZ8mfL6puoHA==",
++      "devOptional": true,
++      "license": "Apache-2.0",
++      "dependencies": {
++        "@prisma/debug": "6.19.3"
++      }
++    },
+     "node_modules/@rtsao/scc": {
+       "version": "1.1.0",
+       "resolved": "https://registry.npmjs.org/@rtsao/scc/-/scc-1.1.0.tgz",
+@@ -4583,98 +4675,13 @@
+         "node": ">=18.0.0"
+       }
+     },
+-    "node_modules/@supabase/auth-js": {
+-      "version": "2.116.0",
+-      "resolved": "https://registry.npmjs.org/@supabase/auth-js/-/auth-js-2.116.0.tgz",
+-      "integrity": "sha512-Cmosty12gyKGK9N3bQb+lMmuAFev5nmUzaR1AsmZHqKOAGzqX1VQzmp49CNPwOx/pw0H9Qqk4rs9yhwTlKpfDg==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "tslib": "2.8.1"
+-      },
+-      "engines": {
+-        "node": ">=22.0.0"
+-      }
+-    },
+-    "node_modules/@supabase/functions-js": {
+-      "version": "2.116.0",
+-      "resolved": "https://registry.npmjs.org/@supabase/functions-js/-/functions-js-2.116.0.tgz",
+-      "integrity": "sha512-E+VOc2QDcni/fySqkBFiZhnoB3SGydEdZgFI6/dEAGAHx6yEhB46TN9qb2wXs+E+RSzOBV0R6dasiSlw4xlZAA==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "tslib": "2.8.1"
+-      },
+-      "engines": {
+-        "node": ">=22.0.0"
+-      }
+-    },
+-    "node_modules/@supabase/phoenix": {
+-      "version": "0.4.5",
+-      "resolved": "https://registry.npmjs.org/@supabase/phoenix/-/phoenix-0.4.5.tgz",
+-      "integrity": "sha512-aAn9H9ovVyeApKy11OWOrrOGq8DV68yWeH4ud2lN9fzn4aO8Zb5GLL9m1pUg9nLqIcT+ZDfAcsZe0E/nqdv2lw==",
++    "node_modules/@standard-schema/spec": {
++      "version": "1.1.0",
++      "resolved": "https://registry.npmjs.org/@standard-schema/spec/-/spec-1.1.0.tgz",
++      "integrity": "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==",
++      "devOptional": true,
+       "license": "MIT"
+     },
+-    "node_modules/@supabase/postgrest-js": {
+-      "version": "2.116.0",
+-      "resolved": "https://registry.npmjs.org/@supabase/postgrest-js/-/postgrest-js-2.116.0.tgz",
+-      "integrity": "sha512-kGpVZTDHxFTJS3tu+rU0iTAZ+4U0bcLVjxwCk8f3gRhjw3qdCZjTBlgYvc4kGH2XccmAzbkKwXL/mrNHMGSc+A==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "tslib": "2.8.1"
+-      },
+-      "engines": {
+-        "node": ">=22.0.0"
+-      }
+-    },
+-    "node_modules/@supabase/realtime-js": {
+-      "version": "2.116.0",
+-      "resolved": "https://registry.npmjs.org/@supabase/realtime-js/-/realtime-js-2.116.0.tgz",
+-      "integrity": "sha512-MHAnlXxi2s6yiJsZsQMfs2B3RFxeVfQWxerqYhIMqcCQV/FuY3LIeouPEkXw/ah7wUWMLYwempF9MOCUScyddg==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "@supabase/phoenix": "0.4.5",
+-        "tslib": "2.8.1"
+-      },
+-      "engines": {
+-        "node": ">=22.0.0"
+-      }
+-    },
+-    "node_modules/@supabase/storage-js": {
+-      "version": "2.116.0",
+-      "resolved": "https://registry.npmjs.org/@supabase/storage-js/-/storage-js-2.116.0.tgz",
+-      "integrity": "sha512-6/3hR6vccBP6oGM5B6RfbwZcTCKmQOodd/ZWQdsw8yJsU5zO/a//oBL6yLnmgxcjnHSrelW8rsO7hL5DPybyUQ==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "iceberg-js": "^0.8.1",
+-        "tslib": "2.8.1"
+-      },
+-      "engines": {
+-        "node": ">=22.0.0"
+-      }
+-    },
+-    "node_modules/@supabase/supabase-js": {
+-      "version": "2.116.0",
+-      "resolved": "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.116.0.tgz",
+-      "integrity": "sha512-YyWmKXt2NspV9iO8FPnlswUFJIRnrLd3oTCb+3ZyYRuKZtBH0xCUDgnUqoyA0fGUxpM/UhfwDjYf/dht/9bp7g==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "@supabase/auth-js": "2.116.0",
+-        "@supabase/functions-js": "2.116.0",
+-        "@supabase/postgrest-js": "2.116.0",
+-        "@supabase/realtime-js": "2.116.0",
+-        "@supabase/storage-js": "2.116.0"
+-      },
+-      "engines": {
+-        "node": ">=22.0.0"
+-      },
+-      "peerDependencies": {
+-        "@opentelemetry/api": ">=1.0.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@opentelemetry/api": {
+-          "optional": true
+-        }
+-      }
+-    },
+     "node_modules/@svgr/babel-plugin-add-jsx-attribute": {
+       "version": "8.0.0",
+       "resolved": "https://registry.npmjs.org/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-8.0.0.tgz",
+@@ -5624,39 +5631,6 @@
+         "win32"
+       ]
+     },
+-    "node_modules/@upstash/core-analytics": {
+-      "version": "0.0.10",
+-      "resolved": "https://registry.npmjs.org/@upstash/core-analytics/-/core-analytics-0.0.10.tgz",
+-      "integrity": "sha512-7qJHGxpQgQr9/vmeS1PktEwvNAF7TI4iJDi8Pu2CFZ9YUGHZH4fOP5TfYlZ4aVxfopnELiE4BS4FBjyK7V1/xQ==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "@upstash/redis": "^1.28.3"
+-      },
+-      "engines": {
+-        "node": ">=16.0.0"
+-      }
+-    },
+-    "node_modules/@upstash/ratelimit": {
+-      "version": "2.0.8",
+-      "resolved": "https://registry.npmjs.org/@upstash/ratelimit/-/ratelimit-2.0.8.tgz",
+-      "integrity": "sha512-YSTMBJ1YIxsoPkUMX/P4DDks/xV5YYCswWMamU8ZIfK9ly6ppjRnVOyBhMDXBmzjODm4UQKcxsJPvaeFAijp5w==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "@upstash/core-analytics": "^0.0.10"
+-      },
+-      "peerDependencies": {
+-        "@upstash/redis": "^1.34.3"
+-      }
+-    },
+-    "node_modules/@upstash/redis": {
+-      "version": "1.37.0",
+-      "resolved": "https://registry.npmjs.org/@upstash/redis/-/redis-1.37.0.tgz",
+-      "integrity": "sha512-LqOJ3+XWPLSZ2rGSed5DYG3ixybxb8EhZu3yQqF7MdZX1wLBG/FRcI6xcUZXHy/SS7mmXWyadrud0HJHkOc+uw==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "uncrypto": "^0.1.3"
+-      }
+-    },
+     "node_modules/@vercel/analytics": {
+       "version": "1.6.1",
+       "resolved": "https://registry.npmjs.org/@vercel/analytics/-/analytics-1.6.1.tgz",
+@@ -6188,6 +6162,35 @@
+         "node": "^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7"
+       }
+     },
++    "node_modules/c12": {
++      "version": "3.1.0",
++      "resolved": "https://registry.npmjs.org/c12/-/c12-3.1.0.tgz",
++      "integrity": "sha512-uWoS8OU1MEIsOv8p/5a82c3H31LsWVR5qiyXVfBNOzfffjUWtPnhAb4BYI2uG2HfGmZmFjCtui5XNWaps+iFuw==",
++      "devOptional": true,
++      "license": "MIT",
++      "dependencies": {
++        "chokidar": "^4.0.3",
++        "confbox": "^0.2.2",
++        "defu": "^6.1.4",
++        "dotenv": "^16.6.1",
++        "exsolve": "^1.0.7",
++        "giget": "^2.0.0",
++        "jiti": "^2.4.2",
++        "ohash": "^2.0.11",
++        "pathe": "^2.0.3",
++        "perfect-debounce": "^1.0.0",
++        "pkg-types": "^2.2.0",
++        "rc9": "^2.1.2"
++      },
++      "peerDependencies": {
++        "magicast": "^0.3.5"
++      },
++      "peerDependenciesMeta": {
++        "magicast": {
++          "optional": true
++        }
++      }
++    },
+     "node_modules/call-bind": {
+       "version": "1.0.8",
+       "resolved": "https://registry.npmjs.org/call-bind/-/call-bind-1.0.8.tgz",
+@@ -6294,6 +6297,32 @@
+         "url": "https://github.com/chalk/chalk?sponsor=1"
+       }
+     },
++    "node_modules/chokidar": {
++      "version": "4.0.3",
++      "resolved": "https://registry.npmjs.org/chokidar/-/chokidar-4.0.3.tgz",
++      "integrity": "sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==",
++      "devOptional": true,
++      "license": "MIT",
++      "dependencies": {
++        "readdirp": "^4.0.1"
++      },
++      "engines": {
++        "node": ">= 14.16.0"
++      },
++      "funding": {
++        "url": "https://paulmillr.com/funding/"
++      }
++    },
++    "node_modules/citty": {
++      "version": "0.1.6",
++      "resolved": "https://registry.npmjs.org/citty/-/citty-0.1.6.tgz",
++      "integrity": "sha512-tskPPKEs8D2KPafUypv2gxwJP8h/OaJmC82QQGGDQcHvXX43xF2VDACcJVmZ0EuSxkpO9Kc4MlrA3q0+FG58AQ==",
++      "devOptional": true,
++      "license": "MIT",
++      "dependencies": {
++        "consola": "^3.2.3"
++      }
++    },
+     "node_modules/classnames": {
+       "version": "2.5.1",
+       "resolved": "https://registry.npmjs.org/classnames/-/classnames-2.5.1.tgz",
+@@ -6315,6 +6344,15 @@
+         "node": ">=6"
+       }
+     },
++    "node_modules/cluster-key-slot": {
++      "version": "1.1.1",
++      "resolved": "https://registry.npmjs.org/cluster-key-slot/-/cluster-key-slot-1.1.1.tgz",
++      "integrity": "sha512-rwHwUfXL40Chm1r08yrhU3qpUvdVlgkKNeyeGPOxnW8/SyVDvgRaed/Uz54AqWNaTCAThlj6QAs3TZcKI0xDEw==",
++      "license": "Apache-2.0",
++      "engines": {
++        "node": ">=0.10.0"
++      }
++    },
+     "node_modules/color": {
+       "version": "4.2.3",
+       "resolved": "https://registry.npmjs.org/color/-/color-4.2.3.tgz",
+@@ -6372,6 +6410,23 @@
+       "integrity": "sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==",
+       "license": "MIT"
+     },
++    "node_modules/confbox": {
++      "version": "0.2.4",
++      "resolved": "https://registry.npmjs.org/confbox/-/confbox-0.2.4.tgz",
++      "integrity": "sha512-ysOGlgTFbN2/Y6Cg3Iye8YKulHw+R2fNXHrgSmXISQdMnomY6eNDprVdW9R5xBguEqI954+S6709UyiO7B+6OQ==",
++      "devOptional": true,
++      "license": "MIT"
++    },
++    "node_modules/consola": {
++      "version": "3.4.2",
++      "resolved": "https://registry.npmjs.org/consola/-/consola-3.4.2.tgz",
++      "integrity": "sha512-5IKcdX0nnYavi6G7TtOhwkYzyjfJlatbjMjuLSfE2kYT5pMDOilZ4OvMhi637CcDICTmz3wARPoyhqyX1Y+XvA==",
++      "devOptional": true,
++      "license": "MIT",
++      "engines": {
++        "node": "^14.18.0 || >=16.10.0"
++      }
++    },
+     "node_modules/convert-source-map": {
+       "version": "2.0.0",
+       "resolved": "https://registry.npmjs.org/convert-source-map/-/convert-source-map-2.0.0.tgz",
+@@ -6641,6 +6696,16 @@
+         "node": ">=0.10.0"
+       }
+     },
++    "node_modules/deepmerge-ts": {
++      "version": "7.1.5",
++      "resolved": "https://registry.npmjs.org/deepmerge-ts/-/deepmerge-ts-7.1.5.tgz",
++      "integrity": "sha512-HOJkrhaYsweh+W+e74Yn7YStZOilkoPb6fycpwNLKzSPtruFs48nYis0zy5yJz1+ktUhHxoRDJ27RQAWLIJVJw==",
++      "devOptional": true,
++      "license": "BSD-3-Clause",
++      "engines": {
++        "node": ">=16.0.0"
++      }
++    },
+     "node_modules/define-data-property": {
+       "version": "1.1.4",
+       "resolved": "https://registry.npmjs.org/define-data-property/-/define-data-property-1.1.4.tgz",
+@@ -6675,6 +6740,29 @@
+         "url": "https://github.com/sponsors/ljharb"
+       }
+     },
++    "node_modules/defu": {
++      "version": "6.1.7",
++      "resolved": "https://registry.npmjs.org/defu/-/defu-6.1.7.tgz",
++      "integrity": "sha512-7z22QmUWiQ/2d0KkdYmANbRUVABpZ9SNYyH5vx6PZ+nE5bcC0l7uFvEfHlyld/HcGBFTL536ClDt3DEcSlEJAQ==",
++      "devOptional": true,
++      "license": "MIT"
++    },
++    "node_modules/denque": {
++      "version": "2.1.0",
++      "resolved": "https://registry.npmjs.org/denque/-/denque-2.1.0.tgz",
++      "integrity": "sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==",
++      "license": "Apache-2.0",
++      "engines": {
++        "node": ">=0.10"
++      }
++    },
++    "node_modules/destr": {
++      "version": "2.0.5",
++      "resolved": "https://registry.npmjs.org/destr/-/destr-2.0.5.tgz",
++      "integrity": "sha512-ugFTXCtDZunbzasqBxrK93Ik/DRYsO6S/fedkWEMKqt04xZ4csmnmwGDBAb07QWNaGMAmnTIemsYZCksjATwsA==",
++      "devOptional": true,
++      "license": "MIT"
++    },
+     "node_modules/detect-libc": {
+       "version": "2.1.2",
+       "resolved": "https://registry.npmjs.org/detect-libc/-/detect-libc-2.1.2.tgz",
+@@ -6798,6 +6886,19 @@
+         "tslib": "^2.0.3"
+       }
+     },
++    "node_modules/dotenv": {
++      "version": "16.6.1",
++      "resolved": "https://registry.npmjs.org/dotenv/-/dotenv-16.6.1.tgz",
++      "integrity": "sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==",
++      "devOptional": true,
++      "license": "BSD-2-Clause",
++      "engines": {
++        "node": ">=12"
++      },
++      "funding": {
++        "url": "https://dotenvx.com"
++      }
++    },
+     "node_modules/dunder-proto": {
+       "version": "1.0.1",
+       "resolved": "https://registry.npmjs.org/dunder-proto/-/dunder-proto-1.0.1.tgz",
+@@ -6818,6 +6919,17 @@
+       "integrity": "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==",
+       "license": "MIT"
+     },
++    "node_modules/effect": {
++      "version": "3.21.0",
++      "resolved": "https://registry.npmjs.org/effect/-/effect-3.21.0.tgz",
++      "integrity": "sha512-PPN80qRokCd1f015IANNhrwOnLO7GrrMQfk4/lnZRE/8j7UPWrNNjPV0uBrZutI/nHzernbW+J0hdqQysHiSnQ==",
++      "devOptional": true,
++      "license": "MIT",
++      "dependencies": {
++        "@standard-schema/spec": "^1.0.0",
++        "fast-check": "^3.23.1"
++      }
++    },
+     "node_modules/electron-to-chromium": {
+       "version": "1.5.267",
+       "resolved": "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.267.tgz",
+@@ -6831,6 +6943,16 @@
+       "integrity": "sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==",
+       "license": "MIT"
+     },
++    "node_modules/empathic": {
++      "version": "2.0.0",
++      "resolved": "https://registry.npmjs.org/empathic/-/empathic-2.0.0.tgz",
++      "integrity": "sha512-i6UzDscO/XfAcNYD75CfICkmfLedpyPDdozrLMmQc5ORaQcdMoc21OnlEylMIqI7U8eniKrPMxxtj8k0vhmJhA==",
++      "devOptional": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=14"
++      }
++    },
+     "node_modules/entities": {
+       "version": "4.5.0",
+       "resolved": "https://registry.npmjs.org/entities/-/entities-4.5.0.tgz",
+@@ -7551,6 +7673,36 @@
+       "integrity": "sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==",
+       "license": "MIT"
+     },
++    "node_modules/exsolve": {
++      "version": "1.1.1",
++      "resolved": "https://registry.npmjs.org/exsolve/-/exsolve-1.1.1.tgz",
++      "integrity": "sha512-9U/jZUgjnSGyntRr6y5Muu1MJcwFl6kPu7k8qLF0IMNfLqvw0NZ4nnVDq0RVoZ0RvCyumib4Ez3KYrVfilrw+g==",
++      "devOptional": true,
++      "license": "MIT"
++    },
++    "node_modules/fast-check": {
++      "version": "3.23.2",
++      "resolved": "https://registry.npmjs.org/fast-check/-/fast-check-3.23.2.tgz",
++      "integrity": "sha512-h5+1OzzfCC3Ef7VbtKdcv7zsstUQwUDlYpUTvjeUsJAssPgLn7QzbboPtL5ro04Mq0rPOsMzl7q5hIbRs2wD1A==",
++      "devOptional": true,
++      "funding": [
++        {
++          "type": "individual",
++          "url": "https://github.com/sponsors/dubzzz"
++        },
++        {
++          "type": "opencollective",
++          "url": "https://opencollective.com/fast-check"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "pure-rand": "^6.1.0"
++      },
++      "engines": {
++        "node": ">=8.0.0"
++      }
++    },
+     "node_modules/fast-deep-equal": {
+       "version": "3.1.3",
+       "resolved": "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz",
+@@ -7946,6 +8098,24 @@
+         "url": "https://github.com/privatenumber/get-tsconfig?sponsor=1"
+       }
+     },
++    "node_modules/giget": {
++      "version": "2.0.0",
++      "resolved": "https://registry.npmjs.org/giget/-/giget-2.0.0.tgz",
++      "integrity": "sha512-L5bGsVkxJbJgdnwyuheIunkGatUF/zssUoxxjACCseZYAVbaqdh9Tsmmlkl8vYan09H7sbvKt4pS8GqKLBrEzA==",
++      "devOptional": true,
++      "license": "MIT",
++      "dependencies": {
++        "citty": "^0.1.6",
++        "consola": "^3.4.0",
++        "defu": "^6.1.4",
++        "node-fetch-native": "^1.6.6",
++        "nypm": "^0.6.0",
++        "pathe": "^2.0.3"
++      },
++      "bin": {
++        "giget": "dist/cli.mjs"
++      }
++    },
+     "node_modules/glob": {
+       "version": "10.3.10",
+       "resolved": "https://registry.npmjs.org/glob/-/glob-10.3.10.tgz",
+@@ -8182,15 +8352,6 @@
+       "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==",
+       "license": "MIT"
+     },
+-    "node_modules/iceberg-js": {
+-      "version": "0.8.1",
+-      "resolved": "https://registry.npmjs.org/iceberg-js/-/iceberg-js-0.8.1.tgz",
+-      "integrity": "sha512-1dhVQZXhcHje7798IVM+xoo/1ZdVfzOMIc8/rgVSijRK38EDqOJoGula9N/8ZI5RD8QTxNQtK/Gozpr+qUqRRA==",
+-      "license": "MIT",
+-      "engines": {
+-        "node": ">=20.0.0"
+-      }
+-    },
+     "node_modules/ignore": {
+       "version": "5.3.2",
+       "resolved": "https://registry.npmjs.org/ignore/-/ignore-5.3.2.tgz",
+@@ -8259,6 +8420,28 @@
+         "node": ">= 0.4"
+       }
+     },
++    "node_modules/ioredis": {
++      "version": "5.11.1",
++      "resolved": "https://registry.npmjs.org/ioredis/-/ioredis-5.11.1.tgz",
++      "integrity": "sha512-ehuGcf94bQXhfagULNXrJdfnWO38v070jxSx/qE87Kjzmu2fU7ro5EFAb+OPituLqgfyuQaym5DlrNydW2sJ9A==",
++      "license": "MIT",
++      "dependencies": {
++        "@ioredis/commands": "1.10.0",
++        "cluster-key-slot": "1.1.1",
++        "debug": "4.4.3",
++        "denque": "2.1.0",
++        "redis-errors": "1.2.0",
++        "redis-parser": "3.0.0",
++        "standard-as-callback": "2.1.0"
++      },
++      "engines": {
++        "node": ">=12.22.0"
++      },
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/ioredis"
++      }
++    },
+     "node_modules/is-array-buffer": {
+       "version": "3.0.5",
+       "resolved": "https://registry.npmjs.org/is-array-buffer/-/is-array-buffer-3.0.5.tgz",
+@@ -8719,6 +8902,16 @@
+         "@pkgjs/parseargs": "^0.11.0"
+       }
+     },
++    "node_modules/jiti": {
++      "version": "2.7.0",
++      "resolved": "https://registry.npmjs.org/jiti/-/jiti-2.7.0.tgz",
++      "integrity": "sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==",
++      "devOptional": true,
++      "license": "MIT",
++      "bin": {
++        "jiti": "lib/jiti-cli.mjs"
++      }
++    },
+     "node_modules/jquery": {
+       "version": "3.7.1",
+       "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.7.1.tgz",
+@@ -9898,6 +10091,13 @@
+         "tslib": "^2.0.3"
+       }
+     },
++    "node_modules/node-fetch-native": {
++      "version": "1.6.7",
++      "resolved": "https://registry.npmjs.org/node-fetch-native/-/node-fetch-native-1.6.7.tgz",
++      "integrity": "sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==",
++      "devOptional": true,
++      "license": "MIT"
++    },
+     "node_modules/node-releases": {
+       "version": "2.0.27",
+       "resolved": "https://registry.npmjs.org/node-releases/-/node-releases-2.0.27.tgz",
+@@ -9942,6 +10142,31 @@
+         "node": "*"
+       }
+     },
++    "node_modules/nypm": {
++      "version": "0.6.10",
++      "resolved": "https://registry.npmjs.org/nypm/-/nypm-0.6.10.tgz",
++      "integrity": "sha512-W72Hrj1petq+b3Hk2aAC+9zswetlIFTnDW4s5djseZh2nYqBbyQLOtj472HwcbcWykPBUW1WpWpjOd4nK6gMRw==",
++      "devOptional": true,
++      "license": "MIT",
++      "dependencies": {
++        "citty": "^0.2.2",
++        "pathe": "^2.0.3",
++        "tinyexec": "^1.3.1"
++      },
++      "bin": {
++        "nypm": "dist/cli.mjs"
++      },
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/nypm/node_modules/citty": {
++      "version": "0.2.2",
++      "resolved": "https://registry.npmjs.org/citty/-/citty-0.2.2.tgz",
++      "integrity": "sha512-+6vJA3L98yv+IdfKGZHBNiGW5KHn22e/JwID0Strsz8h4S/csAu/OuICwxrg44k5MRiZHWIo8XXuJgQTriRP4w==",
++      "devOptional": true,
++      "license": "MIT"
++    },
+     "node_modules/object-assign": {
+       "version": "4.1.1",
+       "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+@@ -10057,6 +10282,13 @@
+         "url": "https://github.com/sponsors/ljharb"
+       }
+     },
++    "node_modules/ohash": {
++      "version": "2.0.12",
++      "resolved": "https://registry.npmjs.org/ohash/-/ohash-2.0.12.tgz",
++      "integrity": "sha512-65S/5gk9YSsaRjcyf7Nfa6h/d3E8/1gslpXfI4W7Dxn/oap8IKRuNT5VXkLQ1YFKIEg4apRY4Pj6aiwFzrDdmw==",
++      "devOptional": true,
++      "license": "MIT"
++    },
+     "node_modules/once": {
+       "version": "1.4.0",
+       "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
+@@ -10246,6 +10478,20 @@
+         "node": ">=8"
+       }
+     },
++    "node_modules/pathe": {
++      "version": "2.0.3",
++      "resolved": "https://registry.npmjs.org/pathe/-/pathe-2.0.3.tgz",
++      "integrity": "sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w==",
++      "devOptional": true,
++      "license": "MIT"
++    },
++    "node_modules/perfect-debounce": {
++      "version": "1.0.0",
++      "resolved": "https://registry.npmjs.org/perfect-debounce/-/perfect-debounce-1.0.0.tgz",
++      "integrity": "sha512-xCy9V055GLEqoFaHoC1SoLIaLmWctgCUaBaWxDZ7/Zx4CTyX7cJQLJOok/orfjZAh9kEYpjJa4d0KcJmCbctZA==",
++      "devOptional": true,
++      "license": "MIT"
++    },
+     "node_modules/picocolors": {
+       "version": "1.1.1",
+       "resolved": "https://registry.npmjs.org/picocolors/-/picocolors-1.1.1.tgz",
+@@ -10264,6 +10510,25 @@
+         "url": "https://github.com/sponsors/jonschlinkert"
+       }
+     },
++    "node_modules/pkg-types": {
++      "version": "2.3.3",
++      "resolved": "https://registry.npmjs.org/pkg-types/-/pkg-types-2.3.3.tgz",
++      "integrity": "sha512-j/lCFdcppV0JxWpCEITdbDltBxPP6cHT+yNJ6Go2OgoSA9518X847X9z0p6LtA4Nc16+eQzCZjRrWanTGvHJ5w==",
++      "devOptional": true,
++      "license": "MIT",
++      "dependencies": {
++        "confbox": "^0.3.1",
++        "exsolve": "^1.1.1",
++        "pathe": "^2.0.3"
++      }
++    },
++    "node_modules/pkg-types/node_modules/confbox": {
++      "version": "0.3.1",
++      "resolved": "https://registry.npmjs.org/confbox/-/confbox-0.3.1.tgz",
++      "integrity": "sha512-cKUSoKa8YxFZZSmraVi7onONx3amu77ngK3kGpsYHDH7drPwCRkQE1RYMPlLRrMtnciRj274XNRxcHxnKmDSnA==",
++      "devOptional": true,
++      "license": "MIT"
++    },
+     "node_modules/possible-typed-array-names": {
+       "version": "1.1.0",
+       "resolved": "https://registry.npmjs.org/possible-typed-array-names/-/possible-typed-array-names-1.1.0.tgz",
+@@ -10327,6 +10592,32 @@
+         "url": "https://github.com/prettier/prettier?sponsor=1"
+       }
+     },
++    "node_modules/prisma": {
++      "version": "6.19.3",
++      "resolved": "https://registry.npmjs.org/prisma/-/prisma-6.19.3.tgz",
++      "integrity": "sha512-++ZJ0ijLrDJF6hNB4t4uxg2br3fC4H9Yc9tcbjr2fcNFP3rh/SBNrAgjhsqBU4Ght8JPrVofG/ZkXfnSfnYsFg==",
++      "devOptional": true,
++      "hasInstallScript": true,
++      "license": "Apache-2.0",
++      "dependencies": {
++        "@prisma/config": "6.19.3",
++        "@prisma/engines": "6.19.3"
++      },
++      "bin": {
++        "prisma": "build/index.js"
++      },
++      "engines": {
++        "node": ">=18.18"
++      },
++      "peerDependencies": {
++        "typescript": ">=5.1.0"
++      },
++      "peerDependenciesMeta": {
++        "typescript": {
++          "optional": true
++        }
++      }
++    },
+     "node_modules/prop-types": {
+       "version": "15.8.1",
+       "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz",
+@@ -10360,6 +10651,23 @@
+         "node": ">=6"
+       }
+     },
++    "node_modules/pure-rand": {
++      "version": "6.1.0",
++      "resolved": "https://registry.npmjs.org/pure-rand/-/pure-rand-6.1.0.tgz",
++      "integrity": "sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==",
++      "devOptional": true,
++      "funding": [
++        {
++          "type": "individual",
++          "url": "https://github.com/sponsors/dubzzz"
++        },
++        {
++          "type": "opencollective",
++          "url": "https://opencollective.com/fast-check"
++        }
++      ],
++      "license": "MIT"
++    },
+     "node_modules/queue-microtask": {
+       "version": "1.2.3",
+       "resolved": "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz",
+@@ -10380,6 +10688,17 @@
+       ],
+       "license": "MIT"
+     },
++    "node_modules/rc9": {
++      "version": "2.1.2",
++      "resolved": "https://registry.npmjs.org/rc9/-/rc9-2.1.2.tgz",
++      "integrity": "sha512-btXCnMmRIBINM2LDZoEmOogIZU7Qe7zn4BpomSKZ/ykbLObuBdvG+mFq11DL6fjH1DRwHhrlgtYWG96bJiC7Cg==",
++      "devOptional": true,
++      "license": "MIT",
++      "dependencies": {
++        "defu": "^6.1.4",
++        "destr": "^2.0.3"
++      }
++    },
+     "node_modules/react": {
+       "version": "19.2.3",
+       "resolved": "https://registry.npmjs.org/react/-/react-19.2.3.tgz",
+@@ -10528,6 +10847,41 @@
+         "react-dom": ">=16.6.0"
+       }
+     },
++    "node_modules/readdirp": {
++      "version": "4.1.2",
++      "resolved": "https://registry.npmjs.org/readdirp/-/readdirp-4.1.2.tgz",
++      "integrity": "sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==",
++      "devOptional": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">= 14.18.0"
++      },
++      "funding": {
++        "type": "individual",
++        "url": "https://paulmillr.com/funding/"
++      }
++    },
++    "node_modules/redis-errors": {
++      "version": "1.2.0",
++      "resolved": "https://registry.npmjs.org/redis-errors/-/redis-errors-1.2.0.tgz",
++      "integrity": "sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==",
++      "license": "MIT",
++      "engines": {
++        "node": ">=4"
++      }
++    },
++    "node_modules/redis-parser": {
++      "version": "3.0.0",
++      "resolved": "https://registry.npmjs.org/redis-parser/-/redis-parser-3.0.0.tgz",
++      "integrity": "sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A==",
++      "license": "MIT",
++      "dependencies": {
++        "redis-errors": "^1.0.0"
++      },
++      "engines": {
++        "node": ">=4"
++      }
++    },
+     "node_modules/reflect.getprototypeof": {
+       "version": "1.0.10",
+       "resolved": "https://registry.npmjs.org/reflect.getprototypeof/-/reflect.getprototypeof-1.0.10.tgz",
+@@ -11143,6 +11497,12 @@
+       "integrity": "sha512-+L3ccpzibovGXFK+Ap/f8LOS0ahMrHTf3xu7mMLSpEGU0EO9ucaysSylKo9eRDFNhWve/y275iPmIZ4z39a9iA==",
+       "license": "MIT"
+     },
++    "node_modules/standard-as-callback": {
++      "version": "2.1.0",
++      "resolved": "https://registry.npmjs.org/standard-as-callback/-/standard-as-callback-2.1.0.tgz",
++      "integrity": "sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==",
++      "license": "MIT"
++    },
+     "node_modules/stop-iteration-iterator": {
+       "version": "1.1.0",
+       "resolved": "https://registry.npmjs.org/stop-iteration-iterator/-/stop-iteration-iterator-1.1.0.tgz",
+@@ -11525,6 +11885,16 @@
+       "integrity": "sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==",
+       "license": "MIT"
+     },
++    "node_modules/tinyexec": {
++      "version": "1.3.1",
++      "resolved": "https://registry.npmjs.org/tinyexec/-/tinyexec-1.3.1.tgz",
++      "integrity": "sha512-GCvB3aoys96IuDFBMcTB46JOR6mdMtAToqwiW8JlWhsoh1mhHi/xn9ss/Dg7N555GiJyEt2qzoG/NHCwM6h1EA==",
++      "devOptional": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=18"
++      }
++    },
+     "node_modules/tinyglobby": {
+       "version": "0.2.15",
+       "resolved": "https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.15.tgz",
+@@ -11761,12 +12131,6 @@
+         "url": "https://github.com/sponsors/ljharb"
+       }
+     },
+-    "node_modules/uncrypto": {
+-      "version": "0.1.3",
+-      "resolved": "https://registry.npmjs.org/uncrypto/-/uncrypto-0.1.3.tgz",
+-      "integrity": "sha512-Ql87qFHB3s/De2ClA9e0gsnS6zXG27SkTiSJwjCc9MebbfapQfuPzumMIUMi38ezPZVNFcHI9sUIepeQfw8J8Q==",
+-      "license": "MIT"
+-    },
+     "node_modules/undici-types": {
+       "version": "6.21.0",
+       "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-6.21.0.tgz",
+diff --git a/package.json b/package.json
+index 5a61be0..dc2f83a 100644
+--- a/package.json
++++ b/package.json
+@@ -11,6 +11,8 @@
+     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
++    "postinstall": "prisma generate",
++    "db:pull": "prisma db pull",
+     "rm:all": "rm -rf node_modules .next out dist build",
+     "re:start": "yarn rm:all && yarn install && yarn dev",
+     "re:build": "yarn rm:all && yarn install && yarn build",
+@@ -26,9 +28,7 @@
+     "@mui/material": "^7.3.6",
+     "@mui/system": "^7.3.6",
+     "@mui/x-date-pickers": "^8.22.0",
+-    "@supabase/supabase-js": "^2.58.0",
+-    "@upstash/ratelimit": "^2.0.8",
+-    "@upstash/redis": "^1.37.0",
++    "@prisma/client": "^6.19.3",
+     "@vercel/analytics": "^1.4.1",
+     "@vercel/speed-insights": "^1.0.10",
+     "date-fns": "^2.30.0",
+@@ -37,6 +37,7 @@
+     "formik": "^2.4.9",
+     "framer-motion": "^12.23.26",
+     "google-map-react": "^2.2.1",
++    "ioredis": "^5.4.1",
+     "lodash.isequal": "^4.5.0",
+     "lodash.merge": "^4.6.2",
+     "moment": "^2.29.4",
+@@ -82,6 +83,7 @@
+     "@typescript-eslint/eslint-plugin": "^6.15.0",
+     "@typescript-eslint/parser": "^6.15.0",
+     "prettier": "^3.0.3",
++    "prisma": "^6.19.3",
+     "typescript": "^5.2.2"
+   }
+ }
+diff --git a/prisma/schema.prisma b/prisma/schema.prisma
+new file mode 100644
+index 0000000..17f422d
+--- /dev/null
++++ b/prisma/schema.prisma
+@@ -0,0 +1,125 @@
++// LDA public site (lda-su) — Prisma schema for the self-hosted `lda` Postgres
++// (shared with lda-dashboard). Connects as `lda_app`; public reads go through
++// asAnon and question writes through asService in src/lib/db/rls.ts.
++// Relation fields are named to match the PostgREST embed names the service
++// mappers already expect (row.project_summaries / row.project_activities).
++// Kept in sync with ~/platform/lda-migration/*.sql.
++
++generator client {
++  provider = "prisma-client-js"
++}
++
++datasource db {
++  provider = "postgresql"
++  url      = env("DATABASE_URL")
++}
++
++model admin_allowlist {
++  email      String   @id
++  created_at DateTime @default(now()) @db.Timestamptz(6)
++}
++
++model activities {
++  id                String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
++  title             String
++  activity_url      String    @unique
++  author            String?
++  published_date    DateTime? @db.Timestamptz(6)
++  status            String    @default("to-do")
++  category          String    @default("other")
++  descriptions      String[]  @default([])
++  quill_editor_data String?
++  gallery           String[]  @default([])
++  cover_url         String?
++  links             String[]  @default([])
++  list              String[]  @default([])
++  list_title        String?
++  favorited         Boolean   @default(false)
++  favorited_number  Int?
++  locale            String    @default("sr")
++  created_at        DateTime  @default(now()) @db.Timestamptz(6)
++  updated_at        DateTime  @default(now()) @db.Timestamptz(6)
++}
++
++model project_summaries {
++  id                        String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
++  title                     String
++  project_summary_url       String               @unique
++  project_summary_cover_url String?
++  status                    String               @default("to-do")
++  category                  String               @default("other")
++  project_start_date_time   DateTime?            @db.Timestamptz(6)
++  project_end_date_time     DateTime?            @db.Timestamptz(6)
++  organizers                String[]             @default([])
++  locations                 String[]             @default([])
++  applicants                String[]             @default([])
++  donators                  String[]             @default([])
++  publications              String[]             @default([])
++  links                     String[]             @default([])
++  gallery                   String[]             @default([])
++  locale                    String               @default("sr")
++  created_at                DateTime             @default(now()) @db.Timestamptz(6)
++  updated_at                DateTime             @default(now()) @db.Timestamptz(6)
++  project_activities        project_activities[]
++}
++
++model project_activities {
++  id                   String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
++  project_summary_id   String?            @db.Uuid
++  title                String
++  sub_title            String?
++  title_eng            String?
++  sub_title_eng        String?
++  has_translation      Boolean            @default(false)
++  paragraphs           String[]           @default([])
++  paragraphs_eng       String[]           @default([])
++  quill_editor_data    String?
++  content_html         String?
++  content_html_eng     String?
++  project_url          String             @unique
++  published            DateTime?          @db.Timestamptz(6)
++  status               String             @default("to-do")
++  category             String             @default("other")
++  gallery              String[]           @default([])
++  links                String[]           @default([])
++  list                 String[]           @default([])
++  list_title           String?
++  favorited            Boolean            @default(false)
++  favorited_number     Int?
++  organizers           String[]           @default([])
++  sub_organizers       String[]           @default([])
++  applicants           String[]           @default([])
++  donators             String[]           @default([])
++  locations            String[]           @default([])
++  publications         String[]           @default([])
++  show_project_details Boolean            @default(false)
++  show_list            Boolean            @default(false)
++  show_list_on_bottom  Boolean            @default(false)
++  locale               String             @default("sr")
++  created_at           DateTime           @default(now()) @db.Timestamptz(6)
++  updated_at           DateTime           @default(now()) @db.Timestamptz(6)
++  project_summaries    project_summaries? @relation(fields: [project_summary_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
++
++  @@index([project_summary_id])
++}
++
++model publications {
++  id                             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
++  publication_title              String
++  publication_url                String
++  publication_image_url          String?
++  publication_uploaded_date_time DateTime @default(now()) @db.Timestamptz(6)
++  created_at                     DateTime @default(now()) @db.Timestamptz(6)
++}
++
++model questions {
++  id                 String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
++  full_name          String?
++  email              String
++  question           String
++  answer             String?
++  question_date_time DateTime? @db.Timestamptz(6)
++  answer_date_time   DateTime? @db.Timestamptz(6)
++  archived           Boolean   @default(false)
++  created_at         DateTime  @default(now()) @db.Timestamptz(6)
++}
+diff --git a/src/app/api/send-question/route.ts b/src/app/api/send-question/route.ts
+index ab27fa2..56166ff 100644
+--- a/src/app/api/send-question/route.ts
++++ b/src/app/api/send-question/route.ts
+@@ -58,7 +58,7 @@ export async function POST(request: Request) {
+ 
+                     <p style="margin-top: 24px;">
+                          <a
+-                              href="https://lda-dashboard.vercel.app/questions"
++                              href="https://lda-dashboard.mrbigs.cloud/questions"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               style="
+diff --git a/src/lib/db/prisma.ts b/src/lib/db/prisma.ts
+new file mode 100644
+index 0000000..5125376
+--- /dev/null
++++ b/src/lib/db/prisma.ts
+@@ -0,0 +1,23 @@
++import 'server-only';
++import { PrismaClient } from '@prisma/client';
++
++/*
++ * Connects as `lda_app`, which (NOINHERIT) has no table privileges of its own —
++ * every query must go through `asAnon` / `asService` in `./rls.ts`, which switch
++ * to the right database role for RLS. The public site reads content as `anon`;
++ * question submissions run as `service_role`.
++ */
++
++const globalForPrisma = globalThis as unknown as {
++     prisma: PrismaClient | undefined;
++};
++
++export const prisma =
++     globalForPrisma.prisma ??
++     new PrismaClient({
++          log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
++     });
++
++if (process.env.NODE_ENV !== 'production') {
++     globalForPrisma.prisma = prisma;
++}
+diff --git a/src/lib/db/rls.ts b/src/lib/db/rls.ts
+new file mode 100644
+index 0000000..5b801d1
+--- /dev/null
++++ b/src/lib/db/rls.ts
+@@ -0,0 +1,37 @@
++import 'server-only';
++import type { Prisma } from '@prisma/client';
++import { prisma } from './prisma';
++
++/*
++ * Row-level security for Prisma (same pattern as lda-dashboard / dar-pharmacy).
++ * Each call runs `fn` in one transaction that first does
++ *   SET LOCAL ROLE <role>
++ *   set_config('request.jwt.claims', {"role": <role>}, true)
++ * so the RLS policies from ~/platform/lda-migration/02_rls.sql apply. Both
++ * settings are transaction-local, so pooled connections never leak a role.
++ *
++ * - asAnon: public content reads (RLS grants anon SELECT on activities,
++ *   project_summaries, project_activities, publications).
++ * - asService: the `questions` table (no public policy) — reads answered Q&A and
++ *   inserts new submissions, matching the old service-role Supabase client.
++ */
++
++export type Tx = Prisma.TransactionClient;
++
++type DbRole = 'anon' | 'service_role';
++
++const TX_OPTIONS = { maxWait: 5_000, timeout: 15_000 } as const;
++
++const withRole = <T>(role: DbRole, fn: (tx: Tx) => Promise<T>): Promise<T> =>
++     prisma.$transaction(async (tx) => {
++          // `role` is one of the two literals above, never user input.
++          await tx.$executeRawUnsafe(`SET LOCAL ROLE ${role}`);
++          await tx.$queryRaw`SELECT set_config('request.jwt.claims', ${JSON.stringify({ role })}, true)`;
++          return fn(tx);
++     }, TX_OPTIONS);
++
++/** Public visitor: RLS allows SELECT on the content tables only. */
++export const asAnon = <T>(fn: (tx: Tx) => Promise<T>) => withRole('anon', fn);
++
++/** Bypasses RLS — used only for the `questions` table (read answered / insert new). */
++export const asService = <T>(fn: (tx: Tx) => Promise<T>) => withRole('service_role', fn);
+diff --git a/src/lib/db/serialize.ts b/src/lib/db/serialize.ts
+new file mode 100644
+index 0000000..6b7971a
+--- /dev/null
++++ b/src/lib/db/serialize.ts
+@@ -0,0 +1,30 @@
++import { Prisma } from '@prisma/client';
++
++/*
++ * Prisma returns Date objects for timestamptz columns; the service mappers and
++ * the UI were written against Supabase's JSON (ISO strings). Convert once so the
++ * rows fed to the mappers look exactly like the old PostgREST responses.
++ */
++
++type Plain<T> = T extends Prisma.Decimal
++     ? number
++     : T extends Date
++       ? string
++       : T extends Array<infer U>
++         ? Plain<U>[]
++         : T extends object
++           ? { [K in keyof T]: Plain<T[K]> }
++           : T;
++
++export function toPlain<T>(value: T): Plain<T> {
++     if (value === null || value === undefined) return value as Plain<T>;
++     if (Prisma.Decimal.isDecimal(value)) return (value as Prisma.Decimal).toNumber() as Plain<T>;
++     if (value instanceof Date) return value.toISOString() as Plain<T>;
++     if (Array.isArray(value)) return value.map(toPlain) as Plain<T>;
++     if (typeof value === 'object') {
++          const out: Record<string, unknown> = {};
++          for (const [key, entry] of Object.entries(value)) out[key] = toPlain(entry);
++          return out as Plain<T>;
++     }
++     return value as Plain<T>;
++}
+diff --git a/src/lib/supabase-admin.ts b/src/lib/supabase-admin.ts
+deleted file mode 100644
+index f5a8c3d..0000000
+--- a/src/lib/supabase-admin.ts
++++ /dev/null
+@@ -1,8 +0,0 @@
+-import { createClient } from '@supabase/supabase-js';
+-
+-// Service-role key — only ever import this from server-side code (route handlers,
+-// server components/services), never from a 'use client' file.
+-export const supabaseAdmin = createClient(
+-     process.env.NEXT_PUBLIC_SUPABASE_URL!,
+-     process.env.SUPABASE_SECRET_KEY!
+-);
+diff --git a/src/lib/supabase.ts b/src/lib/supabase.ts
+deleted file mode 100644
+index c79913b..0000000
+--- a/src/lib/supabase.ts
++++ /dev/null
+@@ -1,6 +0,0 @@
+-import { createClient } from '@supabase/supabase-js';
+-
+-export const supabase = createClient(
+-     process.env.NEXT_PUBLIC_SUPABASE_URL!,
+-     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+-);
+diff --git a/src/services/activities-services.ts b/src/services/activities-services.ts
+index 1eec9a4..934eb03 100644
+--- a/src/services/activities-services.ts
++++ b/src/services/activities-services.ts
+@@ -1,4 +1,5 @@
+-import { supabase } from "src/lib/supabase"
++import { asAnon } from "src/lib/db/rls"
++import { toPlain } from "src/lib/db/serialize"
+ import { Activity } from "src/types/activity"
+ 
+ type ActivityWithStringId = Activity & { _id: string };
+@@ -25,90 +26,73 @@ const mapActivity = (row: any): ActivityWithStringId => ({
+ const activityServices = () => {
+ 
+      const getAllActivities = async () => {
+-          const { data, error } = await supabase
+-               .from('activities')
+-               .select('*')
+-               .eq('locale', 'sr')
+-
+-          if (error) {
+-               console.log({ message: error.message })
++          try {
++               const rows = await asAnon((tx) => tx.activities.findMany({ where: { locale: 'sr' } }))
++               return toPlain(rows).map(mapActivity)
++          } catch (error: any) {
++               console.log({ message: error?.message })
+                return []
+           }
+-          return (data ?? []).map(mapActivity)
+      }
+ 
+      const getActivityByLink = async (activityURL: string): Promise<ActivityWithStringId | undefined> => {
+-          const { data, error } = await supabase
+-               .from('activities')
+-               .select('*')
+-               .eq('locale', 'sr')
+-               .eq('activity_url', activityURL)
+-               .maybeSingle()
+-
+-          if (error || !data) {
+-               if (error) console.log({ message: error.message })
++          try {
++               const row = await asAnon((tx) => tx.activities.findFirst({ where: { locale: 'sr', activity_url: activityURL } }))
++               if (!row) return undefined
++               return mapActivity(toPlain(row))
++          } catch (error: any) {
++               console.log({ message: error?.message })
+                return undefined
+           }
+-          return mapActivity(data)
+      }
+ 
+      const getCompletedActivities = async () => {
+-          const { data, error } = await supabase
+-               .from('activities')
+-               .select('*')
+-               .eq('locale', 'sr')
+-               .eq('status', 'completed')
+-               .order('published_date', { ascending: true })
+-
+-          if (error) {
+-               console.log({ message: error.message })
++          try {
++               const rows = await asAnon((tx) => tx.activities.findMany({
++                    where: { locale: 'sr', status: 'completed' },
++                    orderBy: { published_date: { sort: 'asc', nulls: 'last' } },
++               }))
++               return toPlain(rows).map(mapActivity)
++          } catch (error: any) {
++               console.log({ message: error?.message })
+                return []
+           }
+-          return (data ?? []).map(mapActivity)
+      }
+ 
+      const getActivitiesByCategory = async (category: string) => {
+-          const { data, error } = await supabase
+-               .from('activities')
+-               .select('*')
+-               .eq('locale', 'sr')
+-               .eq('category', category)
+-               .order('published_date', { ascending: true })
+-
+-          if (error) {
+-               console.log({ message: error.message })
++          try {
++               const rows = await asAnon((tx) => tx.activities.findMany({
++                    where: { locale: 'sr', category },
++                    orderBy: { published_date: { sort: 'asc', nulls: 'last' } },
++               }))
++               return toPlain(rows).map(mapActivity)
++          } catch (error: any) {
++               console.log({ message: error?.message })
+                return []
+           }
+-          return (data ?? []).map(mapActivity)
+      }
+ 
+      const getFeaturedCompletedActivities = async () => {
+-          const { data, error } = await supabase
+-               .from('activities')
+-               .select('*')
+-               .eq('locale', 'sr')
+-               .eq('status', 'completed')
+-               .limit(6)
+-
+-          if (error) {
+-               console.log({ message: error.message })
++          try {
++               const rows = await asAnon((tx) => tx.activities.findMany({
++                    where: { locale: 'sr', status: 'completed' },
++                    take: 6,
++               }))
++               return toPlain(rows).map(mapActivity)
++          } catch (error: any) {
++               console.log({ message: error?.message })
+                return []
+           }
+-          return (data ?? []).map(mapActivity)
+      }
+ 
+      const getInProgressActivities = async () => {
+-          const { data, error } = await supabase
+-               .from('activities')
+-               .select('*')
+-               .eq('locale', 'sr')
+-               .eq('status', 'in-progress')
+-
+-          if (error) {
+-               console.log({ message: error.message })
++          try {
++               const rows = await asAnon((tx) => tx.activities.findMany({ where: { locale: 'sr', status: 'in-progress' } }))
++               return toPlain(rows).map(mapActivity)
++          } catch (error: any) {
++               console.log({ message: error?.message })
+                return []
+           }
+-          return (data ?? []).map(mapActivity)
+      }
+ 
+      return {
+diff --git a/src/services/project-services.ts b/src/services/project-services.ts
+index c5ce2e2..50c9769 100644
+--- a/src/services/project-services.ts
++++ b/src/services/project-services.ts
+@@ -1,4 +1,5 @@
+-import { supabase } from "src/lib/supabase";
++import { asAnon } from "src/lib/db/rls";
++import { toPlain } from "src/lib/db/serialize";
+ import { Project } from "src/types/project";
+ import { ProjectSummary } from "src/types/projectSummary";
+ import { Publication } from "src/types/publication";
+@@ -101,131 +102,123 @@ const shuffle = <T,>(items: T[]): T[] => {
+ 
+ const projectsServices = () => {
+ 
+-     const getAllPublications = async () => {
+-          const { data, error } = await supabase
+-               .from('publications')
+-               .select('*')
+-               .order('publication_uploaded_date_time', { ascending: false });
++     // project summaries with their sr-locale child activities embedded
++     const summaryInclude = { project_activities: { where: { locale: 'sr' } } } as const;
++     const projectInclude = { project_summaries: { select: { project_summary_url: true } } } as const;
+ 
+-          if (error) {
++     const getAllPublications = async () => {
++          try {
++               const rows = await asAnon((tx) => tx.publications.findMany({
++                    orderBy: { publication_uploaded_date_time: 'desc' },
++               }));
++               return toPlain(rows).map(mapPublication);
++          } catch {
+                return [];
+           }
+-          return (data ?? []).map(mapPublication);
+      };
+ 
+      const getAllProjectSummaries = async () => {
+-          const { data, error } = await supabase
+-               .from('project_summaries')
+-               .select('*, project_activities(*)')
+-               .eq('locale', 'sr')
+-               .eq('project_activities.locale', 'sr')
+-               .order('project_end_date_time', { ascending: false });
+-
+-          if (error) {
++          try {
++               const rows = await asAnon((tx) => tx.project_summaries.findMany({
++                    where: { locale: 'sr' },
++                    include: summaryInclude,
++                    orderBy: { project_end_date_time: { sort: 'desc', nulls: 'last' } },
++               }));
++               return toPlain(rows).map(mapProjectSummary);
++          } catch {
+                return [];
+           }
+-          return (data ?? []).map(mapProjectSummary);
+      };
+ 
+      const getInProgressProjectSummaries = async () => {
+-          const { data, error } = await supabase
+-               .from('project_summaries')
+-               .select('*, project_activities(*)')
+-               .eq('locale', 'sr')
+-               .eq('project_activities.locale', 'sr')
+-               .eq('status', 'in-progress')
+-               .order('project_end_date_time', { ascending: false });
+-
+-          if (error) {
++          try {
++               const rows = await asAnon((tx) => tx.project_summaries.findMany({
++                    where: { locale: 'sr', status: 'in-progress' },
++                    include: summaryInclude,
++                    orderBy: { project_end_date_time: { sort: 'desc', nulls: 'last' } },
++               }));
++               return toPlain(rows).map(mapProjectSummary);
++          } catch {
+                return [];
+           }
+-          return (data ?? []).map(mapProjectSummary);
+      };
+ 
+      const getCompletedProjectSummaries = async () => {
+-          const { data, error } = await supabase
+-               .from('project_summaries')
+-               .select('*, project_activities(*)')
+-               .eq('locale', 'sr')
+-               .eq('project_activities.locale', 'sr')
+-               .eq('status', 'completed')
+-               .order('project_end_date_time', { ascending: false });
+-
+-          if (error) {
++          try {
++               const rows = await asAnon((tx) => tx.project_summaries.findMany({
++                    where: { locale: 'sr', status: 'completed' },
++                    include: summaryInclude,
++                    orderBy: { project_end_date_time: { sort: 'desc', nulls: 'last' } },
++               }));
++               return toPlain(rows).map(mapProjectSummary);
++          } catch {
+                return [];
+           }
+-          return (data ?? []).map(mapProjectSummary);
+      };
+ 
+      const getRandomCompletedProjectSummaries = async () => {
+-          const { data, error } = await supabase
+-               .from('project_summaries')
+-               .select('*, project_activities(*)')
+-               .eq('locale', 'sr')
+-               .eq('project_activities.locale', 'sr')
+-               .eq('status', 'completed');
+-
+-          if (error) {
++          try {
++               const rows = await asAnon((tx) => tx.project_summaries.findMany({
++                    where: { locale: 'sr', status: 'completed' },
++                    include: summaryInclude,
++               }));
++               return shuffle(toPlain(rows)).slice(0, 5).map(mapProjectSummary);
++          } catch {
+                return [];
+           }
+-          return shuffle(data ?? []).slice(0, 5).map(mapProjectSummary);
+      };
+ 
+      const getProjectSummaryByLink = async (link: string): Promise<ProjectSummary | undefined> => {
+-          const { data, error } = await supabase
+-               .from('project_summaries')
+-               .select('*, project_activities(*)')
+-               .eq('locale', 'sr')
+-               .eq('project_activities.locale', 'sr')
+-               .eq('project_summary_url', link)
+-               .maybeSingle();
+-
+-          if (error || !data) {
+-               if (error) console.log({ message: error.message });
++          try {
++               const row = await asAnon((tx) => tx.project_summaries.findFirst({
++                    where: { locale: 'sr', project_summary_url: link },
++                    include: summaryInclude,
++               }));
++               if (!row) return undefined;
++               return mapProjectSummary(toPlain(row));
++          } catch (error: any) {
++               console.log({ message: error?.message });
+                return undefined;
+           }
+-          return mapProjectSummary(data);
+      };
+ 
+      const getAllProjects = async () => {
+-          const { data, error } = await supabase
+-               .from('project_activities')
+-               .select('*, project_summaries(project_summary_url)')
+-               .eq('locale', 'sr');
+-
+-          if (error) {
++          try {
++               const rows = await asAnon((tx) => tx.project_activities.findMany({
++                    where: { locale: 'sr' },
++                    include: projectInclude,
++               }));
++               return toPlain(rows).map(mapProject);
++          } catch {
+                return [];
+           }
+-          return (data ?? []).map(mapProject);
+      };
+ 
+      const getProjectByLink = async (projectURL: string): Promise<Project | undefined> => {
+-          const { data, error } = await supabase
+-               .from('project_activities')
+-               .select('*, project_summaries(project_summary_url)')
+-               .eq('locale', 'sr')
+-               .eq('project_url', projectURL)
+-               .maybeSingle();
+-
+-          if (error || !data) {
+-               if (error) console.log({ message: error.message });
++          try {
++               const row = await asAnon((tx) => tx.project_activities.findFirst({
++                    where: { locale: 'sr', project_url: projectURL },
++                    include: projectInclude,
++               }));
++               if (!row) return undefined;
++               return mapProject(toPlain(row));
++          } catch (error: any) {
++               console.log({ message: error?.message });
+                return undefined;
+           }
+-          return mapProject(data);
+      };
+ 
+      const getSearchTermResults = async (searchTerm: string) => {
+-          const { data, error } = await supabase
+-               .from('project_activities')
+-               .select('*, project_summaries(project_summary_url)')
+-               .eq('locale', 'sr')
+-               .ilike('sub_title', `%${searchTerm}%`)
+-               .limit(5);
+-
+-          if (error) {
++          try {
++               const rows = await asAnon((tx) => tx.project_activities.findMany({
++                    where: { locale: 'sr', sub_title: { contains: searchTerm, mode: 'insensitive' } },
++                    include: projectInclude,
++                    take: 5,
++               }));
++               return toPlain(rows).map(mapProject);
++          } catch {
+                return [];
+           }
+-          return (data ?? []).map(mapProject);
+      };
+ 
+      return {
+diff --git a/src/services/question-answer-services.ts b/src/services/question-answer-services.ts
+index 397d24d..b8b3109 100644
+--- a/src/services/question-answer-services.ts
++++ b/src/services/question-answer-services.ts
+@@ -1,4 +1,5 @@
+-import { supabaseAdmin } from "src/lib/supabase-admin";
++import { asService } from "src/lib/db/rls";
++import { toPlain } from "src/lib/db/serialize";
+ import { QuestionAnswer } from "src/types/question-answer";
+ 
+ type CreateQuestionInput = Pick<QuestionAnswer, 'fullName' | 'email' | 'question'>;
+@@ -7,48 +8,50 @@ const questionAnswerServices = () => {
+ 
+      // Public list only ever shows answered, non-archived questions, and never the
+      // submitter's name/email — this table has no public read policy, everything here
+-     // runs server-side with the service-role key.
++     // runs server-side with the service_role (asService).
+      const getAllQuestionsAndAnswers = async (): Promise<QuestionAnswer[]> => {
+-          const { data, error } = await supabaseAdmin
+-               .from('questions')
+-               .select('id, question, answer, question_date_time, answer_date_time, archived')
+-               .eq('archived', false)
+-               .neq('answer', '')
+-               .order('question_date_time', { ascending: false });
++          try {
++               const rows = await asService((tx) => tx.questions.findMany({
++                    where: { archived: false, NOT: [{ answer: null }, { answer: '' }] },
++                    orderBy: { question_date_time: { sort: 'desc', nulls: 'last' } },
++                    select: {
++                         id: true, question: true, answer: true,
++                         question_date_time: true, answer_date_time: true, archived: true,
++                    },
++               }));
+ 
+-          if (error) {
+-               console.log({ message: error.message });
++               return toPlain(rows).map((row) => ({
++                    _id: row.id,
++                    fullName: '',
++                    email: '',
++                    question: row.question,
++                    answer: row.answer ?? '',
++                    archived: row.archived,
++                    questionDateTime: row.question_date_time ?? '',
++                    answerDateTime: row.answer_date_time,
++               }));
++          } catch (error: any) {
++               console.log({ message: error?.message });
+                return [];
+           }
+-
+-          return (data ?? []).map((row) => ({
+-               _id: row.id,
+-               fullName: '',
+-               email: '',
+-               question: row.question,
+-               answer: row.answer,
+-               archived: row.archived,
+-               questionDateTime: row.question_date_time,
+-               answerDateTime: row.answer_date_time,
+-          }));
+      };
+ 
+      const createQuestion = async (input: CreateQuestionInput) => {
+-          const { data, error } = await supabaseAdmin
+-               .from('questions')
+-               .insert({
+-                    full_name: input.fullName,
+-                    email: input.email,
+-                    question: input.question,
+-                    answer: '',
+-                    archived: false,
+-                    question_date_time: new Date().toISOString(),
+-                    answer_date_time: null,
+-               })
+-               .select()
+-               .single();
+-
+-          if (error || !data) {
++          let data: any;
++          try {
++               const row = await asService((tx) => tx.questions.create({
++                    data: {
++                         full_name: input.fullName,
++                         email: input.email,
++                         question: input.question,
++                         answer: '',
++                         archived: false,
++                         question_date_time: new Date().toISOString(),
++                         answer_date_time: null,
++                    },
++               }));
++               data = toPlain(row);
++          } catch (error: any) {
+                console.log({ message: error?.message });
+                return {
+                     acknowledged: false,
+diff --git a/src/utils/rate-limiter.ts b/src/utils/rate-limiter.ts
+index 1425046..dd9b8a4 100644
+--- a/src/utils/rate-limiter.ts
++++ b/src/utils/rate-limiter.ts
+@@ -1,14 +1,60 @@
+-import { Ratelimit } from "@upstash/ratelimit";
+-import { Redis } from "@upstash/redis";
+-
+-// Create Redis client
+-const redis = new Redis({
+-     url: process.env.UPSTASH_REDIS_REST_URL!,
+-     token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+-});
+-
+-// Create limiter
+-export const rateLimiter = new Ratelimit({
+-     redis,
+-     limiter: Ratelimit.slidingWindow(3, "1 h"), // 3 requests per hour
+-});
+\ No newline at end of file
++import 'server-only';
++import Redis from 'ioredis';
++
++/*
++ * Sliding-window rate limiter on the self-hosted platform Redis (replaces
++ * @upstash/ratelimit). Same public shape as before: `rateLimiter.limit(id)`
++ * resolves to { success, limit, remaining, reset }.
++ *
++ * Fails OPEN: if REDIS_HOST is unset or Redis is unreachable, requests are
++ * allowed rather than blocking the contact/question forms. Redis is reachable
++ * only over the platform Docker network (redis:6379), so local dev without
++ * REDIS_HOST simply skips limiting. Discrete host/port/password vars are used
++ * (not a URL) because the password can contain URL-reserved characters.
++ */
++
++const LIMIT = 3;
++const WINDOW_MS = 60 * 60 * 1000; // 1 hour
++
++let redis: Redis | null = null;
++if (process.env.REDIS_HOST) {
++     redis = new Redis({
++          host: process.env.REDIS_HOST,
++          port: Number(process.env.REDIS_PORT) || 6379,
++          password: process.env.REDIS_PASSWORD,
++          maxRetriesPerRequest: 1,
++          // Queue commands until the (fast, same-network) connection is ready so
++          // the first request isn't miscounted; time-bound so a real Redis outage
++          // still fails open quickly rather than hanging.
++          connectTimeout: 3000,
++          commandTimeout: 2000,
++     });
++     // Swallow connection errors — the limiter fails open instead of throwing.
++     redis.on('error', () => {});
++}
++
++type LimitResult = { success: boolean; limit: number; remaining: number; reset: number };
++
++export const rateLimiter = {
++     async limit(identifier: string): Promise<LimitResult> {
++          const now = Date.now();
++          const reset = now + WINDOW_MS;
++          if (!redis) {
++               return { success: true, limit: LIMIT, remaining: LIMIT, reset };
++          }
++          try {
++               const key = `ratelimit:${identifier}`;
++               await redis.zremrangebyscore(key, 0, now - WINDOW_MS);
++               const count = await redis.zcard(key);
++               if (count >= LIMIT) {
++                    return { success: false, limit: LIMIT, remaining: 0, reset };
++               }
++               await redis.zadd(key, now, `${now}-${Math.random().toString(36).slice(2)}`);
++               await redis.pexpire(key, WINDOW_MS);
++               return { success: true, limit: LIMIT, remaining: LIMIT - (count + 1), reset };
++          } catch {
++               // Redis unavailable — fail open.
++               return { success: true, limit: LIMIT, remaining: LIMIT, reset };
++          }
++     },
++};
+-- 
+2.53.0
+

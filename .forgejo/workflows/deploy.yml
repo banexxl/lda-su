@@ -1,0 +1,56 @@
+name: Deploy lda-su
+
+# Every push to main rebuilds and restarts the container on the home server
+# (same approach as dar-pharmacy-shop). Runs on the self-hosted runner (label
+# xxl), which has the host's docker socket, ~/projects and ~/platform mounted at
+# their real paths, and an SSH key for Forgejo (host alias forgejo-lan).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-lda-su
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: [xxl]
+
+    steps:
+      - name: Update source
+        run: |
+          set -eu
+          cd /home/banexxl/projects/lda-su
+          git config --global --add safe.directory "$PWD"
+
+          # Deploy exactly what was pushed: the server checkout follows main.
+          # (Untracked/ignored files such as .env are left alone.)
+          git fetch forgejo-lan:MrBigsOrg/lda-su.git main
+          git checkout -f -B main FETCH_HEAD
+          git reset --hard FETCH_HEAD
+          git log --oneline -1
+
+          # The runner is root; give the working copy back to banexxl so
+          # normal git use on the server keeps working.
+          chown -R 1000:1000 .git
+          git ls-files -z | xargs -0 -r chown -h 1000:1000
+
+      - name: Build and restart container
+        run: |
+          set -eu
+          cd /home/banexxl/platform
+          # --no-deps: never touch postgres/redis/minio from an app deploy.
+          docker compose up -d --no-deps --build lda-su
+
+      - name: Health check
+        run: |
+          set -eu
+          for i in $(seq 1 30); do
+            if docker exec lda-su wget -q -O /dev/null http://127.0.0.1:3000/; then
+              echo "lda-su is up"; exit 0
+            fi
+            sleep 2
+          done
+          echo "lda-su did not come up"; docker logs --tail 50 lda-su; exit 1

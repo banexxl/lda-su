@@ -1,4 +1,5 @@
-import { supabase } from "src/lib/supabase"
+import { asAnon } from "src/lib/db/rls"
+import { toPlain } from "src/lib/db/serialize"
 import { Activity } from "src/types/activity"
 
 type ActivityWithStringId = Activity & { _id: string };
@@ -25,90 +26,73 @@ const mapActivity = (row: any): ActivityWithStringId => ({
 const activityServices = () => {
 
      const getAllActivities = async () => {
-          const { data, error } = await supabase
-               .from('activities')
-               .select('*')
-               .eq('locale', 'sr')
-
-          if (error) {
-               console.log({ message: error.message })
+          try {
+               const rows = await asAnon((tx) => tx.activities.findMany({ where: { locale: 'sr' } }))
+               return toPlain(rows).map(mapActivity)
+          } catch (error: any) {
+               console.log({ message: error?.message })
                return []
           }
-          return (data ?? []).map(mapActivity)
      }
 
      const getActivityByLink = async (activityURL: string): Promise<ActivityWithStringId | undefined> => {
-          const { data, error } = await supabase
-               .from('activities')
-               .select('*')
-               .eq('locale', 'sr')
-               .eq('activity_url', activityURL)
-               .maybeSingle()
-
-          if (error || !data) {
-               if (error) console.log({ message: error.message })
+          try {
+               const row = await asAnon((tx) => tx.activities.findFirst({ where: { locale: 'sr', activity_url: activityURL } }))
+               if (!row) return undefined
+               return mapActivity(toPlain(row))
+          } catch (error: any) {
+               console.log({ message: error?.message })
                return undefined
           }
-          return mapActivity(data)
      }
 
      const getCompletedActivities = async () => {
-          const { data, error } = await supabase
-               .from('activities')
-               .select('*')
-               .eq('locale', 'sr')
-               .eq('status', 'completed')
-               .order('published_date', { ascending: true })
-
-          if (error) {
-               console.log({ message: error.message })
+          try {
+               const rows = await asAnon((tx) => tx.activities.findMany({
+                    where: { locale: 'sr', status: 'completed' },
+                    orderBy: { published_date: { sort: 'asc', nulls: 'last' } },
+               }))
+               return toPlain(rows).map(mapActivity)
+          } catch (error: any) {
+               console.log({ message: error?.message })
                return []
           }
-          return (data ?? []).map(mapActivity)
      }
 
      const getActivitiesByCategory = async (category: string) => {
-          const { data, error } = await supabase
-               .from('activities')
-               .select('*')
-               .eq('locale', 'sr')
-               .eq('category', category)
-               .order('published_date', { ascending: true })
-
-          if (error) {
-               console.log({ message: error.message })
+          try {
+               const rows = await asAnon((tx) => tx.activities.findMany({
+                    where: { locale: 'sr', category },
+                    orderBy: { published_date: { sort: 'asc', nulls: 'last' } },
+               }))
+               return toPlain(rows).map(mapActivity)
+          } catch (error: any) {
+               console.log({ message: error?.message })
                return []
           }
-          return (data ?? []).map(mapActivity)
      }
 
      const getFeaturedCompletedActivities = async () => {
-          const { data, error } = await supabase
-               .from('activities')
-               .select('*')
-               .eq('locale', 'sr')
-               .eq('status', 'completed')
-               .limit(6)
-
-          if (error) {
-               console.log({ message: error.message })
+          try {
+               const rows = await asAnon((tx) => tx.activities.findMany({
+                    where: { locale: 'sr', status: 'completed' },
+                    take: 6,
+               }))
+               return toPlain(rows).map(mapActivity)
+          } catch (error: any) {
+               console.log({ message: error?.message })
                return []
           }
-          return (data ?? []).map(mapActivity)
      }
 
      const getInProgressActivities = async () => {
-          const { data, error } = await supabase
-               .from('activities')
-               .select('*')
-               .eq('locale', 'sr')
-               .eq('status', 'in-progress')
-
-          if (error) {
-               console.log({ message: error.message })
+          try {
+               const rows = await asAnon((tx) => tx.activities.findMany({ where: { locale: 'sr', status: 'in-progress' } }))
+               return toPlain(rows).map(mapActivity)
+          } catch (error: any) {
+               console.log({ message: error?.message })
                return []
           }
-          return (data ?? []).map(mapActivity)
      }
 
      return {

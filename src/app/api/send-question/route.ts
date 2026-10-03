@@ -58,7 +58,7 @@ export async function POST(request: Request) {
 
                     <p style="margin-top: 24px;">
                          <a
-                              href="https://lda-dashboard.vercel.app/questions"
+                              href="https://lda-dashboard.mrbigs.cloud/questions"
                               target="_blank"
                               rel="noopener noreferrer"
                               style="

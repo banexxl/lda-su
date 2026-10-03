@@ -1,0 +1,125 @@
+// LDA public site (lda-su) — Prisma schema for the self-hosted `lda` Postgres
+// (shared with lda-dashboard). Connects as `lda_app`; public reads go through
+// asAnon and question writes through asService in src/lib/db/rls.ts.
+// Relation fields are named to match the PostgREST embed names the service
+// mappers already expect (row.project_summaries / row.project_activities).
+// Kept in sync with ~/platform/lda-migration/*.sql.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model admin_allowlist {
+  email      String   @id
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model activities {
+  id                String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title             String
+  activity_url      String    @unique
+  author            String?
+  published_date    DateTime? @db.Timestamptz(6)
+  status            String    @default("to-do")
+  category          String    @default("other")
+  descriptions      String[]  @default([])
+  quill_editor_data String?
+  gallery           String[]  @default([])
+  cover_url         String?
+  links             String[]  @default([])
+  list              String[]  @default([])
+  list_title        String?
+  favorited         Boolean   @default(false)
+  favorited_number  Int?
+  locale            String    @default("sr")
+  created_at        DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime  @default(now()) @db.Timestamptz(6)
+}
+
+model project_summaries {
+  id                        String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title                     String
+  project_summary_url       String               @unique
+  project_summary_cover_url String?
+  status                    String               @default("to-do")
+  category                  String               @default("other")
+  project_start_date_time   DateTime?            @db.Timestamptz(6)
+  project_end_date_time     DateTime?            @db.Timestamptz(6)
+  organizers                String[]             @default([])
+  locations                 String[]             @default([])
+  applicants                String[]             @default([])
+  donators                  String[]             @default([])
+  publications              String[]             @default([])
+  links                     String[]             @default([])
+  gallery                   String[]             @default([])
+  locale                    String               @default("sr")
+  created_at                DateTime             @default(now()) @db.Timestamptz(6)
+  updated_at                DateTime             @default(now()) @db.Timestamptz(6)
+  project_activities        project_activities[]
+}
+
+model project_activities {
+  id                   String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_summary_id   String?            @db.Uuid
+  title                String
+  sub_title            String?
+  title_eng            String?
+  sub_title_eng        String?
+  has_translation      Boolean            @default(false)
+  paragraphs           String[]           @default([])
+  paragraphs_eng       String[]           @default([])
+  quill_editor_data    String?
+  content_html         String?
+  content_html_eng     String?
+  project_url          String             @unique
+  published            DateTime?          @db.Timestamptz(6)
+  status               String             @default("to-do")
+  category             String             @default("other")
+  gallery              String[]           @default([])
+  links                String[]           @default([])
+  list                 String[]           @default([])
+  list_title           String?
+  favorited            Boolean            @default(false)
+  favorited_number     Int?
+  organizers           String[]           @default([])
+  sub_organizers       String[]           @default([])
+  applicants           String[]           @default([])
+  donators             String[]           @default([])
+  locations            String[]           @default([])
+  publications         String[]           @default([])
+  show_project_details Boolean            @default(false)
+  show_list            Boolean            @default(false)
+  show_list_on_bottom  Boolean            @default(false)
+  locale               String             @default("sr")
+  created_at           DateTime           @default(now()) @db.Timestamptz(6)
+  updated_at           DateTime           @default(now()) @db.Timestamptz(6)
+  project_summaries    project_summaries? @relation(fields: [project_summary_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
+
+  @@index([project_summary_id])
+}
+
+model publications {
+  id                             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  publication_title              String
+  publication_url                String
+  publication_image_url          String?
+  publication_uploaded_date_time DateTime @default(now()) @db.Timestamptz(6)
+  created_at                     DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model questions {
+  id                 String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  full_name          String?
+  email              String
+  question           String
+  answer             String?
+  question_date_time DateTime? @db.Timestamptz(6)
+  answer_date_time   DateTime? @db.Timestamptz(6)
+  archived           Boolean   @default(false)
+  created_at         DateTime  @default(now()) @db.Timestamptz(6)
+}

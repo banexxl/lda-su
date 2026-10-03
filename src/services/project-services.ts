@@ -1,4 +1,5 @@
-import { supabase } from "src/lib/supabase";
+import { asAnon } from "src/lib/db/rls";
+import { toPlain } from "src/lib/db/serialize";
 import { Project } from "src/types/project";
 import { ProjectSummary } from "src/types/projectSummary";
 import { Publication } from "src/types/publication";
@@ -101,131 +102,123 @@ const shuffle = <T,>(items: T[]): T[] => {
 
 const projectsServices = () => {
 
-     const getAllPublications = async () => {
-          const { data, error } = await supabase
-               .from('publications')
-               .select('*')
-               .order('publication_uploaded_date_time', { ascending: false });
+     // project summaries with their sr-locale child activities embedded
+     const summaryInclude = { project_activities: { where: { locale: 'sr' } } } as const;
+     const projectInclude = { project_summaries: { select: { project_summary_url: true } } } as const;
 
-          if (error) {
+     const getAllPublications = async () => {
+          try {
+               const rows = await asAnon((tx) => tx.publications.findMany({
+                    orderBy: { publication_uploaded_date_time: 'desc' },
+               }));
+               return toPlain(rows).map(mapPublication);
+          } catch {
                return [];
           }
-          return (data ?? []).map(mapPublication);
      };
 
      const getAllProjectSummaries = async () => {
-          const { data, error } = await supabase
-               .from('project_summaries')
-               .select('*, project_activities(*)')
-               .eq('locale', 'sr')
-               .eq('project_activities.locale', 'sr')
-               .order('project_end_date_time', { ascending: false });
-
-          if (error) {
+          try {
+               const rows = await asAnon((tx) => tx.project_summaries.findMany({
+                    where: { locale: 'sr' },
+                    include: summaryInclude,
+                    orderBy: { project_end_date_time: { sort: 'desc', nulls: 'last' } },
+               }));
+               return toPlain(rows).map(mapProjectSummary);
+          } catch {
                return [];
           }
-          return (data ?? []).map(mapProjectSummary);
      };
 
      const getInProgressProjectSummaries = async () => {
-          const { data, error } = await supabase
-               .from('project_summaries')
-               .select('*, project_activities(*)')
-               .eq('locale', 'sr')
-               .eq('project_activities.locale', 'sr')
-               .eq('status', 'in-progress')
-               .order('project_end_date_time', { ascending: false });
-
-          if (error) {
+          try {
+               const rows = await asAnon((tx) => tx.project_summaries.findMany({
+                    where: { locale: 'sr', status: 'in-progress' },
+                    include: summaryInclude,
+                    orderBy: { project_end_date_time: { sort: 'desc', nulls: 'last' } },
+               }));
+               return toPlain(rows).map(mapProjectSummary);
+          } catch {
                return [];
           }
-          return (data ?? []).map(mapProjectSummary);
      };
 
      const getCompletedProjectSummaries = async () => {
-          const { data, error } = await supabase
-               .from('project_summaries')
-               .select('*, project_activities(*)')
-               .eq('locale', 'sr')
-               .eq('project_activities.locale', 'sr')
-               .eq('status', 'completed')
-               .order('project_end_date_time', { ascending: false });
-
-          if (error) {
+          try {
+               const rows = await asAnon((tx) => tx.project_summaries.findMany({
+                    where: { locale: 'sr', status: 'completed' },
+                    include: summaryInclude,
+                    orderBy: { project_end_date_time: { sort: 'desc', nulls: 'last' } },
+               }));
+               return toPlain(rows).map(mapProjectSummary);
+          } catch {
                return [];
           }
-          return (data ?? []).map(mapProjectSummary);
      };
 
      const getRandomCompletedProjectSummaries = async () => {
-          const { data, error } = await supabase
-               .from('project_summaries')
-               .select('*, project_activities(*)')
-               .eq('locale', 'sr')
-               .eq('project_activities.locale', 'sr')
-               .eq('status', 'completed');
-
-          if (error) {
+          try {
+               const rows = await asAnon((tx) => tx.project_summaries.findMany({
+                    where: { locale: 'sr', status: 'completed' },
+                    include: summaryInclude,
+               }));
+               return shuffle(toPlain(rows)).slice(0, 5).map(mapProjectSummary);
+          } catch {
                return [];
           }
-          return shuffle(data ?? []).slice(0, 5).map(mapProjectSummary);
      };
 
      const getProjectSummaryByLink = async (link: string): Promise<ProjectSummary | undefined> => {
-          const { data, error } = await supabase
-               .from('project_summaries')
-               .select('*, project_activities(*)')
-               .eq('locale', 'sr')
-               .eq('project_activities.locale', 'sr')
-               .eq('project_summary_url', link)
-               .maybeSingle();
-
-          if (error || !data) {
-               if (error) console.log({ message: error.message });
+          try {
+               const row = await asAnon((tx) => tx.project_summaries.findFirst({
+                    where: { locale: 'sr', project_summary_url: link },
+                    include: summaryInclude,
+               }));
+               if (!row) return undefined;
+               return mapProjectSummary(toPlain(row));
+          } catch (error: any) {
+               console.log({ message: error?.message });
                return undefined;
           }
-          return mapProjectSummary(data);
      };
 
      const getAllProjects = async () => {
-          const { data, error } = await supabase
-               .from('project_activities')
-               .select('*, project_summaries(project_summary_url)')
-               .eq('locale', 'sr');
-
-          if (error) {
+          try {
+               const rows = await asAnon((tx) => tx.project_activities.findMany({
+                    where: { locale: 'sr' },
+                    include: projectInclude,
+               }));
+               return toPlain(rows).map(mapProject);
+          } catch {
                return [];
           }
-          return (data ?? []).map(mapProject);
      };
 
      const getProjectByLink = async (projectURL: string): Promise<Project | undefined> => {
-          const { data, error } = await supabase
-               .from('project_activities')
-               .select('*, project_summaries(project_summary_url)')
-               .eq('locale', 'sr')
-               .eq('project_url', projectURL)
-               .maybeSingle();
-
-          if (error || !data) {
-               if (error) console.log({ message: error.message });
+          try {
+               const row = await asAnon((tx) => tx.project_activities.findFirst({
+                    where: { locale: 'sr', project_url: projectURL },
+                    include: projectInclude,
+               }));
+               if (!row) return undefined;
+               return mapProject(toPlain(row));
+          } catch (error: any) {
+               console.log({ message: error?.message });
                return undefined;
           }
-          return mapProject(data);
      };
 
      const getSearchTermResults = async (searchTerm: string) => {
-          const { data, error } = await supabase
-               .from('project_activities')
-               .select('*, project_summaries(project_summary_url)')
-               .eq('locale', 'sr')
-               .ilike('sub_title', `%${searchTerm}%`)
-               .limit(5);
-
-          if (error) {
+          try {
+               const rows = await asAnon((tx) => tx.project_activities.findMany({
+                    where: { locale: 'sr', sub_title: { contains: searchTerm, mode: 'insensitive' } },
+                    include: projectInclude,
+                    take: 5,
+               }));
+               return toPlain(rows).map(mapProject);
+          } catch {
                return [];
           }
-          return (data ?? []).map(mapProject);
      };
 
      return {
